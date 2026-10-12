@@ -123,7 +123,7 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 
 - [Convex best practices](./rules/convex-cursorrules-prompt-file/.cursorrules) - Cursor rules for Convex development with best practices.
 - [Deno Integration](./rules/deno-integration-techniques-cursorrules-prompt-fil/.cursorrules) - Cursor rules for Deno development with integration techniques.
-- [Drupal 11](./rules/drupal-11-cursorrules-promt-file/.cursorrules) - Cursor rules for Drupal 11 development.
+- [Drupal 11](./rules/drupal-11-cursorrules-prompt-file/.cursorrules) - Cursor rules for Drupal 11 development.
 - [Elixir Engineer Guidelines](./rules/elixir-engineer-guidelines-cursorrules-prompt-file/.cursorrules) - Cursor rules for Elixir development with engineer guidelines.
 - [Elixir (Phoenix, Docker)](./rules/elixir-phoenix-docker-setup-cursorrules-prompt-fil/.cursorrules) - Cursor rules for Elixir development with Phoenix and Docker integration.
 - [ES Module (Node.js)](./rules/es-module-nodejs-guidelines-cursorrules-prompt-fil/.cursorrules) - Cursor rules for ES Module development with Node.js guidelines.
