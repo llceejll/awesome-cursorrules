@@ -8,7 +8,7 @@ globs: "**/*.css, **/*.tsx, **/*.jsx, tailwind.config.js, tailwind.config.ts"
 ## Project Setup
 - Use proper Tailwind configuration
 - Configure theme extension properly
-- Set up proper purge configuration
+- Set up the `content` paths
 - Use proper plugin integration
 - Configure custom spacing and breakpoints
 - Set up proper color palette
@@ -62,7 +62,7 @@ globs: "**/*.css, **/*.tsx, **/*.jsx, tailwind.config.js, tailwind.config.ts"
 - Use proper responsive spacing
 
 ## Performance
-- Use proper purge configuration
+- Use the `content` paths so unused styles are removed
 - Minimize custom CSS
 - Use proper caching strategies
 - Implement proper code splitting
