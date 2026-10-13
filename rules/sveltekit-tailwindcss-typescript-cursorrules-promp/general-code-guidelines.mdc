@@ -1,6 +1,6 @@
 ---
 description: Outlines the general code guidelines to be followed, including early returns, Tailwind CSS for styling, and descriptive naming conventions. This ensures consistency and readability across the codebase.
-globs: **/*.{svelte,js,ts,jsx,tsx,html,css}
+globs: "**/*.{svelte,js,ts,jsx,tsx,html,css}"
 ---
 - Adhere to the following guidelines in your code:
   - Utilize early returns for code readability.

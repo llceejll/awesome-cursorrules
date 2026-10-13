@@ -1,6 +1,6 @@
 ---
 description: Applies general TypeScript coding standards and best practices across the project.
-globs: **/*.ts
+globs: "**/*.ts"
 ---
 - Use TypeScript for all code; prefer interfaces over types.
 - Avoid enums; use maps instead.

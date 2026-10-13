@@ -1,6 +1,6 @@
 ---
 description: General guidelines for developing Laravel packages, including PHP version, conventions, and tooling.
-globs: */src/**/*.*
+globs: "*/src/**/*.*"
 ---
 - Use PHP 8.3+ features where appropriate
 - Follow Laravel conventions and best practices

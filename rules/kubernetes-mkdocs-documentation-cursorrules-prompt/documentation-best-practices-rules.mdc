@@ -1,6 +1,6 @@
 ---
 description: Enforces adherence to established documentation best practices, ensuring consistency and quality.
-globs: **/*.md
+globs: "**/*.md"
 ---
 - Follow established style guides and conventions.
 - Use templates and reusable components to ensure consistency.

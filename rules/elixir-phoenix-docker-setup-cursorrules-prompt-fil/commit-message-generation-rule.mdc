@@ -1,6 +1,6 @@
 ---
 description: Provides guidelines for generating conventional commit messages based on changes in the codebase.
-globs: **/*
+globs: "**/*"
 ---
 ## Commit Message Guidelines:
 

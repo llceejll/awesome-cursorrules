@@ -1,5 +1,5 @@
 ---
 description: Uses environment variables for managing configurations.
-globs: *
+globs: "*"
 ---
 - Configuration management using environment variables.

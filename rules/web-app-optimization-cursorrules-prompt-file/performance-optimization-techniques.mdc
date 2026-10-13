@@ -1,6 +1,6 @@
 ---
 description: Performance Optimization techniques for Svelte and SvelteKit projects.
-globs: **/*.svelte
+globs: "**/*.svelte"
 ---
 - Leverage Svelte's compile-time optimizations.
 - Use `{#key}` blocks to force re-rendering of components when needed.

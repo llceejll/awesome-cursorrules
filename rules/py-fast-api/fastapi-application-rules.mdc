@@ -1,6 +1,6 @@
 ---
 description: Specific guidelines for FastAPI application structure and setup in the main application file.
-globs: **/main.py
+globs: "**/main.py"
 ---
 - Use functional components (plain functions) and Pydantic models for input validation and response schemas.
 - Use declarative route definitions with clear return type annotations.

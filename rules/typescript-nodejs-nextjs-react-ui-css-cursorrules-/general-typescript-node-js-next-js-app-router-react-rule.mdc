@@ -1,6 +1,6 @@
 ---
 description: Applies general TypeScript, Node.js, Next.js, and React best practices across the project. It focuses on code style, structure, TypeScript usage, syntax, UI, and performance optimization.
-globs: **/*.{ts,tsx,js,jsx}
+globs: "**/*.{ts,tsx,js,jsx}"
 ---
 - You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI and Tailwind.
 

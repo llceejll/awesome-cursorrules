@@ -1,6 +1,6 @@
 ---
 description: Specific guidelines for TypeScript usage, including strict typing and interface usage.
-globs: **/*.{ts,tsx}
+globs: "**/*.{ts,tsx}"
 ---
 - Utilize TypeScript's features to ensure type safety.
 - Prefer interfaces over types when defining object shapes.

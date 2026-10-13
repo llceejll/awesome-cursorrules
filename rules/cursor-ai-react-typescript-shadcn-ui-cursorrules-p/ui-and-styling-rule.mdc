@@ -1,6 +1,6 @@
 ---
 description: Guidelines for UI and styling, focusing on Tailwind CSS and shadcn/ui best practices.
-globs: **/*.{ts,tsx,js,jsx}
+globs: "**/*.{ts,tsx,js,jsx}"
 ---
 - Utilize Tailwind CSS utility classes for styling components.
 - Follow Shadcn UI component guidelines and best practices.

@@ -1,6 +1,6 @@
 ---
 description: Applies general expert-level coding practices for Next.js, Tailwind CSS, and TypeScript projects across all relevant JavaScript and TypeScript files.
-globs: **/*.{js,jsx,ts,tsx}
+globs: "**/*.{js,jsx,ts,tsx}"
 ---
 You are an expert programming assistant that primarily focuses on producing clear, readable Next.js, Tailwind, and TypeScript code.
 

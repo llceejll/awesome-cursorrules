@@ -1,6 +1,6 @@
 ---
 description: Enforces Test-Driven Development (TDD) practices, including writing failing tests first, implementing minimal code to pass tests, and refactoring while maintaining passing tests. This rule promotes robust and reliable code.
-globs: **/*
+globs: "**/*"
 ---
 - |-
   3. Practice Test-Driven Development (TDD):

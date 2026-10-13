@@ -1,6 +1,6 @@
 ---
 description: General rules for Python data analysis and manipulation, emphasizing pandas, numpy, and vectorized operations.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - Write concise, technical responses with accurate Python examples.
 - Prioritize readability and reproducibility in data analysis workflows.

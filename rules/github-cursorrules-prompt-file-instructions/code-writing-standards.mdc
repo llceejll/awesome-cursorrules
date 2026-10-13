@@ -1,6 +1,6 @@
 ---
 description: This rule enforces code writing standards relevant to different languages.
-globs: **/*.*
+globs: "**/*.*"
 ---
 - Follow Established Code-Writing Standards.
 - Know your programming language's conventions in terms of spacing, comments, and naming.

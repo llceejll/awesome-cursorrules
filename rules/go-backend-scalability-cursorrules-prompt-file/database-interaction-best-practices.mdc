@@ -1,6 +1,6 @@
 ---
 description: Best practices when interacting with databases in backend Go code.
-globs: */db/**/*.go
+globs: "*/db/**/*.go"
 ---
 When interacting with databases:
 - Use prepared statements to prevent SQL injection.

@@ -1,6 +1,6 @@
 ---
 description: Sets standards for testing NestJS applications, including unit, integration, and end-to-end tests, plus the use of Jest.
-globs: **/*.spec.ts
+globs: "**/*.spec.ts"
 ---
 - Use the standard Jest framework for testing.
 - Write tests for each controller and service.

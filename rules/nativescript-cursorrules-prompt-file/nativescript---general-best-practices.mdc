@@ -1,6 +1,6 @@
 ---
 description: Applies general NativeScript best practices.
-globs: **/*.tsx, **/*.ts, **/*.vue, **/*.svelte, src/**/*.ts, app/**/*.ts, src/**/*.tsx, app/**/*.tsx, src/**/*.vue, app/**/*.vue, src/**/*.svelte
+globs: "**/*.tsx, **/*.ts, **/*.vue, **/*.svelte, src/**/*.ts, app/**/*.ts, src/**/*.tsx, app/**/*.tsx, src/**/*.vue, app/**/*.vue, src/**/*.svelte"
 ---
 - Organize code using modular components and services for maintainability.
 - Use platform-specific files (`.ios.ts`, `.android.ts`) when code exceeds 20 platform-specific lines.

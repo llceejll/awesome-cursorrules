@@ -1,6 +1,6 @@
 ---
 description: Specifies the coding process guidelines, applicable to all coding tasks.
-globs: *
+globs: "*"
 ---
 - Show concise step-by-step reasoning
 - Prioritize tasks/steps you’ll address in each response

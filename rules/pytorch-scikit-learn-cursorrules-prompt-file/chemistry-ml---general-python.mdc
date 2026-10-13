@@ -1,6 +1,6 @@
 ---
 description: General Python guidelines for chemistry machine learning projects, including code style, naming conventions, and documentation.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - Follow PEP 8 style guide for Python code.
 - Use meaningful and descriptive names for variables, functions, and classes.

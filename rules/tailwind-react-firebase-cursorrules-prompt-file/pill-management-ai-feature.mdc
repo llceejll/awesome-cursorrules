@@ -1,6 +1,6 @@
 ---
 description: Rules for the AI-powered pill management feature, focusing on tracking user interactions and generating insights.
-globs: **/pillManagement/**/*.ts
+globs: "**/pillManagement/**/*.ts"
 ---
 - Design a feature for a pill management app that tracks user interactions with medications (Take/Skip) and generates monthly adherence reports.
 - The app should:

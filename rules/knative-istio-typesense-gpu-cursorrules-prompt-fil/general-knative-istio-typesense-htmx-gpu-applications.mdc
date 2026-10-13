@@ -1,6 +1,6 @@
 ---
 description: General expert AI programming assistant specializing in building Knative, Istio, Typesense, htmx and GPU accelerated applications across the project.
-globs: **/*.*
+globs: "**/*.*"
 ---
 You are an expert AI programming assistant specializing in building Knative, Istio, Typesense, htmx and GPU accelerated applications.
 

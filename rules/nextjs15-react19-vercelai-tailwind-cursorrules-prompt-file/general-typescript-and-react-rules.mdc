@@ -1,6 +1,6 @@
 ---
 description: Applies general coding principles and best practices for TypeScript and React development across the project.
-globs: **/*.{ts,tsx}
+globs: "**/*.{ts,tsx}"
 ---
 - Write concise, readable TypeScript code.
 - Use functional and declarative programming patterns.

@@ -1,6 +1,6 @@
 ---
 description: Defines UI and styling conventions using Tailwind CSS and Shadcn components, emphasizing utility-first styling and reusable UI elements.
-globs: **/*.svelte
+globs: "**/*.svelte"
 ---
 - Use Tailwind CSS for utility-first styling approach.
 - Leverage Shadcn components for pre-built, customizable UI elements.

@@ -1,6 +1,6 @@
 ---
 description: Focus on performance optimization techniques in all files of the project.
-globs: **/*.*
+globs: "**/*.*"
 ---
 - Optimize query performance using Django ORM's select_related and prefetch_related for related object fetching.
 - Use Django’s cache framework with backend support (e.g., Redis or Memcached) to reduce database load.

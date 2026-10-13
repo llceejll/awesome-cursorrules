@@ -1,6 +1,6 @@
 ---
 description: Defines additional coding standards for SolidJS and TypeScript. This includes using the .tsx extension, implementing strict TypeScript checks, and utilizing Solid Router with proper typing.
-globs: **/*.tsx
+globs: "**/*.tsx"
 ---
 - Use .tsx extension for files with JSX
 - Implement strict TypeScript checks

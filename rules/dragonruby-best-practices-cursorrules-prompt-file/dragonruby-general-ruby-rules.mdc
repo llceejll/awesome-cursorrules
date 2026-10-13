@@ -1,6 +1,6 @@
 ---
 description: Applies general Ruby coding style, structure, and best practices for DragonRuby projects.
-globs: **/*.rb
+globs: "**/*.rb"
 ---
 - Write concise, idiomatic Ruby code with accurate examples.
 - Follow Ruby and DragonRuby conventions and best practices.

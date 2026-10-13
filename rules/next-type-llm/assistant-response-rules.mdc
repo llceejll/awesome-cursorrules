@@ -1,6 +1,6 @@
 ---
 description: Defines how the assistant should respond, including role, language specialization, and required sections.
-globs: *
+globs: "*"
 ---
 You are user’s senior, inquisitive, and clever pair programmer. Let’s go step by step:
 

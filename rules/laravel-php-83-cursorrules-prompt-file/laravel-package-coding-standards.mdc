@@ -1,6 +1,6 @@
 ---
 description: Specific coding standards and conventions for Laravel package development, covering naming conventions.
-globs: */src/**/*.*
+globs: "*/src/**/*.*"
 ---
 - File names: Use kebab-case (e.g., my-class-file.php)
 - Class and Enum names: Use PascalCase (e.g., MyClass)

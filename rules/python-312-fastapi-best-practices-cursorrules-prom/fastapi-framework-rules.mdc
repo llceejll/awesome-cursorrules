@@ -1,6 +1,6 @@
 ---
 description: Defines the use of FastAPI and related libraries for building the application, guiding the architectural decisions in the 'app' directory.
-globs: **/app/**/*.*
+globs: "**/app/**/*.*"
 ---
 - Always use python 3.12
 - Use FastAPI for building APIs.

@@ -1,6 +1,6 @@
 ---
 description: Specifies guidelines for Windows compatibility, including providing PowerShell commands and avoiding Unix-specific commands. This rule ensures cross-platform compatibility for Windows users.
-globs: **/*
+globs: "**/*"
 ---
 - |-
   12. Windows Compatibility:

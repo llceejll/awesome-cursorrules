@@ -1,6 +1,6 @@
 ---
 description: Provides specific guidance related to Typesense setup, configuration, index creation, and search query optimization.
-globs: **/*.*
+globs: "**/*.*"
 ---
 3. Typesense
   - Provide guidance on Typesense setup and configuration

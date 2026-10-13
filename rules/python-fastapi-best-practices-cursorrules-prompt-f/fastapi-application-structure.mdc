@@ -1,6 +1,6 @@
 ---
 description: Defines the preferred file structure and component usage for FastAPI applications.
-globs: **/main.py
+globs: "**/main.py"
 ---
 - File structure: exported router, sub-routes, utilities, static content, types (models, schemas).
 - Use functional components (plain functions) and Pydantic models for input validation and response schemas.

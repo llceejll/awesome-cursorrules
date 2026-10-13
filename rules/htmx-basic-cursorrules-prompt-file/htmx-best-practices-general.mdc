@@ -1,6 +1,6 @@
 ---
 description: Applies general HTMX best practices to all HTML files in the project, ensuring consistent use of HTMX attributes for requests, content swapping, and user feedback.
-globs: **/*.html
+globs: "**/*.html"
 ---
 - Use hx-get for GET requests
 - Implement hx-post for POST requests

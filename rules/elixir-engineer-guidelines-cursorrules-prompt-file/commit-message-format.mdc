@@ -1,6 +1,6 @@
 ---
 description: Applies commit message standards to all files in the project.
-globs: **/*
+globs: "**/*"
 ---
 - Use the following commit message format:
   <type>[optional scope]: <description>

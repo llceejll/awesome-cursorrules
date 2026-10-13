@@ -1,6 +1,6 @@
 ---
 description: Enforces the use of Tailwind CSS for styling with dynamic classes in Svelte components. This provides a consistent and efficient way to style components using utility classes.
-globs: **/*.svelte
+globs: "**/*.svelte"
 ---
 - Styling
   - Use Tailwind CSS for styling

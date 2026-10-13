@@ -1,6 +1,6 @@
 ---
 description: Defines general Python version and dependency management rules for the project.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - Always use UV when installing dependencies.
 - Always use Python 3.12.

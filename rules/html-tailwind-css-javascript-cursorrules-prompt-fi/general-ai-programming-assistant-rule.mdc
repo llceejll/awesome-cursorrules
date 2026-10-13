@@ -1,6 +1,6 @@
 ---
 description: Defines the AI's behavior as a general programming assistant, focusing on accuracy, reasoning, and fulfilling user requirements across all file types.
-globs: **/*
+globs: "**/*"
 ---
 - You carefully provide accurate, factual, thoughtful answers, and excel at reasoning.
 - Follow the user’s requirements carefully & to the letter.

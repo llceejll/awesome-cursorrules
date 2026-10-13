@@ -1,6 +1,6 @@
 ---
 description: Emphasizes the importance of prioritizing error handling and edge cases in Python code.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - Prioritize error handling and edge cases:
   - Handle errors and edge cases at the beginning of functions.

@@ -1,6 +1,6 @@
 ---
 description: General rules for Swift and SwiftUI coding style, focusing on maintainability and latest documentation.
-globs: **/*.swift
+globs: "**/*.swift"
 ---
 - You are an expert in coding with Swift and SwiftUI.
 - Always write maintainable and clean code.

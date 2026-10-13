@@ -1,6 +1,6 @@
 ---
 description: Details Paraglide.js i18n implementations.
-globs: **/*.svelte
+globs: "**/*.svelte"
 ---
 - Use Paraglide.js for internationalization: https://inlang.com/m/gerre34r/library-inlang-paraglideJs
 - Install Paraglide.js: `npm install @inlang/paraglide-js`

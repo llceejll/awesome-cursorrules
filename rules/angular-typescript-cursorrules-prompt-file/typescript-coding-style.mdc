@@ -1,6 +1,6 @@
 ---
 description: Enforces code style and best practices for TypeScript files.
-globs: **/*.ts
+globs: "**/*.ts"
 ---
 - Code should obey the rules defined in the .eslintrc.json, .prettierrc, and .editorconfig files.
 - Lines should not be more than 80 characters.

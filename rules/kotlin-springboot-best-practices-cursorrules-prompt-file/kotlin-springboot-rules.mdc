@@ -1,6 +1,6 @@
 ---
 description: Rule set for Kotlin coding best practices in Spring Boot applications.
-globs: **/*.kt
+globs: "**/*.kt"
 ---
 # Kotlin Coding Best Practices for Spring Boot Development
 

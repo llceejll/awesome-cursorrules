@@ -1,6 +1,6 @@
 ---
 description: Specifies rules for managing context files, including the master project context and supplementary files, emphasizing stability and change management.
-globs: **/ProjectDocs/contexts/**/*
+globs: "**/ProjectDocs/contexts/**/*"
 ---
 - **Master Project Context (`projectContext.md`):**
    - Located in `/ProjectDocs/contexts/`.

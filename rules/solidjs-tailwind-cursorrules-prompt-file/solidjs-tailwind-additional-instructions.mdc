@@ -1,6 +1,6 @@
 ---
 description: Provides additional instructions to remember when coding with solid and tailwind.
-globs: **/*.jsx
+globs: "**/*.jsx"
 ---
 - Use JSX for component templates.
 - Implement proper Tailwind CSS purging for production builds.

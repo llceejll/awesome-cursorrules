@@ -1,6 +1,6 @@
 ---
 description: Applies general Python development guidelines including typing, docstrings, dependency management, testing with pytest, and code style using Ruff.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - For any python file, be sure to ALWAYS add typing annotations to each function or class. Be sure to include return types when necessary.
 - Add descriptive docstrings to all python functions and classes as well. Please use pep257 convention. Update existing docstrings if need be.

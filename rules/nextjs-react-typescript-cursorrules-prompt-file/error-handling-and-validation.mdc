@@ -1,6 +1,6 @@
 ---
 description: Prioritizes error handling and edge cases in all code. Defines how to manage errors, handle preconditions, and implement logging.
-globs: **/*.{ts,js,jsx,tsx}
+globs: "**/*.{ts,js,jsx,tsx}"
 ---
 - Prioritize error handling and edge cases:
   - Handle errors and edge cases at the beginning of functions.

@@ -1,6 +1,6 @@
 ---
 description: Apply general guidelines for Next.js 14 code generation.
-globs: **/*.*
+globs: "**/*.*"
 ---
 - Assume the user has already set up the Next.js project with Tailwind CSS.
 - Use environment variables for configuration following Next.js conventions.

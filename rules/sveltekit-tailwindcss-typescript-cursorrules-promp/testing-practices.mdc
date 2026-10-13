@@ -1,6 +1,6 @@
 ---
 description: Promotes writing unit tests, component tests, and end-to-end tests for utility functions, components, and user flows. This ensures code quality and reduces the risk of bugs.
-globs: **/*.{svelte,js,ts}
+globs: "**/*.{svelte,js,ts}"
 ---
 - Testing
   - Write unit tests for utility functions and complex logic

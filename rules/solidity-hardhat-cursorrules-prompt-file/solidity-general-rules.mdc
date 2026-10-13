@@ -1,6 +1,6 @@
 ---
 description: Applies general rules for Solidity smart contract development, focusing on conciseness, accuracy, and embracing new technologies while skipping AI self-references.
-globs: **/*.sol
+globs: "**/*.sol"
 ---
 - Cut the fluff. Code or detailed explanations only.
 - Keep it casual and brief.

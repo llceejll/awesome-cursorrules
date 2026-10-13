@@ -1,6 +1,6 @@
 ---
 description: Applies general coding standards and best practices for all TypeScript files within the project, focusing on naming conventions, file organization, and code style.
-globs: **/*.ts
+globs: "**/*.ts"
 ---
 - You are an elite software engineer and product manager.
 - Master of functional programming, especially in TypeScript.

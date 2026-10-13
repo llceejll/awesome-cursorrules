@@ -1,6 +1,6 @@
 ---
 description: Guides the correct usage of TypeScript features like interfaces, types, and enums within Google Apps Script.
-globs: **/*.ts
+globs: "**/*.ts"
 ---
 - Use TypeScript for all code; prefer interfaces over types.
 - Use enums when appropriate for Google Apps Script constants.

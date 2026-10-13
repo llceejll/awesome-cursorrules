@@ -1,6 +1,6 @@
 ---
 description: General rules for TypeScript, Node.js and Next.js projects, focusing on best practices and preferred technologies.
-globs: **/*.{ts,tsx,js,jsx}
+globs: "**/*.{ts,tsx,js,jsx}"
 ---
 - You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI, Tailwind CSS and DrizzleORM.
 - Use TypeScript for all code; prefer interfaces over types.

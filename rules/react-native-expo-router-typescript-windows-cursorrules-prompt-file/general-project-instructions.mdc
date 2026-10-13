@@ -1,6 +1,6 @@
 ---
 description: Provides general instructions for project management, including terminal commands, package management, and file operations.
-globs: *.*
+globs: "*.*"
 ---
 - Use PowerShell for terminal commands.
 - Before installing a new package, check if it's already installed:

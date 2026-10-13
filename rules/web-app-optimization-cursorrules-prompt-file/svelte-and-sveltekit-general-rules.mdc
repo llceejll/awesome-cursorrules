@@ -1,6 +1,6 @@
 ---
 description: Applies general Svelte and SvelteKit best practices, including file structure, component development, and state management.
-globs: **/*.svelte
+globs: "**/*.svelte"
 ---
 - Write concise, technical TypeScript or JavaScript code with accurate examples.
 - Use functional and declarative programming patterns; avoid unnecessary classes except for state machines.

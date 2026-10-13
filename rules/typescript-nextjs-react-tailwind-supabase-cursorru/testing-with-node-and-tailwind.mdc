@@ -1,6 +1,6 @@
 ---
 description: Rules relating to testing Node.js and Tailwind CSS code in this stack.
-globs: **/tests/**/*.*
+globs: "**/tests/**/*.*"
 ---
 - You are an expert in Node.js and Tailwind CSS.
 - Write comprehensive unit and integration tests for the Node.js and Tailwind CSS parts of the application.

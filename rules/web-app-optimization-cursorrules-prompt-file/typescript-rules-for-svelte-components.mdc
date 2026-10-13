@@ -1,6 +1,6 @@
 ---
 description: Enforces TypeScript best practices within Svelte component logic files, including interface usage, avoiding enums, and strict mode.
-globs: **/*.svelte.ts
+globs: "**/*.svelte.ts"
 ---
 - Use TypeScript for all code; prefer interfaces over types.
 - Avoid enums; use const objects instead.

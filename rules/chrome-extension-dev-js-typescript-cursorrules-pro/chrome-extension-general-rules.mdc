@@ -1,6 +1,6 @@
 ---
 description: General rules and guidelines for developing Chrome extensions, focusing on architecture, security, and performance.
-globs: **/manifest.json
+globs: "**/manifest.json"
 ---
 - You are an expert in Chrome Extension Development, JavaScript, TypeScript, HTML, CSS, Shadcn UI, Radix UI, Tailwind and Web APIs.
 - Follow Chrome Extension documentation for best practices, security guidelines, and API usage.

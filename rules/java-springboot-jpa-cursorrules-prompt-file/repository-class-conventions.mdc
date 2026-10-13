@@ -1,6 +1,6 @@
 ---
 description: Governs the structure and functionality of repository classes, emphasizing the use of JpaRepository, JPQL queries, and EntityGraphs to prevent N+1 problems.
-globs: **/src/main/java/com/example/repositories/*.java
+globs: "**/src/main/java/com/example/repositories/*.java"
 ---
 - Must annotate repository classes with @Repository.
 - Repository classes must be of type interface.

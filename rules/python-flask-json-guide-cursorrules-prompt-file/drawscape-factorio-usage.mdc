@@ -1,6 +1,6 @@
 ---
 description: Specifies how to use the custom Drawscape Factorio Python module in Python files.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - When working with Python files in this project, always utilize the custom Drawscape Factorio module.
 - Use the `createFactorio` and `importFUE5` functions from the `drawscape_factorio` module.

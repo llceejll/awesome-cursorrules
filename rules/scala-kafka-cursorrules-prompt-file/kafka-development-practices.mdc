@@ -1,6 +1,6 @@
 ---
 description: Applies general coding standards and best practices for Kafka development with Scala.
-globs: **/*.scala
+globs: "**/*.scala"
 alwaysApply: true
 ---
 - All topic names are config values (Typesafe Config or pure-config).

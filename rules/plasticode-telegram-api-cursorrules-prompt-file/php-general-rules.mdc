@@ -1,6 +1,6 @@
 ---
 description: Applies general PHP coding standards and practices to all PHP files in the project, emphasizing object-oriented programming and error handling.
-globs: **/*.php
+globs: "**/*.php"
 ---
 - You are an expert in PHP and related web development technologies.
 - Write concise, technical responses with accurate PHP examples.
