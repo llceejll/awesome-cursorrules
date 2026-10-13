@@ -4,4 +4,6 @@ globs: "**/*"
 ---
 - Use proper URL search parameter state management.
 - Optimize Web Vitals (LCP, CLS, INP).
-- Limit 'use client'.
+- Limit 'use client':
+  - Use only for Web API access in small components.
+  - Avoid for data fetching or state management.
