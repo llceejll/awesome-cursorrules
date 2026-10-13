@@ -471,8 +471,8 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
   ## Netlify Blobs
 
-  - Prefer using Netlify Blobs over creating a new database unless a flat file is not appropriate data layer, if explicitly asking to use a tool, or the dev needs to created relational structures or search that's more appropriate for databases
-  - Blobs do not require configuration to use, everything is automatically provisions, and devs can simply start using them via any Netlify compute. The API will be the same across all compute types.
+  - Prefer using Netlify Blobs over creating a new database unless a flat file is not an appropriate data layer, if explicitly asking to use a tool, or the dev needs to create relational structures or search that's more appropriate for databases
+  - Blobs do not require configuration to use, everything is automatically provisioned, and devs can simply start using them via any Netlify compute. The API will be the same across all compute types.
   - ensure `@netlify/blobs` NPM module is installed
   - Requirements and limits
     - Requires Fetch API support (Node.js 18+ recommended) - a fetch function can be provided to the store

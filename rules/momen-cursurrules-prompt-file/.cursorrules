@@ -29,7 +29,7 @@ Backend Architecture:
 5. Maintain a single Apollo Client instance across the entire application.
 6. Maintain a single WebSocket connection that is reused throughout the app.
 7. Never cache anything at the GraphQL level.
-8. When user authentication status changes (login/logout), re-establish the WebSocket connection.
+8. When the user's authentication status changes (login/logout), re-establish the WebSocket connection.
 
 Apollo Client Setup:
 
@@ -46,12 +46,12 @@ Authentication:
 1. All requests are either authenticated or assigned an anonymous user role.
 2. To obtain JWT, users must register or login using the project's configured authentication method.
 3. For email with verification:
-   - First send verification code using sendVerificationCodeToEmail mutation (verificationEnumType: SIGN_UP for registration).
+   - First send a verification code using sendVerificationCodeToEmail mutation (verificationEnumType: SIGN_UP for registration).
    - Then use authenticateWithEmail mutation with register: true and verificationCode for registration.
    - For subsequent logins, use register: false and omit verificationCode.
 4. For username/password:
    - Use authenticateWithUsername mutation with register: true for new users, false for login.
-5. Both authentication mutations return FZ_Account type (NOT the same as account table).
+5. Both authentication mutations return FZ_Account type (NOT the same as the account table).
 6. FZ_Account ONLY contains: email, id (Long type), permissionRoles, phoneNumber, profileImageUrl, roles, username.
 7. Store JWT token securely and include in all authenticated requests.
 
@@ -157,11 +157,11 @@ GraphQL Subscriptions:
 2. WebSocket sends connection_init, server acknowledges with connection_ack.
 3. Subscribe using start message with id, operationName, query, and variables.
 4. Server sends data messages with matching id containing updated data.
-5. Use same subscription operations as queries (e.g., subscription { post { id title } }).
+5. Use the same subscription operations as queries (e.g., subscription { post { id title } }).
 
 Best Practices:
 
-1. When generating frontends, ensure UI is modern, beautiful, and follows UX best practices.
+1. When generating frontends, ensure the UI is modern, beautiful, and follows UX best practices.
 2. When debugging, check both browser console and network tab for errors.
 3. For asynchronous requests, inspect WebSocket messages in network tab.
 4. When initiating Chrome DevTools debugging, clear local storage and cookies first.
