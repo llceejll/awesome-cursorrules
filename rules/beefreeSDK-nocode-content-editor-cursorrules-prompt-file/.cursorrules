@@ -262,17 +262,17 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 ## Template Loading Guidelines
 
 ### Loading Templates
-- Use the `start()` method with template data to load existing templates:
+- Call `start(beeConfig, template)`. The configuration is the first argument and the template is the second. Pass `{}` when there is no saved template:
   ```typescript
   // Load template from localStorage
   const selectedTemplate = JSON.parse(localStorage.getItem('currentEmailData'));
   
   if (selectedTemplate) {
-    beefreeSDKInstance.start(selectedTemplate);
+    beefreeSDKInstance.start(beeConfig, selectedTemplate);
     console.log('Loaded template from localStorage');
   } else {
     // Start with empty template
-    beefreeSDKInstance.start();
+    beefreeSDKInstance.start(beeConfig, {});
     console.log('Started with empty template');
   }
   ```
@@ -325,7 +325,7 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 - Load imported templates into the Beefree SDK:
   ```typescript
   const importedTemplate = await importHtmlTemplate(htmlContent);
-  beefreeSDK.start(importedTemplate);
+  beefreeSDK.start(beeConfig, importedTemplate);
   ```
 
 ## Error Handling Guidelines

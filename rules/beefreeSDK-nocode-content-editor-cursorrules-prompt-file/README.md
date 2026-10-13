@@ -239,10 +239,10 @@ node proxy-server.js
 const selectedTemplate = JSON.parse(localStorage.getItem('currentEmailData'));
 
 if (selectedTemplate) {
-  beefreeSDKInstance.start(selectedTemplate);
+  beefreeSDKInstance.start(beeConfig, selectedTemplate);
   console.log('Loaded template from localStorage');
 } else {
-  beefreeSDKInstance.start();
+  beefreeSDKInstance.start(beeConfig, {});
   console.log('Started with empty template');
 }
 ```
