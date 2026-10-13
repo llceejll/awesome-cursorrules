@@ -26,7 +26,7 @@ globs: "**/*.py, src/**/*.py, tests/**/*.py"
 ## Type Hints
 - Use type hints for all function parameters and returns
 - Import types from `typing` module
-- Use `Optional[Type]` instead of `Type | None`
+- Write a value that may be `None` as `Type | None`
 - Use `TypeVar` for generic types
 - Define custom types in `types.py`
 - Use `Protocol` for duck typing
