@@ -267,6 +267,7 @@ const data = await response.json();
 ```typescript
 const beeConfig = {
   container: 'beefree-sdk-container',
+  trackChanges: true,
   onChange: function (jsonFile, response) {
     console.log('Template changed:', jsonFile);
     console.log('Response:', response);
