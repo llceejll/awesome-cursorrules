@@ -2,5 +2,5 @@
 description: Defines conventions and optimizations for React frontend development.
 globs: frontend/src/**/*.ts*
 ---
-- Optimize Web Vitals (LCP, CLS, FID).
+- Optimize Web Vitals (LCP, CLS, INP).
 - Limit `use client` hooks to small, specific components for Web API access.

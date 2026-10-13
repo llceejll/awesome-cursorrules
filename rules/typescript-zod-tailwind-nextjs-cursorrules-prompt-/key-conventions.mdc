@@ -3,5 +3,5 @@ description: Specifies key conventions for URL search parameter state management
 globs: "**/*"
 ---
 - Use proper URL search parameter state management.
-- Optimize Web Vitals (LCP, CLS, FID).
+- Optimize Web Vitals (LCP, CLS, INP).
 - Limit 'use client'.

@@ -4,4 +4,4 @@ globs: src/**/*.*
 ---
 - Implement lazy loading for non-critical components.
 - Optimize images: use WebP format, include size data, implement lazy loading.
-- Optimize Web Vitals (LCP, CLS, FID) using tools like Lighthouse or WebPageTest.
+- Optimize Web Vitals (LCP, CLS, INP) using tools like Lighthouse or WebPageTest.

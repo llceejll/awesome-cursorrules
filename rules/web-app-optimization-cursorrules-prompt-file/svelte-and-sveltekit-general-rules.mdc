@@ -19,7 +19,7 @@ globs: "**/*.svelte"
 - Use Svelte's bind:this for managing focus programmatically.
 - Embrace Svelte's simplicity and avoid over-engineering solutions.
 - Use SvelteKit for full-stack applications with SSR and API routes.
-- Prioritize Web Vitals (LCP, FID, CLS) for performance optimization.
+- Prioritize Web Vitals (LCP, INP, CLS) for performance optimization.
 - Follow Svelte's best practices for component composition and state management.
 - Ensure cross-browser compatibility by testing on multiple platforms.
 - Keep your Svelte and SvelteKit versions up to date.

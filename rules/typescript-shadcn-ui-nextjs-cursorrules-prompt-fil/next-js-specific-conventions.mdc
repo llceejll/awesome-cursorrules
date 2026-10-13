@@ -3,7 +3,7 @@ description: Enforces Next.js specific conventions for data fetching, rendering,
 globs: pages/**/*
 ---
 - Use 'nuqs' for URL search parameter state management
-- Optimize Web Vitals (LCP, CLS, FID)
+- Optimize Web Vitals (LCP, CLS, INP)
 - Limit 'use client':
   - Favor server components and Next.js SSR
   - Use only for Web API access in small components

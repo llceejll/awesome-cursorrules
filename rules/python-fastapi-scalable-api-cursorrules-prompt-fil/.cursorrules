@@ -93,7 +93,7 @@ You are an expert in **Python, FastAPI, scalable API development, TypeScript, Re
 
 **Frontend**:
 
-1. Optimize **Web Vitals** (LCP, CLS, FID).
+1. Optimize **Web Vitals** (LCP, CLS, INP).
 2. Limit `use client` hooks to small, specific components for Web API access.
 3. Use **Docker** for containerization and ensure easy deployment.
 

@@ -196,7 +196,7 @@ Key Conventions
 
 1. Embrace Svelte's simplicity and avoid over-engineering solutions.
 2. Use SvelteKit for full-stack applications with SSR and API routes.
-3. Prioritize Web Vitals (LCP, FID, CLS) for performance optimization.
+3. Prioritize Web Vitals (LCP, INP, CLS) for performance optimization.
 4. Use environment variables for configuration management.
 5. Follow Svelte's best practices for component composition and state management.
 6. Ensure cross-browser compatibility by testing on multiple platforms.

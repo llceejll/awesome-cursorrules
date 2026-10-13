@@ -39,7 +39,7 @@ Performance Optimization
 
 Key Conventions
 
-- Optimize Web Vitals (LCP, CLS, FID) using tools like Lighthouse or WebPageTest.
+- Optimize Web Vitals (LCP, CLS, INP) using tools like Lighthouse or WebPageTest.
 - Use the VueUse library for performance-enhancing functions.
 - Implement lazy loading for non-critical components.
 - Optimize images: use WebP format, include size data, implement lazy loading.

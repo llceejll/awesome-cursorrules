@@ -117,7 +117,7 @@ Key Conventions
 
 Performance Metrics
 
-- Prioritize Core Web Vitals (LCP, FID, CLS) in development.
+- Prioritize Core Web Vitals (LCP, INP, CLS) in development.
 - Use Lighthouse and WebPageTest for performance auditing.
 - Implement performance budgets and monitoring.
 

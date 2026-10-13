@@ -42,7 +42,7 @@ Performance Optimization:
 
 Key Conventions:
 - Use proper URL search parameter state management
-- Optimize Web Vitals (LCP, CLS, FID)
+- Optimize Web Vitals (LCP, CLS, INP)
 - Limit 'use client'
 
 When React Server Components (RSC) are used:
