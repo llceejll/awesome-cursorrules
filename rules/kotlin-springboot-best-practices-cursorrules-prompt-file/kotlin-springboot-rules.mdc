@@ -32,7 +32,7 @@ globs: "**/*.kt"
 2.	Replace overloaded constructors with default and named parameters to simplify function calls and make them more expressive.
     ```kotlin
     // Kotlin – use default parameters
-    fun createConnection(host: String, secure: Boolean = true) { … }
+    fun createConnection(host: String, secure: Boolean = true) { /* … */ }
 
     createConnection("example.com")                      // uses default secure=true
     createConnection(host = "test.com", secure = false)  // named arg for clarity
