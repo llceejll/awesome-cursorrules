@@ -1,6 +1,6 @@
 ---
-description: Enforces best practices for React Native Expo development within the src directory, promoting maintainable and efficient code.
-globs: src/**/*.*
+description: Enforces best practices for Expo Router routes, promoting maintainable and efficient code.
+globs: app/**/*.{ts,tsx}
 ---
 - Use functional components with hooks.
 - Leverage Expo SDK features and APIs.

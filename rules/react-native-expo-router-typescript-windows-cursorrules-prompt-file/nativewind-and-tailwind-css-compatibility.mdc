@@ -1,10 +1,10 @@
 ---
-description: Provides specific version compatibility notes for NativeWind and Tailwind CSS to prevent common installation errors.
+description: Installs NativeWind 4.2.7 with Tailwind CSS v3 for Expo.
 globs: package.json
 ---
-- NativeWind and Tailwind CSS compatibility:
-  - Use nativewind@2.0.11 with tailwindcss@3.3.2.
-  - Higher versions may cause 'process(css).then(cb)' errors.
-  - If errors occur, remove both packages and reinstall specific versions:
-    npm remove nativewind tailwindcss
-    npm install nativewind@2.0.11 tailwindcss@3.3.2
+- NativeWind 4.2.7 is the stable release and uses Tailwind CSS v3:
+  - `npm install nativewind@4.2.7 react-native-reanimated react-native-safe-area-context`
+  - `npm install --save-dev tailwindcss@^3.4.17 prettier-plugin-tailwindcss@^0.5.11 babel-preset-expo`
+- On Expo 57, install native packages with `npx expo install react-native-reanimated react-native-worklets react-native-safe-area-context`. Projects on Reanimated 3 keep that setup.
+- `tailwind.config.js` sets `presets: [require("nativewind/preset")]` and `content` paths for files that use NativeWind classes.
+- `global.css` contains `@tailwind base;`, `@tailwind components;`, and `@tailwind utilities;`, and is passed to `withNativeWind`.

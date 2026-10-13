@@ -23,33 +23,23 @@ const reactNativeExpoBestPractices = [
 
 const folderStructure = `
 assets/
-src/
-  components/
-  screens/
-  navigation/
-  hooks/
-  utils/
 app/
   _layout.tsx
   index.tsx
-App.js
 app.json
 `;
 
 // Package Version Compatibility Notes
 
 const packageCompatibilityNotes = [
-  "NativeWind and Tailwind CSS compatibility:",
-  "- Use nativewind@2.0.11 with tailwindcss@3.3.2.",
-  "- Higher versions may cause 'process(css).then(cb)' errors.",
-  "- If errors occur, remove both packages and reinstall specific versions:",
-  "  npm remove nativewind tailwindcss",
-  "  npm install nativewind@2.0.11 tailwindcss@3.3.2",
-
+  "NativeWind 4.2.7 is the stable release and uses Tailwind CSS v3:",
+  "- npm install nativewind@4.2.7 react-native-reanimated react-native-safe-area-context",
+  "- npm install --save-dev tailwindcss@^3.4.17 prettier-plugin-tailwindcss@^0.5.11 babel-preset-expo",
+  "- On Expo 57, install native packages with npx expo install react-native-reanimated react-native-worklets react-native-safe-area-context. Projects on Reanimated 3 keep that setup.",
+  "- tailwind.config.js sets presets: [require('nativewind/preset')] and content paths for files that use NativeWind classes.",
+  "- global.css contains @tailwind base, @tailwind components, and @tailwind utilities, and is passed to withNativeWind.",
   "Babel configuration for NativeWind:",
-  "- Include 'nativewind/babel' in the plugins array.",
-  "- Avoid using jsxImportSource in presets.",
-  "- Ensure 'react-native-reanimated/plugin' follows 'nativewind/babel'."
+  "- presets: [['babel-preset-expo', { jsxImportSource: 'nativewind' }], 'nativewind/babel']"
 ];
 
 // Additional Instructions
@@ -58,11 +48,10 @@ const additionalInstructions = [
   "Use PowerShell for terminal commands.",
   "Before installing a new package, check if it's already installed:",
   "  Get-ChildItem -Recurse -Filter package-name",
-  "If installed, upgrade using:",
-  "  expo upgrade <package-name>",
-  "or",
+  "If it is an Expo package, install the SDK-compatible version with:",
+  "  npx expo install <package-name>",
+  "Otherwise use:",
   "  npm install <package-name>",
-  "if not supported by Expo.",
   "Use PowerShell commands to manage the project, e.g., moving and renaming files:",
   "  Move-Item -Path .\\old\\path\\file.txt -Destination .\\new\\path\\newname.txt",
   "If unsure about the current structure or details, use PowerShell to list out necessary information:",

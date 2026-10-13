@@ -1,17 +1,11 @@
 ---
-description: Defines the recommended folder structure for React Native Expo projects to maintain organization and scalability.
+description: Defines the Expo Router folder structure and the package.json entry point.
 globs: "*"
 ---
+- Set `package.json` `"main"` to `expo-router/entry`. The initial route file is `app/_layout.tsx`.
 - Ensure the following folder structure:
 assets/
-src/
-  components/
-  screens/
-  navigation/
-  hooks/
-  utils/
 app/
   _layout.tsx
   index.tsx
-App.js
 app.json
