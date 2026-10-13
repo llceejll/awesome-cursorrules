@@ -2,7 +2,7 @@
 description: Applies best practices for Styled Components within React components.
 globs: src/components/styled/**/*.js
 ---
-- Use the styled-components/macro for better debugging.
+- Import from `styled-components`. Use the Babel or SWC plugin for display names and debugging.
 - Implement a global theme using ThemeProvider.
 - Create reusable styled components.
 - Use props for dynamic styling.

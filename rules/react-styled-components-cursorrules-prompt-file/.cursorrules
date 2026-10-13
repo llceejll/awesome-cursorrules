@@ -7,7 +7,7 @@ const preferFunctionalComponents = true;
 // Styled Components best practices
 
 const styledComponentsBestPractices = [
-  "Use the styled-components/macro for better debugging",
+  "Import from styled-components and use the Babel or SWC plugin for debugging",
   "Implement a global theme using ThemeProvider",
   "Create reusable styled components",
   "Use props for dynamic styling",
