@@ -34,7 +34,7 @@ For example, use `rails generate model` instead of creating a model from scratch
 3. **Controller Patterns**
    - Use `params.expect()` for safer parameter handling
    - Implement rate limiting via cache store
-   - Use the new sessions generator for authentication
+   - Use `bin/rails generate authentication` for the built-in session-based authentication system
    - Silence healthcheck requests in production
    - Keep controllers RESTful and focused
    - Use service objects for complex business logic
@@ -153,7 +153,7 @@ For example, use `rails generate model` instead of creating a model from scratch
 - **Background Jobs**: Solid Queue (default in Rails 8)
 - **Caching**: Solid Cache (default in Rails 8)
 - **Real-time**: Solid Cable
-- **Authentication**: Built-in Sessions Generator
+- **Authentication**: `bin/rails generate authentication`
 - **Authorization**: Pundit
 - **Deployment**: Kamal 2 (default in Rails 8)
 - **Asset Pipeline**: Vite (via the vite_rails gem) or Propshaft (default in Rails 8)
