@@ -12,7 +12,7 @@
 - **Python Version:** Python 3.10+
 - **Dependency Management:** uv (preferred) / Poetry
 - **Code Formatting:** Ruff (replaces `black`, `isort`, `flake8`)
-- **Type Hinting:** Strictly use the `typing` module. All functions, methods, and class members must have type annotations.
+- **Type Hinting:** Annotate every function, method, and class member. Prefer built-in generics (`list`, `dict`, `set`, `tuple`) and `X | Y` unions. Use `typing` for names that still live there, such as `Protocol`, `TypedDict`, `Literal`, and `Annotated`.
 - **Testing Framework:** `pytest`
 - **Documentation:** Google style docstring
 - **Environment Management:** `conda` / `venv`
