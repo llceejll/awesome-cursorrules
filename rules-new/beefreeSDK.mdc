@@ -21,7 +21,7 @@ Guidelines and best practices for building applications with [Beefree SDK](https
   ```json
   {
     "dependencies": {
-      "@beefree.io/sdk": "^9.0.2-fix-optional-url-config.0",
+      "@beefree.io/sdk": "^11.7.1",
       "axios": "^1.10.0",
       "express": "^5.1.0",
       "cors": "^2.8.5",
