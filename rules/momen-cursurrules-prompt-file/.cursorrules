@@ -100,7 +100,7 @@ Third-Party APIs:
 1. Third-party APIs imported into Momen act as authenticated backend relays.
 2. Each API has: id, name, operation (query or mutation), inputs, outputs.
 3. Invoke via operation_{id} GraphQL field (query or mutation based on operation type).
-4. Always check responseCode subfield in results - may return 4xx or 5xx codes.
+4. Always check the responseCode subfield in results, in case 4xx or 5xx codes are returned.
 5. Use field_200_json subfield for successful responses (2xx codes).
 6. Provide all input parameters unless explicitly instructed otherwise.
 7. Benefits: keeps API keys server-side, avoids CORS issues, centralized error handling.
@@ -124,7 +124,7 @@ AI Agents:
 
 Binary Asset Uploads:
 
-1. All binary assets (images, videos, files) stored in object storage, not PostgreSQL.
+1. All binary assets (images, videos, files) are stored in object storage, not PostgreSQL.
 2. Always reference assets by Momen ID, never by URL or path.
 3. Two-step upload process (mandatory):
    - Step 1: Calculate MD5 hash, Base64-encode it, call presigned URL mutation (imagePresignedUrl, videoPresignedUrl, or filePresignedUrl).
@@ -132,7 +132,7 @@ Binary Asset Uploads:
 4. Presigned URL mutations require: MD5 Base64 hash, MediaFormat (suffix), optional CannedAccessControlList (recommend PRIVATE).
 5. Valid MediaFormat values: CSS, CSV, DOC, DOCX, GIF, HTML, ICO, JPEG, JPG, JSON, MOV, MP3, MP4, OTHER, PDF, PNG, PPT, PPTX, SVG, TXT, WAV, WEBP, XLS, XLSX, XML.
 6. When using media on frontend, always fetch the url subfield from FZ_Image, FZ_Video, or FZ_File types.
-7. Media columns stored as {columnName}_id in database mutations.
+7. Media columns are stored as {columnName}_id in database mutations.
 
 Stripe Payments:
 
@@ -148,7 +148,7 @@ Stripe Payments:
    - Call createStripeRecurringPayment mutation with orderId and priceId.
    - Returns clientSecret, amount, recurringPaymentId, stripeReadableAmountAndCurrency, stripeRecurring.
    - Use clientSecret with Stripe Elements to show Checkout Form.
-7. Stripe webhooks handled automatically by Momen actionflows - no frontend logic needed.
+7. Stripe webhooks are handled automatically by Momen actionflows - no frontend logic needed.
 8. Frontend should poll or use GraphQL subscription to detect webhook effects (order status updates).
 
 GraphQL Subscriptions:
