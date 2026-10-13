@@ -6,7 +6,7 @@
             "indentation": "4 spaces",
             "max_line_length": 120,
             "comments": {
-                "style": "# for single-line, ''' for multi-line",
+                "style": "# for single-line and block comments",
                 "require_comments": true
             }
         },
