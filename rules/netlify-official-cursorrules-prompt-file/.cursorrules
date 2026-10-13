@@ -180,16 +180,20 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - Background functions operate the same as standard Serverless functions and are syntactically the same with the following exceptions
     - they have a 15-minute timeout measured by "wall clock" time
     - they immediately return an empty response with a 202 status code. Return values from these functions are ignored.
-    - Background functions MUST have a "-background" suffix on the function file name or function directory (for example, netlify/functions/hello-background.mts or netlify/functions/hello-background/index.mts).
+    - Set `background: true` in the function `config` export. A `-background` suffix on the file or directory name still enables background mode.
 
   #### Examples of the latest background function structures
   - ```typescript
-      import { Context } from "@netlify/functions";
+      import type { Config, Context } from "@netlify/functions";
 
       export default async (req: Request, context: Context) => {
         await someLongRunningTask();
 
         console.log("Done");
+      };
+
+      export const config: Config = {
+        background: true,
       };
     ```
 
@@ -198,6 +202,10 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
         await someLongRunningTask();
 
         console.log("Done");
+      };
+
+      export const config = {
+        background: true,
       };
     ```
 
@@ -221,7 +229,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       netlify functions:invoke myfunction
     ```
 
-  #### Examples of the latest background function structures
+  #### Examples of the latest scheduled function structures
   - ```typescript
       import type { Config } from "@netlify/functions"
 
