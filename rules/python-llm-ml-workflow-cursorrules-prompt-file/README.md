@@ -17,7 +17,7 @@ This prompt file is designed for senior Python AI/ML engineers specializing in L
 - `fastapi`
 - `gradio`, `streamlit`
 - `langchain`, `transformers`
-- (Optional) `faiss`, `chroma`, `mlflow`, `tensorboard`, `optuna`, `hyperopt`, `pandas`, `numpy`, `dask`, `pyspark`
+- (Optional) `faiss-cpu`, `chromadb`, `mlflow`, `tensorboard`, `optuna`, `hyperopt`, `pandas`, `numpy`, `dask`, `pyspark`
 - `git`
 - `gunicorn`, `uvicorn`, `nginx`, `caddy`
 - `systemd`, `supervisor`

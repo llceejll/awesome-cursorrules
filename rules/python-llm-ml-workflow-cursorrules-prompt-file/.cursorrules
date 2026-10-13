@@ -21,7 +21,7 @@
 - **Web Framework:** `fastapi`
 - **Demo Framework:** `gradio`, `streamlit`
 - **LLM Framework:** `langchain`, `transformers`
-- **Vector Database:** `faiss`, `chroma` (optional)
+- **Vector Database:** `faiss-cpu`, `chromadb` (optional)
 - **Experiment Tracking:** `mlflow`, `tensorboard` (optional)
 - **Hyperparameter Optimization:** `optuna`, `hyperopt` (optional)
 - **Data Processing:** `pandas`, `numpy`, `dask` (optional), `pyspark` (optional)
