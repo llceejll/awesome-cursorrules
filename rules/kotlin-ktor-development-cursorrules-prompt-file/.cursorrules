@@ -259,6 +259,17 @@ fun Application.configureSecurity() {
 ```kotlin
 fun Application.configureMonitoring() {
     val startTime = System.currentTimeMillis()
+    val prometheusRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
+
+    install(MicrometerMetrics) {
+        registry = prometheusRegistry
+        meterBinders = listOf(
+            JvmMemoryMetrics(),
+            JvmGcMetrics(),
+            ProcessorMetrics(),
+            JvmThreadMetrics()
+        )
+    }
 
     routing {
         get("/health") {
@@ -268,16 +279,6 @@ fun Application.configureMonitoring() {
         get("/metrics") {
             call.respond(prometheusRegistry.scrape())
         }
-    }
-
-    install(MicrometerMetrics) {
-        registry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
-        meterBinders = listOf(
-            JvmMemoryMetrics(),
-            JvmGcMetrics(),
-            ProcessorMetrics(),
-            JvmThreadMetrics()
-        )
     }
 }
 ```
