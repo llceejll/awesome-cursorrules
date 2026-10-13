@@ -62,8 +62,8 @@ UI and Styling
 
 - Use Tailwind CSS for utility-first styling approach.
 - Leverage Shadcn components for pre-built, customizable UI elements.
-- Import Shadcn components from `$lib/components/ui`.
-- Organize Tailwind classes using the `cn()` utility from `$lib/utils`.
+- Import Shadcn components from `#lib/components/ui` and the `cn()` utility from `#lib/utils.js`.
+- Declare `#lib` in package.json `imports`: `"#lib/*": "./src/lib/*"`.
 - Use Svelte's built-in transition and animation features.
 
 Shadcn Color Conventions
