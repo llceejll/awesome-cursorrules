@@ -524,9 +524,9 @@ Reference the complete project at Beefree SDK [multiple-versions-concept](https:
     <script src="https://app-rsrc.getbee.io/plugin/BeefreeSDK.js"></script>
     <script type="text/javascript">
       const beeConfig = {
-            container: 'beefree-sdk-container',
-    uid: 'demo-user-' + Date.now(),
-    language: 'en-US',
+        container: 'beefree-sdk-container',
+        uid: 'demo-user-' + Date.now(),
+        language: 'en-US',
         onSave: function (jsonFile, htmlFile) {
           console.log("Template saved:", jsonFile);
         },
