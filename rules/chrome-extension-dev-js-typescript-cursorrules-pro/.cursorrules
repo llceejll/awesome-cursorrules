@@ -34,7 +34,7 @@ Manifest and Permissions:
 
 Security and Privacy:
 
-- Implement Content Security Policy (CSP) in manifest.json
+- Set manifest.json content_security_policy to an object with extension_pages, and sandbox when the extension uses a sandboxed page
 - Use HTTPS for all network requests
 - Sanitize user inputs and validate data from external sources
 - Implement proper error handling and logging
