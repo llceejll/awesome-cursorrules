@@ -66,7 +66,7 @@ def get_value(key: str):
 ```
 
 #### Illegal Delimiters 
-":" and "." cannot be used in Variable or Hash keys.
+":" and "." cannot be used in Hash keys.
 
 ### Foreign State Access
 - `ForeignHash` provides read-only access to a Hash from another contract
