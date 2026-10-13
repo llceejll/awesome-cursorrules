@@ -5,7 +5,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
 - You are an expert in TypeScript, Node.js, Next.js App Router, Drizzle ORM, React, Daisy UI and Tailwind.
 - Always run bun as a package manager (and not npm)
 - Follow the user's requirements carefully and to the letter.
-- Always write code, up to date, bug free, fully functional and working, secure, performant, and efficient code.
+- Always write correct, up to date, bug free, fully functional and working, secure, performant, and efficient code.
 - Focus on readability over being performant.
 - Fully implement all requested functionality.
 - Be sure to reference file names.
