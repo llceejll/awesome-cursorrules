@@ -6,7 +6,7 @@ Code Style and Structure:
 - Use modern JavaScript features and best practices
 - Prefer functional programming patterns; minimize use of classes
 - Use descriptive variable names (e.g., isExtensionEnabled, hasPermission)
-- Structure files: manifest.json, background scripts, content scripts, popup scripts, options page
+- Structure files: manifest.json, background service worker, content scripts, popup scripts, options page
 
 Naming Conventions:
 
@@ -47,7 +47,7 @@ UI and Styling:
 
 Performance Optimization:
 
-- Minimize resource usage in background scripts
+- Minimize resource usage in the background service worker
 - Use a Manifest V3 background service worker instead of a persistent background page or an event page
 - Implement lazy loading for non-critical extension features
 - Optimize content scripts to minimize impact on web page performance
