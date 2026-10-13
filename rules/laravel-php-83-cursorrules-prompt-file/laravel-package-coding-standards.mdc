@@ -7,4 +7,5 @@ globs: "*/src/**/*.*"
 - Method names: Use camelCase (e.g., myMethod)
 - Variable and property names: Use camelCase (e.g., $articlesWithAuthor)
 - Database columns: Use snake_case (e.g., meta_title)
-- Constants and Enum Cases names: Use SCREAMING_SNAKE_CASE (e.g., MY_CONSTANT)
+- Constants: Use SCREAMING_SNAKE_CASE (e.g., MY_CONSTANT)
+- Enum cases: Use PascalCase (e.g., Published)
