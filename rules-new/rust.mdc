@@ -43,7 +43,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 - Never panic! Use `ProgramError::Custom(u32)` or `ErrorCode` enums
 
 ## Security Patterns
-- Always validate `msg.sender`/signer with `account_info.is_signer`
+- Always validate the signer with `account_info.is_signer`
 - Prevent replay attacks via `seeds`, `bump`, and unique PDAs
 - Use strict size checks before reallocating or deserializing
 - Avoid unsafe unchecked casting; prefer Anchor deserialization
