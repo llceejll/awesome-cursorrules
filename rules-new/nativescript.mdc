@@ -22,11 +22,10 @@ globs: "**/*.tsx, **/*.ts, **/*.vue, **/*.svelte, src/**/*.ts, app/**/*.ts, src/
 - Track and clean up all timers (`setTimeout`, `setInterval`) to avoid memory leaks.
 
 ## UI and Styling
-- Always use TailwindCSS as the CSS Framework using `"@nativescript/tailwind": "^2.1.0"` for consistent styling paired with `"tailwindcss": "~3.4.0"`.
-- Add ios: and android: style variants for platform-specific styling, addVariant('android', '.ns-android &'), addVariant('ios', '.ns-ios &');
-- darkMode: ['class', '.ns-dark']
+- Use Tailwind CSS with `@nativescript/tailwind`. For Tailwind CSS v4, install `@nativescript/tailwind` and `tailwindcss`, then add `@import "tailwindcss";` to `app.css` or `app.scss`.
+- For Tailwind CSS v3, generate `tailwind.config.js`, set `darkMode: ['class', '.ns-dark']`, and register platform variants with `addVariant('android', '.ns-android &')` and `addVariant('ios', '.ns-ios &')`.
 - Leverage `GridLayout` or `StackLayout` for flexible, responsive layouts. Place more emphasis on proper GridLayout usage for complex layouts but use StackLayout for simpler, linear arrangements.
-- Use `visibility: 'hidden'` for elements that should not affect layout when hidden.
+- Use `visibility: 'collapse'` for elements that should not affect layout when hidden. The documented visibility values are `visible` and `collapse`.
  
 ## Performance Optimization
 - Try to avoid deeply nesting layout containers but instead use `GridLayout` wisely to setup complex layouts.
