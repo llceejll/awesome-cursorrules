@@ -17,4 +17,5 @@ globs: "**/*.svelte"
     
   - Usage example:
     ```svelte
+    <div class="bg-primary text-primary-foreground"></div>
     ```
