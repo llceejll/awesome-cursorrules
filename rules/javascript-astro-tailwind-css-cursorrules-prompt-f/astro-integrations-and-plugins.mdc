@@ -4,6 +4,6 @@ globs: astro.config.mjs
 ---
 Integrations and Plugins
 
-- Utilize Astro integrations for extending functionality (e.g., @astrojs/image).
+- Utilize Astro integrations for extending functionality (e.g., @astrojs/mdx).
 - Implement proper configuration for integrations in astro.config.mjs.
 - Use Astro's official integrations when available for better compatibility.
