@@ -33,7 +33,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 - Use `provider.simulate()` to inspect failed txs
 - Spin up a local validator (`anchor test`) and reset between tests
 - Airdrop SOL to wallets with `provider.connection.requestAirdrop(...)`
-- Validate program logs using `tx.confirmation.logMessages`
+- Validate program logs using `tx.meta.logMessages`
 
 ## Solana SDK (Manual)
 - Use `solana_program` crate when not using Anchor (bare-metal programs)
