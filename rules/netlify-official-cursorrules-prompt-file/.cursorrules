@@ -515,12 +515,12 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       // Creates or overwrites a blob entry.
       // example: await store.set('key-name', 'contents-of key');
       // - NEVER add metadata unless instructed to.
-      set(key: string, value: ArrayBuffer | Blob | string, options?: { metadata?: object }): Promise<void>;
+      set(key: string, value: ArrayBuffer | Blob | string, options?: { metadata?: object }): Promise<{ etag?: string; modified: boolean }>;
 
       // Stores a JSON-serializable object.
       // example: await store.setJSON('key-name', {version: 'a', someBoolean: true});
       // - NEVER add metadata unless instructed to.
-      setJSON(key: string, value: any, options?: { metadata?: object }): Promise<void>;
+      setJSON(key: string, value: any, options?: { metadata?: object }): Promise<{ etag?: string; modified: boolean }>;
 
       // Retrieves a stored blob.
       // example: await store.get('key-name');
@@ -532,16 +532,15 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       // Retrieves a blob along with metadata
       // example: await store.getWithMetadata('key-name');
       // - NEVER add the second getOpts arg unless you need an explicit type or have an etag to check against.
-      // - AVOID adding it unless it's reliably available but IF an etag is provided, it will only return the blob if the etag is different than what's stored.
+      // - IF an etag is provided, the request sends If-None-Match. A matching etag returns `{ data: null }` and does not download the body.
       // - if the blob is missing, it will resolve the promise with a null value
       getWithMetadata(key: string, getOpts?: GetKeyAndMetadataOptions): Promise<{ data: any, etag: string, metadata: object } | null>;
 
       // Retrieves metadata of a blob WITHOUT downloading the data.
       // example: await store.getMetadata('key-name');
-      // - NEVER add the second getOpts arg unless you need an explicit type or have an etag to check against.
-      // - AVOID adding it unless it's reliably available but IF an etag is provided, it will only return the blob if the etag is different than what's stored.
+      // - The options argument only accepts `consistency`. It does not accept `etag` or `type`.
       // - if the blob is missing, it will resolve the promise with a null value
-      getMetadata(key: string, getOpts?: GetKeyAndMetadataOptions): Promise<{ etag: string, metadata: object } | null>;
+      getMetadata(key: string, getOpts?: { consistency?: 'strong' | 'eventual' }): Promise<{ etag?: string, metadata: object } | null>;
 
       // Lists blobs in the store with optional hierarchical browsing.
       // example:
