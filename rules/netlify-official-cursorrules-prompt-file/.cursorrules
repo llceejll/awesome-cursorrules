@@ -737,10 +737,8 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   ```
 
   ### Caching & deployment behavior
-  - Transformed images are cached at the edge.
-  - Source images are cached for future transformations.
-  - After a new deploy cached images are invalidated and so images can be reprocessed in case of changes
-  - Cache-busting via asset fingerprinting is recommended if you must finely control cache key.
+  - A transformed image is cached at the edge. Another request for the same transformation serves that cached asset.
+  - A new deploy re-runs transformations when the source image changed in that deploy, so new requests do not serve the outdated asset.
   - In order to use externally hosted (aka remote) images the domain pattern must be allowlisted in the Netlify `netlify.toml`.
     - Allow remote sources using:
       ```toml
