@@ -214,8 +214,8 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       [functions."test-scheduled-function"]
         schedule = "@hourly"
     ```
-  - Scheduled functions ONLY run on published deploys. They donâ€™t run on Deploy Previews or branch deploys.
-  - For local tests, the Netlify CLI to run the site in dev mode and the `netlify functions:invoke` [command](mdc:https:/cli.netlify.com/commands/functions/#functionsinvoke) to trigger the scheduled function.
+  - Scheduled functions ONLY run on published deploys. They don't run on Deploy Previews or branch deploys.
+  - For local tests, the Netlify CLI to run the site in dev mode and the `netlify functions:invoke` [command](https://cli.netlify.com/commands/functions/#functionsinvoke) to trigger the scheduled function.
     example:
     ```bash
       netlify functions:invoke myfunction
@@ -466,7 +466,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
     - Can only rewrite requests to same-site URLs (use `fetch()` for external content)
     - Cached edge functions override existing static files
     - No local caching; HTTP cache headers are ignored in local testing
-    - Not included in Netlifyâ€™s HIPAA-compliant hosting offering
+    - Not included in Netlify's HIPAA-compliant hosting offering
 
 
   ## Netlify Blobs
@@ -775,7 +775,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - examples
     ```toml
       # Production context: all deploys from the Production branch
-      # set in your siteâ€™s Branches settings in the UI will inherit
+      # set in your site's Branches settings in the UI will inherit
       # these settings. You can define environment variables
       # here but we recommend using the Netlify UI for sensitive
       # values to keep them out of your source repository.

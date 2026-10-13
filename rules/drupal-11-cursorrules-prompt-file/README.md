@@ -38,4 +38,4 @@ Contributions and improvements are welcome. If you have suggestions or enhanceme
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This catalog entry is covered by the repository license. See the [LICENSE](../../LICENSE) file for more details.
