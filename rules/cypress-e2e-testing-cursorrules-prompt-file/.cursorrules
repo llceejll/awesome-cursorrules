@@ -45,9 +45,9 @@ describe('Login Page', () => {
     cy.visit('/login');
     cy.intercept('POST', '/api/login', (req) => {
       if (req.body.username === 'validUser' && req.body.password === 'validPass') {
-        req.reply({ status: 200, body: { message: 'Login successful' } });
+        req.reply({ statusCode: 200, body: { message: 'Login successful' } });
       } else {
-        req.reply({ status: 401, body: { error: 'Invalid credentials' } });
+        req.reply({ statusCode: 401, body: { error: 'Invalid credentials' } });
       }
     }).as('loginRequest');
   });
