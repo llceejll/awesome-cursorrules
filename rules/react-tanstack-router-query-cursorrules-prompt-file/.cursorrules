@@ -201,7 +201,9 @@ function CreatePostForm() {
     },
   })
 
-  return (/* form JSX */)
+  return (
+    <>{/* form JSX */}</>
+  )
 }
 ```
 
