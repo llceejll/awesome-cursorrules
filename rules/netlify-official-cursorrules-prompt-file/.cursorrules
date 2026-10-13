@@ -178,17 +178,24 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - Each `excludedPath` entry starts with `/`.
   - New sites deploy functions to `cmh` (Ohio). Sites created before October 4, 2023 may use a different default. A per-function `region` overrides the site region and is a Pro and Enterprise feature. Self-serve airport codes are `cmh`, `dub`, `fra`, `gru`, `iad`, `lhr`, `nrt`, `pdx`, `sfo`, `sin`, `syd`, and `yul`. `cdg` and `mxp` require support. Each function runs in exactly one region.
   - `memory` and `vcpu` are mutually exclusive. Setting one sizes the other. The default is 1024 MB. Raising either is a Credit-based Pro and Enterprise feature, and billing scales with the configured size.
-  - `background` and `schedule` are also valid on this object. Their behavior is documented in the Background Functions and Scheduled Functions sections below.
+  - `background` and `schedule` are also valid on this object. `schedule` cannot be combined with `path` or `excludedPath`. Their behavior is documented in the Background Functions and Scheduled Functions sections below.
 
   ```
   {
     path: string | string[], // URLPattern paths that trigger the function. Wildcards and named groups are supported. Named groups are on context.params.
     excludedPath?: string | string[], // Optional. Paths to exclude. Each entry starts with '/'.
     preferStatic?: boolean, // Optional. When true, static assets on the CDN win when they exist.
-    method?: string | string[], // Optional. HTTP methods that trigger the function. Omitted means every method.
+    method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS" | Array<"GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS">, // Optional. Omitted means every method.
     region?: string, // Optional. Airport code that overrides the site region.
     memory?: number | string, // Optional. 1024 to 4096 MB, or a unit string such as "2gb" or "1024mb" (case-insensitive).
     vcpu?: number, // Optional. 0.5 to 2.0. 0.5 maps to 1024 MB and 2.0 maps to 4096 MB, with linear scaling in between.
+    rateLimit?: {
+      windowSize: number, // Time window in seconds.
+      windowLimit: number, // Maximum requests in the window.
+      action?: "rate_limit" | "rewrite", // Behavior when the limit is exceeded.
+      aggregateBy?: "domain" | "ip" | Array<"domain" | "ip">, // How requests are grouped.
+      to?: string, // Rewrite path when action is "rewrite".
+    },
   }
   ```
 
