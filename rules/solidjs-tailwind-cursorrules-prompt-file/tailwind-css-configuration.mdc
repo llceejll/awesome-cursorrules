@@ -1,7 +1,6 @@
 ---
-description: Provides rules related to the configuration file for Tailwind CSS, focusing on customization.
-globs: tailwind.config.js
+description: Provides rules for Tailwind CSS setup in a Solid.js project, including theme tokens and source scanning.
+globs: src/**/*.css
 ---
-- Use Tailwind's configuration file for customization.
-- Implement Tailwind CSS purging for production builds.
-- Use JIT (Just-In-Time) mode for faster development.
+- Customize Tailwind with `@theme` in the CSS file that contains `@import "tailwindcss"`.
+- Tailwind scans project source and generates only the classes it finds. Register an extra path with `@source`.

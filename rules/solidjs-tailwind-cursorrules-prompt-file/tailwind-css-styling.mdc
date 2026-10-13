@@ -4,5 +4,5 @@ globs: "**/*.css"
 ---
 - Utilize @apply directive in CSS files for reusable styles.
 - Implement responsive design using Tailwind's responsive classes.
-- Use Tailwind's configuration file for customization.
+- Customize Tailwind with `@theme` in the CSS file that contains `@import "tailwindcss"`.
 - Implement dark mode using Tailwind's dark variant.
