@@ -222,10 +222,12 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 })
 
 // src/routes/_auth.tsx (pathless layout for protected routes)
+import { createFileRoute, redirect } from '@tanstack/react-router'
+
 export const Route = createFileRoute('/_auth')({
-  beforeLoad: ({ context }) => {
+  beforeLoad: ({ context, location }) => {
     if (!context.auth.isAuthenticated) {
-      throw redirect({ to: '/login', search: { redirect: location.pathname } })
+      throw redirect({ to: '/login', search: { redirect: location.href } })
     }
   },
 })
