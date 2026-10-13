@@ -23,7 +23,7 @@ Solidity Best Practices
 
 - Use explicit function visibility modifiers and appropriate natspec comments.
 - Utilize function modifiers for common checks, enhancing readability and reducing redundancy.
-- Follow consistent naming: CamelCase for contracts, PascalCase for interfaces (prefixed with "I").
+- Follow consistent naming: use CapWords for contracts, libraries, and interfaces, and prefix interface names with "I".
 - Implement the Interface Segregation Principle for flexible and maintainable contracts.
 - Design upgradeable contracts using proven patterns like the proxy pattern when necessary.
 - Implement comprehensive events for all significant state changes.
