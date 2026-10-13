@@ -54,7 +54,7 @@ React/Next.js:
 - Code in services/ dir always throw user-friendly errors that tanStackQuery can catch and show to the user.
 - Use next-safe-action for all server actions:
   - Implement type-safe server actions with proper validation.
-  - Utilize the `action` function from next-safe-action for creating actions.
+  - Utilize `.inputSchema()` and `.action()` on a client created with `createSafeActionClient`. The server function receives `{ parsedInput }`.
   - Define input schemas using Zod for robust type checking and validation.
   - Handle errors gracefully and return appropriate responses.
   - Use import type { ActionResponse } from '@/types/actions'
@@ -70,11 +70,11 @@ React/Next.js:
       value: z.string()
     })
     export const someAction = createSafeActionClient()
-      .schema(schema)
-      .action(async (input): Promise<ActionResponse> => {
+      .inputSchema(schema)
+      .action(async ({ parsedInput }): Promise<ActionResponse> => {
         try {
           // Action logic here
-          return { success: true, data: input }
+          return { success: true, data: parsedInput }
         } catch (error) {
           return { success: false, error: error instanceof Error ? error.message : "Unexpected error" }
         }
