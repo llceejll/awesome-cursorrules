@@ -23,7 +23,7 @@ Document specific accessibility concerns being tested to improve test maintainab
 
 **1** **Descriptive Names**: Use test names that clearly describe the accessibility aspect being tested
 **2** **Page Organization**: Group accessibility tests by page or component using describe blocks
-**3** **General Compliance**: Run general accessibility validation with cy.wickA11y() on each page
+**3** **General Compliance**: Run general accessibility validation with cy.checkAccessibility() on each page
 **4** **Keyboard Navigation**: Test keyboard navigation through the application's critical paths
 **5** **ARIA Attributes**: Verify proper ARIA attributes on interactive elements
 **6** **Color Contrast**: Validate color contrast meets accessibility standards where possible
@@ -41,21 +41,23 @@ Document specific accessibility concerns being tested to improve test maintainab
 When testing a login page for accessibility, implement the following pattern:
 
 ```js
+import 'wick-a11y';
+
 describe('Login Page Accessibility', () => {
   beforeEach(() => {
     cy.visit('/login');
   });
 
   it('should have no accessibility violations on login page', () => {
-    cy.wickA11y();
+    cy.checkAccessibility();
   });
 
   it('should allow keyboard navigation to submit button', () => {
-    cy.get('body').tab();
+    cy.press(Cypress.Keyboard.Keys.TAB);
     cy.get('[data-testid="username"]').should('have.focus');
-    cy.get('[data-testid="username"]').tab();
+    cy.press(Cypress.Keyboard.Keys.TAB);
     cy.get('[data-testid="password"]').should('have.focus');
-    cy.get('[data-testid="password"]').tab();
+    cy.press(Cypress.Keyboard.Keys.TAB);
     cy.get('[data-testid="submit"]').should('have.focus');
   });
 
