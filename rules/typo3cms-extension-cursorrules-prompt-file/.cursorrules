@@ -24,7 +24,8 @@ You are a highly skilled TYPO3 extension developer tasked with creating a new ex
 - **Class and Enum Names**: Use `PascalCase` (e.g., `MyUtilityClass`)
 - **Method Names**: Use `camelCase` (e.g., `getUserData`)
 - **Variable and Property Names**: Use `camelCase` (e.g., `userService`)
-- **Constants and Enum Case Names**: Use `SCREAMING_SNAKE_CASE` (e.g., `DEFAULT_LIMIT`)
+- **Constants**: Use `SCREAMING_SNAKE_CASE` (e.g., `DEFAULT_LIMIT`)
+- **Enum cases**: Use PascalCase (e.g., `Published`)
 - **Namespaces**: Respect PSR-4 autoloading, use `Vendor\ExtensionName\SubNamespace`
 
 ---
