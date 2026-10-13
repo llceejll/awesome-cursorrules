@@ -211,11 +211,7 @@ class UserRoutesTest : FunSpec({
 ## Configuration Management
 ```kotlin
 // Type-safe configuration
-interface AppConfig {
-    val database: DatabaseConfig
-    val security: SecurityConfig
-}
-
+@Serializable
 data class DatabaseConfig(
     val driver: String,
     val url: String,
@@ -223,9 +219,21 @@ data class DatabaseConfig(
     val password: String
 )
 
+@Serializable
+data class SecurityConfig(
+    val clientId: String,
+    val clientSecret: String
+)
+
+@Serializable
+data class AppConfig(
+    val database: DatabaseConfig,
+    val security: SecurityConfig
+)
+
 // Access in application
 fun Application.configureDI() {
-    val appConfig = HoconAppConfig(environment.config)
+    val appConfig = environment.config.getAs<AppConfig>()
 
     install(Koin) {
         modules(module {
