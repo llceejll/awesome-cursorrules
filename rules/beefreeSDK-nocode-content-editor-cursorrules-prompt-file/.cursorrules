@@ -17,7 +17,7 @@ Guidelines and best practices for building applications with [Beefree SDK](https
   ```
 
 ### Dependencies
-- Beefree SDK requires the following core dependencies:
+- The authentication proxy in this guide uses these packages alongside the Beefree SDK:
   ```json
   {
     "dependencies": {
