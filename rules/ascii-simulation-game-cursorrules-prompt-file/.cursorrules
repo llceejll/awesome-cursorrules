@@ -22,7 +22,7 @@ value of resources should be based on their rarity throughout the entire map. Na
 
 armies are the primary way that nations can expand their territory.
 
-there should be no talent tree or technology tree, nations should be balanced without the need for such a tree
+there should be no talent tree or technology tree; nations should be balanced without the need for such a tree
 
 population should collect in towns and cities
 
@@ -32,7 +32,7 @@ resources are spread throughout nations through roads
 
 nations attempt to spread their resources evenly over their territory
 
-gold is not omni present and must be transported using roads to the location where it is spent to build armies or develop land
+gold is not omnipresent and must be transported using roads to the location where it is spent to build armies or develop land
 
 oceans should be randomly generated to separate continents
 
@@ -54,7 +54,7 @@ towns can only spawn a max level 3 army
 
 towns have a 3 square radius for gathering resources
 
-as towns grow their radius grows, there are 3 levels of towns and cities
+as towns grow, their radius grows; there are 3 levels of towns and cities
 
 a Nation's largest city is its capital
 
