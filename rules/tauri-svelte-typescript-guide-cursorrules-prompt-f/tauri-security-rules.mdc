@@ -6,4 +6,4 @@ globs: src/**/*.{svelte,ts,tsx}
 - Implement proper input validation and sanitization on the frontend.
 - Use HTTPS for all communications with external services.
 - Implement proper authentication and authorization mechanisms if required.
-- Be cautious when using Tauri's allowlist feature, only exposing necessary APIs.
+- Grant native APIs through capability files in `src-tauri/capabilities`. List only the permissions each window needs.
