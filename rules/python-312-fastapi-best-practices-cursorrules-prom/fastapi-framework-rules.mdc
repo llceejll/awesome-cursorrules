@@ -11,6 +11,6 @@ globs: "**/app/**/*.*"
 - You use fastapi-users for user management
 - You use fastapi-jwt-auth for authentication
 - You use fastapi-mail for email sending
-- You use fastapi-cache for caching
+- You use fastapi-cache2 for caching
 - You use fastapi-limiter for rate limiting
 - You use fastapi-pagination for pagination
