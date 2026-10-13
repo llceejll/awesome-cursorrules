@@ -229,10 +229,10 @@ Here are some example workflow implementations:
 * Serial workflow:
 
 ```yaml
-# This sample workflow execute 3 steps in sequence.
-# 1) sampleActivity1, takes arg1 as input, and put result as result1.
-# 2) sampleActivity2, takes result1 as input, and put result as result2.
-# 3) sampleActivity3, takes args2 and result2 as input, and put result as result3.
+# This sample workflow executes 3 steps in sequence.
+# 1) sampleActivity1, takes arg1 as input, and puts result as result1.
+# 2) sampleActivity2, takes result1 as input, and puts result as result2.
+# 3) sampleActivity3, takes arg2 and result2 as input, and puts result as result3.
 variables:
   arg1: value1
   arg2: value2
@@ -261,16 +261,16 @@ root:
 * Parallel workflow:
 
 ```yaml
-# This sample workflow execute 3 steps in sequence.
-# 1) activity1, takes arg1 as input, and put result as result1.
+# This sample workflow executes 3 steps in sequence.
+# 1) activity1, takes arg1 as input, and puts result as result1.
 # 2) it runs a parallel block which runs below sequence branches in parallel
 #  2.1) sequence 1
-#    2.1.1) activity2, takes result1 as input, and put result as result2
-#    2.1.2) activity3, takes arg2 and result2 as input, and put result as result3
+#    2.1.1) activity2, takes result1 as input, and puts result as result2
+#    2.1.2) activity3, takes arg2 and result2 as input, and puts result as result3
 #  2.2) sequence 2
-#    2.2.1) activity4, takes result1 as input, and put result as result4
-#    2.2.2) activity5, takes arg3 and result4 as input, and put result as result5
-# 3) activity1, takes result3 and result5 as input, and put result as result6.
+#    2.2.1) activity4, takes result1 as input, and puts result as result4
+#    2.2.2) activity5, takes arg3 and result4 as input, and puts result as result5
+# 3) activity1, takes result3 and result5 as input, and puts result as result6.
 variables:
   arg1: value1
   arg2: value2
