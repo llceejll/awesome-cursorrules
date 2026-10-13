@@ -356,14 +356,16 @@ mutation StripePay($orderId: Long!, $currency: String!, $amount: BigDecimal!) {
 }
 ```
 
-```typescript
+```tsx
 // Use clientSecret with Stripe Elements
-const options = { clientSecret };
+function Checkout({ clientSecret }: { clientSecret: string }) {
+  const options = { clientSecret };
 
-return (
-  <Elements stripe={stripePromise} options={options}>
-    <CheckoutForm />
-  </Elements>
-);
+  return (
+    <Elements stripe={stripePromise} options={options}>
+      <CheckoutForm />
+    </Elements>
+  );
+}
 ```
 
