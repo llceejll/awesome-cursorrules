@@ -619,7 +619,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
   ## Blob consistency models
   - By default, blobs are "eventually consistent" - Fast reads, updates/deletions propagated within 60 seconds.
-  - To have strong consistency that ensures updates are immediately visible at the cost of slower reads. set the `consistency` field to `'strong'` on the store instantiation.
+  - To have strong consistency that ensures updates are immediately visible at the cost of slower reads. Set the `consistency` field to `'strong'` on the store instantiation.
   - There is no concurrency control built in, last write wins. Add object-locking mechanisms if you need concurrency guarantees.
 
   Example:
