@@ -97,7 +97,7 @@ foundation_owner = ForeignVariable(foreign_contract='foundation', foreign_name='
 ### ctx.owner
 - Owner of the contract, optional field set at time of submission
 - Only the owner can call exported functions if set
-- Change it with `submission.change_owner(contract=..., new_owner=...)`
+- Pass `owner` to `submission.submit_contract` when the contract is submitted. That value stays on the contract
 
 ### ctx.entry
 - Returns tuple of (contract_name, function_name) of the original entry point
