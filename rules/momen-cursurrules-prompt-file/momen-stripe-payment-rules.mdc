@@ -24,8 +24,8 @@ The actual process involves obtaining the one-time client secret for every payme
 It might also be helpful to display human readable payment amount and other miscellaneous information around the checkout form for better user experience. 
 
 ## Order creation
-Each project's conceptual order table has its own structure, and does not need to be called "order", since technically any one table per project can be bound to the project's "order table" setting. Though typically they should contain information about to which account this order belongs to, how much the order's amount is and what item(s) this order is for (usually via 1:n relationships).  
-Orders should be created via actionflows rather than direct insertion on the frontend, as monetary values and items involves might be present and should only be controlled via the backend. 
+Each project's conceptual order table has its own structure, and does not need to be called "order", since technically any one table per project can be bound to the project's "order table" setting. Though typically they should contain information about which account this order belongs to, how much the order's amount is and what item(s) this order is for (usually via 1:n relationships).  
+Orders should be created via actionflows rather than direct insertion on the frontend, as monetary values and items involved might be present and should only be controlled via the backend. 
 
 ## One-time payment
 Pre-requisite: order id, payment amount (in the currency’s minor unit, e.g. 109 for 1.09 USD, and 203 for 203 JPY), and currency.  
@@ -72,7 +72,7 @@ Example output:
 
 ## Recurring payment (subscription)
 Pre-requisite: order id, price id (the id for one of the pricings for the stripe product involved). 
-Send a mutaiton to the project's GraphQL API:
+Send a mutation to the project's GraphQL API:
 Query:
 ```gql
 mutation CreateStripeRecurringPayment($orderId: Long!, $priceId: String!) {
