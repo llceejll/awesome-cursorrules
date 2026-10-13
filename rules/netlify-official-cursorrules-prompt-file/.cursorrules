@@ -532,14 +532,14 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       // Retrieves a blob along with metadata
       // example: await store.getWithMetadata('key-name');
       // - NEVER add the second getOpts arg unless you need an explicit type or have an etag to check against.
-      // - AVOID adding it unless it's reliably available but IF an etag is provided, it will only return the blob if the etag is different that what's stored.
+      // - AVOID adding it unless it's reliably available but IF an etag is provided, it will only return the blob if the etag is different than what's stored.
       // - if the blob is missing, it will resolve the promise with a null value
       getWithMetadata(key: string, getOpts?: GetKeyAndMetadataOptions): Promise<{ data: any, etag: string, metadata: object } | null>;
 
       // Retrieves metadata of a blob WITHOUT downloading the data.
       // example: await store.getMetadata('key-name');
       // - NEVER add the second getOpts arg unless you need an explicit type or have an etag to check against.
-      // - AVOID adding it unless it's reliably available but IF an etag is provided, it will only return the blob if the etag is different that what's stored.
+      // - AVOID adding it unless it's reliably available but IF an etag is provided, it will only return the blob if the etag is different than what's stored.
       // - if the blob is missing, it will resolve the promise with a null value
       getMetadata(key: string, getOpts?: GetKeyAndMetadataOptions): Promise<{ etag: string, metadata: object } | null>;
 
@@ -548,15 +548,15 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       //      const { blobs } = await store.list()
       //      // blobs === [ { etag: 'etag1', key: 'some-key' }, { etag: 'etag2', key: 'another-key' } ]
       //
-      // - NEVER add the options arg unless you need an explicit reduce the searched data.
+      // - NEVER add the options arg unless you need to explicitly reduce the searched data.
       //    -- ONLY if you have to reduce searched data, use `prefix: 'some-prefix'` to pull blobs that start with that prefix value. Use `directories: true` to include the full directory path on the `key`
       // - By default, the list() method retrieves all pages, meaning you'll always get the full list of results. This can be slow or memory intensive. To paginate, pass the `paginate: true` in the options to turn the response into an AsyncIterator that allows you to for-of loop through the blobs in the store.
       // - if store path is empty, the blobs will resolve the promise with an empty array
-      list(options?: { directories?: boolean, paginate?: boolean. prefix?: string }): Promise<{ blobs: BlobResult[], directories: string[] }> | AsyncIterable<{ blobs: BlobResult[], directories: string[] }>
+      list(options?: { directories?: boolean, paginate?: boolean, prefix?: string }): Promise<{ blobs: BlobResult[], directories: string[] }> | AsyncIterable<{ blobs: BlobResult[], directories: string[] }>
 
       // Deletes a blob.
       // example: await store.delete('key-name');
-      // - The return value is always resolves to `undefined`, regardless of whether or not there was an object to delete.
+      // - The return value always resolves to `undefined`, regardless of whether or not there was an object to delete.
       delete(key: string): Promise<void>;
     }
 
@@ -566,7 +566,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       region?: Region;
     }
 
-    // Returns a store instance for managing blobs. This is global scoped data across all deploys.
+    // Returns a store instance for managing blobs. This is globally scoped data across all deploys.
     // example: const store = getStore('my-store');
     // - ONLY add the options argument if the user needs strong consistency
     export function getStore(name: string, options?: { consistency?: 'strong' | 'eventual' }): Store;
