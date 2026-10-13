@@ -20,20 +20,20 @@ An example AI Agent configuration whose output is streaming plain text will be u
     "inputs": {
       "mgzzufo2": {
         "type": "VIDEO",
-        "displayName": "the_video",
+        "displayName": "the_video"
       },
       "mh4cjjcf": {
         "type": "TEXT",
-        "displayName": "text",
+        "displayName": "text"
       },
       "mh4cjkyv": {
         "type": "BIGINT",
-        "displayName": "some_int",
+        "displayName": "some_int"
       },
       "mh4cjoof": {
         "type": "array",
         "itemType": "IMAGE",
-        "displayName": "images",
+        "displayName": "images"
       }
     },
     "output": "Unstructured Text"
@@ -45,7 +45,7 @@ An example AI Agent configuration whose output is streaming plain text will be u
   "inputs": {
     "mgzzufo2": {
       "type": "VIDEO",
-      "displayName": "the_video",
+      "displayName": "the_video"
     }
   }
 }
@@ -54,7 +54,7 @@ Corresponds to:
 ```json
 {
   "inputArgs": {
-    "mgzzufo2_id": 1030000000000002,
+    "mgzzufo2_id": 1030000000000002
   }
 }
 ```  
@@ -228,8 +228,8 @@ There will be no messages from the GraphQL server that are in the "STREAMING" st
 e.g. 
 ```json
 {
-  "httplink": "https://www.google.com/calendar/event?eid=MTcxN2U3cHAzaDFtYTdxYzd0bGV0aHNvYmsgamlhbmd5YW9rYWlqb2huQG0",
-  "explanation": "No existing events were found on 2025-10-24 in America/Los_Angeles, so there are no conflicts. Preference is mornings; scheduled 08:00–08:10 at Los Altos High school. With no adjacent events, transit checks to previous and next events are trivially satisfied."
+  "httpLink": "https://www.google.com/calendar/event?eid=MTcxN2U3cHAzaDFtYTdxYzd0bGV0aHNvYmsgamlhbmd5YW9rYWlqb2huQG0",
+  "reasoning": "No existing events were found on 2025-10-24 in America/Los_Angeles, so there are no conflicts. Preference is mornings; scheduled 08:00–08:10 at Los Altos High school. With no adjacent events, transit checks to previous and next events are trivially satisfied."
 }
 ```
 
