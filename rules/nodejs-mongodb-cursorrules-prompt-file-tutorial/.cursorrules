@@ -56,7 +56,7 @@ Pick Management:
 
 Users make Picks for each Entry separately
 
-Picks can be updated until deadline (game start or 1PM Sunday of the current week of the pick)
+Picks can be updated until the deadline (game start or 1PM Sunday of the current week of the pick)
 
 Scoring and Ranking:
 
@@ -82,7 +82,7 @@ Limit Requests to 3 per User per Pool
 
 Track Requests and Entries separately (numbered 1, 2, 3)
 
-Implement payment status tracking in Request model
+Implement payment status tracking in the Request model
 
 Create Entry only after admin approval and payment completion
 
