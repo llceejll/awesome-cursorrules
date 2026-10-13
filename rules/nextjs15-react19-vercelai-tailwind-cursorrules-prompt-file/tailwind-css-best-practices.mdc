@@ -10,13 +10,12 @@ globs: app/**/*
 - Implement dark mode using Tailwind's `dark:` variant.
 - Use `group` and `peer` variants for interactive states.
 - Create custom utilities with `@layer utilities` for project-specific needs.
-- Use `theme()` function to reference Tailwind's design tokens in custom CSS.
-- Avoid arbitrary values (`w-[532px]`) when possible; define custom values in `tailwind.config.js`.
+- Reference design tokens with the CSS variables Tailwind generates, such as `var(--color-red-500)`.
+- Avoid arbitrary values (`w-[532px]`) when possible; define custom tokens in `@theme` in the CSS file that contains `@import "tailwindcss"`.
 - Use `container` class for responsive containers with max-width constraints.
 - Implement proper focus styles for accessibility using `focus:` and `focus-within:` variants.
 - Use `sr-only` for screen reader-only content.
-- Optimize for production by purging unused styles with `NODE_ENV=production`.
+- Tailwind scans project source files and generates only the classes it finds. Register an extra path with `@source` when a folder would otherwise be ignored.
 - Use plugins like `@tailwindcss/typography` for rich text content.
-- Configure `content` paths properly in `tailwind.config.js` for purging.
-- Extend themes rather than overriding default values when possible.
-- Use `preflight` to reset browser default styles.
+- Add new tokens in `@theme`. Redefining an existing theme variable replaces that token.
+- Preflight is included by `@import "tailwindcss"`.
