@@ -521,7 +521,7 @@ Reference the complete project at Beefree SDK [multiple-versions-concept](https:
   </head>
   <body>
     <div id="beefree-sdk-container"></div>
-    <script src="https://app-rsrc.getbee.io/plugin/BeefreeSDK.js"></script>
+    <script src="https://app-rsrc.getbee.io/plugin/v2/BeePlugin.js"></script>
     <script type="text/javascript">
       const beeConfig = {
         container: 'beefree-sdk-container',
@@ -553,9 +553,9 @@ Reference the complete project at Beefree SDK [multiple-versions-concept](https:
       }
 
       function initializeBeefree(authResponse) {
-        BeefreeSDK.create(authResponse, beeConfig, function (beefreeSDKInstance) {
+        BeePlugin.create(authResponse, beeConfig, function (beePluginInstance) {
           console.log('Beefree SDK initialized successfully');
-          beefreeSDKInstance.start();
+          beePluginInstance.start({});
         });
       }
 

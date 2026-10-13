@@ -63,7 +63,7 @@ BEE_CLIENT_SECRET=your_client_secret_here
 <body>
     <div id="beefree-sdk-container"></div>
     
-    <script src="https://app-rsrc.getbee.io/plugin/BeefreeSDK.js"></script>
+    <script src="https://app-rsrc.getbee.io/plugin/v2/BeePlugin.js"></script>
     <script>
         const beeConfig = {
             container: 'beefree-sdk-container',
@@ -84,8 +84,9 @@ BEE_CLIENT_SECRET=your_client_secret_here
                 body: JSON.stringify({ uid: 'demo-user' })
             }).then(res => res.json());
 
-            const bee = new BeefreeSDK(token);
-            bee.start(beeConfig, {});
+            BeePlugin.create(token, beeConfig, function (beePluginInstance) {
+                beePluginInstance.start({});
+            });
         }
 
         initializeBeefree();
