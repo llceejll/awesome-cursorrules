@@ -111,7 +111,7 @@ export const postsListQueryOptions = (filters?: PostFilters) =>
 ```
 
 ## Router Loader + Query Integration
-- Loaders call `queryClient.ensureQueryData` — populates cache, renders immediately without spinner
+- Loaders call `queryClient.query` with `staleTime: 'static'` — populates cache, renders immediately without spinner
 - Components then call `useQuery` with the same options — reads from cache synchronously
 ```tsx
 // src/routes/posts/$postId.tsx
@@ -121,7 +121,7 @@ import { postDetailQueryOptions } from '../../queries/posts'
 
 export const Route = createFileRoute('/posts/$postId')({
   loader: ({ context: { queryClient }, params }) =>
-    queryClient.ensureQueryData(postDetailQueryOptions(params.postId)),
+    queryClient.query({ ...postDetailQueryOptions(params.postId), staleTime: 'static' }),
 
   errorComponent: ({ error }) => <ErrorMessage error={error} />,
   pendingComponent: PostSkeleton,
@@ -155,7 +155,7 @@ const searchSchema = z.object({
 export const Route = createFileRoute('/posts/')({
   validateSearch: searchSchema,
   loader: ({ context: { queryClient }, location: { search } }) =>
-    queryClient.ensureQueryData(postsListQueryOptions(search)),
+    queryClient.query({ ...postsListQueryOptions(search), staleTime: 'static' }),
   component: PostsList,
 })
 
@@ -239,7 +239,7 @@ function PostCard({ post }: { post: Post }) {
     <Link
       to="/posts/$postId"
       params={{ postId: post.id }}
-      onMouseEnter={() => queryClient.prefetchQuery(postDetailQueryOptions(post.id))}
+      onMouseEnter={() => queryClient.query(postDetailQueryOptions(post.id)).catch(() => {})}
     >
       {post.title}
     </Link>

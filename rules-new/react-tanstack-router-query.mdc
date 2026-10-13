@@ -57,7 +57,7 @@ export const postsQueryOptions = (filters?: PostFilters) =>
 ```tsx
 export const Route = createFileRoute('/posts/$postId')({
   loader: ({ context: { queryClient }, params }) =>
-    queryClient.ensureQueryData(postQueryOptions(params.postId)),
+    queryClient.query({ ...postQueryOptions(params.postId), staleTime: 'static' }),
   component: PostDetail,
 })
 
@@ -75,7 +75,7 @@ const searchSchema = z.object({ page: z.number().default(1), q: z.string().optio
 export const Route = createFileRoute('/posts/')({
   validateSearch: searchSchema,
   loader: ({ context: { queryClient }, location: { search } }) =>
-    queryClient.ensureQueryData(postsQueryOptions(search)),
+    queryClient.query({ ...postsQueryOptions(search), staleTime: 'static' }),
   component: PostsList,
 })
 
@@ -103,7 +103,7 @@ const mutation = useMutation({
 <Link
   to="/posts/$postId"
   params={{ postId: post.id }}
-  onMouseEnter={() => queryClient.prefetchQuery(postQueryOptions(post.id))}
+  onMouseEnter={() => queryClient.query(postQueryOptions(post.id)).catch(() => {})}
 >
   {post.title}
 </Link>
