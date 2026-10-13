@@ -87,9 +87,8 @@ SvelteKit Project Structure
     - lib/
     - routes/
     - app.html
-    - static/
-    - svelte.config.js
-    - vite.config.js
+  - static/
+  - vite.config.js
   ```
 
 Component Development
