@@ -190,7 +190,7 @@ Column Type Classifications:
 
 1. **Numeric Column Types** (supporting avg and sum aggregation operations): `integer`, `bigint`, `float8`, `decimal`
 2. **Time Column Types**: `timestamptz`, `timetz`, `date`
-3. **Comparable Column Types **(supporting min and max aggregation operations): all numeric column types, time column types, and text types.
+3. **Comparable Column Types** (supporting min and max aggregation operations): all numeric column types, time column types, and text types.
 
 ### Composite Column Types (Media Assets)
 
