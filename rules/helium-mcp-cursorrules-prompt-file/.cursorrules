@@ -23,7 +23,7 @@ Alternative: stdio bridge via `npx helium-mcp` if your workflow requires a local
 1. **Call tools instead of inventing data** — Do not fabricate article headlines, bias scores, prices, forecasts, option fair values, or meme metadata. Fetch with the appropriate tool, then summarize and cite what came back.
 2. **Minimize duplicate calls** — Batch reasoning: one `get_ticker` per symbol per task unless the user asks for a refresh; reuse prior tool output in the same conversation when still relevant.
 3. **Respect limits** — The public tier includes a modest free query allowance; avoid spamming parallel calls. If a call fails for quota or rate limits, say so and suggest spacing requests or upgrading via [heliumtrades.com/mcp-page](https://heliumtrades.com/mcp-page/).
-4. **Trust the client’s tool list** — The hosted server documents **nine** first-class tools below. If your Cursor build lists a different count or names, follow the live `tools/list` output from the MCP panel.
+4. **Trust the client’s tool list** — The hosted server documents **ten** first-class tools below. If your Cursor build lists a different count or names, follow the live `tools/list` output from the MCP panel.
 
 ## Tool selection guide
 
@@ -40,6 +40,8 @@ Use **`get_all_source_biases`** when the user wants a **landscape view** (many s
 Use **`get_ticker`** for **stocks, ETFs, or crypto**: spot context, bull/bear narrative, forecast-style output, IV rank, volatility context, and **hooks into options strategy** content returned by Helium for that symbol.
 
 Use **`get_option_price`** when the user specifies a **single listed option** (underlying, strike, expiration `YYYY-MM-DD`, call/put) and wants **ML fair value** and **probability ITM** from Helium’s models—not broker quotes.
+
+Use **`get_historical_options_data`** when the user wants the **full options chain** for one ticker on a date. Pass `symbol` and `date` (`YYYY-MM-DD`). The result lists every expiration’s contracts with bid, ask, greeks, and Helium model fields such as `helium_theo` and `helium_pitm`.
 
 Use **`get_top_trading_strategies`** when the user asks for **ranked options structures** (short vol vs long vol packs, edge-style ranking). Pass sorting preference when the user cares about odds vs reward/risk vs historical performance.
 
