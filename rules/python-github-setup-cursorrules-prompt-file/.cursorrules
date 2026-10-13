@@ -19,7 +19,7 @@
         },
         
         "error_handling": {
-            "prefer_try_catch": true,
+            "prefer_try_except": true,
             "log_errors": true
         },
         
