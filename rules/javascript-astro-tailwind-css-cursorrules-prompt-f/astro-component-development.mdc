@@ -8,4 +8,4 @@ Component Development
 - Use framework-specific components (React, Vue, Svelte) when necessary.
 - Implement proper component composition and reusability.
 - Use Astro's component props for data passing.
-- Leverage Astro's built-in components like when appropriate.
+- Leverage Astro's built-in components from `astro:assets`, such as `Image`, `Picture`, and `Font`, when appropriate.
