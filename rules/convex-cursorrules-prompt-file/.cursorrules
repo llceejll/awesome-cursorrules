@@ -156,6 +156,11 @@ globs: "**/*.{ts,tsx,js,jsx}"
                             import { paginationOptsValidator } from "convex/server";
                             export const listWithExtraArg = query({
                                 args: { paginationOpts: paginationOptsValidator, author: v.string() },
+                                returns: v.object({
+                                    page: v.array(v.any()),
+                                    isDone: v.boolean(),
+                                    continueCursor: v.string(),
+                                }),
                                 handler: async (ctx, args) => {
                                     return await ctx.db
                                     .query("messages")
