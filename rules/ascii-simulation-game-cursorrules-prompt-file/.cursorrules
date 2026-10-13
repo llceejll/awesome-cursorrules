@@ -10,7 +10,7 @@ Nations should be able to trade resources with each other. Nations should be abl
 
 The time period of the game is constant and there is no technological tree. It takes place in ancient times.
 
-nations should spawn a minimum distance away from eachother
+nations should spawn a minimum distance away from each other
 
 the entire game should be colored ASCII based in terms of graphics
 
@@ -104,7 +104,7 @@ there should be effects over the screen that mimic a CRT monitor
 
 the game should aim to be similar to Conway's Game of Life where the nations are the living organisms.
 
-like conway's game of life, nations should be able to "see" eachother and react to eachother
+like conway's game of life, nations should be able to "see" each other and react to each other
 
 like conway's game of life, the nations should be able to "see" the resources and react to them
 
