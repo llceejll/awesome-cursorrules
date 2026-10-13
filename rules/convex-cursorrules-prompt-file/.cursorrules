@@ -641,7 +641,7 @@ export const loadContext = internalQuery({
       .take(10);
 
     const result = [];
-    for (const message of messages) {
+    for (const message of messages.reverse()) {
       if (message.authorId) {
         const user = await ctx.db.get(message.authorId);
         if (!user) {
