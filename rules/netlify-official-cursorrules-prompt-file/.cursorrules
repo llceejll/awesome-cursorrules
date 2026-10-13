@@ -164,13 +164,21 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - prefer to provide a friendly path using the config object.
   - ONLY serverless functions use `/.netlify/functions/{function_name}` path by default.
   - If you set a specific path via this config or the netlify.toml, it will only be available at that new path.
-  - path and excluded path support substring patterns or the URLPattern syntax from the web platform.
+  - `path` uses the web platform URLPattern syntax, including wildcards and named groups. Named groups are available on `context.params`.
+  - Each `excludedPath` entry starts with `/`.
+  - New sites deploy functions to `cmh` (Ohio). Sites created before October 4, 2023 may use a different default. A per-function `region` overrides the site region and is a Pro and Enterprise feature. Self-serve airport codes are `cmh`, `dub`, `fra`, `gru`, `iad`, `lhr`, `nrt`, `pdx`, `sfo`, `sin`, `syd`, and `yul`. `cdg` and `mxp` require support. Each function runs in exactly one region.
+  - `memory` and `vcpu` are mutually exclusive. Setting one sizes the other. The default is 1024 MB. Raising either is a Credit-based Pro and Enterprise feature, and billing scales with the configured size.
+  - `background` and `schedule` are also valid on this object. Their behavior is documented in the Background Functions and Scheduled Functions sections below.
 
   ```
   {
-    path: string | string[], // Defines the URL path(s) that trigger the function. Can be a single string or an array of paths.
-    excludedPath?: string | string[], // Optional. Defines paths that should be excluded from triggering the function.
-    preferStatic?: boolean, // Optional. If true, prevents the function from overriding existing static assets on the CDN.
+    path: string | string[], // URLPattern paths that trigger the function. Wildcards and named groups are supported. Named groups are on context.params.
+    excludedPath?: string | string[], // Optional. Paths to exclude. Each entry starts with '/'.
+    preferStatic?: boolean, // Optional. When true, static assets on the CDN win when they exist.
+    method?: string | string[], // Optional. HTTP methods that trigger the function. Omitted means every method.
+    region?: string, // Optional. Airport code that overrides the site region.
+    memory?: number | string, // Optional. 1024 to 4096 MB, or a unit string such as "2gb" or "1024mb" (case-insensitive).
+    vcpu?: number, // Optional. 0.5 to 2.0. 0.5 maps to 1024 MB and 2.0 maps to 4096 MB, with linear scaling in between.
   }
   ```
 
