@@ -26,5 +26,5 @@ Error Handling and Validation
 - Use exceptions for exceptional cases, not for control flow.
 - Implement proper error logging and user-friendly messages.
 
-Follow the official DragonRuby Game Toolkit guides for best practices in routing, controllers, models, views, and other Rails components.
+Follow the official DragonRuby Game Toolkit guides. Drive the game from `tick args`, and render with `args.outputs`.
 
