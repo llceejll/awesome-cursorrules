@@ -190,7 +190,7 @@ Always ensure momen-ai-agent-gql-api-rules is read before writing code to intera
 ### Subscriptions
 
 For real-time functionality, the GraphQL API supports subscriptions. A client can subscribe to data, and the server will automatically push updates when that data changes in the database, enabling features like live chat or notifications.  
-Once Websocket is established, the initial connection_init message will be acknowledged by the server with 
+Once the WebSocket is established, the initial connection_init message will be acknowledged by the server with 
 ```json
 {
   "id": null,

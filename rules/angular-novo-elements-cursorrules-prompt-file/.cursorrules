@@ -117,7 +117,7 @@ Always code as if the person who ends up maintaining your code is a violent psyc
 
 Principle of Least Astonishment
 
-Principle of Least Astonishment states that a component of a system should behave in a way that most users will expect it to behave. The behavior should not astonish or surprise users.
+The Principle of Least Astonishment states that a component of a system should behave in a way that most users will expect it to behave. The behavior should not astonish or surprise users.
 
 Code should do what the name and comments suggest. Conventions should be followed. Surprising side effects should be avoided as much as possible.
 
