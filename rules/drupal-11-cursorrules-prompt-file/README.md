@@ -28,7 +28,7 @@ The goal of this project is to enable a consistent, secure, and efficient develo
 
 ## References
 
-- [Awesome CursorRules on GitHub](https://github.com/awesome-cursorrules/awesome-cursorrules)
+- [Awesome CursorRules on GitHub](https://github.com/PatrickJS/awesome-cursorrules)
 - [Drupal 11 Documentation](https://www.drupal.org/docs/understanding-drupal)
 - [Drupal Coding Standards (PSR-12)](https://www.drupal.org/docs/develop/standards)
 
