@@ -3,6 +3,8 @@ This project is heavily reliant on our custom Drawscape Factorio python module.
 Here are code examples of how to use the module:
 
 ```python
+import json
+
 from drawscape_factorio import create as createFactorio
 from drawscape_factorio import importFUE5
 
@@ -15,7 +17,7 @@ with open('/path/to/exported-entities.json', 'r') as file:
         'show_layers': ['assets', 'belts', 'walls', 'rails', 'electrical', 'spaceship']
     })
 
-with open(output_file_name, 'w') as f:
+with open('/path/to/output.svg', 'w') as f:
     f.write(result['svg_string'])
 ```
 
