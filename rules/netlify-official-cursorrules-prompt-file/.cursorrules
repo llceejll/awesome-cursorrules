@@ -264,7 +264,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - Edge functions have a global `Netlify` object that is also accessible.
     - ONLY use `Netlify.env.*` for interacting with environment variables in code.
   - Place function files in `YOUR_BASE_DIRECTORY/netlify/edge-functions` or a subdirectory.
-    - The serverless functions director can be changed via`netlify.toml`:
+    - The serverless functions directory can be changed via `netlify.toml`:
       ```toml
       [build]
         edge_functions = "my-custom-directory"
@@ -758,7 +758,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
   ### Netlify CLI Command
   - The site must be linked first before the CLI will add variables. See the rules for initializing and linking sites for how to do this.
-  - Use `env:set` for changes, `env:unset` to delete. `env:import` to import from a dotenv`.env` file.
+  - Use `env:set` for changes, `env:unset` to delete. `env:import` to import from a dotenv `.env` file.
 
   #### Example usage of env var CLI
   - Basic setting an environment variable for the site
