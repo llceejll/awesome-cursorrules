@@ -282,7 +282,7 @@ const messages = await ctx.db
                             export default crons;
                             ```
 - You can register Convex functions within `crons.ts` just like any other file.
-- If a cron calls an internal function, always import the `internal` object from '_generated/api`, even if the internal function is registered in the same file.
+- If a cron calls an internal function, always import the `internal` object from `_generated/api`, even if the internal function is registered in the same file.
 
 
 ## File storage guidelines
