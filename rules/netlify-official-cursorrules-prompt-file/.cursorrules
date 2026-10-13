@@ -739,14 +739,16 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   ### Caching & deployment behavior
   - A transformed image is cached at the edge. Another request for the same transformation serves that cached asset.
   - A new deploy re-runs transformations when the source image changed in that deploy, so new requests do not serve the outdated asset.
-  - In order to use externally hosted (aka remote) images the domain pattern must be allowlisted in the Netlify `netlify.toml`.
-    - Allow remote sources using:
+  - Externally hosted images must be allowlisted. Relative paths on this site do not need an allowlist.
+    - Direct Image CDN use, Angular, and Gatsby use `remote_images` in `netlify.toml`:
       ```toml
       [images]
         remote_images = ["https://externalexample\\.com/.*"]
       ```
       - `remote_images` entries are regular expressions. Escape a literal dot as `\\.` inside a double-quoted string.
-      - only absolute urls to external servers need to be in remote_images
+    - Astro uses `image.domains` or `image.remotePatterns` in `astro.config.mjs`.
+    - Next.js 13.5 or later, with the Next.js adapter v5, uses `remotePatterns` in `next.config.js`.
+    - Nuxt uses `image.domains` in `nuxt.config.ts`.
 
   ### Redirects & Rewrites
   - If you do not want to use the default `/.netlify/images` path, a redirect or rewrite can be used to have a different url.
@@ -785,7 +787,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - **Angular**: `NgOptimizedImage` component will use Image CDN automatically
   - **Astro**: `<Image />` component will use Image CDN automatically
   - **Gatsby**: set `NETLIFY_IMAGE_CDN=true` and use the Contentful, Drupal, or WordPress source plugins.
-  - **Next.js**: set `remotePatterns` in `next.config.js`
+  - **Next.js**: Next.js 13.5 or later with the Next.js adapter v5. Remote images use `remotePatterns` in `next.config.js`.
   - **Nuxt**: `nuxt/image` module will use Image CDN automatically
 
   ---
