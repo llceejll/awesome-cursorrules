@@ -230,8 +230,8 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       [functions."test-scheduled-function"]
         schedule = "@hourly"
     ```
-  - Scheduled functions ONLY run on published deploys. They don't run on Deploy Previews or branch deploys.
-  - For local tests, use the Netlify CLI to run the site in dev mode and the `netlify functions:invoke` [command](https://cli.netlify.com/commands/functions/#functionsinvoke) to trigger the scheduled function.
+  - Scheduled functions run on their schedule only for published deploys. Deploy Previews and branch deploys do not trigger them automatically.
+  - To test a Deploy Preview or branch deploy, open the function on the Functions page and use Run now. For local tests, use the Netlify CLI to run the site in dev mode and the `netlify functions:invoke` [command](https://cli.netlify.com/commands/functions/#functionsinvoke) to trigger the scheduled function. Netlify Dev does not run the schedule.
     example:
     ```bash
       netlify functions:invoke myfunction
