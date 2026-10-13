@@ -47,7 +47,7 @@ For example, use `rails generate model` instead of creating a model from scratch
    - Use service objects for complex business logic
    - Keep controllers skinny
    - Use concerns for shared functionality
-   - Use `params.expect()` instead of strong parameters
+   - Use `params.expect()` for strong parameters
    - Follow Rails 8 conventions
 
 2. **Performance**
@@ -168,7 +168,7 @@ For example, use `rails generate model` instead of creating a model from scratch
 5. Keep dependencies updated
 6. Monitor application performance
 7. Regular security audits
-8. Use `params.expect()` instead of strong parameters
+8. Use `params.expect()` for strong parameters
 9. Use Propshaft for asset pipeline (if not using Vite)
 10. Always use `bin/dev` to start the server
 11. Check logs after every significant change
