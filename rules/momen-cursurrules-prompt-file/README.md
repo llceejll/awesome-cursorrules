@@ -491,7 +491,7 @@ Open an issue with:
 
 This repository is provided under the MIT License. Feel free to use, modify, and distribute these rules in your projects.
 
-**Note**: While these rules are MIT licensed, Momen.app itself is a commercial service. Refer to [Momen's Terms of Service](https://momen.app/terms) for usage rights to the Momen platform.
+**Note**: While these rules are MIT licensed, Momen.app itself is a commercial service. Refer to [Momen's Terms of Service](https://momen.app/term) for usage rights to the Momen platform.
 
 ## 🙏 Acknowledgments
 
