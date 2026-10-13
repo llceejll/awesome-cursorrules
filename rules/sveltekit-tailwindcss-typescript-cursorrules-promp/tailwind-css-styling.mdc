@@ -7,5 +7,6 @@ globs: "**/*.svelte"
   - Utilize Tailwind's utility classes directly in the markup
   - For complex components, consider using Tailwind's @apply directive in a scoped <style> block
   - Use dynamic classes with template literals when necessary:
-    svelte
+    ```svelte
     <div class={`bg-blue-500 p-4 ${isActive ? 'opacity-100' : 'opacity-50'}`}></div>
+    ```

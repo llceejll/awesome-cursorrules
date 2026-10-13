@@ -5,8 +5,9 @@ globs: "**/*.{svelte,ts}"
 - Typing
   - Use TypeScript for type definitions
   - Create interfaces or types for component props:
-    typescript
+    ```typescript
     interface MyComponentProps {
       someValue: string;
       optionalValue?: number;
     }
+    ```
