@@ -23,4 +23,4 @@ globs: src/**/*.*
 - Use the standard Jest framework for testing.
 - Write tests for each controller and service.
 - Write end to end tests for each api module.
-- Add a admin/test method to each controller as a smoke test.
+- Add an admin/test method to each controller as a smoke test.
