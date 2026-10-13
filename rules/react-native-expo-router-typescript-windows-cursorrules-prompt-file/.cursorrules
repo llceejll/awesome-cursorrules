@@ -35,7 +35,7 @@ const packageCompatibilityNotes = [
   "NativeWind 4.2.7 is the stable release and uses Tailwind CSS v3:",
   "- npm install nativewind@4.2.7 react-native-reanimated react-native-safe-area-context",
   "- npm install --save-dev tailwindcss@^3.4.17 prettier-plugin-tailwindcss@^0.5.11 babel-preset-expo",
-  "- On Expo 57, install native packages with npx expo install react-native-reanimated react-native-worklets react-native-safe-area-context. Projects on Reanimated 3 keep that setup.",
+  "- On Expo 57 with Reanimated 4, install native packages with npx expo install react-native-reanimated react-native-worklets react-native-safe-area-context. Projects on Reanimated 3 keep their existing compatible native packages.",
   "- tailwind.config.js sets presets: [require('nativewind/preset')] and content paths for files that use NativeWind classes.",
   "- global.css contains @tailwind base, @tailwind components, and @tailwind utilities, and is passed to withNativeWind.",
   "Babel configuration for NativeWind:",
