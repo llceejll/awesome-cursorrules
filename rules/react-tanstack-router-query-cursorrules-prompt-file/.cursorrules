@@ -250,7 +250,7 @@ function PostCard({ post }: { post: Post }) {
 ## DevTools (Development Only)
 ```tsx
 // In __root.tsx
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 // Inside component
