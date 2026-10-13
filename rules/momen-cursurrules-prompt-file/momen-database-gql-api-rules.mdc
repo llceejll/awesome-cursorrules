@@ -365,13 +365,13 @@ mutation InsertPost($object: post_insert_input!) {
 
 This section details the notation used in the schema descriptions that follow.
 
-1. **Placeholders for User-Specific Data: **Placeholders like `${tableName}` or `${columnType}` represent elements derived from the specific user data model. When generating GraphQL queries, replace these placeholders with actual names from the relevant data model (e.g., `todo_list`, `bigint`) or from the core `post` example.
+1. **Placeholders for User-Specific Data:** Placeholders like `${tableName}` or `${columnType}` represent elements derived from the specific user data model. When generating GraphQL queries, replace these placeholders with actual names from the relevant data model (e.g., `todo_list`, `bigint`) or from the core `post` example.
 2. **Enhanced GraphQL Schema Format Conventions:**
 
-   - **Allowed Values ****{}****: **When a field's type is followed by curly braces, it indicates only the listed values are permitted. Example: `column: post_text_column{title, content}` means `column` can only be `title` or `content`.
-   - **Field Arguments ****()****: **Parentheses after a field name list its arguments and types. Example: `date_format(time: post_date_op!, format: post_date_format_enum_op!)`.
-   - **Non-Nullable Fields ****!****: **Standard GraphQL notation. An exclamation mark after a type means the field cannot be null (inputs) or will not return null (outputs).
-   - **@oneOf Directive: **Applied to input types to indicate that one and only one of the fields must be provided.
+   - **Allowed Values `{}`:** When a field's type is followed by curly braces, it indicates only the listed values are permitted. Example: `column: post_text_column{title, content}` means `column` can only be `title` or `content`.
+   - **Field Arguments `()`:** Parentheses after a field name list its arguments and types. Example: `date_format(time: post_date_op!, format: post_date_format_enum_op!)`.
+   - **Non-Nullable Fields `!`:** Standard GraphQL notation. An exclamation mark after a type means the field cannot be null (inputs) or will not return null (outputs).
+   - **@oneOf Directive:** Applied to input types to indicate that one and only one of the fields must be provided.
 
 ## Root Operations and Inputs
 
@@ -666,29 +666,26 @@ input post_pk_columns_input {
 
 The post type represents a single record from the post table and includes the following fields:
 
-1. Column Fields**:** Fields corresponding to all columns of the post table (whether primitive or composite types like `image`, `file`, etc.). For example: `id`, `title`, `created_at`.
+1. **Column Fields:** Fields corresponding to all columns of the post table (whether primitive or composite types like `image`, `file`, etc.). For example: `id`, `title`, `created_at`.
 2. Relationship Fields:
 
-   1. One-To-Many Relationships**: **A single post record is associated with multiple records in the related table (post_tag).
+   1. **One-To-Many Relationships:** A single post record is associated with multiple records in the related table (post_tag).
 
    ```
-   ```
-
 post_tags(where: post_tag_bool_exp, order_by: [post_tag_order_by!], distinct_on: [post_tag_select_column!], offset: Int, limit: Int): [post_tag]!
 post_tags_aggregate(where: post_tag_bool_exp, order_by: [post_tag_order_by!], distinct_on: [post_tag_select_column!], offset: Int, limit: Int): post_tag_aggregate!
-
-```
-	1. One-To-One And Many-to-One Relationships**: **A post record references exactly one record in the related table (post_meta or account).
-	```
+   ```
+   1. **One-To-One And Many-to-One Relationships:** A post record references exactly one record in the related table (post_meta or account).
+   ```
 meta: post_meta
 author: account
-```
+   ```
 
 ### Aggregate Type (post_aggregate)
 
 **Purpose:** When you query posts, you might want statistical summaries (like how many posts there are, the newest/oldest post date, etc.) in addition to the post data itself. The `post_aggregate` type provides this capability.
 
-**1. Top-Level Structure: ****post_aggregate**
+**1. Top-Level Structure:** `post_aggregate`
 
 When you perform an aggregation query on posts, the result is structured using the `post_aggregate` type. This type gives you two main pieces of information:
 
@@ -705,15 +702,15 @@ type post_aggregate {
 }
 ```
 
-**2. Aggregate Fields Container: ****post_aggregate_fields**
+**2. Aggregate Fields Container:** `post_aggregate_fields`
 
 The `aggregate` field within `post_aggregate` holds the actual statistical results. It provides several fields for different calculations:
 
 - `count`: Calculates the total number of posts matching your criteria.
 
   - You can optionally provide `columns` (using the `post_select_column` enum) and `distinct: Boolean` to count distinct values in specific columns (e.g., count distinct authors). If you don't provide arguments, it counts all matching posts.
-- `avg`, `sum`: Provide fields for calculating the average and sum. **Importantly, these will only contain fields for the ****Numeric**** columns in the ****post**** table.** Based on the example schema, these are `id` and `author_account`.
-- `max`, `min`: Provide fields for finding the maximum and minimum values. **These will contain fields for the ****Comparable**** columns in the ****post**** table.** This includes numeric columns (`id`, `author_account`), time columns (`created_at`, `updated_at`), and text columns (`title`, `content`).
+- `avg`, `sum`: Provide fields for calculating the average and sum. **Importantly, these will only contain fields for the `Numeric` columns in the `post` table.** Based on the example schema, these are `id` and `author_account`.
+- `max`, `min`: Provide fields for finding the maximum and minimum values. **These will contain fields for the `Comparable` columns in the `post` table.** This includes numeric columns (`id`, `author_account`), time columns (`created_at`, `updated_at`), and text columns (`title`, `content`).
 
 ```
 # Holds the calculated aggregate values for the 'post' table
@@ -736,7 +733,7 @@ type post_aggregate_fields {
 }
 ```
 
-**3.1** **Statistical Field Types (****post_avg_fields****, ****post_max_fields****, etc.)**
+**3.1 Statistical Field Types (`post_avg_fields`, `post_max_fields`, etc.)**
 
 These types define the specific output structure for each statistical calculation (`avg`, `sum`, `max`, `min`) applied to the `post` table's columns.
 
@@ -777,7 +774,7 @@ type post_min_fields {
 }
 ```
 
-**3.2 Column Selection Enum (****post_select_column****)**
+**3.2 Column Selection Enum (`post_select_column`)**
 
 This enum lists all column fields on the `post` table. It's used in two main places:
 
@@ -812,15 +809,12 @@ Filtering is one of the most powerful features in the GraphQL schema. It allows 
 2. **Logical Operators**: The "glue" that combines multiple predicates. These operators—`_and`, `_or`, and `_not`—are used to build complex logical statements.
 
    ```
-   ```
-
 input post_bool_exp {
 _and: [post_bool_exp!]
 _or: [post_bool_exp!]
 _not: post_bool_exp
 }
-
-```
+   ```
 
 3. **Relation Filters**: The "navigators" for traversing relationships. They allow you to move from a source table to a related one (e.g., from a `post` to its `author`) and apply a new filter clause to the records in the related table.
 	1. To-Many relationships (e.g., `post_tags`): passes if any related row matches (IN semantics)

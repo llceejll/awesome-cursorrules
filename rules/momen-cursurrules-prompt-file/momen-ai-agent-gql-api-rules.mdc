@@ -6,7 +6,7 @@ alwaysApply: false
 # Momen.app's AI agents
 
 ## Overview
-Momen.app has an integrated AI agent builder, which supports multi-modal (text, video, image) inputs and outputs, prompt templating, context fetching (via database and third-party APIs), tool use (actionflows, third-party APIs and other AI agents) and structured output (JSON according corresponding JSONSchema).  
+Momen.app has an integrated AI agent builder, which supports multi-modal (text, video, image) inputs and outputs, prompt templating, context fetching (via database and third-party APIs), tool use (actionflows, third-party APIs and other AI agents) and structured output (JSON according to the corresponding JSONSchema).  
 AI Agents' results are delivered differently by the GraphQL service depending on the configuration of its output, namely, whether it is streaming and whether it is structured. A structured output can not be streamed but plain text can be either streamed or not. A structured output must be accompanied by a JSONSchema that describes the JSON's type.  
 In order to invoke an AI agent, the id and the input arguments must be obtained from the project schema. An AI agent built in Momen.app's agent builder can only be invoked via the GraphQL API asynchronously. 
 
