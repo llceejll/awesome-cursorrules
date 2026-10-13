@@ -515,12 +515,12 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       // Creates or overwrites a blob entry.
       // example: await store.set('key-name', 'contents-of key');
       // - NEVER add metadata unless instructed to.
-      set(key: string, value: ArrayBuffer | Blob | string, { metadata?: object }): Promise<void>;
+      set(key: string, value: ArrayBuffer | Blob | string, options?: { metadata?: object }): Promise<void>;
 
       // Stores a JSON-serializable object.
       // example: await store.setJSON('key-name', {version: 'a', someBoolean: true});
       // - NEVER add metadata unless instructed to.
-      setJSON(key: string, value: any, { metadata?: object }): Promise<void>;
+      setJSON(key: string, value: any, options?: { metadata?: object }): Promise<void>;
 
       // Retrieves a stored blob.
       // example: await store.get('key-name');
