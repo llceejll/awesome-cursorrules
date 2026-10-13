@@ -1,6 +1,6 @@
 # Drupal 11 Awesome CursorRules
 
-This repository provides a custom **CursorRules** file tailored for Drupal 11 projects. The rules defined in the `.cursorrules` file ensure that AI-generated code adheres to Drupal 11’s coding standards, best practices, and modern architecture, leveraging PHP 8.x, Symfony 6, and Drupal’s APIs.
+This repository provides a custom **CursorRules** file tailored for Drupal 11 projects. The rules defined in the `.cursorrules` file ensure that AI-generated code adheres to Drupal 11’s coding standards, best practices, and modern architecture, leveraging PHP 8.3 or newer, Symfony 7, and Drupal’s APIs.
 
 ## Purpose
 
@@ -30,7 +30,7 @@ The goal of this project is to enable a consistent, secure, and efficient develo
 
 - [Awesome CursorRules on GitHub](https://github.com/PatrickJS/awesome-cursorrules)
 - [Drupal 11 Documentation](https://www.drupal.org/docs/understanding-drupal)
-- [Drupal Coding Standards (PSR-12)](https://www.drupal.org/docs/develop/standards)
+- [Drupal Coding Standards](https://www.drupal.org/docs/develop/standards)
 
 ## Contributing
 
