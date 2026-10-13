@@ -12,7 +12,7 @@ const qwikTailwindBestPractices = [
   "Implement Tailwind CSS classes for styling",
   "Use @apply directive in CSS files for reusable styles",
   "Implement responsive design using Tailwind's responsive classes",
-  "Utilize Tailwind's configuration file for customization",
+  "Customize Tailwind in src/global.css with @theme after @import \"tailwindcss\"",
   "Leverage TypeScript for type safety",
   "Use Vite's fast HMR for development",
 ];
@@ -27,8 +27,6 @@ src/
   root.tsx
   entry.ssr.tsx
 public/
-tailwind.config.js
-postcss.config.js
 vite.config.ts
 tsconfig.json
 `;
@@ -37,7 +35,7 @@ tsconfig.json
 
 const additionalInstructions = `
 1. Use TypeScript for all .ts and .tsx files
-2. Implement proper Tailwind CSS purging for production builds
+2. Tailwind scans project source and generates only the classes it finds. Register an extra path with @source in src/global.css
 3. Utilize Qwik City for routing when applicable
 4. Use Tailwind's @layer directive for custom styles
 5. Implement dark mode using Tailwind's dark variant

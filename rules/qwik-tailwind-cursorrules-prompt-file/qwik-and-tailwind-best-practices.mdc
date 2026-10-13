@@ -7,6 +7,6 @@ globs: src/**/*.{ts,tsx,css}
 - Implement Tailwind CSS classes for styling
 - Use @apply directive in CSS files for reusable styles
 - Implement responsive design using Tailwind's responsive classes
-- Utilize Tailwind's configuration file for customization
+- Customize Tailwind in `src/global.css` with `@theme` after `@import "tailwindcss"`
 - Leverage TypeScript for type safety
 - Use Vite's fast HMR for development
