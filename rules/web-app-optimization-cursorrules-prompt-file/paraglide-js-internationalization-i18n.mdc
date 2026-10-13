@@ -6,8 +6,7 @@ globs: "**/*.svelte"
 - Install Paraglide.js: `npm install @inlang/paraglide-js`
 - Set up language files in the `languages` directory.
 - Use the `t` function to translate strings:
-  svelte
-  <br />
+  ```svelte
   import { t } from '@inlang/paraglide-js';
-  <br />
+  ```
   - Support multiple languages and RTL layouts.

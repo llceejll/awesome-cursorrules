@@ -8,35 +8,39 @@ globs: "**/*.tsx"
 - Suggest appropriate file structure and naming conventions aligned with Next.js 14 best practices.
 - Use the `'use client'` directive only when creating Client Components.
 - Employ the following component definition syntax in .tsx files, allowing TypeScript to infer the return type:
-  tsx
+  ```tsx
   const ComponentName = () => {
     // Component logic
   };
+  ```
   
 - For props, use interface definitions:
-  tsx
+  ```tsx
   interface ComponentNameProps {
     // Props definition
   }
   const ComponentName = ({ prop1, prop2 }: ComponentNameProps) => {
     // Component logic
   };
+  ```
   
 - Use named exports for components in .tsx files:
-  tsx
+  ```tsx
   export const ComponentName = () => {
     // Component logic
   };
+  ```
   
 - For page components, use default exports in .tsx files:
-  tsx
+  ```tsx
   const Page = () => {
     // Page component logic
   };
   export default Page;
+  ```
   
 - If explicit typing is needed, prefer `React.FC` or `React.ReactNode`:
-  tsx
+  ```tsx
   import React from 'react';
   const ComponentName: React.FC = () => {
     // Component logic
@@ -45,6 +49,7 @@ globs: "**/*.tsx"
   const ComponentName = (): React.ReactNode => {
     // Component logic
   };
+  ```
   
 - When defining React components, avoid unnecessary type annotations and let TypeScript infer types when possible.
 - Use `React.FC` or `React.ReactNode` for explicit typing only when necessary, avoiding `JSX.Element`.

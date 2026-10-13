@@ -3,7 +3,7 @@ description: Rules for implementing error handling in Next.js 14 using error.tsx
 globs: "**/app/error.tsx"
 ---
 - For error handling (in error.tsx):
-  tsx
+  ```tsx
   'use client'
   export default function Error({
     error,
@@ -18,3 +18,4 @@ globs: "**/app/error.tsx"
 
     );
   }
+  ```

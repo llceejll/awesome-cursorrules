@@ -76,6 +76,7 @@ Shadcn Color Conventions
   ```
 - Usage example:
   ```svelte
+  ```
 
 SvelteKit Project Structure
 
@@ -120,9 +121,7 @@ State Management
   ```
 - Use in components:
   ```svelte
-  <br />
   import { counter } from './counter.svelte.ts';
-  <br />
   <button on:click={() => counter.increment()}>
     Count: {counter.count}
   ```
@@ -177,9 +176,8 @@ Internationalization (i18n) with Paraglide.js
 - Set up language files in the `languages` directory.
 - Use the `t` function to translate strings:
   ```svelte
-  <br />
   import { t } from '@inlang/paraglide-js';
-  <br />
+  ```
   - Support multiple languages and RTL layouts.
   - Ensure text scaling and font adjustments for accessibility.
 
