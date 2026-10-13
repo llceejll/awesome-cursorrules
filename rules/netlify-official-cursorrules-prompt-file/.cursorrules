@@ -597,19 +597,34 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       region?: Region;
     }
 
-    // Returns a store instance for managing blobs. This is globally scoped data across all deploys.
-    // example: const store = getStore('my-store');
-    // - ONLY add the options argument if the user needs strong consistency
-    export function getStore(name: string, options?: { consistency?: 'strong' | 'eventual' }): Store;
-
-    // Returns a deploy-specific store instance for managing blobs tied to a deploy.
-    // example: const store = getDeployStore('my-store');
-    // - ONLY add the options argument if the user needs strong consistency
-    declare const getDeployStore: (input?: GetDeployStoreOptions | string) => Store;
     interface GetStoreOptions extends Partial<ClientOptions> {
-        deployID?: string;
-        name?: string;
+      deployID?: string;
+      name?: string;
+      // Site-wide stores default to us-east-2. Allowed codes: ap-southeast-1, ap-southeast-2, eu-central-1, us-east-1, us-east-2.
+      region?: Region;
     }
+
+    // Returns a site-wide store. Data persists across deploys.
+    // example: const store = getStore('my-store');
+    // example: const store = getStore({ name: 'animals', consistency: 'strong' });
+    // - Site-wide stores default to region us-east-2. Pass `region` on every getStore call when the store must live in another region.
+    // - Pass `siteID` and `token` when calling from outside Functions, Edge Functions, or Build Plugins.
+    // - Pass `consistency: 'strong'` only when this store needs strong consistency.
+    declare const getStore: {
+      (name: string): Store;
+      (name: string, options: Omit<GetStoreOptions, 'name'>): Store;
+      (options: GetStoreOptions): Store;
+    };
+
+    // Returns a deploy-specific store.
+    // example: const store = getDeployStore('my-store');
+    // - deployID, region, siteID, and token are set automatically in Functions, Edge Functions, and Build Plugins.
+    // - Pass `consistency: 'strong'` only when this store needs strong consistency.
+    declare const getDeployStore: {
+      (name: string): Store;
+      (name: string, options: Omit<GetDeployStoreOptions, 'name'>): Store;
+      (input?: GetDeployStoreOptions): Store;
+    };
 
     // Lists all stores available on a site.
     // example:
