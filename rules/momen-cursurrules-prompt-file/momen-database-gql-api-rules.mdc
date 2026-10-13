@@ -344,7 +344,7 @@ A One-to-Many relationship means one record in the `sourceTable` (the "one" side
 
 ## Constraints
 
-For Mutations,** **When inserting or updating data, named Primary Key and Unique constraints are crucial for conflict handling. Operations like `insert` often provide an `on_conflict` argument that uses these constraint names to define resolution strategies (e.g., 'do nothing' or 'update conflicting record')
+**For Mutations:** When inserting or updating data, named Primary Key and Unique constraints are crucial for conflict handling. Operations like `insert` often provide an `on_conflict` argument that uses these constraint names to define resolution strategies (e.g., 'do nothing' or 'update conflicting record')
 
 For example, if a post with the same primary key already exists, it will update the title and content fields instead:
 
@@ -853,7 +853,7 @@ This design provides unparalleled flexibility, allowing any value (a column, a l
 This principle dictates how you choose the correct operand "wrapper" (e.g., `bigint_operand`, `text_operand`). Its application depends on the type of operator you are using:
 
 - For **generic operators** (e.g., `_eq`, `_gt`) that can compare multiple data types, this principle is critical. You **must** choose the operand type based on the final data type of the values being compared. For instance, extracting the `MONTH` (a number) from a `created_at` (a timestamp) requires wrapping the entire comparison in `bigint_operand`.
-- For **type-specific operators** (e.g., `_ilike`, `_contains`), the operand type is **implicit, **the operand type is implicit. The system already knows that `_ilike` operates on text, so you do not need to specify it.
+- For **type-specific operators** (e.g., `_ilike`, `_contains`), the operand type is **implicit**. The system already knows that `_ilike` operates on text, so you do not need to specify it.
 
 #### Principle #3: Everything is an Operand
 
