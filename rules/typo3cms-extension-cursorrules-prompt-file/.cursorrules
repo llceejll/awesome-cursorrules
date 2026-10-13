@@ -63,7 +63,7 @@ my_extension/
 
 - The extension is installed via **Composer** or manually via the **Extension Manager**
 - Services are automatically injected via `Services.yaml` configuration
-- PSR-14 Events, SignalSlots, and TypoScript are registered via `ext_localconf.php`
+- Register PSR-14 event listeners with the `AsEventListener` attribute or in `Configuration/Services.yaml`. Register TypoScript in `ext_localconf.php`.
 - Configuration is handled via TypoScript and YAML
 
 ---
