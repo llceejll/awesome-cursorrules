@@ -9,7 +9,7 @@
 - **Framework**: Kotlin Ktor with Kotlin 2.1.20+
 - **JDK**: 21 (LTS)
 - **Build**: Gradle with Kotlin DSL
-- **Dependencies**: Ktor Server Core/Netty, kotlinx.serialization, Exposed, HikariCP, kotlin-logging, Koin, Kotest
+- **Dependencies**: Ktor Server Core/Netty, `ktor-server-content-negotiation`, `ktor-serialization-kotlinx-json`, kotlinx.serialization, Exposed, HikariCP, kotlin-logging, Koin, Kotest
 
 ## Application Structure (Feature-Based)
 - **Organize by business features, not technical layers**
@@ -94,6 +94,19 @@ class UserServiceImpl(
         return userRepository.findById(id) ?: throw ResourceNotFoundException("User", id.toString())
     }
     // Other implementations...
+}
+```
+
+## Serialization
+`call.respond` of a data class or map needs the Content Negotiation plugin. Install it once in the application module:
+```kotlin
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.plugins.contentnegotiation.*
+
+fun Application.configureSerialization() {
+    install(ContentNegotiation) {
+        json()
+    }
 }
 ```
 
@@ -187,6 +200,7 @@ class UserRoutesTest : FunSpec({
 
         testApplication {
             application {
+                configureSerialization()
                 configureUserRoutes(mockService)
             }
 
