@@ -69,7 +69,7 @@ interface UserRepository {
 class UserRepositoryImpl : UserRepository {
     override suspend fun findById(id: UUID): UserDTO? = withContext(Dispatchers.IO) {
         transaction {
-            Users.select { Users.id eq id }
+            Users.selectAll().where { Users.id eq id }
                 .mapNotNull { it.toUserDTO() }
                 .singleOrNull()
         }
