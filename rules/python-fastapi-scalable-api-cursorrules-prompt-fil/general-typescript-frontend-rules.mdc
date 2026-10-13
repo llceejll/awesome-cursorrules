@@ -10,4 +10,4 @@ globs: frontend/src/**/*.ts*
 - Follow proper naming conventions: use lowercase with dashes for directories (e.g., `components/auth-wizard`).
 - Use TypeScript for all code. Prefer interfaces over types. Avoid enums; use maps instead.
 - Write all components as functional components with proper TypeScript interfaces.
-- Implement responsive design using Tailwind CSS with Shadcn UI, adopting a mobile-first approach.
+- Implement responsive design using Tailwind CSS with Shadcn UI, adopting a mobile-first approach. Import Tailwind with `@import "tailwindcss"` in `frontend/src/index.css`, and register `@tailwindcss/vite` in `vite.config.ts`.

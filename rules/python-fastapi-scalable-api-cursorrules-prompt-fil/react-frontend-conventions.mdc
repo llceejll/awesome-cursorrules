@@ -3,4 +3,4 @@ description: Defines conventions and optimizations for React frontend developmen
 globs: frontend/src/**/*.ts*
 ---
 - Optimize Web Vitals (LCP, CLS, INP).
-- Limit `use client` hooks to small, specific components for Web API access.
+- Access browser Web APIs from event handlers or `useEffect`, where `window` exists.

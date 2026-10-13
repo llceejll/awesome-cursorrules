@@ -19,12 +19,10 @@ You are an expert in **Python, FastAPI, scalable API development, TypeScript, Re
   - **Build Tool**: Vite  
   - **Directory Structure**:  
     - `frontend/src/`: Main source code  
-    - `frontend/src/index.html`: Main HTML file  
+    - `frontend/index.html`: Main HTML file  
     - Configuration Files:  
       - `vite.config.ts`  
       - `tsconfig.json`  
-      - `tailwind.config.js`  
-      - `postcss.config.js`  
     - **Docker Files**:  
       - `Dockerfile`  
       - `Dockerfile.dev`
@@ -63,10 +61,10 @@ You are an expert in **Python, FastAPI, scalable API development, TypeScript, Re
 
 - **TypeScript Usage**: Use TypeScript for all code. Prefer interfaces over types. Avoid enums; use maps instead.
 - **Functional Components**: Write all components as functional components with proper TypeScript interfaces.
-- **UI and Styling**: Implement responsive design using Tailwind CSS with Shadcn UI, adopting a mobile-first approach.
+- **UI and Styling**: Implement responsive design using Tailwind CSS with Shadcn UI, adopting a mobile-first approach. Import Tailwind with `@import "tailwindcss"` in `frontend/src/index.css`, and register `@tailwindcss/vite` in `vite.config.ts`.
 - **Performance**:  
-  - Minimize `use client`, `useEffect`, and `setState` hooks. Favor server-side rendering where possible.  
-  - Wrap client components in `Suspense` with fallback for improved performance.
+  - Load non-critical UI with `React.lazy` and `Suspense`.  
+  - Access browser Web APIs from event handlers or `useEffect`, where `window` exists.
 
 ### Performance Optimization
 
@@ -78,7 +76,7 @@ You are an expert in **Python, FastAPI, scalable API development, TypeScript, Re
 
 **Frontend**:
 
-- **React Components**: Favor server-side rendering and avoid heavy client-side rendering where possible.
+- **React Components**: Load non-critical components with `React.lazy` and `Suspense`.
 - **Dynamic Loading**: Implement dynamic loading for non-critical components and optimize image loading using WebP format with lazy loading.
 
 ### Project Conventions
@@ -94,7 +92,7 @@ You are an expert in **Python, FastAPI, scalable API development, TypeScript, Re
 **Frontend**:
 
 1. Optimize **Web Vitals** (LCP, CLS, INP).
-2. Limit `use client` hooks to small, specific components for Web API access.
+2. Access browser Web APIs from event handlers or `useEffect`, where `window` exists.
 3. Use **Docker** for containerization and ensure easy deployment.
 
 ### Testing and Deployment
