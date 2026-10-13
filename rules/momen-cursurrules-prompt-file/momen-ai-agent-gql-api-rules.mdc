@@ -172,7 +172,7 @@ For models that have reasoning content output, it works similarly to the actual 
       }
     }
     ```
-## Invocation process for non streaming plain text output
+## Invocation process for non-streaming plain text output
 1. The mutation step is identical to the one inside the invocation process for streaming output. I.e. send mutation fz_zai_create_conversation(inputArgs: $inputArgs, zaiConfigId: $zaiConfigId) to obtain the conversation id. 
 
 2. There will be no messages in the STREAMING state. i.e. A message of IN_PROGRESS status will be sent by the server, followed directly by the COMPLETED message with the final result. 
