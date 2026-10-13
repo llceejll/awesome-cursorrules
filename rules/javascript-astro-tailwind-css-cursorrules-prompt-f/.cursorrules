@@ -85,14 +85,14 @@ Build and Deployment
 
 Styling with Tailwind CSS
 
-- Integrate Tailwind CSS with Astro @astrojs/tailwind
+- Register @tailwindcss/vite in the vite.plugins array in astro.config.mjs, and import Tailwind with @import "tailwindcss" in src/styles/global.css
 
 Tailwind CSS Best Practices
 
 - Use Tailwind utility classes extensively in your Astro components.
 - Leverage Tailwind's responsive design utilities (sm:, md:, lg:, etc.).
 - Utilize Tailwind's color palette and spacing scale for consistency.
-- Implement custom theme extensions in tailwind.config.cjs when necessary.
+- Implement custom theme tokens with @theme in src/styles/global.css when necessary.
 - Never use the @apply directive
 
 Testing
