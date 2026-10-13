@@ -3,6 +3,6 @@ description: Rules for optimizing extension performance, minimizing resource usa
 globs: "**/background_worker.js, **/content_script.js"
 ---
 - Minimize resource usage in background scripts
-- Use event pages instead of persistent background pages when possible
+- Use a Manifest V3 background service worker instead of a persistent background page or an event page
 - Implement lazy loading for non-critical extension features
 - Optimize content scripts to minimize impact on web page performance
