@@ -1236,23 +1236,23 @@ IMPORTANT: When providing a scalar value directly as an operand argument, it mus
 
 ```
 enum date_format_enum_op {
-  DATE, MONTH_DAY, DATE_TIME,DAY_OF_WEEK,MONTH_DAY_YEAR,SHORT_MONTH_DAY_YEAR,RELATIVE_TIME,ISO8601
+  DATE, MONTH_DAY, DATE_TIME, DAY_OF_WEEK, MONTH_DAY_YEAR, SHORT_MONTH_DAY_YEAR, RELATIVE_TIME, ISO8601
 }
 
 enum date_unit_enum_op {
-  YEAR,MONTH,DAY
+  YEAR, MONTH, DAY
 }
 
 enum geo_distance_unit_enum_op {
-  METER,KILOMETER,MILE
+  METER, KILOMETER, MILE
 }
 
 enum language_enum_op {
-  EN,ZH
+  EN, ZH
 }
 
 enum rounding_mode_enum_op {
-  HALF_EVEN,HALF_UP,HALF_DOWN,UP,DOWN,CEILING,FLOOR
+  HALF_EVEN, HALF_UP, HALF_DOWN, UP, DOWN, CEILING, FLOOR
 }
 
 enum time_format_enum_op {
@@ -1260,15 +1260,15 @@ enum time_format_enum_op {
 }
 
 enum time_unit_enum_op {
-  HOUR,MINUTE,SECOND,MILLISECOND
+  HOUR, MINUTE, SECOND, MILLISECOND
 }
 
 enum timestamp_format_enum_op {
-  DATE,MONTH_DAY,DATE_TIME,DAY_OF_WEEK,MONTH_DAY_YEAR,SHORT_MONTH_DAY_YEAR,RELATIVE_TIME,ISO8601
+  DATE, MONTH_DAY, DATE_TIME, DAY_OF_WEEK, MONTH_DAY_YEAR, SHORT_MONTH_DAY_YEAR, RELATIVE_TIME, ISO8601
 }
 
 enum timestamp_unit_enum_op {
-  YEAR,MONTH,DAY,HOUR,MINUTE,SECOND,MILLISECOND
+  YEAR, MONTH, DAY, HOUR, MINUTE, SECOND, MILLISECOND
 }
 ```
 
