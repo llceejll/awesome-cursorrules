@@ -718,7 +718,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - All Netlify sites have a `/.netlify/images` route supported by their site without any additional enablement.
   - Transform images via query parameters in requests to `/.netlify/images`.
   - NEVER introduce circular dependencies with urls redirecting to urls that redirect back to the same url in a loop
-  - when using the ?url={URL} parameter, ensure the url is a URI encoded component.
+  - The `url` parameter is a relative path on this site or an absolute URL of an allowlisted remote image. Pass that value the way the examples below do.
   - Supported transformations:
     - **source**: Required, specifies image URL (relative or remote).
     - **size**: `w` (width) and `h` (height) in pixels.
