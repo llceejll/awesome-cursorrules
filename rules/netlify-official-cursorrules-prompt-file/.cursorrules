@@ -17,7 +17,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - the `.netlify` folder is not for user code. It should be added to the .gitignore list
   - avoid adding version numbers to imported code. (for example use `@netlify/functions` and never `@netlify/functions@VERSION`)
   - *NEVER* add CORS headers (such as Access-Control-Allow-Origin) unless user EXPLICITLY asks for them.
-  - prefer using `netlify dev` to start dev server unless another dev command is requested by the user
+  - prefer using `netlify dev` to start the dev server unless another dev command is requested by the user
 
   # Guidelines
 
@@ -204,7 +204,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   ### Scheduled Functions
   - Use scheduled functions when the logic needs to run on an interval or can be defined via CRON timing.
   - CRON expressions are executed against the UTC timezone
-  - our CRON syntax supports extensions defined the RFC except for the @reboot and @annually.
+  - our CRON syntax supports extensions defined in the RFC except for the @reboot and @annually.
   - The minimum interval is 1 minute
   - Scheduled functions have a 30-second execution limit
   - Scheduled functions do not return response bodies
@@ -215,7 +215,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
         schedule = "@hourly"
     ```
   - Scheduled functions ONLY run on published deploys. They don't run on Deploy Previews or branch deploys.
-  - For local tests, the Netlify CLI to run the site in dev mode and the `netlify functions:invoke` [command](https://cli.netlify.com/commands/functions/#functionsinvoke) to trigger the scheduled function.
+  - For local tests, use the Netlify CLI to run the site in dev mode and the `netlify functions:invoke` [command](https://cli.netlify.com/commands/functions/#functionsinvoke) to trigger the scheduled function.
     example:
     ```bash
       netlify functions:invoke myfunction
