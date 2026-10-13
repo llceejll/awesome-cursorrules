@@ -8,4 +8,4 @@ globs: "**/*.tsx"
 - Use Tailwind's responsive variants for adaptive designs
 - Leverage DaisyUI components for rapid development
 - Customize DaisyUI components only when necessary
-- Define and use design tokens in tailwind.config.js
+- Define DaisyUI themes and design tokens in CSS with `@plugin "daisyui"` and `@plugin "daisyui/theme"` after `@import "tailwindcss"`
