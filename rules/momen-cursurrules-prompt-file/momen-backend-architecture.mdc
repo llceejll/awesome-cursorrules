@@ -64,9 +64,9 @@ For other languages, infer implementation from the above example.
 ## Authentication
 
 All requests to the GraphQL endpoint are either authenticated, or they will be assigned an anonymous user role. 
-When user changes authentication status (logging in/out), WebSocket connection should be re-established. 
+When the user changes authentication status (logging in/out), the WebSocket connection should be re-established. 
 
-In order to obtain JWT, user must either register or login. Depending on the login settings of the project, it can have different authentication methods. 
+In order to obtain a JWT, the user must either register or login. Depending on the login settings of the project, it can have different authentication methods. 
 - Email with verification
     1. When registering, you must first send a verification code. Valid values for verificationEnumType are: LOGIN, SIGN_UP, BIND, UNBIND, DEREGISTER, RESET_PASSWORD. In this case, choose SIGN_UP.
         ```graphql 
@@ -80,7 +80,7 @@ In order to obtain JWT, user must either register or login. Depending on the log
             )
         }
         ``` 
-    2. When registering, use set register to true, and fill in the verificationCode. When logging in subsequently, set register to false and omit verificationCode. 
+    2. When registering, set register to true, and fill in the verificationCode. When logging in subsequently, set register to false and omit verificationCode. 
     ```graphql
     mutation AuthenticateWithEmail(
         $email: String!

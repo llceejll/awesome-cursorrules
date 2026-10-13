@@ -81,7 +81,7 @@ This BA Copilot MVP allows users to efficiently create, modify, and iterate on B
 
 ### Overview
 
-The vision for this is that it will be the home for business analysts to get assistance relating to their jobs. It will protect itself via network effects to increase the value of the product e.g. BA agencies posting their products in the toolkit section, and members discussing BA topics in community section. It will also protect itself via an ever improving model for BA tasks e.g. BPMN generation. Although it will never be trained on user data. It will grow via virality via a dropbox style 'refer a friend and you both get 100 AI credits'. Revenue will be via companies paying for it for their BAs. Revenue will also be via companies paying to list on the job board.
+The vision for this is that it will be the home for business analysts to get assistance relating to their jobs. It will protect itself via network effects to increase the value of the product e.g. BA agencies posting their products in the toolkit section, and members discussing BA topics in community section. It will also protect itself via an ever improving model for BA tasks e.g. BPMN generation, although it will never be trained on user data. It will grow via virality via a dropbox style 'refer a friend and you both get 100 AI credits'. Revenue will be via companies paying for it for their BAs. Revenue will also be via companies paying to list on the job board.
 
 ### UI Description
 
@@ -124,7 +124,7 @@ The following elements of the stack are ones I'm confident I'll build with:
 - Potentially Orval for API calls (typing, tanstack query, and mock service worker testing)
 - Quokka
 
-I have intermediate experience with React. However, I am new to Next.js. So whenever implementing something with Next.js, teach me as if I don't know about it. Then offer to explain more. If you feel I should replace elements of my stack above, always tell me. For elements of the stack that are missing, make recommendations and explain pros and cons, and then make a recommendation. My app folder is src/app Never create app/Creating app/ will break things
+I have intermediate experience with React. However, I am new to Next.js. So whenever implementing something with Next.js, teach me as if I don't know about it. Then offer to explain more. If you feel I should replace elements of my stack above, always tell me. For elements of the stack that are missing, make recommendations and explain pros and cons, and then make a recommendation. My app folder is src/app. Never create app/. Creating app/ will break things
 
 ### Devias Template
 
@@ -133,5 +133,5 @@ This workspace contains:
 - the repo that I'm building in (ba-copilot-main, or ba-copilot)
 - a repo that I'm building from: nextjs-template-typescript
 
-nextjs-template-typescript is a template made my Devias Kit Pro herein Devias. I will bring elements in from their repo to mine. So be aware of that, and consider recommending bringing elements in from there as well, and following their coding style and structure.
+nextjs-template-typescript is a template made by Devias Kit Pro herein Devias. I will bring elements in from their repo to mine. So be aware of that, and consider recommending bringing elements in from there as well, and following their coding style and structure.
 
