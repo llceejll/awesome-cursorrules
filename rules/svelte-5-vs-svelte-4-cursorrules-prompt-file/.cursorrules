@@ -14,7 +14,7 @@ In Svelte 5, event handlers are treated as standard HTML properties rather than 
 ### Svelte 4 vs. Svelte 5:
 
 **Before (Svelte 4):**
-```html
+```svelte
 <script>
   let count = 0;
   $: double = count * 2;
@@ -26,7 +26,7 @@ In Svelte 5, event handlers are treated as standard HTML properties rather than 
 ```
 
 **After (Svelte 5):**
-```html
+```svelte
 <script>
   // Define state with runes
   let count = $state(0);
