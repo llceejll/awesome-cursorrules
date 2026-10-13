@@ -2,11 +2,11 @@
 
 ## 1. Rails 8 Core Features
 
-** Prefer the command line utilities to manually generated code **
+**Prefer the command line utilities to manually generated code**
 
 For example, use `rails generate model` instead of creating a model from scratch.
 
-** IMPORTANT: Server Management **
+**IMPORTANT: Server Management**
 
 - Always use `bin/dev` to start the server (uses Procfile.dev)
 - Check logs after every significant change

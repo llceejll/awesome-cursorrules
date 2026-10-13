@@ -16,7 +16,7 @@ Here is the metadata for a simple blogging application. We will use this `post` 
   - title: text
   - content: text
   - author_account: bigint (foreign key to account.id, reference to the author of the post)
-- **Constraints: **
+- **Constraints:**
 
   - post_id_key: unique constraint on (id)
   - post_pkey: primary key on (id)
