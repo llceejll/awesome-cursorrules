@@ -114,7 +114,7 @@ No companion CSS. No root className. Layout-level inline styles
 
 ```tsx
 import "rsuite/dist/rsuite.min.css";
-import { FormViewer, BiDi } from "@react-form-builder/core";
+import { FormViewer } from "@react-form-builder/core";
 import { view } from "@react-form-builder/components-rsuite";
 import formJson from "./form.json";
 
@@ -127,7 +127,6 @@ export default function App() {
         view={view}
         getForm={getForm}
         onFormDataChange={(d) => console.log(d)}
-        biDi={BiDi.LTR}
       />
     </div>
   );
