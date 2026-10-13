@@ -1,7 +1,7 @@
 ---
-description: Applies specifically to the `middleware.ts` file to manage requests and sessions using Upstash Redis.
-globs: middleware.ts
+description: Applies specifically to the `proxy.ts` file to manage requests and sessions using Upstash Redis.
+globs: proxy.ts
 ---
-- Use Vercel middleware to handle incoming requests.
-- Use middleware to parse user input and manage sessions with Upstash Redis.
+- Use the Next.js Proxy file to handle incoming requests.
+- Use the proxy to parse user input and manage sessions with Upstash Redis.
 - Use `@upstash/redis` for managing stateful data.
