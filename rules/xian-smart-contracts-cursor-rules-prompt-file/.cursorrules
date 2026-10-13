@@ -221,26 +221,21 @@ def verify_signature(vk: str, msg: str, signature: str):
 ```
 
 ### Hashlib
-- Xian provides a simplified version of hashlib with a different API than Python's standard library
-- Does not require setting up an object and updating it with bytes
-- Functions directly accept and return hexadecimal strings
+- The runtime hashlib helpers accept a string and return a lowercase hex digest
+- Use the `_text` helpers for ordinary messages. Use the `_hex` helpers when the value is already unprefixed, even-length hex
 
 ```python
-# Hash a hex string with SHA3 (256 bit)
-hash_result = hashlib.sha3("68656c6c6f20776f726c64")  # hex for "hello world"
-
-# If not a valid hex string, it will encode the string to bytes first
-text_hash = hashlib.sha3("hello world")
-
-# SHA256 works the same way (SHA2 256-bit, used in Bitcoin)
-sha256_result = hashlib.sha256("68656c6c6f20776f726c64")
+payload_hash = hashlib.sha3_text("transfer:alice:bob:10")
+byte_hash = hashlib.sha3_hex("68656c6c6f")
+sha256_result = hashlib.sha256_hex("68656c6c6f")
 ```
 
 ## Testing
 
 ### Setting Up Tests
 - Use Python's unittest framework
-- Client available via `from contracting.client import ContractingClient`
+- Client available via `from contracting.local import ContractingClient`
+- Submit a contract function with `client.submit`, then call it through `client.get_contract_proxy`
 - Flush client before and after each test
 
 ### Setting Test Environment
@@ -263,28 +258,21 @@ result = self.some_contract.some_fn(some_arg=some_value, signer="some_signer")
 ## Events
 
 ### Defining Events
-- Use `LogEvent` to define events at the top level of a contract
-- Each event has a name and a schema of parameters with their types
-- Set `idx: True` for parameters that should be indexed for querying
+- Use `LogEvent` to define events at module scope
+- Pass the event name and a field map. Mark indexed fields with `indexed(type)`
 
 ```python
-TransferEvent = LogEvent(
-    event="Transfer",
-    params={
-        "from": {'type': str, 'idx': True},
-        "to": {'type': str, 'idx': True},
-        "amount": {'type': (int, float, decimal)}
-    }
-)
+TransferEvent = LogEvent("Transfer", {
+    "from": indexed(str),
+    "to": indexed(str),
+    "amount": (int, float, decimal),
+})
 
-ApprovalEvent = LogEvent(
-    event="Approval",
-    params={
-        "owner": {'type': str, 'idx': True},
-        "spender": {'type': str, 'idx': True},
-        "amount": {'type': (int, float, decimal)}
-    }
-)
+ApprovalEvent = LogEvent("Approval", {
+    "owner": indexed(str),
+    "spender": indexed(str),
+    "amount": (int, float, decimal),
+})
 ```
 
 ### Emitting Events
@@ -322,12 +310,11 @@ result = self.contract.transfer(
 )
 
 # Verify events
-events = result['events']
+events = result["events"]
 assert len(events) == 1
-assert events[0]['event'] == 'Transfer'
-assert events[0]['from'] == 'sender'
-assert events[0]['to'] == 'recipient'
-assert events[0]['amount'] == 100
+assert events[0]["event"] == "Transfer"
+assert events[0]["data_indexed"]["from"] == "sender"
+assert events[0]["data_indexed"]["to"] == "recipient"
 ```
 
 ### Common Event Types
@@ -346,27 +333,16 @@ assert events[0]['amount'] == 100
 - Define the environment and chain ID in setUp for consistent testing
 
 ```python
+from contracting.local import ContractingClient
+
 class TestMyContract(unittest.TestCase):
     def setUp(self):
-        # Bootstrap the environment
-        self.chain_id = "test-chain"
-        self.environment = {"chain_id": self.chain_id}
-        self.deployer_vk = "test-deployer"
-        
-        # Initialize the client
-        self.client = ContractingClient(environment=self.environment)
+        self.client = ContractingClient()
         self.client.flush()
-        
-        # Load and submit the contract
-        with open('path/to/my_contract.py') as f:
-            code = f.read()
-            self.client.submit(code, name="my_contract", constructor_args={"owner": self.deployer_vk})
-            
-        # Get contract instance
-        self.contract = self.client.get_contract("my_contract")
-        
+        self.client.submit(my_contract, name="con_my_contract")
+        self.contract = self.client.get_contract_proxy("con_my_contract")
+
     def tearDown(self):
-        # Clean up after each test
         self.client.flush()
 ```
 
@@ -380,16 +356,13 @@ class TestMyContract(unittest.TestCase):
 
 ```python
 def test_transfer_success(self):
-    # GIVEN a sender with balance
     sender = "alice"
-    self.contract.balances[sender] = 1000
-    
-    # WHEN a transfer is executed
+    self.client.set_var("con_my_contract", "balances", arguments=[sender], value=1000)
+
     result = self.contract.transfer(amount=100, to="bob", signer=sender)
-    
-    # THEN the balances should be updated correctly
-    self.assertEqual(self.contract.balances["bob"], 100)
-    self.assertEqual(self.contract.balances[sender], 900)
+
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=["bob"]), 100)
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=[sender]), 900)
 ```
 
 ### Testing for Security Vulnerabilities
@@ -446,16 +419,13 @@ def test_time_sensitive_function(self):
 
 ```python
 def test_transfer_balances(self):
-    # Set initial balances
-    self.contract.balances["alice"] = 1000
-    self.contract.balances["bob"] = 500
-    
-    # Perform transfer
+    self.client.set_var("con_my_contract", "balances", arguments=["alice"], value=1000)
+    self.client.set_var("con_my_contract", "balances", arguments=["bob"], value=500)
+
     self.contract.transfer(amount=300, to="bob", signer="alice")
-    
-    # Verify final balances
-    self.assertEqual(self.contract.balances["alice"], 700)
-    self.assertEqual(self.contract.balances["bob"], 800)
+
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=["alice"]), 700)
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=["bob"]), 800)
 ```
 
 #### 5. Signature Validation
@@ -506,7 +476,7 @@ def test_event_emission(self):
     sender = "alice"
     receiver = "bob"
     amount = 100
-    self.contract.balances[sender] = amount
+    self.client.set_var("con_my_contract", "balances", arguments=[sender], value=amount)
     
     # WHEN executing with return_full_output
     result = self.contract.transfer(
@@ -550,15 +520,12 @@ def test_no_reentrancy_vulnerability(self):
 
 ```python
 def test_integer_boundaries(self):
-    # Set a large balance
-    self.contract.balances["user"] = 10**20
-    
-    # Test with large transfers
+    self.client.set_var("con_my_contract", "balances", arguments=["user"], value=10**20)
+
     result = self.contract.transfer(amount=10**19, to="receiver", signer="user")
-    
-    # Verify results are as expected
-    self.assertEqual(self.contract.balances["user"], 9*10**19)
-    self.assertEqual(self.contract.balances["receiver"], 10**19)
+
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=["user"]), 9 * 10**19)
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=["receiver"]), 10**19)
 ```
 
 #### Front-Running Protection
