@@ -181,6 +181,10 @@ globs: "**/*.{ts,tsx,js,jsx}"
 ## Schema guidelines
 - Always define your schema in `convex/schema.ts`.
 - Always import the schema definition functions from `convex/server`:
+                    ```ts
+                    import { defineSchema, defineTable } from "convex/server";
+                    import { v } from "convex/values";
+                    ```
 - System fields are automatically added to all documents and are prefixed with an underscore. The two system fields that are automatically added to all documents are `_creationTime` which has the validator `v.number()` and `_id` which has the validator `v.id(tableName)`.
 - Always include all index fields in the index name. For example, if an index is defined as `["field1", "field2"]`, the index name should be "by_field1_and_field2".
 - Index fields must be queried in the same order they are defined. If you want to be able to query by "field1" then "field2" and by "field2" then "field1", you must create separate indexes.
@@ -216,13 +220,14 @@ globs: "**/*.{ts,tsx,js,jsx}"
 
 ## Full text search guidelines
 - A query for "10 messages in channel '#general' that best match the query 'hello hi' in their body" would look like:
-
-const messages = await ctx.db
-  .query("messages")
-  .withSearchIndex("search_body", (q) =>
-    q.search("body", "hello hi").eq("channel", "#general"),
-  )
-  .take(10);
+                    ```ts
+                    const messages = await ctx.db
+                      .query("messages")
+                      .withSearchIndex("search_body", (q) =>
+                        q.search("body", "hello hi").eq("channel", "#general"),
+                      )
+                      .take(10);
+                    ```
 
 ## Query guidelines
 - Do NOT use `filter` in queries. Instead, define an index in the schema and use `withIndex` instead.
