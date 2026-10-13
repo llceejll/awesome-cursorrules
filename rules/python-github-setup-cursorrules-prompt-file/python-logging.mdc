@@ -3,5 +3,5 @@ description: Configures logging practices for Python applications, including usi
 globs: "**/*.py"
 ---
 - Use the Python logging module for logging.
-- Use log levels: debug, info, warn, error.
+- Use log levels: debug, info, warning, error.
 - Set a log retention policy of 7 days.
