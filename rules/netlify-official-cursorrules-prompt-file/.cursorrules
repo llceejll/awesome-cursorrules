@@ -164,7 +164,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - prefer to provide a friendly path using the config object.
   - ONLY serverless functions use `/.netlify/functions/{function_name}` path by default.
   - If you set a specific path via this config or the netlify.toml, it will only be available at that new path.
-  - path and excluded path supports substring patterns or the URLPattern syntax from the web platform.
+  - path and excluded path support substring patterns or the URLPattern syntax from the web platform.
 
   ```
   {
@@ -375,7 +375,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - prefer to use in-code configuration via exporting a `config` object. This is the structure the config can have:
   - prefer to provide a friendly path using the config object.
   - Edge functions are configured with a path pattern and only paths matching those patterns will run the edge function
-  - path and excludedPath supports substring patterns or the URLPattern syntax from the web platform.
+  - path and excludedPath support substring patterns or the URLPattern syntax from the web platform.
   - unless explicitly asked to modify other properties, only set path, pattern, excludedPath when creating functions.
 
   ```
@@ -394,7 +394,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
   #### Configuring Edge Functions in netlify.toml
   - ONLY Use `netlify.toml` for precise function order control instead of inline declarations.
-  - DO NOT use `netlify.toml` if there is not edge function ordering requirements.
+  - DO NOT use `netlify.toml` if there are no edge function ordering requirements.
   - When controlling order, it's important to include all edge functions for order control.
 
   - **Declare Edge Functions in `netlify.toml`**:
