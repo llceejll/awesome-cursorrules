@@ -603,18 +603,18 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   Put files in `.netlify/blobs/deploy/*` for deploy specific
   ```
   .netlify/
-  â”œâ”€ blobs/
-  |  â”œâ”€ deploy/
-  â”‚  |  â”œâ”€ beauty/
-  â”‚  â”‚  |  â””â”€ nails.jpg
+  ├─ blobs/
+  |  ├─ deploy/
+  │  |  ├─ beauty/
+  │  │  |  └─ nails.jpg
   ```
   To attach metadata to a blob via file upload flows, include a JSON file that prefixes the corresponding blob filename with $ and has a .json extension. For example:
   ```
-  â”œâ”€ blobs/
-  |  â”œâ”€ deploy/
-  â”‚  |  â”œâ”€ beauty/
-  â”‚  â”‚  |  â”œâ”€ nails.jpg
-  â”‚  â”‚  |  â””â”€ $nails.jpg.json
+  ├─ blobs/
+  |  ├─ deploy/
+  │  |  ├─ beauty/
+  │  │  |  ├─ nails.jpg
+  │  │  |  └─ $nails.jpg.json
   ```
 
   ## Blob consistency models
@@ -625,7 +625,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   Example:
   ```javascript
   const store = getStore({ name: "animals", consistency: "strong" });
-  await store.set("dog", "ðŸ¶");
+  await store.set("dog", "🐕");
   const dog = await store.get("dog");
   ```
 
@@ -656,7 +656,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
     function getBlobStore(...storeOptions){
 
-      if((Netlify.context?.deploy.context === 'production'){
+      if (Netlify.context?.deploy.context === 'production') {
         return getStore(...storeOptions);
       }
 

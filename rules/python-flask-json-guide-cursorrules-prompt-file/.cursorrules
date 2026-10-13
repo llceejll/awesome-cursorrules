@@ -1,6 +1,6 @@
 This project is heavily reliant on our custom Drawscape Factorio python module.
 
-Here is code examples of how to use the module:
+Here are code examples of how to use the module:
 
 ```python
 from drawscape_factorio import create as createFactorio
@@ -17,6 +17,7 @@ with open('/path/to/exported-entities.json', 'r') as file:
 
 with open(output_file_name, 'w') as f:
     f.write(result['svg_string'])
+```
 
 ## Drawscape factorio usage
 

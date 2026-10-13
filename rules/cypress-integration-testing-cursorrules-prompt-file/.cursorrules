@@ -203,4 +203,5 @@ describe('Shopping Cart Integration', () => {
     // Verify cart count is not updated
     cy.get('[data-testid="cart-count"]').should('contain', '0');
   });
-}); 
+});
+``` 

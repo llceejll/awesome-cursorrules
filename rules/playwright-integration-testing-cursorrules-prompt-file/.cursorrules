@@ -197,4 +197,5 @@ test.describe('Shopping Cart Integration', () => {
     // Verify cart count is not updated
     await expect(page.locator('[data-testid="cart-count"]')).toContainText('0');
   });
-}); 
+});
+``` 

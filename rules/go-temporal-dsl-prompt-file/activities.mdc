@@ -79,3 +79,4 @@ func (a *SampleActivities) SampleActivity5(ctx context.Context, input []string) 
 	fmt.Printf("Run %s with input %v \n", name, input)
 	return "Result_" + name, nil
 }
+```

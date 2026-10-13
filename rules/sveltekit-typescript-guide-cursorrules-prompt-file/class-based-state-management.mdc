@@ -3,7 +3,7 @@ description: Enforces the use of classes for complex state management (state mac
 globs: **/*.svelte.ts
 ---
 - Use classes for complex state management (state machines):
-typescript
+```typescript
 // counter.svelte.ts
 class Counter {
   count = $state(0);
@@ -19,3 +19,4 @@ class Counter {
   }
 }
 export const counter = new Counter();
+```

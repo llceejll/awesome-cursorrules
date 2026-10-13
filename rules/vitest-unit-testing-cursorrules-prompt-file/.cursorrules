@@ -138,4 +138,5 @@ describe('getForecast', () => {
     // Act & Assert
     await expect(getForecast('Tokyo')).rejects.toThrow('Failed to get forecast: Service unavailable');
   });
-}); 
+});
+``` 

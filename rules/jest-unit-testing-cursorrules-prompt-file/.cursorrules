@@ -120,4 +120,5 @@ describe('getUserData', () => {
     // Act & Assert
     await expect(getUserData(1)).rejects.toThrow('Failed to fetch user: Network error');
   });
-}); 
+});
+``` 
