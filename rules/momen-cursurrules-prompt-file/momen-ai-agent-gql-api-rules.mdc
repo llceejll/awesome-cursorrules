@@ -12,7 +12,7 @@ In order to invoke an AI agent, the id and the input arguments must be obtained 
 
 
 ## Invocation process for streaming output
-An example AI Agent configuration whose output is a streaming plain text will be used to illustrate this process. Its configuration is: 
+An example AI Agent configuration whose output is streaming plain text will be used to illustrate this process. Its configuration is: 
 ```json
 {
     "id": "mgzzu8jp",
@@ -39,7 +39,7 @@ An example AI Agent configuration whose output is a streaming plain text will be
     "output": "Unstructured Text"
 }
 ```
-1.  A mutation is sent to start the AI agent, supplying the arguments as inputArgs and the id as zAIConfigId. The response value only contains the id of the corresponding conversation. The keys of inputArgs should be the same keys in the inputs object from the schema. Input parameters of Image / video or other binary assets types, or arrays of such types are handled slightly differently. Their key names within the inputArgs object have `_id` suffix. e.g. the following configuration  
+1.  A mutation is sent to start the AI agent, supplying the arguments as inputArgs and the id as zAIConfigId. The response value only contains the id of the corresponding conversation. The keys of inputArgs should be the same keys in the inputs object from the schema. Input parameters of Image / video or other binary asset types, or arrays of such types are handled slightly differently. Their key names within the inputArgs object have `_id` suffix. e.g. the following configuration  
 ```json
 { 
   "inputs": {
@@ -90,8 +90,8 @@ Corresponds to:
       }
     }
     ```
-2.  Using the obtained conversation id to subscribe to the result of the previous invocation of the AI Agent. Multiple messages may be received. The messages' status may transition from IN_PROGRESS to STREAMING to eventually COMPLETED. The last message always gives you COMPLETED status and its data field will contain the consolidated output from all the previous STREAMING messages' data field. 
-For models that have reasoning content output, it works similarly as the actual output. i.e. Partial reasoning content will be emitted first in multiple messages in the reasoningContent field, and then when everything is ready, the entirety of reasoningContent will be emitted again in the COMPLETED message. 
+2.  The obtained conversation id is used to subscribe to the result of the previous invocation of the AI Agent. Multiple messages may be received. The messages' status may transition from IN_PROGRESS to STREAMING to eventually COMPLETED. The last message always gives you COMPLETED status and its data field will contain the consolidated output from all the previous STREAMING messages' data field. 
+For models that have reasoning content output, it works similarly to the actual output. i.e. Partial reasoning content will be emitted first in multiple messages in the reasoningContent field, and then when everything is ready, the entirety of reasoningContent will be emitted again in the COMPLETED message. 
     Subscription request:  
     Query: 
     ```gql
@@ -178,8 +178,8 @@ For models that have reasoning content output, it works similarly as the actual 
 2. There will be no messages in the STREAMING state. i.e. A message of IN_PROGRESS status will be sent by the server, followed directly by the COMPLETED message with the final result. 
 
 ## Invocation process for AI agents that use models with image output
-Certain model support image output, like gemini-2.5-flash-image.  
-Their invocation process is the same as the plain text ones. Except that in the COMPLETED message, the field images will be filled with content. The images
+Certain models support image output, like gemini-2.5-flash-image.  
+Their invocation process is the same as the plain text ones. Except that in the COMPLETED message, the field images will be filled with content.
 Their output will be no different from plain-text only outputs, regardless of the streaming setting. Their COMPLETED message looks like:
 ```json
 {
@@ -234,7 +234,7 @@ e.g.
 ```
 
 ## Continuing conversation
-After AI Agent returns result (status = COMPLETED), the conversation can be continued by calling fz_zai_send_ai_message. 
+After the AI Agent returns a result (status = COMPLETED), the conversation can be continued by calling fz_zai_send_ai_message. 
 The subscription of fz_zai_listen_conversation_result on the same conversationId will continue to receive messages.  
 e.g.  
   mutation request:  
