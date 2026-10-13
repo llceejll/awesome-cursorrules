@@ -56,7 +56,7 @@ Before using these rules, you need to create your backend infrastructure in Mome
 ### Step 2: Clone This Repository
 
 ```bash
-git clone https://github.com/privateJiangyaokai/momen-cursor-rules.git
+git clone https://github.com/momen-tech-org/momen-cursor-rules.git
 cd momen-cursor-rules
 ```
 
