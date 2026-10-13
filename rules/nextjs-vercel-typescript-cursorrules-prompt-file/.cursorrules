@@ -126,7 +126,7 @@ To extend the provided rules to include usage of the `@ai-sdk/rsc` library and i
   - Ensure the database operations are asynchronous to avoid blocking server-side rendering (SSR).
 
 - **Data Fetching and State Management**:
-  - Use Next.js data fetching methods (`getServerSideProps`, `getStaticProps`) to manage server-side state.
+  - Fetch server-side state in async Server Components. App Router routes do not use `getServerSideProps` or `getStaticProps`.
   - Avoid client-side data fetching methods (`useEffect`, `fetch`) except for critical, non-blocking operations.
 
 - **Deployment Considerations**:
