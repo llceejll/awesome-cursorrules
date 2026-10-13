@@ -12,7 +12,7 @@ This prompt file is designed for senior Python AI/ML engineers specializing in L
 - `pytest`
 - Google Style Docstrings
 - `conda` / `venv`
-- `docker`, `docker-compose`
+- `docker`, `docker compose`
 - `async` and `await`
 - `fastapi`
 - `gradio`, `streamlit`

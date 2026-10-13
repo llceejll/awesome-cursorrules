@@ -16,7 +16,7 @@
 - **Testing Framework:** `pytest`
 - **Documentation:** Google style docstring
 - **Environment Management:** `conda` / `venv`
-- **Containerization:** `docker`, `docker-compose`
+- **Containerization:** `docker`, `docker compose`
 - **Asynchronous Programming:** Prefer `async` and `await`
 - **Web Framework:** `fastapi`
 - **Demo Framework:** `gradio`, `streamlit`
