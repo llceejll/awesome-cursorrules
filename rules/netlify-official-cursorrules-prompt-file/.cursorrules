@@ -70,8 +70,8 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       },
       timezone: string, // Timezone of the location.
       postalCode: string, // Postal code of the location in its regional format.
-      ip: string, // Client IP address.
     },
+    ip: string, // Client IP address.
     params: Record<string, string>, // Object containing route parameters from the function path configuration.
     requestId: string, // Unique Netlify request ID.
     server: {
