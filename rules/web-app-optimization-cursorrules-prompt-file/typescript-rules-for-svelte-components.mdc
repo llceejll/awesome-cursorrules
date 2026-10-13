@@ -28,7 +28,10 @@ globs: "**/*.svelte.ts"
     
 - State Management Example Usage:
   ```svelte
-  import { counter } from './counter.svelte.ts';
-  <button on:click={() => counter.increment()}>
+  <script>
+    import { counter } from './counter.svelte.ts';
+  </script>
+  <button onclick={() => counter.increment()}>
     Count: {counter.count}
+  </button>
   ```

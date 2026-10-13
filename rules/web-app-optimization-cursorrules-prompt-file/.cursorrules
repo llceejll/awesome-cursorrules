@@ -76,6 +76,7 @@ Shadcn Color Conventions
   ```
 - Usage example:
   ```svelte
+  <div class="bg-primary text-primary-foreground"></div>
   ```
 
 SvelteKit Project Structure
@@ -121,9 +122,12 @@ State Management
   ```
 - Use in components:
   ```svelte
-  import { counter } from './counter.svelte.ts';
-  <button on:click={() => counter.increment()}>
+  <script>
+    import { counter } from './counter.svelte.ts';
+  </script>
+  <button onclick={() => counter.increment()}>
     Count: {counter.count}
+  </button>
   ```
 
 Routing and Pages
