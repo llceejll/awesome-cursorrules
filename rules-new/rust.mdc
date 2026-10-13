@@ -23,7 +23,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 
 ## Serialization
 - Use **Borsh** or Anchor's custom serializer (not Serde) for on-chain data
-- Always include `#[account(zero_copy)]` or `#[repr(C)]` for packed structures
+- Always include `#[account(zero_copy)]` and `#[repr(C)]` for zero-copy accounts
 - Avoid floating point types — use `u64`, `u128`, or fixed-point math
 - Zero out or close unused accounts to reduce rent costs
 
