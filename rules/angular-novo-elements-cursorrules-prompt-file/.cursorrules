@@ -129,7 +129,7 @@ I'm integrating novo elements which is the novo-elements module
 Documentation is here: https://bullhorn.github.io/novo-elements/docs/#/home
 Github is here: https://github.com/bullhorn/novo-elements
 
-I don''t have a module file. I am using standalone components
+I don't have a module file. I am using standalone components
 
 @Docs{
   "library_name": "Novo Elements",
