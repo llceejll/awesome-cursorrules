@@ -63,7 +63,7 @@
         
         "logging": {
             "logging_tool": "Python logging module",
-            "log_levels": ["debug", "info", "warn", "error"],
+            "log_levels": ["debug", "info", "warning", "error"],
             "log_retention_policy": "7 days"
         },
         
