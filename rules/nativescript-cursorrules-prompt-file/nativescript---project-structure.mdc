@@ -13,4 +13,3 @@ globs: "*.*"
     - services/
     - utils/
   - nativescript.config.ts
-  - tailwind.config.js
