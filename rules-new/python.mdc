@@ -49,7 +49,7 @@ globs: "**/*.py, src/**/*.py, tests/**/*.py"
 
 ## Authentication
 - Use Flask-Login for session management
-- Implement Google OAuth using Flask-OAuth
+- Implement Google OAuth using Authlib
 - Hash passwords with bcrypt
 - Use proper session security
 - Implement CSRF protection
