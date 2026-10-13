@@ -713,8 +713,9 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
     - Allow remote sources using:
       ```toml
       [images]
-        remote_images = ["https://externalexample.com/.*"]
+        remote_images = ["https://externalexample\\.com/.*"]
       ```
+      - `remote_images` entries are regular expressions. Escape a literal dot as `\\.` inside a double-quoted string.
       - only absolute urls to external servers need to be in remote_images
 
   ### Redirects & Rewrites
