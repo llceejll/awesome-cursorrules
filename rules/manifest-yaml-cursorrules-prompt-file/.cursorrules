@@ -10,15 +10,15 @@ alwaysApply: true
 **Code structure**
 When asked to create a backend, execute the following actions:
 
-1. Install the `manifest` npm package
+1. Install `manifest@4.17.13`, the last release of the 1-file backend. Later versions of the `manifest` package are a different product and do not include these scripts.
 2. Add the following scripts to `package.json`: "manifest": "node node_modules/manifest/scripts/watch/watch.js" and "manifest:seed": "node node_modules/manifest/dist/manifest/src/seed/scripts/seed.js"
 3. Create the `manifest/backend.yml` file and add the manifest code to it.
 4. Add the `redhat.vscode-yaml` as recommendation in `.vscode/extensions.json`
-5. Add the following `yaml.schemas`: `"https://schema.manifest.build/schema.json": "**/manifest/**.yml"` in `.vscode/settings.json`
+5. Add the following `yaml.schemas`: `"https://raw.githubusercontent.com/mnfst/manifest-baas/master/packages/core/json-schema/src/schema/schema.json": "**/manifest/**.yml"` in `.vscode/settings.json`
 
 **Backend file**
 On the `manifest/backend.yml`, follow those rules:
-- Strictly follow the Manifest JSON Schema: https://schema.manifest.build/schema.json
+- Strictly follow the Manifest JSON Schema: https://raw.githubusercontent.com/mnfst/manifest-baas/master/packages/core/json-schema/src/schema/schema.json
 - Start by adding a quick name to the app
 - Limit to 2 or 3 entities maximum
 - Limit to 4 properties maximum per entity
@@ -40,7 +40,7 @@ On the `manifest/backend.yml`, follow those rules:
 - Do not add "seedCount" and "mainProp" to entities
 
 **Documentation**
-Refer to the Manifest documentation: https://manifest.build/docs
+Refer to the 1-file backend in the Manifest repository: https://github.com/mnfst/manifest-baas
 
 **Example**
 This is an example of the content of a `backend.yml` file:
