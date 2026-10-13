@@ -120,7 +120,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
     - ONLY use `Netlify.env.*` for interacting with environment variables in code.
   - Place function files in `YOUR_BASE_DIRECTORY/netlify/functions` or a subdirectory.
     - The serverless functions directory can be changed via:
-      - **Netlify UI**: *Site configuration > Build & deploy > Continuous deployment > Build settings*
+      - **Netlify UI**: *Project configuration > Developer settings > Continuous deployment > Build settings*
       - **`netlify.toml`**:
         ```toml
         [functions]
@@ -799,7 +799,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
   ### Creating Environment Variables
   Variables can be created and managed using:
-  - **Netlify UI**: Suggest using this if they don't want to provide the values directly to this agent. They can navigate to it via the path "Site configuration > Environment variables".
+  - **Netlify UI**: Suggest using this if they don't want to provide the values directly to this agent. They can navigate to it via the path "Project configuration > Environment variables".
   - **Netlify CLI**: Prefer using this if the agent can run commands. This requires the site to be linked.
   - **Netlify Configuration (`netlify.toml`)**: Defines variables at the repository level. ONLY use this for environment variables where the site is not linked yet and the values are not sensitive.
 
