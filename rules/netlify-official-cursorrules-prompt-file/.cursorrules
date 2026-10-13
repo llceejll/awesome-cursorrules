@@ -723,7 +723,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
     - **source**: Required, specifies image URL (relative or remote).
     - **size**: `w` (width) and `h` (height) in pixels.
     - **fit**: Determines how the image is resized (`contain`, `cover`, `fill`).
-    - **position**: Cropping alignment (`top`, `bottom`, `left`, `right`, `center`).
+    - **position**: What to keep when `fit=cover` crops the image (`top`, `bottom`, `left`, `right`, `center`). `cover` needs both `w` and `h`.
     - **format**: Convert to `avif`, `jpg`, `png`, `webp`, `gif`, or `blurhash`.
     - **quality**: Controls lossy format quality (`q`, 1-100, default 75).
 
