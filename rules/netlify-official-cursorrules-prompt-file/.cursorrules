@@ -844,6 +844,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
   # Initializing sites or linking them
   - determine if a site is linked by checking if `PROJECT_FOLDER/.netlify/state.json` file exists and it has a populated `siteId` value.
-  - if the site is not linked, run `netlify init` to allow the user to set up the site with Netlify. If the user deploys manually, it will set up the site to use Netlify automatically. If the user decides to set up a repo, they might have to set up the repo first. If the site is already set up on netlify then run `netlify link` for the user to input the credentials to link.
+  - if the site is not linked, run `netlify init`. With a git remote, it can create and configure a new project or connect this directory to an existing project. Without a git remote, it can create a project for manual deploys with `netlify deploy`, or stop so a GitHub remote can be added first. `netlify sites:create` creates a project without continuous deployment.
+  - `netlify link` connects this directory to an existing project by selecting it or entering its project ID, then writes `siteId`. Sign-in is `netlify login`.
 
 </ProviderContext>
