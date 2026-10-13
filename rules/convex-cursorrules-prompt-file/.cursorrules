@@ -116,7 +116,11 @@ globs: "**/*.{ts,tsx,js,jsx}"
 - Try to use as few calls from actions to queries and mutations as possible. Queries and mutations are transactions, so splitting logic up into multiple calls introduces the risk of race conditions.
 - All of these calls take in a `FunctionReference`. Do NOT try to pass the callee function directly into one of these calls.
 - When using `ctx.runQuery`, `ctx.runMutation`, or `ctx.runAction` to call a function in the same file, specify a type annotation on the return value to work around TypeScript circularity limitations. For example,
-                            ```
+                            ```ts
+                            import { query } from "./_generated/server";
+                            import { v } from "convex/values";
+                            import { api } from "./_generated/api";
+
                             export const f = query({
                               args: { name: v.string() },
                               returns: v.string(),
