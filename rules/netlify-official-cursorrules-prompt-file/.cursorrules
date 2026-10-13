@@ -47,29 +47,33 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       id: string, // Unique ID of the Netlify team account associated with the site and function.
     },
     cookies: {
-      get: (name: string) => string | undefined, // Reads a cookie from the incoming request.
-      set: (options: { name: string; value: string; path?: string; domain?: string; secure?: boolean; httpOnly?: boolean; expires?: Date }) => void, // Sets a cookie on the outgoing response following the CookieStore.set web standard.
+      get: (name: string) => string, // Reads a cookie from the incoming request.
+      set: {
+        (cookie: { name: string; value: string; expires?: Date | number; maxAge?: number; domain?: string; path?: string; secure?: boolean; httpOnly?: boolean; sameSite?: "Strict" | "Lax" | "None" }): void, // maxAge is seconds. 0 expires the cookie immediately. sameSite is Strict, Lax, or None.
+        (name: string, value: string): void,
+      },
       delete: (nameOrOptions: string | { name: string; path?: string; domain?: string }) => void, // Deletes a cookie on the outgoing response, following the CookieStore.delete web standard.
     },
     deploy: {
       context: string, // The deploy context (e.g., production, deploy-preview).
       id: string, // Unique ID of the deploy the function belongs to.
       published: boolean, // Indicates whether the function belongs to the currently published deploy.
+      skewProtectionToken?: string, // Identifies this deploy in HTTP calls when skew protection is enabled.
     },
     geo: {
-      city: string, // City name of the client location.
-      country: {
-        code: string, // ISO 3166 country code.
-        name: string, // Full country name.
+      city?: string, // City name of the client location.
+      country?: {
+        code?: string, // ISO 3166 country code.
+        name?: string, // Full country name.
       },
-      latitude: number, // Latitude coordinate of the client location.
-      longitude: number, // Longitude coordinate of the client location.
-      subdivision: {
-        code: string, // ISO 3166 subdivision code (e.g., state or province).
-        name: string, // Subdivision name.
+      latitude?: number, // Latitude coordinate of the client location.
+      longitude?: number, // Longitude coordinate of the client location.
+      subdivision?: {
+        code?: string, // ISO 3166 subdivision code (e.g., state or province).
+        name?: string, // Subdivision name.
       },
-      timezone: string, // Timezone of the location.
-      postalCode: string, // Postal code of the location in its regional format.
+      timezone?: string, // Timezone of the location.
+      postalCode?: string, // Postal code of the location in its regional format.
     },
     ip: string, // Client IP address.
     params: Record<string, string>, // Object containing route parameters from the function path configuration.
@@ -82,6 +86,12 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       name: string, // The site's Netlify subdomain name.
       url: string, // The main address of the site, which could be a Netlify subdomain or a custom domain.
     },
+    user?: {
+      id: string, // Netlify user ID of the signed-in visitor.
+      email?: string, // Email on the Netlify account, when Netlify has one.
+      expiresAt: Date, // When access to this project expires.
+    }, // Present when the visitor logged in with Netlify for a private project or team login protection. Undefined for public projects and basic password protection. This is not a Netlify Identity user. Available for functions deployed on or after October 5, 2026, and not available in the Netlify CLI.
+    waitUntil: (promise: Promise<unknown>) => void, // Extends execution until the promise settles without blocking the response. On serverless functions, available for deploys on or after March 20, 2025, and the billed duration includes that work. On edge functions, the work still counts toward the CPU time limit.
   }
   ```
 
