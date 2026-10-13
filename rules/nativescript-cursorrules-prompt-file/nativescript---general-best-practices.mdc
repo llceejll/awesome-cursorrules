@@ -15,7 +15,7 @@ globs: "**/*.tsx, **/*.ts, **/*.vue, **/*.svelte, src/**/*.ts, app/**/*.ts, src/
 - Use Tailwind CSS with `@nativescript/tailwind`. For Tailwind CSS v4, install `@nativescript/tailwind` and `tailwindcss`, then add `@import "tailwindcss";` to `app.css` or `app.scss`.
 - For Tailwind CSS v3, generate `tailwind.config.js`, set `darkMode: ['class', '.ns-dark']`, and register platform variants with `addVariant('android', '.ns-android &')` and `addVariant('ios', '.ns-ios &')`.
 - Leverage `GridLayout` or `StackLayout` for flexible, responsive layouts. Place more emphasis on proper GridLayout usage for complex layouts but use StackLayout for simpler, linear arrangements.
-- Use `visibility: 'collapse'` for elements that should not affect layout when hidden. The documented visibility values are `visible` and `collapse`.
+- Use `visibility: 'collapse'` for elements that should not affect layout when hidden. The documented visibility values are `visible`, `hidden`, and `collapse` (`collapsed` is also accepted). `hidden` keeps the view's layout space.
 - Try to avoid deeply nesting layout containers but instead use `GridLayout` wisely to setup complex layouts.
 - Avoid direct manipulation of the visual tree during runtime to minimize rendering overhead.
 - Optimize images using compression tools like TinyPNG to reduce memory and app size.
