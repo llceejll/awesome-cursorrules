@@ -187,8 +187,7 @@ class UserRoutesTest : FunSpec({
 
         testApplication {
             application {
-                configureRouting()
-                configureDI { single { mockService } }
+                configureUserRoutes(mockService)
             }
 
             client.get("/api/users/$userId").apply {
