@@ -330,7 +330,7 @@ assert events[0]["data_indexed"]["to"] == "recipient"
 - Use Python's unittest framework for structured testing
 - Create a proper test class that inherits from `unittest.TestCase`
 - Implement `setUp` and `tearDown` methods to isolate tests
-- Define the environment and chain ID in setUp for consistent testing
+- In setUp, flush the client, submit the contract, and load it with get_contract
 
 ```python
 from contracting.client import ContractingClient
