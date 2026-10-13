@@ -511,10 +511,12 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
     }
 
     interface GetKeyOptions {
+      consistency?: 'strong' | 'eventual';
       type?: 'arrayBuffer' | 'blob' | 'json' | 'stream' | 'text'
     }
 
     interface GetKeyAndMetadataOptions {
+      consistency?: 'strong' | 'eventual';
       type?: 'arrayBuffer' | 'blob' | 'json' | 'stream' | 'text',
       etag?: string;
     }
@@ -549,14 +551,14 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
       // Retrieves a stored blob.
       // example: await store.get('key-name');
-      // - NEVER add the second arg unless you need an explicit type 'arrayBuffer' | 'blob' | 'json' | 'stream' | 'text'.
+      // - NEVER add the second arg unless you need an explicit type 'arrayBuffer' | 'blob' | 'json' | 'stream' | 'text', or a consistency mode for this read.
       // - Instead of using JSON.parse(blob), use store.get('key-name', {type: 'json'})
       // - if the blob is missing, it will resolve the promise with a null value
       get(key: string, getOpt?: GetKeyOptions): Promise<any | null>;
 
       // Retrieves a blob along with metadata
       // example: await store.getWithMetadata('key-name');
-      // - NEVER add the second getOpts arg unless you need an explicit type or have an etag to check against.
+      // - NEVER add the second getOpts arg unless you need an explicit type, a consistency mode for this read, or have an etag to check against.
       // - IF an etag is provided, the request sends If-None-Match. A matching etag returns `{ data: null }` and does not download the body.
       // - if the blob is missing, it will resolve the promise with a null value
       getWithMetadata(key: string, getOpts?: GetKeyAndMetadataOptions): Promise<{ data: any, etag: string, metadata: object } | null>;
