@@ -2,7 +2,6 @@
     "general": {
         "coding_style": {
             "language": "Python",
-            "use_strict": true,
             "indentation": "4 spaces",
             "max_line_length": 120,
             "comments": {
