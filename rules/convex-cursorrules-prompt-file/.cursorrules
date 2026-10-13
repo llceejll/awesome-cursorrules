@@ -214,7 +214,8 @@ globs: "**/*.{ts,tsx,js,jsx}"
 - If you need to define a `Record` make sure that you correctly provide the type of the key and value in the type. For example a validator `v.record(v.id('users'), v.string())` would have the type `Record<Id<'users'>, string>`. Below is an example of using `Record` with an `Id` type in a query:
                     ```ts
                     import { query } from "./_generated/server";
-                    import { Doc, Id } from "./_generated/dataModel";
+                    import { Id } from "./_generated/dataModel";
+                    import { v } from "convex/values";
 
                     export const exampleQuery = query({
                         args: { userIds: v.array(v.id("users")) },
@@ -270,6 +271,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
 - Below is an example of the syntax for an action:
                     ```ts
                     import { action } from "./_generated/server";
+                    import { v } from "convex/values";
 
                     export const exampleAction = action({
                         args: {},
@@ -288,6 +290,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
 - Define crons by declaring the top-level `crons` object, calling some methods on it, and then exporting it as default. For example,
                             ```ts
                             import { cronJobs } from "convex/server";
+                            import { v } from "convex/values";
                             import { internal } from "./_generated/api";
                             import { internalAction } from "./_generated/server";
 
@@ -319,6 +322,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
                     ```
                     import { query } from "./_generated/server";
                     import { Id } from "./_generated/dataModel";
+                    import { v } from "convex/values";
 
                     type FileMetadata = {
                         _id: Id<"_storage">;
