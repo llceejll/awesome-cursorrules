@@ -170,7 +170,7 @@ alwaysApply: true  # or false for contextual rules
 - Project structure and conventions
 
 **Key Concepts**:
-```typescript
+```text
 // HTTP endpoint
 https://villa.momen.app/zero/{projectExId}/api/graphql-v2
 
