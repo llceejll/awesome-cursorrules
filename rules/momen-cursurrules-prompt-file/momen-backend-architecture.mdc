@@ -59,7 +59,7 @@ export const createApolloClient = (token?: string) => {
   });
 };
 ```
-For other languages, infer implemenation from the above example. 
+For other languages, infer implementation from the above example. 
 
 ## Authentication
 
@@ -176,7 +176,7 @@ universal_scalar
 Use the momen MCP server for this. 
 
 ### Database
-Always ensure momen-database-gql-api-rules is read before writing code to interact with the databse. 
+Always ensure momen-database-gql-api-rules is read before writing code to interact with the database. 
 
 ### Third-party API
 Always ensure momen-tpa-gql-api-rules is read before writing code to interact with any Third-party APIs.

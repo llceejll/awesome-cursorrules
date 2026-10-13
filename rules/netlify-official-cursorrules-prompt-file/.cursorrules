@@ -807,7 +807,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
       # Specific branch context: all deploys from
       # this specific branch will inherit these settings.
-      [context.staging.environment] # â€œstagingâ€ is a branch name
+      [context.staging.environment] # "staging" is a branch name
         NODE_ENV = "development"
     ```
 
