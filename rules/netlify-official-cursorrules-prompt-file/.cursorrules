@@ -178,8 +178,8 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - Use background functions when you need to run long-running logic, and that logic does not need to compute a response immediately.
   - Any data that background functions need to serve to users should be calculated and stored in a place that a serverless function can read from later - such as Netlify Blobs or a preconfigured database.
   - Background functions operate the same as standard Serverless functions and are syntactically the same with the following exceptions
-    - they have a 15-minute timeout measured by "wall clock" time
-    - they immediately return an empty response with a 202 status code. Return values from these functions are ignored.
+    - they run for up to 15 minutes
+    - the client receives an empty 202 response immediately, so store results where a later request can read them
     - Set `background: true` in the function `config` export. A `-background` suffix on the file or directory name still enables background mode.
 
   #### Examples of the latest background function structures
