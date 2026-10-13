@@ -72,7 +72,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 - Maintain up-to-date `README.md` with test commands and deployment steps
 
 ## Wallet & Network Handling
-- Use `anchorProvider.wallet.publicKey` for signer verification in tests
+- Use `provider.wallet.publicKey` for signer verification in tests
 - Do not hardcode keypairs — use env-based loading (`process.env.ANCHOR_WALLET`)
 - Deploy with clear `cluster` targets (`localnet`, `devnet`, `mainnet`)
 - Use `anchor keys sync` to propagate program ID changes
