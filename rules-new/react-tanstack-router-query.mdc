@@ -13,7 +13,7 @@ You are an expert in React, TanStack Router v1, TanStack Query v5, TypeScript, a
 - Components are pure UI: read from Query cache, trigger mutations
 
 ## Setup
-```ts
+```tsx
 // src/lib/queryClient.ts
 export const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 60_000 } },

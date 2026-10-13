@@ -96,7 +96,7 @@ BEE_CLIENT_SECRET=your_client_secret_here
 
 #### React Implementation
 
-```typescript
+```tsx
 import { useEffect, useRef } from 'react';
 import BeefreeSDK from '@beefree.io/sdk';
 

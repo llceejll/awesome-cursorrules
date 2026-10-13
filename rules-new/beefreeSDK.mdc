@@ -125,7 +125,7 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 
 ### React Container
 - For React applications, the following code snippet shows an example using refs to manage the container:
-  ```typescript
+  ```tsx
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -445,7 +445,7 @@ Reference the official [Beefree SDK technical documentation](https://docs.beefre
 
 ### Complete React Component
 Reference the full project at [beefree-react-demo](https://github.com/BeefreeSDK/beefree-react-demo).
-```typescript
+```tsx
 import { useEffect, useRef } from 'react';
 import BeefreeSDK from '@beefree.io/sdk';
 
