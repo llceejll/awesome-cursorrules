@@ -90,13 +90,54 @@ Given TPA configuration as follows:
 ```
 The corresponding GraphQL query should be
 ```gql
-mutation request_${nonce}($summary: String, $location: String, $description: String, $start_dateTime: String, $start_timeZone: String, $end_dateTime: String, $end_timeZone: String, $attendees:[String], $Authorization: String) {
-  operation_lzb3ownk(fz_body: {}, arg1: $_1, arg2: $_2) {
+mutation request($summary: String, $location: String, $description: String, $start_dateTime: String, $start_timeZone: String, $end_dateTime: String, $end_timeZone: String, $attendees: [String], $Authorization: String) {
+  operation_lzb3ownk(
+    fz_body: {
+      summary: $summary
+      location: $location
+      description: $description
+      start: { dateTime: $start_dateTime, timeZone: $start_timeZone }
+      end: { dateTime: $end_dateTime, timeZone: $end_timeZone }
+      attendees: $attendees
+    }
+    Authorization: $Authorization
+  ) {
     responseCode
     field_200_json {
-      {subFieldSelections}
+      kind
+      etag
+      id
+      status
+      htmlLink
+      created
+      updated
+      summary
+      description
+      location
+      creator {
+        email
+        self
+      }
+      organizer {
+        email
+        self
+      }
+      start {
+        dateTime
+        timeZone
+      }
+      end {
+        dateTime
+        timeZone
+      }
+      iCalUID
+      sequence
+      reminders {
+        useDefault
+      }
+      eventType
     }
- }
+  }
 }
 ```
 field_200_json is a fixed field for all third-party API derived GraphQL operations. It means the response that's valid for all 2xx response codes. 
