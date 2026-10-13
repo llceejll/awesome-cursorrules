@@ -63,7 +63,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 - Use `anchor build`, `anchor deploy`, `anchor test` consistently
 - Use separate `Anchor.toml` environments for devnet/mainnet/localnet
 - Format all Rust code with `cargo fmt`, lint with `cargo clippy`
-- Keep `Cargo.lock` checked into `programs/` but not root
+- Keep the workspace `Cargo.lock` checked in at the project root
 
 ## Documentation
 - Use `///` Rust doc comments for all instructions and accounts
