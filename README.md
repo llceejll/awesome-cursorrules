@@ -19,7 +19,7 @@ Configuration files that enhance Cursor AI editor experience with custom rules a
 	  <a href="https://coderabbit.ai/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
 		  <img alt="CodeRabbit.ai Sponsorship Logo" src="./cr_logo.png" width=350>
 	  </a>
-	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP- Supercharge Cursor with your team’s knowledge</a></h3> 
+	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP - Supercharge Cursor with your team’s knowledge</a></h3> 
 	  <a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
 		  <img alt="Unblocked Sponsorship Logo" src="./Unblocked-logo-sq-words-over-gradient-1024w.png" width=250>
 	  </a>
@@ -352,7 +352,7 @@ Please ensure your contribution is original or properly credited if based on exi
 	  <a href="https://coderabbit.ai/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
 		  <img alt="CodeRabbit.ai Sponsorship Logo" src="./cr_logo.png" width=350>
 	  </a>
-	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP- Supercharge Cursor with your team’s knowledge</a></h3> 
+	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP - Supercharge Cursor with your team’s knowledge</a></h3> 
 	  <a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
 		  <img alt="Unblocked Sponsorship Logo" src="./Unblocked-logo-sq-words-over-gradient-1024w.png" width=250>
 	  </a>
