@@ -3,6 +3,6 @@ description: Tailwind CSS guidelines for responsive design and consistent stylin
 globs: /resources/css/**/*.css
 ---
 - Utilize Tailwind's utility classes for responsive design.
-- Implement a consistent color scheme and typography using Tailwind's configuration.
+- Implement a consistent color scheme and typography with `@theme` in `resources/css/app.css` after `@import "tailwindcss"`.
 - Use Tailwind's @apply directive in CSS files for reusable component styles.
-- Optimize for production by purging unused CSS classes.
+- Tailwind scans project source and generates only the classes it finds. In `resources/css/app.css`, add `@source` entries for Blade and JavaScript views, including the gitignored pagination templates under `vendor` and compiled views under `storage`.

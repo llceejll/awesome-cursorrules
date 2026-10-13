@@ -38,7 +38,7 @@ Laravel Best Practices
 - Implement API versioning for public APIs.
 - Use Laravel's localization features for multi-language support.
 - Implement proper CSRF protection and security measures.
-- Use Laravel Mix for asset compilation.
+- Use Vite for asset compilation.
 - Implement proper database indexing for improved query performance.
 - Use Laravel's built-in pagination features.
 - Implement proper error logging and monitoring.
@@ -61,9 +61,9 @@ Alpine.js Usage
 Tailwind CSS Styling
 
 - Utilize Tailwind's utility classes for responsive design.
-- Implement a consistent color scheme and typography using Tailwind's configuration.
+- Implement a consistent color scheme and typography with @theme in resources/css/app.css after @import "tailwindcss".
 - Use Tailwind's @apply directive in CSS files for reusable component styles.
-- Optimize for production by purging unused CSS classes.
+- Tailwind scans project source and generates only the classes it finds. In resources/css/app.css, add @source entries for Blade and JavaScript views, including the gitignored pagination templates under vendor and compiled views under storage.
 
 Performance Optimization
 

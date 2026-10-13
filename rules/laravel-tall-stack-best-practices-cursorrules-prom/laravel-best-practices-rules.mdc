@@ -11,7 +11,7 @@ globs: /**/*.php
 - Implement API versioning for public APIs.
 - Use Laravel's localization features for multi-language support.
 - Implement proper CSRF protection and security measures.
-- Use Laravel Mix for asset compilation.
+- Use Vite for asset compilation.
 - Implement proper database indexing for improved query performance.
 - Use Laravel's built-in pagination features.
 - Implement proper error logging and monitoring.
