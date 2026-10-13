@@ -34,6 +34,7 @@ public class ExampleQueueable implements System.Finalizer, System.Queueable {
     }
 
     public void execute(System.QueueableContext qc) {
+        System.attachFinalizer(this);
         // implement async logic
     }
 }
