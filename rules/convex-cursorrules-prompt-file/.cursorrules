@@ -139,7 +139,7 @@ globs: **/*.{ts,tsx,js,jsx}
 - Use the `internal` object defined by the framework in `convex/_generated/api.ts` to call internal (or private) functions registered with `internalQuery`, `internalMutation`, or `internalAction`.
 - Convex uses file-based routing, so a public function defined in `convex/example.ts` named `f` has a function reference of `api.example.f`.
 - A private function defined in `convex/example.ts` named `g` has a function reference of `internal.example.g`.
-- Functions can also registered within directories nested within the `convex/` folder. For example, a public function `h` defined in `convex/messages/access.ts` has a function reference of `api.messages.access.h`.
+- Functions can also be registered within directories nested within the `convex/` folder. For example, a public function `h` defined in `convex/messages/access.ts` has a function reference of `api.messages.access.h`.
 
 ### Api design
 - Convex uses file-based routing, so thoughtfully organize files with public query, mutation, or action functions within the `convex/` directory.

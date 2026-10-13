@@ -52,7 +52,7 @@ Solidity Best Practices
 - Implement effective storage patterns to optimize gas costs (e.g., packing variables).
 - Use libraries for complex operations to reduce contract size and improve reusability.
 - Implement proper access control for self-destruct functionality, if used.
-  - Use freezable patterns instead of depricated `selfdestruct`.
+  - Use freezable patterns instead of deprecated `selfdestruct`.
 - Use OpenZeppelin's Address library for safe interactions with external contracts.
 - Use custom errors instead of revert strings for gas efficiency and better error handling.
 - Implement NatSpec comments for all public and external functions.

@@ -1,4 +1,4 @@
-Ce projet s'appel Portfolio2
+Ce projet s'appelle Portfolio2
 
 Il est basé sur Next.Js, il a tailwindcss, materialui, shadcn/ui et aceternityui
 
@@ -18,7 +18,7 @@ Would you like to customize the default import alias (@/)? No
 
 What import alias would you like configured? @/
 
-Nola liste des dépendance
+Nola liste des dépendances
 
 "dependencies": {
   "@ckeditor/ckeditor5-react": "^6.3.0",

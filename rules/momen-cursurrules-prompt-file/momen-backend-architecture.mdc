@@ -11,7 +11,7 @@ Momen is a full-stack no-code development platform, but its backend architecture
 * **Database**: A powerful, enterprise-grade relational database built on PostgreSQL.  This provides the foundation for structured data, relationships, and constraints.
 * **Actionflow**: For building custom workflows and automations.
 * **Third-party API**: Imported third-party HTTP API definitions, the server acts as a relay. 
-* **AI Agent**: AI agent builder / runtime capable of RAG, tool use (depending on model), multi-modal input/output (dpending on model), structured JSON output (depending on model). 
+* **AI Agent**: AI agent builder / runtime capable of RAG, tool use (depending on model), multi-modal input/output (depending on model), structured JSON output (depending on model). 
 * **GraphQL**: All backend interactions, including data operations and business logic execution, are exposed through a single, unified GraphQL API.  There are no traditional REST endpoints for data CRUD operations.
   - **HTTP URL**:  https://villa.momen.app/zero/{projectExId}/api/graphql-v2
   - **WebSocket URL**: wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription
