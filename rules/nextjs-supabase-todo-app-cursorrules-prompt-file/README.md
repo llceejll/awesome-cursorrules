@@ -5,9 +5,6 @@ Author: Mckay Wrigley
 ## What you can build
 
 
-## Benefits
-
-
 ## Synopsis
 Developers aiming to create a structured full-stack Todo app with modern frameworks and best practices would benefit from this prompt.
 

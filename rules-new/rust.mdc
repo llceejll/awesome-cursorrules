@@ -15,7 +15,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 
 ## Anchor Framework
 - Use `#[derive(Accounts)]` for all instruction contexts
-- Validate accounts strictly using constraint macros (e.g., `#[account(mut)]`, `seeds`, `bump]`)
+- Validate accounts strictly using constraint macros (e.g., `#[account(mut)]`, `seeds`, `bump`)
 - Define all state structs with `#[account]` and `#[derive(AnchorSerialize, AnchorDeserialize)]`
 - Prefer `Init`, `Close`, `Realloc`, `Mut`, and constraint macros to avoid manual deserialization
 - Use `ctx.accounts` to access validated context accounts

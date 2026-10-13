@@ -5,9 +5,6 @@ Author: wisdom1456
 ## What you can build
 
 
-## Benefits
-
-
 ## Synopsis
 Frontend developers can use this prompt to ensure they follow best practices and standards when building maintainable and performant SvelteKit applications using specified tools and technologies.
 

@@ -5,9 +5,6 @@ Author: Arun Sathiya
 ## What you can build
 
 
-## Benefits
-
-
 ## Synopsis
 Developers building scalable static sites with Astro, JavaScript, and TypeScript will benefit by gaining guidance on optimal project structure, efficient component development, and performance optimization.
 

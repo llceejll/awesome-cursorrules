@@ -285,6 +285,10 @@ class HomeViewModelTests: XCTestCase {
 
 Remember to always follow SOLID principles, keep your code testable, and maintain separation of concerns between your Model, View, and ViewModel layers.
 
+---
+
+The rules above are a standalone prompt for Swift 5.9+. The rules below are a second standalone prompt for Swift 5.8+ and iOS 13.0+. Use one prompt or the other.
+
 # iOS Swift MVVM + RxSwift Generic Rules
 
 You are an expert iOS Swift developer specializing in MVVM architecture with RxSwift. Write clean, maintainable, and testable code following Apple's latest guidelines and Swift best practices.
