@@ -177,10 +177,10 @@ Internationalization (i18n) with Paraglide.js
 
 - Use Paraglide.js for internationalization: https://inlang.com/m/gerre34r/library-inlang-paraglideJs
 - Install Paraglide.js: `npm install @inlang/paraglide-js`
-- Set up language files in the `languages` directory.
-- Use the `t` function to translate strings:
+- Store messages in `messages/{locale}.json` and compile them into the `paraglide` output directory.
+- Import the generated message functions. `@inlang/paraglide-js` does not export a `t` function:
   ```svelte
-  import { t } from '@inlang/paraglide-js';
+  import { m } from './paraglide/messages.js';
   ```
   - Support multiple languages and RTL layouts.
   - Ensure text scaling and font adjustments for accessibility.
@@ -207,7 +207,7 @@ Documentation
 - Svelte 5 Runes: https://svelte-5-preview.vercel.app/docs/runes
 - Svelte Documentation: https://svelte.dev/docs
 - SvelteKit Documentation: https://kit.svelte.dev/docs
-- Paraglide.js Documentation: https://inlang.com/m/gerre34r/library-inlang-paraglideJs/usage
+- Paraglide.js Documentation: https://inlang.com/m/gerre34r/library-inlang-paraglideJs
 
 Refer to Svelte, SvelteKit, and Paraglide.js documentation for detailed information on components, internationalization, and best practices.
 

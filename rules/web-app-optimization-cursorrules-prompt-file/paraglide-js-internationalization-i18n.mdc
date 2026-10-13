@@ -4,9 +4,9 @@ globs: "**/*.svelte"
 ---
 - Use Paraglide.js for internationalization: https://inlang.com/m/gerre34r/library-inlang-paraglideJs
 - Install Paraglide.js: `npm install @inlang/paraglide-js`
-- Set up language files in the `languages` directory.
-- Use the `t` function to translate strings:
+- Store messages in `messages/{locale}.json` and compile them into the `paraglide` output directory.
+- Import the generated message functions. `@inlang/paraglide-js` does not export a `t` function:
   ```svelte
-  import { t } from '@inlang/paraglide-js';
+  import { m } from './paraglide/messages.js';
   ```
   - Support multiple languages and RTL layouts.
