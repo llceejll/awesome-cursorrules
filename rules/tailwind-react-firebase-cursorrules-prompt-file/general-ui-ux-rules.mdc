@@ -5,7 +5,7 @@ globs: "**/*.{tsx,jsx}"
 - Always design and implement for mobile screens first, then scale up to larger screens.
 - Use Tailwind's responsive prefixes (sm:, md:, lg:, xl:) to adjust layouts for different screen sizes.
 - Create a design system with consistent colors, typography, spacing, and component styles.
-- Utilize Tailwind's configuration file (tailwind.config.js) to define your custom design tokens.
+- Define custom design tokens with `@theme` in the CSS file that contains `@import "tailwindcss"`.
 - Use React.lazy() and Suspense for code-splitting and lazy-loading components.
 - Implement virtualization for long lists using libraries like react-window.
 - Optimize images and use next/image for automatic image optimization in Next.js.
