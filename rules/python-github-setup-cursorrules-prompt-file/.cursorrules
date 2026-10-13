@@ -131,7 +131,7 @@
     "context": {
         "codebase_overview": "Python-based file organization tool using AI for content analysis and classification",
         "libraries": [
-            "watchdog", "spacy", "PyPDF2", "python-docx", "pandas", "beautifulsoup4", 
+            "watchdog", "spacy", "pypdf", "python-docx", "pandas", "beautifulsoup4", 
             "transformers", "scikit-learn", "joblib", "python-dotenv", "torch", "pytest", 
             "shutil", "logging", "pytest-mock"
         ],
