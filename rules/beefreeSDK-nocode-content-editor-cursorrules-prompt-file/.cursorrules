@@ -347,12 +347,10 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 - Handle authentication failures gracefully:
   ```typescript
   function getBeeToken(callback) {
-    fetch('/api/beefree/auth', {
+    fetch('http://localhost:3001/proxy/bee-auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        client_id: 'your_client_id',
-        client_secret: 'your_client_secret',
         uid: beeConfig.uid
       })
     })
@@ -366,7 +364,7 @@ Guidelines and best practices for building applications with [Beefree SDK](https
     .catch(error => {
       console.error('Error getting Beefree token:', error);
       document.getElementById('beefree-sdk-container').innerHTML = 
-        '<div class="error">Failed to authenticate with Beefree. Please check your credentials and try again.</div>';
+        '<div class="error">Failed to authenticate with Beefree. Check the authentication proxy and try again.</div>';
     });
   }
   ```
@@ -536,12 +534,10 @@ Reference the complete project at Beefree SDK [multiple-versions-concept](https:
       };
 
       function getBeeToken(callback) {
-        fetch('/api/beefree/auth', {
+        fetch('http://localhost:3001/proxy/bee-auth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            client_id: 'your_client_id',
-            client_secret: 'your_client_secret',
             uid: beeConfig.uid
           })
         })
