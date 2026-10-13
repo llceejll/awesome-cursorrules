@@ -9,7 +9,7 @@ The main folder contains a "Sources" folder with "App" for main files, "Views" d
 
 SwiftUI UI Design Rules:
 
-Use Built-in Components: Utilize SwiftUI's native UI elements like List, NavigationView, TabView, and SF Symbols for a polished, iOS-consistent look.
+Use Built-in Components: Utilize SwiftUI's native UI elements like List, NavigationStack, TabView, and SF Symbols for a polished, iOS-consistent look.
 
 Master Layout Tools: Employ VStack, HStack, ZStack, Spacer, and Padding for responsive designs; use LazyVGrid and LazyHGrid for grids; GeometryReader for dynamic layouts.
 
