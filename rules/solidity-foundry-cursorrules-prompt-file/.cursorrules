@@ -44,7 +44,7 @@ Solidity Best Practices
 - Implement effective state machine patterns for complex contract logic.
 - Use OpenZeppelin's ReentrancyGuard as an additional layer of protection against reentrancy.
 - Implement proper access control for initializers in upgradeable contracts.
-- Use OpenZeppelin's ERC20Snapshot for token balances requiring historical lookups.
+- OpenZeppelin Contracts 5 removed `ERC20Snapshot`. The current ERC20 extensions do not include a historical balance snapshot contract.
 - Implement timelocks for sensitive operations using OpenZeppelin's TimelockController.
 - Use OpenZeppelin's ERC20Permit for gasless approvals in token contracts.
 - Implement proper slippage protection for DEX-like functionalities.
