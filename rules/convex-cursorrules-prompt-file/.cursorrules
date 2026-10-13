@@ -458,7 +458,7 @@ Internal Functions:
 ### Implementation
 
 #### package.json
-```typescript
+```json
 {
   "name": "chat-app",
   "description": "This example shows how to build a chat app without authentication.",
@@ -474,7 +474,7 @@ Internal Functions:
 ```
 
 #### tsconfig.json
-```typescript
+```json
 {
   "compilerOptions": {
     "target": "ESNext",
