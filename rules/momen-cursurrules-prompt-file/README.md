@@ -342,9 +342,9 @@ Don't try to implement multi-step business logic in frontend:
 const createOrderWithInventoryCheck = async () => {
   const inventory = await checkInventory(productId);
   if (inventory > 0) {
-    const order = await createOrder(...);
+    const order = await createOrder(/* ... */);
     await reduceInventory(productId);
-    await sendEmail(...);
+    await sendEmail(/* ... */);
   }
 };
 ```
