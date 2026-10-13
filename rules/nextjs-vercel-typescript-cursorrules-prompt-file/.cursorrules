@@ -1,10 +1,10 @@
-To extend the provided rules to include usage of the `@ai-sdk/rsc` library and integrate it with Vercel middleware and Upstash Redis, here's an updated set of instructions tailored for use with Cursor IDE. These instructions are designed to help you effectively implement generative user interfaces using React Server Components (RSC) with the AI SDK.
+To extend the provided rules to include usage of the `@ai-sdk/rsc` library and integrate it with the Next.js Proxy and Upstash Redis, here's an updated set of instructions tailored for use with Cursor IDE. These instructions are designed to help you effectively implement generative user interfaces using React Server Components (RSC) with the AI SDK.
 
 ### Extended Rules for AI SDK RSC Integration with Vercel Middleware and Upstash Redis
 
 **Environment and Tools**
 
-- You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI, Tailwind, and Vercel middleware.
+- You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI, Tailwind, and the Next.js Proxy.
 - You are familiar with Upstash Redis for managing stateful data.
 
 **Code Style and Structure**
@@ -137,5 +137,5 @@ To extend the provided rules to include usage of the `@ai-sdk/rsc` library and i
   - Ensure all environment variables (e.g., API keys, database credentials) are securely stored in Vercel's environment settings.
   - Configure the Upstash Redis integration and other serverless functions correctly to handle scalability and performance needs.
 
-By following these extended rules, you'll be able to create a well-optimized, scalable, and efficient Next.js application that leverages `@ai-sdk/rsc`, Vercel middleware, and Upstash Redis for building sophisticated AI-driven interfaces.
+By following these extended rules, you'll be able to create a well-optimized, scalable, and efficient Next.js application that leverages `@ai-sdk/rsc`, the Next.js Proxy, and Upstash Redis for building sophisticated AI-driven interfaces.
 
