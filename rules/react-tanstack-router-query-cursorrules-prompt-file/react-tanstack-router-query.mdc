@@ -92,7 +92,7 @@ const mutation = useMutation({
   mutationFn: createPost,
   onSuccess: (newPost) => {
     queryClient.setQueryData(postKeys.detail(newPost.id), newPost)  // warm cache
-    queryClient.invalidateQueries({ queryKey: postKeys.list() })
+    queryClient.invalidateQueries({ queryKey: [...postKeys.all, 'list'] })
     navigate({ to: '/posts/$postId', params: { postId: newPost.id } })  // instant — no spinner
   },
 })
