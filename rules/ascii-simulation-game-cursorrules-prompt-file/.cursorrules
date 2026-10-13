@@ -76,7 +76,7 @@ armies require wood, food, and metal to be created.
 
 nations must pay upkeep depending on the amount of armies and developed land they have
 
-battles are resolved by the difference in army level and a RISK esque dice roll mechanic that is effected by army level
+battles are resolved by the difference in army level and a RISK-esque dice roll mechanic that is affected by army level
 
 armies can build castles that are good defensively and allow for funding of armies
 
@@ -88,13 +88,7 @@ armies can be used to attack other nations
 
 armies can be used to attack neutral squares
 
-armies can be used to attack other nations squares
-
-armies can be used to attack neutral squares
-
-armies can be used to attack other nations squares
-
-armies can be used to attack neutral squares
+armies can be used to attack other nations' squares
 
 nations should start with the same amount of gold and land
 
