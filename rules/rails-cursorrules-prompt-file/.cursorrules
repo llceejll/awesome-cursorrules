@@ -93,12 +93,12 @@ For example, use `rails generate model` instead of creating a model from scratch
    - Use data attributes for JavaScript hooks
    - Use Solid Cable for real-time features
    - For standard Rails interactivity, use Hotwire (Turbo + Stimulus)
-   - For more complex JavaScript/npm dependencies, use ruby-vite
-   - Place npm/Vite-managed JavaScript entrypoints in `app/javascript/entrypoints/`
+   - For more complex JavaScript/npm dependencies, use the vite_rails gem
+   - Place npm/Vite-managed JavaScript entrypoints in `app/frontend/entrypoints/`
 
 6. **Asset Pipeline Options**
 
-   - For most projects, use Vite (via ruby-vite) for modern JavaScript and CSS asset management, especially when using npm packages.
+   - For most projects, use Vite (via the vite_rails gem) for modern JavaScript and CSS asset management, especially when using npm packages.
    - If using Vite, asset compression and optimization are handled by Vite; Thruster is not required for JS/CSS assets.
    - If not using Vite, use Propshaft for the asset pipeline (default in Rails 8).
    - Thruster is optional: it provides HTTP asset caching/compression and X-Sendfile acceleration with Puma. Consider using Thruster in production for extra HTTP-level asset performance, especially if not using Vite for all assets.
@@ -132,8 +132,9 @@ For example, use `rails generate model` instead of creating a model from scratch
 ├── models/         # Active Record models
 ├── views/          # View templates
 ├── helpers/        # View helpers
-├── javascript/     # Stimulus controllers and npm/Vite entrypoints
-│   ├── controllers/
+├── javascript/     # Stimulus controllers
+│   └── controllers/
+├── frontend/       # Vite source from vite_rails
 │   └── entrypoints/   # npm/Vite-managed JS entrypoints
 ├── services/       # Service objects
 ├── policies/       # Pundit policies
@@ -155,7 +156,7 @@ For example, use `rails generate model` instead of creating a model from scratch
 - **Authentication**: Built-in Sessions Generator
 - **Authorization**: Pundit
 - **Deployment**: Kamal 2 (default in Rails 8)
-- **Asset Pipeline**: Vite (via ruby-vite) or Propshaft (default in Rails 8)
+- **Asset Pipeline**: Vite (via the vite_rails gem) or Propshaft (default in Rails 8)
 - **Container**: Docker (optional for production or deployment; not used for local development)
 
 ## 5. Rails-Specific Reminders
