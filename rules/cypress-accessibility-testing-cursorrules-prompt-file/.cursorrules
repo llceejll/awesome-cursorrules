@@ -23,7 +23,7 @@ Document specific accessibility concerns being tested to improve test maintainab
 
 **1** **Descriptive Names**: Use test names that clearly describe the accessibility aspect being tested
 **2** **Page Organization**: Group accessibility tests by page or component using describe blocks
-**3** **General Compliance**: Run general accessibility validation with cy.checkAccessibility() on each page
+**3** **General Compliance**: Register addAccessibilityTasks(on) in setupNodeEvents, then run cy.checkAccessibility() on each page
 **4** **Keyboard Navigation**: Test keyboard navigation through the application's critical paths
 **5** **ARIA Attributes**: Verify proper ARIA attributes on interactive elements
 **6** **Color Contrast**: Validate color contrast meets accessibility standards where possible
@@ -37,6 +37,22 @@ Document specific accessibility concerns being tested to improve test maintainab
 **Output**: A Cypress test file with 3-5 tests validating accessibility compliance
 
 # Example Accessibility Test
+
+Register wick-a11y tasks in `cypress.config.js` before any test calls `cy.checkAccessibility()`. The command logs results and writes the default HTML report through those tasks.
+
+```js
+const { defineConfig } = require('cypress');
+const addAccessibilityTasks = require('wick-a11y/accessibility-tasks');
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      addAccessibilityTasks(on);
+      return config;
+    },
+  },
+});
+```
 
 When testing a login page for accessibility, implement the following pattern:
 
