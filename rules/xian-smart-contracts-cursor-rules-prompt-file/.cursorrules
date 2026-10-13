@@ -221,13 +221,13 @@ def verify_signature(vk: str, msg: str, signature: str):
 ```
 
 ### Hashlib
-- The runtime hashlib helpers accept a string and return a lowercase hex digest
-- Use the `_text` helpers for ordinary messages. Use the `_hex` helpers when the value is already unprefixed, even-length hex
+- `hashlib.sha3` and `hashlib.sha256` accept a string and return a lowercase hex digest
+- A string of valid unprefixed hex is hashed as those bytes. Any other string is hashed as text
 
 ```python
-payload_hash = hashlib.sha3_text("transfer:alice:bob:10")
-byte_hash = hashlib.sha3_hex("68656c6c6f")
-sha256_result = hashlib.sha256_hex("68656c6c6f")
+payload_hash = hashlib.sha3("transfer:alice:bob:10")
+byte_hash = hashlib.sha3("68656c6c6f")
+sha256_result = hashlib.sha256("68656c6c6f")
 ```
 
 ## Testing
