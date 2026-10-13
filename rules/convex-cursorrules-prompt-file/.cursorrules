@@ -359,12 +359,12 @@ Public Mutations:
 - createUser:
   - file path: convex/index.ts
   - arguments: {name: v.string()}
-  - returns: v.object({userId: v.id("users")})
+  - returns: v.id("users")
   - purpose: Create a new user with a given name
 - createChannel:
   - file path: convex/index.ts
   - arguments: {name: v.string()}
-  - returns: v.object({channelId: v.id("channels")})
+  - returns: v.id("channels")
   - purpose: Create a new channel with a given name
 - sendMessage:
   - file path: convex/index.ts
@@ -395,10 +395,7 @@ Internal Functions:
   - file path: convex/index.ts
   - arguments: {channelId: v.id("channels")}
   - returns: v.array(v.object({
-    _id: v.id("messages"),
-    _creationTime: v.number(),
-    channelId: v.id("channels"),
-    authorId: v.optional(v.id("users")),
+    role: v.union(v.literal("user"), v.literal("assistant")),
     content: v.string(),
   }))
 - writeAgentResponse:
