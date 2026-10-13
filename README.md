@@ -148,11 +148,11 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [Node.js (MongoDB)](./rules/nodejs-mongodb-cursorrules-prompt-file-tutorial/.cursorrules) - Cursor rules for Node.js development with MongoDB integration.
 - [Node.js (MongoDB, JWT, Express, React)](./rules/nodejs-mongodb-jwt-express-react-cursorrules-promp/.cursorrules) - Cursor rules for Node.js development with MongoDB, JWT, Express, and React integration.
 - [Python (Django Best Practices)](./rules/python-django-best-practices-cursorrules-prompt-fi/.cursorrules) - Cursor rules for Python Django development with best practices.
+- [Python (FastAPI API)](./rules/cursorrules-file-cursor-ai-python-fastapi-api/.cursorrules) - Cursor rules for Python FastAPI development with API integration.
 - [Python (FastAPI Best Practices)](./rules/python-fastapi-best-practices-cursorrules-prompt-f/.cursorrules) - Cursor rules for Python FastAPI development with best practices.
-- [Python (FastAPI Best Practices)](./rules/python-fastapi-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python FastAPI development with project structure and Pydantic models.
+- [Python (FastAPI Project Structure)](./rules/python-fastapi-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python FastAPI development with project structure and Pydantic models.
 - [Python (FastAPI Scalable API)](./rules/python-fastapi-scalable-api-cursorrules-prompt-fil/.cursorrules) - Cursor rules for Python FastAPI development with scalable API integration.
 - [Python (FastAPI)](./rules/py-fast-api/.cursorrules) - Cursor rules for Python FastAPI backend development and best practices.
-- [Python (FastAPI)](./rules/cursorrules-file-cursor-ai-python-fastapi-api/.cursorrules) - Cursor rules for Python FastAPI development with API integration.
 - [Python (Flask JSON Guide)](./rules/python-flask-json-guide-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python Flask development with JSON guide.
 - [Python 3.12 (FastAPI Best Practices)](./rules/python-312-fastapi-best-practices-cursorrules-prom/.cursorrules) - Cursor rules for Python FastAPI development with best practices.
 - [Python LLM & ML Workflow](./rules/python-llm-ml-workflow-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python LLM & ML development with workflow integration.

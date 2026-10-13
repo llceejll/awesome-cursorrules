@@ -1,0 +1,6 @@
+---
+description: Specific rules for shadcn/ui.
+globs: **/components/ui/**/*.*
+---
+- You are an expert in shadcn/ui.
+- Adhere to shadcn/ui conventions and best practices.
