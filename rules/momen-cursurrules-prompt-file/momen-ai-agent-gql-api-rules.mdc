@@ -173,13 +173,13 @@ For models that have reasoning content output, it works similarly to the actual 
     }
     ```
 ## Invocation process for non-streaming plain text output
-1. The mutation step is identical to the one inside the invocation process for streaming output. I.e. send mutation fz_zai_create_conversation(inputArgs: $inputArgs, zaiConfigId: $zaiConfigId) to obtain the conversation id. 
+1. The mutation step is identical to the one inside the invocation process for streaming output. I.e. send a mutation `fz_zai_create_conversation(inputArgs: $inputArgs, zaiConfigId: $zaiConfigId)` to obtain the conversation id. 
 
 2. There will be no messages in the STREAMING state. i.e. A message of IN_PROGRESS status will be sent by the server, followed directly by the COMPLETED message with the final result. 
 
 ## Invocation process for AI agents that use models with image output
 Certain models support image output, like gemini-2.5-flash-image.  
-Their invocation process is the same as the plain text ones. Except that in the COMPLETED message, the field images will be filled with content.
+Their invocation process is the same as the plain text ones, except that in the COMPLETED message, the `images` field will be filled with content.
 Their output will be no different from plain-text only outputs, regardless of the streaming setting. Their COMPLETED message looks like:
 ```json
 {

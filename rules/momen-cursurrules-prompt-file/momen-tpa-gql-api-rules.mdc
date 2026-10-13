@@ -99,7 +99,7 @@ mutation request_${nonce}($summary: String, $location: String, $description: Str
  }
 }
 ```
-field_200_json is a fixed fields for all third-party API derived GraphQL operation. It means the response that's valid for all 2xx response codes. 
+field_200_json is a fixed field for all third-party API derived GraphQL operations. It means the response that's valid for all 2xx response codes. 
 
 The responseCode subfield should always be checked, in case 5xx or 4xx codes are returned, which means field_200_json would be empty. 
 
