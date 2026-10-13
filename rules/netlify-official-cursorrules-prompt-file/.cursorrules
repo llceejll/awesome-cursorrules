@@ -519,18 +519,33 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       etag?: string;
     }
 
+    // `onlyIfNew` and `onlyIfMatch` cannot be set together.
+    type SetOptions = {
+      metadata?: object;
+      onlyIfNew?: boolean;
+      onlyIfMatch?: never;
+    } | {
+      metadata?: object;
+      onlyIfMatch?: string;
+      onlyIfNew?: never;
+    };
+
     // THESE ARE THE ONLY STORE METHODS. DO NOT MAKE UP NEW ONES
     interface Store {
 
       // Creates or overwrites a blob entry.
       // example: await store.set('key-name', 'contents-of key');
       // - NEVER add metadata unless instructed to.
-      set(key: string, value: ArrayBuffer | Blob | string, options?: { metadata?: object }): Promise<{ etag?: string; modified: boolean }>;
+      // - Pass `onlyIfNew: true` only when the write must fail if the key already exists.
+      // - Pass `onlyIfMatch` only when the write must fail unless the current ETag matches.
+      // - A failed condition resolves `{ modified: false }` and omits `etag`.
+      set(key: string, value: ArrayBuffer | Blob | string, options?: SetOptions): Promise<{ etag?: string; modified: boolean }>;
 
       // Stores a JSON-serializable object.
       // example: await store.setJSON('key-name', {version: 'a', someBoolean: true});
       // - NEVER add metadata unless instructed to.
-      setJSON(key: string, value: any, options?: { metadata?: object }): Promise<{ etag?: string; modified: boolean }>;
+      // - `onlyIfNew` and `onlyIfMatch` follow the same rules as `set`.
+      setJSON(key: string, value: any, options?: SetOptions): Promise<{ etag?: string; modified: boolean }>;
 
       // Retrieves a stored blob.
       // example: await store.get('key-name');
