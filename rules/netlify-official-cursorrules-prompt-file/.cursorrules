@@ -188,6 +188,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - Background functions operate the same as standard Serverless functions and are syntactically the same with the following exceptions
     - they run for up to 15 minutes
     - the client receives an empty 202 response immediately, so store results where a later request can read them
+    - if invocation returns an error, Netlify retries after one minute, then again two minutes later
     - Set `background: true` in the function `config` export. A `-background` suffix on the file or directory name still enables background mode.
 
   #### Examples of the latest background function structures
