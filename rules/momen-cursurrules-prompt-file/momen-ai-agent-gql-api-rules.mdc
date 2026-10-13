@@ -90,8 +90,8 @@ Corresponds to:
       }
     }
     ```
-2.  Using the obtained conversation id to subscribe to the result of the previous invocation of the AI Agent. Multiple messages may be received. The messages' status may transition from IN_PROGRESS to STREAMING to eventually COMPLETED. The last message always gives you COMPLETED status and its data field will contain the consolidated output from all the previous STEAMING messages' data field. 
-For models that have reasoning content output, it works similarly as the actual output. i.e. Partial reasoning content will be emitted first in multiple messages in the reasoningContent field, and then when everything is ready, the entirety of reasoningContent will be emitted again the COMPLETED message. 
+2.  Using the obtained conversation id to subscribe to the result of the previous invocation of the AI Agent. Multiple messages may be received. The messages' status may transition from IN_PROGRESS to STREAMING to eventually COMPLETED. The last message always gives you COMPLETED status and its data field will contain the consolidated output from all the previous STREAMING messages' data field. 
+For models that have reasoning content output, it works similarly as the actual output. i.e. Partial reasoning content will be emitted first in multiple messages in the reasoningContent field, and then when everything is ready, the entirety of reasoningContent will be emitted again in the COMPLETED message. 
     Subscription request:  
     Query: 
     ```gql
