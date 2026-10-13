@@ -19,7 +19,7 @@ ai_persona:
 tech_stack:
   framework: none
   build_tool: Maven
-  java_version: 24
+  java_version: 25
   dependencies:
     - Eclipse Collections
     - Commons Lang3
