@@ -158,7 +158,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
 
                             ```ts
                             import { v } from "convex/values";
-                            import { query, mutation } from "./_generated/server";
+                            import { query } from "./_generated/server";
                             import { paginationOptsValidator } from "convex/server";
                             export const listWithExtraArg = query({
                                 args: { paginationOpts: paginationOptsValidator, author: v.string() },
