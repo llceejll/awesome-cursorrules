@@ -1,4 +1,4 @@
-To extend the provided rules to include usage of the `ai-sdk-rsc` library and integrate it with Vercel middleware and a KV database, here's an updated set of instructions tailored for use with Cursor IDE. These instructions are designed to help you effectively implement generative user interfaces using React Server Components (RSC) with the AI SDK.
+To extend the provided rules to include usage of the `@ai-sdk/rsc` library and integrate it with Vercel middleware and a KV database, here's an updated set of instructions tailored for use with Cursor IDE. These instructions are designed to help you effectively implement generative user interfaces using React Server Components (RSC) with the AI SDK.
 
 ### Extended Rules for AI SDK RSC Integration with Vercel Middleware and KV Database
 
@@ -56,8 +56,8 @@ To extend the provided rules to include usage of the `ai-sdk-rsc` library and in
 
 **AI SDK RSC Integration**
 
-- **Setup and Installation**: Integrate `ai-sdk-rsc` into your Next.js project.
-  - Install the library using `npm install ai-sdk-rsc` or `yarn add ai-sdk-rsc`.
+- **Setup and Installation**: Integrate `@ai-sdk/rsc` into your Next.js project.
+  - Install the library using `npm install @ai-sdk/rsc` or `yarn add @ai-sdk/rsc`.
   - Configure middleware in `middleware.ts` to manage requests and sessions using Vercel's KV database.
 
 - **Middleware Implementation**: Use Vercel middleware to handle incoming requests.
@@ -89,30 +89,35 @@ To extend the provided rules to include usage of the `ai-sdk-rsc` library and in
     ```
 
 - **React Server Components (RSC) and AI SDK**:
-  - Use `ai-sdk-rsc` hooks to manage state and stream generative content.
-  - Example usage of AI SDK hooks in a React Server Component:
+  - Use `@ai-sdk/rsc` client hooks to read UI state and call server actions.
+  - These hooks run in a Client Component. They are not available inside a Server Component.
+  - Example:
     ```tsx
-    import { useAIStream } from 'ai-sdk-rsc';
-    import { FC } from 'react';
+    'use client';
 
-    interface ChatProps {
-      initialMessage: string;
-    }
+    import { useActions, useUIState } from '@ai-sdk/rsc';
 
-    const Chat: FC<ChatProps> = ({ initialMessage }) => {
-      const { messages, sendMessage } = useAIStream({
-        initialMessage,
-        onMessage: (message) => console.log('New message:', message),
-      });
+    export default function Chat() {
+      const { sendMessage } = useActions();
+      const [messages, setMessages] = useUIState();
 
       return (
         <>
-          {messages.map((message) => message.content)}
+          {messages.map((message) => (
+            <div key={message.id}>{message.display}</div>
+          ))}
+          <button
+            type="button"
+            onClick={async () => {
+              const response = await sendMessage('Hello');
+              setMessages((current) => [...current, response]);
+            }}
+          >
+            Send
+          </button>
         </>
       );
-    };
-
-    export default Chat;
+    }
     ```
 
 - **KV Database Integration**:
@@ -128,5 +133,5 @@ To extend the provided rules to include usage of the `ai-sdk-rsc` library and in
   - Ensure all environment variables (e.g., API keys, database credentials) are securely stored in Vercel's environment settings.
   - Configure Vercel's KV and other serverless functions correctly to handle scalability and performance needs.
 
-By following these extended rules, you'll be able to create a well-optimized, scalable, and efficient Next.js application that leverages `ai-sdk-rsc`, Vercel middleware, and KV database for building sophisticated AI-driven interfaces.
+By following these extended rules, you'll be able to create a well-optimized, scalable, and efficient Next.js application that leverages `@ai-sdk/rsc`, Vercel middleware, and KV database for building sophisticated AI-driven interfaces.
 

@@ -1,6 +1,6 @@
 ---
-description: Guides the integration of `ai-sdk-rsc` into React Server Components for managing state and streaming generative content.
+description: Guides the integration of `@ai-sdk/rsc` so Client Components can read UI state and call server actions.
 globs: "**/*.tsx"
 ---
-- Integrate `ai-sdk-rsc` into your Next.js project.
-- Use `ai-sdk-rsc` hooks to manage state and stream generative content.
+- Integrate `@ai-sdk/rsc` into your Next.js project.
+- Use `@ai-sdk/rsc` client hooks (`useUIState`, `useActions`) to read UI state and call server actions.
