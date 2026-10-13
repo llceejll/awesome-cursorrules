@@ -567,6 +567,11 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       // example: await store.delete('key-name');
       // - The return value always resolves to `undefined`, regardless of whether or not there was an object to delete.
       delete(key: string): Promise<void>;
+
+      // Deletes every blob in the store.
+      // example: const { deletedBlobs } = await store.deleteAll();
+      // - Repeats until the store is empty and resolves with the total number of deleted blobs.
+      deleteAll(): Promise<{ deletedBlobs: number }>;
     }
 
     interface GetDeployStoreOptions extends Partial<ClientOptions> {
