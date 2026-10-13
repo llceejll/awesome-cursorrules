@@ -392,7 +392,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - prefer to use in-code configuration via exporting a `config` object. This is the structure the config can have:
   - prefer to provide a friendly path using the config object.
   - Edge functions are configured with a path pattern and only paths matching those patterns will run the edge function
-  - path and excludedPath support substring patterns or the URLPattern syntax from the web platform.
+  - `path` and `excludedPath` are URLPattern expressions and must start with `/`. Use `pattern` and `excludedPattern` when the match is a regular expression.
   - unless explicitly asked to modify other properties, only set path, pattern, excludedPath when creating functions.
 
   ```
