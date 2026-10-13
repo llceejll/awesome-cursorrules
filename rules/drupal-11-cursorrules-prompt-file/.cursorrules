@@ -13,7 +13,7 @@ Always produce **functional, secure, and efficient** Drupal code that aligns wit
 - Keep functions and methods focused. Adhere to single-responsibility where possible. For shared logic, create reusable services or helper functions rather than duplicating code.  
 
 **Naming Conventions**  
-- Use **CamelCase** for class names and PHPUnit test methods, and **snake_case** for function names in procedural code (e.g., in `.module` files). Variables and class properties should use lowerCamelCase.  
+- Use **UpperCamel** for class names, **lowerCamel** for methods, class properties, and PHPUnit test methods (for example, `testSomething()`), and **snake_case** for function names in procedural code (e.g., in `.module` files). Name variables with either lowerCamelCase or snake_case, and keep one style inside a file.  
 - When implementing Drupal hooks, use the proper function naming pattern: e.g. `mymodule_entity_presave()` for a hook in a module named "mymodule". Ensure hook implementations and event subscriber methods clearly indicate their purpose.  
 - Name files and directories clearly. For example, name module files with the module name (`mymodule.module`), and name template files with the component’s name and context (`node--article--teaser.html.twig` for an Article teaser template).  
 - Follow Drupal’s directory conventions: put custom modules in `/modules` (or `/modules/custom`), custom themes in `/themes`, and use `/src` for PHP classes within a module or theme.  
