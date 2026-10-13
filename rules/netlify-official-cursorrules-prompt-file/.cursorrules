@@ -340,9 +340,10 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   {
     ...ALL OTHER Context fields/methods,
 
-    next: (options?: { sendConditionalRequest?: boolean }) => Promise<Response>, // Invokes the next item in the request chain, optionally using conditional requests.
-
-    nextRequest: (request: Request, options?: { sendConditionalRequest?: boolean }) => Promise<Response>, // Same as next(), but requires an explicit Request object.
+    next: {
+      (options?: { sendConditionalRequest?: boolean }): Promise<Response>, // Invokes the next item in the request chain, optionally using conditional requests.
+      (request: Request, options?: { sendConditionalRequest?: boolean }): Promise<Response>, // Same method. Pass an explicit Request when the handler has already read the incoming body.
+    },
   }
 
   ```
