@@ -237,7 +237,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
                         },
                     });
                     ```
-- Be strict with types, particularly around id's of documents. For example, if a function takes in an id for a document in the 'users' table, take in `Id<'users'>` rather than `string`.
+- Be strict with types, particularly around ids of documents. For example, if a function takes in an id for a document in the 'users' table, take in `Id<'users'>` rather than `string`.
 - Always use `as const` for string literals in discriminated union types.
 - When using the `Array` type, make sure to always define your arrays as `const array: Array<T> = [...];`
 - When using the `Record` type, make sure to always define your records as `const record: Record<KeyType, ValueType> = {...};`
