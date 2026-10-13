@@ -448,11 +448,12 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       function = "common"
   ```
   - **Execution Order for Edge Functions**:
-    1. **Configuration-based** edge functions (`netlify.toml`) run first.
-    2. **Framework-generated** edge functions execute before user-defined functions.
-    3. **Non-cached** edge functions execute before cached functions.
-    4. **Inline-declared** edge functions override duplicate `netlify.toml` functions.
-    5. **Multiple inline edge functions** run alphabetically by filename.
+    Netlify walks this order twice: non-cached functions first, then cached functions.
+    1. Framework-generated edge functions declared for the path in a configuration file.
+    2. Edge functions declared for the path in `netlify.toml`, in file order from top to bottom.
+    3. Framework-generated and integration-generated edge functions declared inline.
+    4. User edge functions declared inline, in alphabetical order by filename.
+    - A function declared in both `netlify.toml` and inline is merged and treated as an inline declaration. Inline values take precedence for duplicate fields.
 
   - **Caveats & Special Cases**:
     - If an edge function returns a response, redirects for that path DO NOT occur.
