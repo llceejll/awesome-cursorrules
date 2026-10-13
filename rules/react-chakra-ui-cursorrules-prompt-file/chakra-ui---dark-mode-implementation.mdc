@@ -1,5 +1,5 @@
 ---
-description: Implement dark mode using Chakra UI's color mode when building React components.
+description: Implement dark mode with next-themes. Chakra UI v3 removed its built-in color mode.
 globs: src/**/*.*
 ---
-- Implement dark mode using Chakra UI's color mode
+- Implement dark mode with next-themes. Chakra UI v3 removed ColorModeProvider and useColorMode.
