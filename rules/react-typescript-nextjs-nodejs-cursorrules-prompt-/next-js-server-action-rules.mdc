@@ -19,13 +19,13 @@ globs: app/actions/**/*.{ts,tsx}
     'use server'
     import { createSafeActionClient } from 'next-safe-action'
     import { z } from 'zod'
-    import type { ActionResponse } from '@/app/actions/actions'
+    import type { ActionResponse } from '@/types/actions'
     const schema = z.object({
       value: z.string()
     })
     export const someAction = createSafeActionClient()
       .schema(schema)
-      .action(async (input): Promise => {
+      .action(async (input): Promise<ActionResponse> => {
         try {
           // Action logic here
           return { success: true, data: /* result */ }
