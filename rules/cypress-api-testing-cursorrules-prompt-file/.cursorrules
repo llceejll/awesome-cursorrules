@@ -12,7 +12,7 @@ Adjust file extensions (.ts/.js) and syntax based on this detection.
 
 # API Testing Focus
 
-Use the cypress-ajv-schema-validator package to validate API response schemas
+Use the cypress-schema-validator package to validate API response schemas
 Focus on testing critical API endpoints, ensuring correct status codes, response data, and schema compliance
 Tests should verify both successful operations and error handling scenarios
 Create isolated, deterministic tests that don't rely on existing server state
@@ -40,7 +40,7 @@ Document schema definitions clearly to improve test maintainability
 When testing a user API endpoint, implement the following pattern:
 
 ```js
-import 'cypress-ajv-schema-validator';
+import 'cypress-schema-validator';
 
 describe('Users API', () => {
   const userSchema = {
