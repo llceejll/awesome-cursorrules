@@ -16,7 +16,7 @@ Never mention TAU or Lamden.
 - You cannot use '_' as a prefix for variables or functions (e.g., `_private_var` is not allowed)
 - Follow standard Python naming conventions otherwise
 - Use descriptive names for clarity
-- A contract can not be deployed by another contract
+- A contract deploys another contract by importing `submission` and calling `submission.submit_contract(name=..., code=..., owner=..., constructor_args=...)`
 
 ### Function Types
 - `@export` decorator defines public functions callable by any user or contract
@@ -87,7 +87,7 @@ foundation_owner = ForeignVariable(foreign_contract='foundation', foreign_name='
 ### ctx.signer
 - The top-level user who signed the transaction
 - Remains constant throughout transaction execution
-- Only used for security guards/blacklisting, not for account authorization
+- Use it when the original external signer is the authority, and use `ctx.caller` for the immediate caller
 
 ### ctx.this
 - The identity/name of the current contract
@@ -97,7 +97,7 @@ foundation_owner = ForeignVariable(foreign_contract='foundation', foreign_name='
 ### ctx.owner
 - Owner of the contract, optional field set at time of submission
 - Only the owner can call exported functions if set
-- Can be changed with `ctx.owner = new_owner`
+- Change it with `submission.change_owner(contract=..., new_owner=...)`
 
 ### ctx.entry
 - Returns tuple of (contract_name, function_name) of the original entry point
@@ -112,12 +112,12 @@ foundation_owner = ForeignVariable(foreign_contract='foundation', foreign_name='
 
 Example usage:
 ```python
+submission_time = Variable()
+submission_block_num = Variable()
+submission_block_hash = Variable()
+
 @construct
 def seed():
-    submission_time = Variable()
-    submission_block_num = Variable()
-    submission_block_hash = Variable()
-    
     # Store blockchain state at contract creation
     submission_time.set(now)
     submission_block_num.set(block_num)
