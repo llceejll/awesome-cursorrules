@@ -66,6 +66,8 @@ Organize the project with clear separation of concerns:
 
 ### Workflow Example
 ```python
+from datetime import timedelta
+
 from temporalio import workflow
 
 @workflow.defn
