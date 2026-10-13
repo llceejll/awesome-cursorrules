@@ -964,7 +964,9 @@ Combining these four focused, coherent clauses gives us our final `variables` ob
                 "timestamptz": {
                   "nullary_func": "now"
                 },
-                "increase": false,
+                "increase": {
+                  "literal": false
+                },
                 "years": {
                   "literal": "10"
                 }
