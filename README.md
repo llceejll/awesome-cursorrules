@@ -289,18 +289,18 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [Alpha Skills](./rules/alpha-skills-quant-factor-research/.cursorrules) - Quantitative factor research skills for Cursor. Evaluate factors, run backtests, mine new alpha — all through natural language.
 - [ASCII Simulation Game](./rules/ascii-simulation-game-cursorrules-prompt-file/.cursorrules) - Cursor rules for ASCII simulation game development.
 - [Code Guidelines](./rules/code-guidelines-cursorrules-prompt-file/.cursorrules) - Cursor rules for code development with guidelines integration.
-- [Code Pair Interviews](./rules/code-pair-interviews/.cursorrules) - Cursor rules for code pair interviews development with integration.
+- [Code Pair Interviews](./rules/code-pair-interviews/.cursorrules) - Cursor rules for code pair interviews development.
 - [Code Style Consistency](./rules/code-style-consistency-cursorrules-prompt-file/.cursorrules) - Cursor rules for code development with style consistency integration.
 - [DragonRuby Best Practices](./rules/dragonruby-best-practices-cursorrules-prompt-file/.cursorrules) - Cursor rules for DragonRuby development with best practices integration.
-- [Graphical Apps Development](./rules/graphical-apps-development-cursorrules-prompt-file/.cursorrules) - Cursor rules for graphical apps development with integration.
+- [Graphical Apps Development](./rules/graphical-apps-development-cursorrules-prompt-file/.cursorrules) - Cursor rules for graphical apps development.
 - [Next.js (Type LLM)](./rules/next-type-llm/.cursorrules) - Cursor rules for Next.js development with Type LLM integration.
 - [Unity (C#)](./rules/unity-cursor-ai-c-cursorrules-prompt-file/.cursorrules) - Cursor rules for Unity development with C# integration.
 - [Web App Optimization](./rules/web-app-optimization-cursorrules-prompt-file/.cursorrules) - Cursor rules for web app development with optimization integration.
 
 ### Documentation
 
-- [Gherkin Style Testing](./rules/gherkin-style-testing-cursorrules-prompt-file/.cursorrules) - Cursor rules for Gherkin style testing development with integration.
-- [How-To Documentation](./rules/how-to-documentation-cursorrules-prompt-file/.cursorrules) - Cursor rules for how-to documentation development with integration.
+- [Gherkin Style Testing](./rules/gherkin-style-testing-cursorrules-prompt-file/.cursorrules) - Cursor rules for Gherkin style testing development.
+- [How-To Documentation](./rules/how-to-documentation-cursorrules-prompt-file/.cursorrules) - Cursor rules for how-to documentation development.
 
 ### Utilities
 
