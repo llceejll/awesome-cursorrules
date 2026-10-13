@@ -54,7 +54,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 - Prefer zero-copy deserialization when accounts are large
 - Minimize compute usage; avoid loops and recursion
 - Avoid memory reallocations mid-instruction
-- Use `#[account(zero_copy)]` and `#[repr(packed)]` for tight layout
+- Use `#[account(zero_copy)]` with `#[repr(C)]` for large accounts
 - Profile compute units with `solana logs` and `anchor run`
 
 ## Dev Workflow
