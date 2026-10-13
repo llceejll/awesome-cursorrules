@@ -1038,7 +1038,7 @@ input post_bool_exp {
 }
 ```
 
-For example, to find all `post` records created in the year 2024, you can use the `_eq` operator. We use `bigint_operand` because the `extract_timestamptz` function returns an bigint value (the year number), and we're comparing it with the bigint `2024`. Even though the source column `created_at` is a timestamp, the extracted year value is an bigint, so we choose `bigint_operand` based on the final comparison values. The `variables` defining this `where` clause would be:
+For example, to find all `post` records created in the year 2024, you can use the `_eq` operator. We use `bigint_operand` because the `extract_timestamptz` function returns a bigint value (the year number), and we're comparing it with the bigint `2024`. Even though the source column `created_at` is a timestamp, the extracted year value is a bigint, so we choose `bigint_operand` based on the final comparison values. The `variables` defining this `where` clause would be:
 
 ```
 {
