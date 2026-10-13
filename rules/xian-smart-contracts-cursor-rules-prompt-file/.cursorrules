@@ -239,10 +239,10 @@ sha256_result = hashlib.sha256_hex("68656c6c6f")
 - Flush client before and after each test
 
 ### Setting Test Environment
-- Pass environment variables like `now` (datetime) in a dictionary
+- Override block time by passing `environment={"now": Datetime(...)}`. Import `Datetime` from `xian_runtime_types.time`
 
 ```python
-from contracting.stdlib.bridge.time import Datetime
+from xian_runtime_types.time import Datetime
 
 env = {"now": Datetime(year=2021, month=1, day=1, hour=0)}
 result = self.some_contract.some_fn(some_arg=some_value, environment=env)
