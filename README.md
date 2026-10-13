@@ -15,15 +15,15 @@ Configuration files that enhance Cursor AI editor experience with custom rules a
 
 ## Sponsorships
 <p align="center">
-    <h3><a href="https://coderabbit.ai/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">coderabbit.ai - Cut Code Review Time & Bugs in Half. Instantly.</h3>
+    <h3><a href="https://coderabbit.ai/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">coderabbit.ai - Cut Code Review Time & Bugs in Half. Instantly.</a></h3>
 	  <a href="https://coderabbit.ai/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
 		  <img alt="CodeRabbit.ai Sponsorship Logo" src="./cr_logo.png" width=350>
 	  </a>
-	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP- Supercharge Cursor with your team’s knowledge</h3> 
+	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP - Supercharge Cursor with your team’s knowledge</a></h3>
 	  <a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
-		  <img alt="Unblocked Sponsorship Logo" src="https://github.com/claire-gong-18/awesome-cursorrules/blob/main/Unblocked-logo-sq-words-over-gradient-1024w.png?raw=true)" width=250>
+		  <img alt="Unblocked Sponsorship Logo" src="./Unblocked-logo-sq-words-over-gradient-1024w.png" width=250>
 	  </a>
-	<h3><a href="https://go.warp.dev/awesome-cursorrules">Warp - Built for coding with multiple AI agents</h3>
+	<h3><a href="https://go.warp.dev/awesome-cursorrules">Warp - Built for coding with multiple AI agents</a></h3>
 	  <a href="https://go.warp.dev/awesome-cursorrules">
 		  <img alt="Warp Sponsorship Logo" src="https://github.com/user-attachments/assets/8d50d811-fabe-4610-a537-c5a5a9224864" width=350>
 	  </a>
@@ -123,7 +123,7 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 
 - [Convex best practices](./rules/convex-cursorrules-prompt-file/.cursorrules) - Cursor rules for Convex development with best practices.
 - [Deno Integration](./rules/deno-integration-techniques-cursorrules-prompt-fil/.cursorrules) - Cursor rules for Deno development with integration techniques.
-- [Drupal 11](./rules/drupal-11-cursorrules-promt-file/.cursorrules) - Cursor rules for Drupal 11 development.
+- [Drupal 11](./rules/drupal-11-cursorrules-prompt-file/.cursorrules) - Cursor rules for Drupal 11 development.
 - [Elixir Engineer Guidelines](./rules/elixir-engineer-guidelines-cursorrules-prompt-file/.cursorrules) - Cursor rules for Elixir development with engineer guidelines.
 - [Elixir (Phoenix, Docker)](./rules/elixir-phoenix-docker-setup-cursorrules-prompt-fil/.cursorrules) - Cursor rules for Elixir development with Phoenix and Docker integration.
 - [ES Module (Node.js)](./rules/es-module-nodejs-guidelines-cursorrules-prompt-fil/.cursorrules) - Cursor rules for ES Module development with Node.js guidelines.
@@ -281,7 +281,6 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [Code Style Consistency](./rules/code-style-consistency-cursorrules-prompt-file/.cursorrules) - Cursor rules for code development with style consistency integration.
 - [DragonRuby Best Practices](./rules/dragonruby-best-practices-cursorrules-prompt-file/.cursorrules) - Cursor rules for DragonRuby development with best practices integration.
 - [Graphical Apps Development](./rules/graphical-apps-development-cursorrules-prompt-file/.cursorrules) - Cursor rules for graphical apps development with integration.
-- [Meta-Prompt](./rules/meta-prompt-cursorrules-prompt-file/.cursorrules) - Cursor rules for meta-prompt development with integration.
 - [Next.js (Type LLM)](./rules/next-type-llm/.cursorrules) - Cursor rules for Next.js development with Type LLM integration.
 - [Unity (C#)](./rules/unity-cursor-ai-c-cursorrules-prompt-file/.cursorrules) - Cursor rules for Unity development with C# integration.
 - [Web App Optimization](./rules/web-app-optimization-cursorrules-prompt-file/.cursorrules) - Cursor rules for web app development with optimization integration.
@@ -337,15 +336,15 @@ Please ensure your contribution is original or properly credited if based on exi
 
 ## Sponsorships
 <p align="center">
-    <h3><a href="https://coderabbit.ai/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">coderabbit.ai - Cut Code Review Time & Bugs in Half. Instantly.</h3>
+    <h3><a href="https://coderabbit.ai/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">coderabbit.ai - Cut Code Review Time & Bugs in Half. Instantly.</a></h3>
 	  <a href="https://coderabbit.ai/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
 		  <img alt="CodeRabbit.ai Sponsorship Logo" src="./cr_logo.png" width=350>
 	  </a>
-	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP- Supercharge Cursor with your team’s knowledge</h3> 
+	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP - Supercharge Cursor with your team’s knowledge</a></h3>
 	  <a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
-		  <img alt="Unblocked Sponsorship Logo" src="https://github.com/claire-gong-18/awesome-cursorrules/blob/main/Unblocked-logo-sq-words-over-gradient-1024w.png?raw=true)" width=250>
+		  <img alt="Unblocked Sponsorship Logo" src="./Unblocked-logo-sq-words-over-gradient-1024w.png" width=250>
 	  </a>
-	<h3><a href="https://go.warp.dev/awesome-cursorrules">Warp - Built for coding with multiple AI agents</h3>
+	<h3><a href="https://go.warp.dev/awesome-cursorrules">Warp - Built for coding with multiple AI agents</a></h3>
 	  <a href="https://go.warp.dev/awesome-cursorrules">
 		  <img alt="Warp Sponsorship Logo" src="https://github.com/user-attachments/assets/8d50d811-fabe-4610-a537-c5a5a9224864" width=350>
 	  </a>
