@@ -156,9 +156,9 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [Python (Flask JSON Guide)](./rules/python-flask-json-guide-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python Flask development with JSON guide.
 - [Python 3.12 (FastAPI Best Practices)](./rules/python-312-fastapi-best-practices-cursorrules-prom/.cursorrules) - Cursor rules for Python FastAPI development with best practices.
 - [Python LLM & ML Workflow](./rules/python-llm-ml-workflow-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python LLM & ML development with workflow integration.
-- [Rails 8 (Basic Setup)](./rules/rails-cursorrules-prompt-file/rails-basics.mdx) - Cursor rules for Rails development with basic setup.
-- [Salesforce (Apex)](./rules/salesforce-apex-cursorrules-prompt-file/.cursorrules.txt) - Cursor rules for Salesforce development with Apex integration.
-- [Scala (Kafka)](./rules/scala-kafka-cursorrules-prompt-file/general-scala-clean-code.mdc) - Cursor rules for Scala development with Kafka.
+- [Rails 8 (Basic Setup)](./rules/rails-cursorrules-prompt-file/.cursorrules) - Cursor rules for Rails development with basic setup.
+- [Salesforce (Apex)](./rules/salesforce-apex-cursorrules-prompt-file/.cursorrules) - Cursor rules for Salesforce development with Apex integration.
+- [Scala (Kafka)](./rules/scala-kafka-cursorrules-prompt-file/.cursorrules) - Cursor rules for Scala development with Kafka.
 - [Temporal (Python SDK)](./rules/temporal-python-cursorrules/.cursorrules) - Cursor rules for Temporal workflow development with the Python SDK.
 - [TypeScript (NestJS Best Practices)](./rules/typescript-nestjs-best-practices-cursorrules-promp/.cursorrules) - Cursor rules for TypeScript development with NestJS best practices.
 - [TYPO3 CMS Extension](./rules/typo3cms-extension-cursorrules-prompt-file/.cursorrules) - Cursor rules for TYPO3 CMS development with extension integration.
@@ -174,7 +174,7 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [NativeScript](./rules/nativescript-cursorrules-prompt-file/.cursorrules) - Cursor rules for NativeScript development.
 - [React Native (Expo Router, TypeScript, Windows)](./rules/react-native-expo-router-typescript-windows-cursorrules-prompt-file/.cursorrules) - Cursor rules for React Native development with Expo Router, TypeScript, and Windows.
 - [React Native Expo](./rules/react-native-expo-cursorrules-prompt-file/.cursorrules) - Cursor rules for React Native Expo development.
-- [Swift (UIKit, MVVM, RxSwift)](./rules/swift-uikit-cursorrules-prompt-file/.cursorrules-mvvm-rxswift) - Cursor rules for Swift UIKit development with MVVM and RxSwift.
+- [Swift (UIKit, MVVM, RxSwift)](./rules/swift-uikit-cursorrules-prompt-file/.cursorrules) - Cursor rules for Swift UIKit development with MVVM and RxSwift.
 - [SwiftUI Guidelines](./rules/swiftui-guidelines-cursorrules-prompt-file/.cursorrules) - Cursor rules for SwiftUI development guidelines.
 - [TypeScript (Expo, Jest, Detox)](./rules/typescript-expo-jest-detox-cursorrules-prompt-file/.cursorrules) - Cursor rules for TypeScript development with Expo, Jest, and Detox integration.
 - [UIKit Guidelines](./rules/uikit-guidelines-cursorrules-prompt-file/.cursorrules) - Cursor rules for UIKit development guidelines.
