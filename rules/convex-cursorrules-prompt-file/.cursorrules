@@ -33,6 +33,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
           return new Response(body, { status: 200 });
           }),
       });
+      export default http;
       ```
 - HTTP endpoints are always registered at the exact path you specify in the `path` field. For example, if you specify `/api/someRoute`, the endpoint will be registered at `/api/someRoute`.
 
