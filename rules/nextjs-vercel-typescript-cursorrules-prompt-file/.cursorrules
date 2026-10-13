@@ -1,11 +1,11 @@
-To extend the provided rules to include usage of the `@ai-sdk/rsc` library and integrate it with Vercel middleware and a KV database, here's an updated set of instructions tailored for use with Cursor IDE. These instructions are designed to help you effectively implement generative user interfaces using React Server Components (RSC) with the AI SDK.
+To extend the provided rules to include usage of the `@ai-sdk/rsc` library and integrate it with Vercel middleware and Upstash Redis, here's an updated set of instructions tailored for use with Cursor IDE. These instructions are designed to help you effectively implement generative user interfaces using React Server Components (RSC) with the AI SDK.
 
-### Extended Rules for AI SDK RSC Integration with Vercel Middleware and KV Database
+### Extended Rules for AI SDK RSC Integration with Vercel Middleware and Upstash Redis
 
 **Environment and Tools**
 
 - You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI, Tailwind, and Vercel middleware.
-- You are familiar with Vercel's KV database for managing stateful data.
+- You are familiar with Upstash Redis for managing stateful data.
 
 **Code Style and Structure**
 
@@ -58,27 +58,29 @@ To extend the provided rules to include usage of the `@ai-sdk/rsc` library and i
 
 - **Setup and Installation**: Integrate `@ai-sdk/rsc` into your Next.js project.
   - Install the library using `npm install @ai-sdk/rsc` or `yarn add @ai-sdk/rsc`.
-  - Configure middleware in `middleware.ts` to manage requests and sessions using Vercel's KV database.
+  - Configure middleware in `middleware.ts` to manage requests and sessions using Upstash Redis.
 
 - **Middleware Implementation**: Use Vercel middleware to handle incoming requests.
   - Name that file `middleware.ts` at the project root, or `src/middleware.ts` when the app keeps source under `src`. Next.js does not run middleware from a `middleware/` directory.
-  - Use middleware to parse user input and manage sessions with the KV database.
+  - Use middleware to parse user input and manage sessions with Upstash Redis.
   - Example:
     ```typescript
     import { NextRequest, NextResponse } from 'next/server';
-    import { kv } from '@vercel/kv';
+    import { Redis } from '@upstash/redis';
+
+    const redis = Redis.fromEnv();
 
     export async function middleware(req: NextRequest) {
       const session = req.cookies.get('session-id');
       if (!session) {
         const newSessionId = generateSessionId();
-        await kv.set(newSessionId, { state: {} }); // Initialize state in KV database
+        await redis.set(newSessionId, { state: {} }); // Initialize session state
         const res = NextResponse.next();
         res.cookies.set('session-id', newSessionId);
         return res;
       }
-      // Fetch state from KV database
-      const state = await kv.get(session.value);
+      // Fetch state from Redis
+      const state = await redis.get(session.value);
       const url = req.nextUrl.clone();
       url.searchParams.set('state', JSON.stringify(state));
       return NextResponse.rewrite(url);
@@ -121,9 +123,10 @@ To extend the provided rules to include usage of the `@ai-sdk/rsc` library and i
     }
     ```
 
-- **KV Database Integration**:
-  - Use Vercel's KV database to store and retrieve session data.
-  - Utilize `kv.set`, `kv.get`, and `kv.delete` to manage data.
+- **Redis Integration**:
+  - Use Upstash Redis to store and retrieve session data. `@vercel/kv` is deprecated.
+  - Create the client with `Redis.fromEnv()`, which reads `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`.
+  - Utilize `redis.set`, `redis.get`, and `redis.del` to manage data.
   - Ensure the database operations are asynchronous to avoid blocking server-side rendering (SSR).
 
 - **Data Fetching and State Management**:
@@ -132,7 +135,7 @@ To extend the provided rules to include usage of the `@ai-sdk/rsc` library and i
 
 - **Deployment Considerations**:
   - Ensure all environment variables (e.g., API keys, database credentials) are securely stored in Vercel's environment settings.
-  - Configure Vercel's KV and other serverless functions correctly to handle scalability and performance needs.
+  - Configure the Upstash Redis integration and other serverless functions correctly to handle scalability and performance needs.
 
-By following these extended rules, you'll be able to create a well-optimized, scalable, and efficient Next.js application that leverages `@ai-sdk/rsc`, Vercel middleware, and KV database for building sophisticated AI-driven interfaces.
+By following these extended rules, you'll be able to create a well-optimized, scalable, and efficient Next.js application that leverages `@ai-sdk/rsc`, Vercel middleware, and Upstash Redis for building sophisticated AI-driven interfaces.
 
