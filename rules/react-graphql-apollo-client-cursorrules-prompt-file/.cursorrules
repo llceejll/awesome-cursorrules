@@ -8,7 +8,7 @@ const preferFunctionalComponents = true;
 
 const graphqlBestPractices = [
   "Use Apollo Client for state management and data fetching",
-  "Implement query components for data fetching",
+  "Use the useQuery hook from @apollo/client/react for data fetching",
   "Utilize mutations for data modifications",
   "Use fragments for reusable query parts",
   "Implement proper error handling and loading states",
