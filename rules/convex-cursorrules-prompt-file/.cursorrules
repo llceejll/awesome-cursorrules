@@ -162,6 +162,12 @@ globs: "**/*.{ts,tsx,js,jsx}"
                                     page: v.array(v.any()),
                                     isDone: v.boolean(),
                                     continueCursor: v.string(),
+                                    splitCursor: v.optional(v.union(v.string(), v.null())),
+                                    pageStatus: v.optional(v.union(
+                                        v.literal("SplitRecommended"),
+                                        v.literal("SplitRequired"),
+                                        v.null(),
+                                    )),
                                 }),
                                 handler: async (ctx, args) => {
                                     return await ctx.db
@@ -179,6 +185,8 @@ globs: "**/*.{ts,tsx,js,jsx}"
                             - page (contains an array of documents that you fetch)
                             - isDone (a boolean that represents whether or not this is the last page of documents)
                             - continueCursor (a string that represents the cursor to use to fetch the next page of documents)
+                            - splitCursor (an optional string or null that splits the page)
+                            - pageStatus (an optional `"SplitRecommended"`, `"SplitRequired"`, or null)
 
 
 ## Validator guidelines
