@@ -38,7 +38,7 @@ Apollo Client Setup:
 3. Use WebSocketLink with SubscriptionClient for subscriptions.
 4. Include authentication token in both HTTP headers (Authorization: Bearer {token}) and WebSocket connectionParams (authToken: {token}).
 5. Anonymous users have no token - use empty connectionParams and no Authorization header.
-6. After writing/modifying GraphQL operations, run: apollo client:codegen --includes='src/path/to/files/containing/gql/**' --target typescript --outputFlat ./src/graphQL/__generated__
+6. After writing or modifying GraphQL operations, generate TypeScript types with GraphQL Code Generator by running `npm run codegen` (`graphql-codegen --config codegen.ts`).
 7. Always use generated TypeScript types for type safety.
 
 Authentication:
