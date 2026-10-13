@@ -98,7 +98,7 @@ Component Development
 - Use .svelte.ts files for component logic and state machines.
 - Implement proper component composition and reusability.
 - Use Svelte's props for data passing.
-- Leverage Svelte's reactive declarations for local state management.
+- Leverage `$state` for local state management.
 
 State Management
 
@@ -170,7 +170,7 @@ SEO and Meta Tags
 Forms and Actions
 
 - Utilize SvelteKit's form actions for server-side form handling.
-- Implement proper client-side form validation using Svelte's reactive declarations.
+- Implement proper client-side form validation with `$derived`.
 - Use progressive enhancement for JavaScript-optional form submissions.
 
 Internationalization (i18n) with Paraglide.js

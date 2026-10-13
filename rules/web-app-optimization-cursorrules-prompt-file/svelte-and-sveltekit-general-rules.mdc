@@ -12,7 +12,7 @@ globs: "**/*.svelte"
 - Use camelCase for variables, functions, and props.
 - Implement proper component composition and reusability.
 - Use Svelte's props for data passing.
-- Leverage Svelte's reactive declarations for local state management.
+- Leverage `$state` for local state management.
 - Ensure proper semantic HTML structure in Svelte components.
 - Implement ARIA attributes where necessary.
 - Ensure keyboard navigation support for interactive elements.
