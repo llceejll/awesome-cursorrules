@@ -141,7 +141,7 @@ mutation CreateOrder($args: Json!) {
 ```
 ```json
 {
-  "variables": {
+  "args": {
     "course_id": 2
   }
 }
