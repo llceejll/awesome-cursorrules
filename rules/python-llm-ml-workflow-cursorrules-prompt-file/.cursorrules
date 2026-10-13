@@ -10,7 +10,7 @@
 # Technology Stack
 
 - **Python Version:** Python 3.10+
-- **Dependency Management:** Poetry / Rye
+- **Dependency Management:** uv (preferred) / Poetry
 - **Code Formatting:** Ruff (replaces `black`, `isort`, `flake8`)
 - **Type Hinting:** Strictly use the `typing` module. All functions, methods, and class members must have type annotations.
 - **Testing Framework:** `pytest`
