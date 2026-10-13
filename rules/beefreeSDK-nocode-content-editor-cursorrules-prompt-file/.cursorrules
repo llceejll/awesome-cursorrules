@@ -272,8 +272,8 @@ Guidelines and best practices for building applications with [Beefree SDK](https
     console.log('Loaded template from localStorage');
   } else {
     // Start with empty template
-              beefreeSDKInstance.start();
-          console.log('Started with empty template');
+    beefreeSDKInstance.start();
+    console.log('Started with empty template');
   }
   ```
 
@@ -292,10 +292,12 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 ### Autosave Functionality
 - Implement autosave to prevent data loss:
   ```typescript
-  onAutoSave: function (jsonFile) {
-    console.log("Auto-saving template...");
-    localStorage.setItem("email.autosave", jsonFile);
-  }
+  const beeConfig = {
+    onAutoSave: function (jsonFile) {
+      console.log("Auto-saving template...");
+      localStorage.setItem("email.autosave", jsonFile);
+    }
+  };
   ```
 
 ## HTML Import Guidelines
@@ -331,12 +333,14 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 ### onError Callback
 - ALWAYS implement the `onError` callback to handle SDK errors:
   ```typescript
-  onError: function (errorMessage) {
-    console.error("Beefree SDK error:", errorMessage);
-    // Display user-friendly error message
-    document.getElementById('beefree-sdk-container').innerHTML = 
-      '<div class="error">Error loading Beefree SDK: ' + errorMessage.message + '</div>';
-  }
+  const beeConfig = {
+    onError: function (errorMessage) {
+      console.error("Beefree SDK error:", errorMessage);
+      // Display user-friendly error message
+      document.getElementById('beefree-sdk-container').innerHTML = 
+        '<div class="error">Error loading Beefree SDK: ' + errorMessage.message + '</div>';
+    }
+  };
   ```
 
 ### Authentication Error Handling
@@ -376,10 +380,12 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 ### Change Detection
 - Use the `onChange` callback to track template changes:
   ```typescript
-  onChange: function (jsonFile, response) {
-  console.log('json', jsonFile);
-  console.log('response', response);
+  const beeConfig = {
+    onChange: function (jsonFile, response) {
+      console.log('json', jsonFile);
+      console.log('response', response);
     },
+  };
   ```
 
 ## Customization Guidelines
