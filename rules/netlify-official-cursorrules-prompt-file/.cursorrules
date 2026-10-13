@@ -626,13 +626,13 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       (input?: GetDeployStoreOptions): Store;
     };
 
-    // Lists all stores available on a site.
+    // Lists site-wide stores. Deploy-specific stores are omitted.
     // example:
     //    const { stores } = await listStores();
     //      // [ "beauty", "construction" ]
-    // - By default, the listStores() method retrieves all pages, meaning you'll always get the full list of results. This can be slow or memory intensive. To paginate, pass the `paginate: true` in the options to turn the response into an AsyncIterator that allows you to for-of loop through the blobs in the store.
-    // - DO NOT pass options unless paginating.
-    declare function listStores(options?: {
+    // - By default, listStores retrieves every page. To paginate, pass `paginate: true`. The result is an AsyncIterator of pages, and each page has `stores: string[]`.
+    // - Pass `siteID` and `token` when calling from outside Functions, Edge Functions, or Build Plugins.
+    declare function listStores(options?: Partial<ClientOptions> & {
         paginate?: boolean;
     }): Promise<ListStoresResponse> | AsyncIterable<ListStoresResponse>;
 
