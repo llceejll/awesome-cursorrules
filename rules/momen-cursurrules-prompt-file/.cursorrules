@@ -84,7 +84,7 @@ Actionflows:
 2. Actionflows have two modes: synchronous (single transaction with rollback) and asynchronous (separate transactions per node).
 3. Synchronous actionflows:
    - Invoked via fz_invoke_action_flow mutation.
-   - Results returned in the same HTTP response.
+   - Results are returned in the same HTTP response.
    - Use for operations requiring transaction integrity.
 4. Asynchronous actionflows:
    - Create task via fz_create_action_flow_task mutation (returns task ID).
