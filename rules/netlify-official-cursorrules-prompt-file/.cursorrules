@@ -391,10 +391,10 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   {
     path?: string | string[], // URLPattern expression defining paths where the edge function should run. Must start with '/'.
     excludedPath?: string | string[], // Optional. Defines paths to exclude from execution. Must start with '/'.
-    pattern?: RegExp | RegExp[], // Alternative to `path`. Uses regex for path matching.
-    excludedPattern?: RegExp | RegExp[], // Optional. Defines regex patterns to exclude certain routes.
+    pattern?: string | string[], // Alternative to `path`. Regex path written as a string, such as "/products/(.*)".
+    excludedPattern?: string | string[], // Optional. Regex paths to exclude, written as strings.
     method?: string | string[], // Optional. Specifies HTTP methods that should trigger the function (e.g., "GET", ["POST", "PUT"]).
-    onError?: "continue" | "fail" | "fallback", // Optional. Controls how the function handles errors.
+    onError?: "fail" | "bypass" | `/${string}`, // Optional. `fail` serves the generic error page. `bypass` continues the request chain. A same-site path starting with `/` rewrites there.
     cache?: 'manual', // Optional. Enables response caching if set to 'manual'.
   } = {
     path: "", // Default value; should be set per function.
