@@ -179,8 +179,13 @@ globs: "**/*.{ts,tsx,js,jsx}"
                             });
                             ```
                             Note: `paginationOpts` is an object with the following properties:
-                            - `numItems`: the maximum number of documents to return (the validator is `v.number()`)
-                            - `cursor`: the cursor to use to fetch the next page of documents (the validator is `v.union(v.string(), v.null())`)
+                            - `numItems`: the number of items to load in this page. This is only an initial value. A reactive query may receive more or less items if documents were added to or removed from the query range (the validator is `v.number()`)
+                            - `cursor`: the cursor for the start of this page, or `null` to start at the beginning (the validator is `v.union(v.string(), v.null())`)
+                            - `endCursor` (optional): a cursor for the end of this page, or `null` to use `numItems` instead (the validator is `v.optional(v.union(v.string(), v.null()))`)
+                            - `maximumRowsRead` (optional): the maximum number of rows to read before returning a page (the validator is `v.optional(v.number())`)
+                            - `maximumBytesRead` (optional): the maximum number of bytes to read before returning a page (the validator is `v.optional(v.number())`)
+                            - `id` (optional): a cache-busting id used by `usePaginatedQuery` (the validator is `v.optional(v.number())`)
+                            Pass `args.paginationOpts` unchanged to `.paginate()`.
 - A query that ends in `.paginate()` returns an object that has the following properties:
                             - page (contains an array of documents that you fetch)
                             - isDone (a boolean that represents whether or not this is the last page of documents)
