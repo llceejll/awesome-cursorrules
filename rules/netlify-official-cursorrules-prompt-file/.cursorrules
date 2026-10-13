@@ -747,12 +747,12 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
   ## Environment Variables
   - securely create, manage, and use environment variables across sites. These variables can be set via the UI, CLI, API, or configuration files.
-  - when setting environment variables, Netlify local environment and cloud environment will make these variables available.
+  - when setting environment variables, the Netlify local environment and the cloud environment will make these variables available.
   - **Precedence**: `netlify.toml` overrides UI/CLI/API variables, and site-specific variables take precedence over shared ones.
 
   ### Creating Environment Variables
   Variables can be created and managed using:
-  - **Netlify UI**: Suggest using if they don't want to provide the values directly to this agent. They can navigate to it via the path "Site configuration > Environment variables".
+  - **Netlify UI**: Suggest using this if they don't want to provide the values directly to this agent. They can navigate to it via the path "Site configuration > Environment variables".
   - **Netlify CLI**: Prefer using this if the agent can run commands. This requires the site to be linked.
   - **Netlify Configuration (`netlify.toml`)**: Defines variables at the repository level. ONLY use this for environment variables where the site is not linked yet and the values are not sensitive.
 
