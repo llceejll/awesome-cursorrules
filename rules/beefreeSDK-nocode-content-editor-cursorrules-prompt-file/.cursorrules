@@ -262,7 +262,7 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 ## Template Loading Guidelines
 
 ### Loading Templates
-- Call `start(beeConfig, template)`. The configuration is the first argument and the template is the second. Pass `{}` when there is no saved template:
+- Call `start(beeConfig, template, endpoint, options)`. The configuration is the first argument and the template is the second. `endpoint` and `options` are optional; the current installation example passes `''` and `{ shared: false }`. Pass `{}` when there is no saved template:
   ```typescript
   // Load template from localStorage
   const selectedTemplate = JSON.parse(localStorage.getItem('currentEmailData'));
@@ -520,8 +520,9 @@ Reference the complete project at Beefree SDK [multiple-versions-concept](https:
   </head>
   <body>
     <div id="beefree-sdk-container"></div>
-    <script src="https://app-rsrc.getbee.io/plugin/v2/BeePlugin.js"></script>
-    <script type="text/javascript">
+    <script type="module">
+      import BeefreeSDK from 'https://cdn.jsdelivr.net/npm/@beefree.io/sdk/+esm';
+
       const beeConfig = {
         container: 'beefree-sdk-container',
         uid: 'demo-user-' + Date.now(),
@@ -534,29 +535,14 @@ Reference the complete project at Beefree SDK [multiple-versions-concept](https:
         }
       };
 
-      function getBeeToken(callback) {
-        fetch('http://localhost:3001/proxy/bee-auth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            uid: beeConfig.uid
-          })
-        })
-        .then(response => response.json())
-        .then(data => callback(data))
-        .catch(error => {
-          console.error('Error getting Beefree token:', error);
-        });
-      }
+      const token = await fetch('http://localhost:3001/proxy/bee-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uid: beeConfig.uid })
+      }).then((response) => response.json());
 
-      function initializeBeefree(authResponse) {
-        BeePlugin.create(authResponse, beeConfig, function (beePluginInstance) {
-          console.log('Beefree SDK initialized successfully');
-          beePluginInstance.start({});
-        });
-      }
-
-      getBeeToken(initializeBeefree);
+      const bee = new BeefreeSDK(token);
+      await bee.start(beeConfig, {}, '', { shared: false });
     </script>
   </body>
 </html>

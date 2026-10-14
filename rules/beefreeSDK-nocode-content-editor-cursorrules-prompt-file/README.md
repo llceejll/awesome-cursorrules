@@ -62,9 +62,10 @@ BEE_CLIENT_SECRET=your_client_secret_here
 </head>
 <body>
     <div id="beefree-sdk-container"></div>
-    
-    <script src="https://app-rsrc.getbee.io/plugin/v2/BeePlugin.js"></script>
-    <script>
+
+    <script type="module">
+        import BeefreeSDK from 'https://cdn.jsdelivr.net/npm/@beefree.io/sdk/+esm';
+
         const beeConfig = {
             container: 'beefree-sdk-container',
             language: 'en-US',
@@ -76,20 +77,14 @@ BEE_CLIENT_SECRET=your_client_secret_here
             }
         };
 
-        // Initialize with authentication
-        async function initializeBeefree() {
-            const token = await fetch('http://localhost:3001/proxy/bee-auth', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ uid: 'demo-user' })
-            }).then(res => res.json());
+        const token = await fetch('http://localhost:3001/proxy/bee-auth', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ uid: 'demo-user' })
+        }).then((response) => response.json());
 
-            BeePlugin.create(token, beeConfig, function (beePluginInstance) {
-                beePluginInstance.start({});
-            });
-        }
-
-        initializeBeefree();
+        const bee = new BeefreeSDK(token);
+        await bee.start(beeConfig, {}, '', { shared: false });
     </script>
 </body>
 </html>
