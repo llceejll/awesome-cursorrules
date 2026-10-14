@@ -21,8 +21,8 @@ The prompt would generate a complete Cypress test file with hierarchical tagging
 
 ```javascript
 // ui/shopping-cart.cy.js
-// Import the qa-shadow-report package
-const { ReportTracker } = require('qa-shadow-report');
+// qa-shadow-report is a CLI. Specs do not import it.
+// After the run, merge the mochawesome JSON and run: qa-shadow-report cypress
 
 describe('[CartTeam][regression] Shopping Cart Tests', () => {
   beforeEach(() => {
@@ -30,7 +30,7 @@ describe('[CartTeam][regression] Shopping Cart Tests', () => {
   });
 
   context('cart management', () => {
-    it('should add item to cart correctly [smoke][C5001]', () => {
+    it('should add item to cart correctly [C5001]', () => {
       cy.get('[data-testid="product-list"]')
         .find('.product-item')
         .first()
@@ -40,7 +40,7 @@ describe('[CartTeam][regression] Shopping Cart Tests', () => {
       cy.get('[data-testid="cart-items"]').should('contain', 'Product Name');
     });
 
-    it('should remove item from cart correctly [smoke][C5002]', () => {
+    it('should remove item from cart correctly [C5002]', () => {
       // Setup: First add an item
       cy.get('[data-testid="product-list"]')
         .find('.product-item')
