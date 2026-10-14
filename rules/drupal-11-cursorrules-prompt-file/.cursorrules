@@ -19,7 +19,7 @@ Always produce **functional, secure, and efficient** Drupal code that aligns wit
 - Follow Drupal’s directory conventions: put custom modules in `/modules` (or `/modules/custom`), custom themes in `/themes`, and use `/src` for PHP classes within a module or theme.  
 
 **Drupal API and Module Development**  
-- **Use Drupal 11 APIs**: leverage the latest core modules and functions. For example, use the new **Workspace (content staging)** module for staging content rather than building a custom staging solution, and use **Recipes** (Drupal 11’s recipe feature) to package reusable functionality if appropriate.  
+- **Use Drupal 11 APIs**: leverage the latest core modules and functions. For example, use the **Workspaces** module to stage and preview content rather than building a custom staging solution, and use **Recipes** (Drupal 11’s recipe feature) to package reusable functionality if appropriate.  
 - Utilize **Symfony services and dependency injection** in Drupal: obtain services via the service container (e.g. getting the `entity_type.manager` service for loading entities) instead of using global static methods. In classes (controllers, forms, etc.), inject needed services through the constructor.  
 - When writing forms, use Drupal’s Form API (`FormBase` classes) and validate/submit handlers according to Drupal patterns. For configuration, use the Config API (YAML `.yml` files and the `ConfigFormBase`).  
 - Ensure **cacheability** of outputs: when rendering content, attach cache contexts/tags as needed or use Drupal’s Render API best practices so that content can be properly cached and invalidated. Avoid disabling cache unless absolutely necessary.  
