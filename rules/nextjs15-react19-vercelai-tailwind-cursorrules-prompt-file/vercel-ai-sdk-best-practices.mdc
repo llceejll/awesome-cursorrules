@@ -3,7 +3,7 @@ description: Best practices for using the Vercel AI SDK in Next.js 15 applicatio
 globs: app/**/*
 ---
 - Use `streamText` for streaming text responses from AI models.
-- Use `streamObject` for streaming structured JSON responses.
+- Stream structured JSON with `streamText` and `output: Output.object({ schema })`, both imported from `ai`.
 - Implement proper error handling with `onFinish` callback.
 - Use `onChunk` for real-time UI updates during streaming.
 - Prefer server-side streaming for better performance and security.
