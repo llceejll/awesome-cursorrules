@@ -63,7 +63,7 @@ Tailwind CSS Styling
 - Utilize Tailwind's utility classes for responsive design.
 - Implement a consistent color scheme and typography with @theme in resources/css/app.css after @import "tailwindcss".
 - Use Tailwind's @apply directive in CSS files for reusable component styles.
-- Tailwind scans project source and generates only the classes it finds. In resources/css/app.css, add @source entries for Blade and JavaScript views, including the gitignored pagination templates under vendor and compiled views under storage.
+- Tailwind scans project Blade and JavaScript files on its own. In resources/css/app.css, add @source only for paths outside that scan: the pagination templates under vendor and the compiled views under storage.
 
 Performance Optimization
 
