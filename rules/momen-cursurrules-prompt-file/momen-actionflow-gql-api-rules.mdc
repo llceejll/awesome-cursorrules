@@ -127,11 +127,4 @@ query GetActionFlowResult($taskId: Long!) {
   }
 }
 ``` 
-The status field has the following transition rules:
-```java
-switch (status) {
-  case CREATED -> Set.of(PROCESSING);
-  case PROCESSING -> Set.of(COMPLETED, FAILED);
-  default -> Set.of();
-};
-```
+The status field uses the TaskStatus enum: CREATED, PROCESSING, COMPLETED, FAILED, STREAMING, and TIME_OUT.
