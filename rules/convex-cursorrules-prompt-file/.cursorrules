@@ -20,7 +20,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
       ```
 
 ### Http endpoint syntax
-- HTTP endpoints are defined in `convex/http.ts` and require an `httpAction` decorator. For example:
+- HTTP endpoints are defined in `convex/http.ts`. Wrap each route handler with the `httpAction` constructor. For example:
       ```typescript
       import { httpRouter } from "convex/server";
       import { httpAction } from "./_generated/server";
