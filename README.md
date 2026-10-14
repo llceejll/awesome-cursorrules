@@ -47,7 +47,7 @@ Configuration files that enhance Cursor AI editor experience with custom rules a
 
 6. **Project-Specific Knowledge**: You can include information about your project's structure, dependencies, or unique requirements, helping the AI to provide more accurate and relevant suggestions.
 
-By creating a `.cursorrules` file in your project's root directory, you can leverage these benefits and enhance your coding experience with Cursor AI.
+Cursor stores current project rules in `.cursor/rules` as `.mdc` files. Copy a rule from this catalog into that directory. When the file has no frontmatter, set the rule type to Always Apply, which [Cursor's rules help](https://cursor.com/help/customization/rules) describes as the match for the legacy root `.cursorrules` file. The steps are in [How to Use](#how-to-use).
 
 <!--lint ignore awesome-toc-->
 ## Contents
@@ -318,16 +318,19 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 
 1. Install Cursor AI if you haven't already.
 2. Browse the rules above to find a `.cursorrules` file that suits your needs.
-3. Copy the chosen `.cursorrules` file to your project's root directory.
-4. Customize the rules as needed for your specific project requirements.
+3. Open the command palette and run `New Cursor Rule`. Cursor saves the new file under `.cursor/rules` with an `.mdc` extension.
+4. Copy the chosen catalog file into that rule.
+5. If the catalog file has no frontmatter, set the rule type to Always Apply. [Cursor's rules help](https://cursor.com/help/customization/rules) says that matches the legacy root `.cursorrules` behavior. If the file already starts with frontmatter, keep it.
+6. Customize the rules as needed for your specific project requirements.
 
 ### Method Two
 
 1. Install Cursor AI if you haven't already.
-2. Install [vscode-cursor-rules](https://marketplace.visualstudio.com/items?itemName=BeilunYang.cursor-rules) extension.
-3. Open the command palette (Cmd+Shift+P or Ctrl+Shift+P) and type `Cursor Rules: Add .cursorrules`.
+2. Install the [vscode-cursor-rules](https://marketplace.visualstudio.com/items?itemName=BeilunYang.cursor-rules) extension.
+3. Open the command palette (Cmd+Shift+P or Ctrl+Shift+P) and run `Cursor Rules: Add .cursorrules`.
 4. Select and download the `.cursorrules` file that suits your needs.
-5. Customize the rules as needed for your specific project requirements.
+5. Move that content into `.cursor/rules` with `New Cursor Rule`, as in Method One. Cursor's rules help marks the root `.cursorrules` file as legacy.
+6. Customize the rules as needed for your specific project requirements.
 
 ## Contributing
 
