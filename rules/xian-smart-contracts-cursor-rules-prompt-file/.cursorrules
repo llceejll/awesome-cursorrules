@@ -8,13 +8,13 @@ Never mention TAU or Lamden.
 ### Basic Structure
 - Smart contracts are written in native Python without transpilation
 - `submission.submit_contract` requires a lowercase name of at most 64 characters. Unless `ctx.caller` is `sys`, the name must start with `con_`
-- `importlib.import_module` accepts a lowercase name of letters, digits, and underscores, and rejects a name that is only digits
+- `importlib.import_module` accepts a name of at most 64 characters that starts with a lowercase letter and then contains only lowercase letters, digits, and underscores
 
 ### Naming Conventions
 - The linter rejects a variable or function name that starts or ends with `_`
 - Follow standard Python naming conventions otherwise
 - Use descriptive names for clarity
-- Submit a contract with `submission.submit_contract(name=..., code=..., owner=..., constructor_args=...)` from the transaction signer. `submission` rejects the call when `ctx.caller` is not `ctx.signer`, so another contract cannot submit it
+- Submit a contract with `submission.submit_contract(name=..., code=..., owner=..., constructor_args=...)`. The caller is stored as the developer and the transaction signer is stored as the initiator
 
 ### Function Types
 - `@export` decorator defines public functions callable by any user or contract
