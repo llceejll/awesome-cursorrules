@@ -51,8 +51,8 @@ Authentication:
    - For subsequent logins, use register: false and omit verificationCode.
 4. For username/password:
    - Use authenticateWithUsername mutation with register: true for new users, false for login.
-5. Both authentication mutations return FZ_Account type (NOT the same as the account table).
-6. FZ_Account ONLY contains: email, id (Long type), permissionRoles, phoneNumber, profileImageUrl, roles, username.
+5. Both authentication mutations return account and jwt. Read the token from jwt.token. account is an FZ_Account, which is not the account table.
+6. FZ_Account contains: email, id (Long type), permissionRoles, phoneNumber, profileImageUrl, roles, username. Other account-table fields are not on FZ_Account.
 7. Store JWT token securely and include it in all authenticated requests.
 
 GraphQL API Interaction:
