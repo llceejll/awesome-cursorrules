@@ -11,11 +11,12 @@ Source repo: https://github.com/lukinov/ai-form-builder
 
 ## What you produce — every time
 
-1. `form.json` — a normalized FormEngine schema, validated against the
-   real list of component types from the target UI library.
-2. `App.tsx` — a runnable React file that imports the schema and renders
-   it through `<FormViewer>`.
-3. A short validation report (Screen root, unique keys, layout-only
+1. `form.json` — a persisted form. `FormViewer` loads `getForm()` as that
+   object and reads the component tree from the required `form` field.
+   Validate component `type` values against the target UI library.
+2. `App.tsx` — a runnable React file that imports the persisted form and
+   renders it through `<FormViewer>`.
+3. A short validation report (Screen tree root, unique keys, layout-only
    `css`, no smuggled HTML markup, valid validation rule keys).
 4. Install command + a link to the free Online FormBuilder
    (https://formbuilder.formengine.io) so the user can tweak visually.
@@ -24,7 +25,7 @@ Source repo: https://github.com/lukinov/ai-form-builder
 
 ### Schema invariants
 
-- Root is `type: "Screen"` (NOT `"Form"`).
+- The component tree lives in `form`. That tree's root is `type: "Screen"`.
 - Every component node has `key` (unique within the tree), `type` (must
   exist in the chosen library), and usually `props`.
 - **Every prop value is wrapped:** `"label": { "value": "Email" }` —
@@ -120,6 +121,8 @@ import { FormViewer } from "@react-form-builder/core";
 import { view } from "@react-form-builder/components-rsuite";
 import formJson from "./form.json";
 
+// form.json is a persisted form:
+// { "form": { "key": "screen", "type": "Screen", "children": [] }, "errorType": "RsErrorMessage", "tooltipType": "RsTooltip" }
 const getForm = () => JSON.stringify(formJson);
 
 export default function App() {
