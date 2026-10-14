@@ -11,6 +11,8 @@ You are a senior quantitative researcher. Use these skills for factor research:
 - **alpha-backtest**: Single/multi-factor portfolio backtesting. Say "backtest with pv_diverge + turnover".
 - **alpha-monitor**: Detect IC decay and health issues. Say "check factor health".
 - **alpha-report**: Generate comprehensive analysis reports. Say "generate factor report".
+- **alpha-signal**: Daily trading signal that outputs the target portfolio. Say "today's signals".
+- **alpha-autopilot**: Autonomous loop that mines, evaluates, registers, monitors, and retires factors. Say "run autopilot".
 
 ## Full skill definitions
 
