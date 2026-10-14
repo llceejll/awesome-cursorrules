@@ -10,69 +10,44 @@ This document describes the required protocol for uploading and referencing bina
 All binary assets (images, videos, files) are stored on object storage services (e.g., S3). Their storage path is recorded in Momen's database. **When referencing these assets in other tables, you must store only the asset's Momen ID, not its path or URL.**
 
 ## Upload Workflow
-To upload a binary asset and obtain its Momen ID, you must follow a strict two-step process:
+To upload a binary asset and obtain its Momen ID, follow the Runtime API upload steps:
 
 ### Step 1: Obtain a Presigned Upload URL
-1. **Calculate the MD5 hash** of the file (raw 128-bit hash), then Base64-encode it.
-2. **Call the appropriate GraphQL mutation** to request a presigned upload URL. Use the mutation that matches your asset type:
+1. **Calculate the MD5 digest** of the file contents (the raw 16-byte digest) and encode it as standard Base64. Do not use the URL-safe variant.
+2. **Call the V2 presigned query field** for the asset type. These are Query fields. The older fields without `V2` (`imagePresignedUrl`, `videoPresignedUrl`, `filePresignedUrl`, and `presignedImageList`) are mutations and are deprecated.
 
-   - `imagePresignedUrl` for images
-   - `videoPresignedUrl` for videos
-   - `filePresignedUrl` for other files
+   | Asset | Single-asset field | Batch field | Asset ID |
+   | --- | --- | --- | --- |
+   | Image | `imagePresignedUrlV2` | `presignedImageListV2` | `imageId` |
+   | Video | `videoPresignedUrlV2` | `presignedVideoListV2` | `videoId` |
+   | File | `filePresignedUrlV2` | — | `fileId` |
 
-   Provide:
-   - The Base64-encoded MD5 hash
-   - The file format/suffix (see `MediaFormat` below)
-   - (Optional) Access control (see `CannedAccessControlList` below)
+   Copy video and file arguments from GraphiQL. The published image query is:
 
-   #### Example GraphQL Mutations
    ```graphql
-   mutation GetImageUploadUrl($md5: String!, $suffix: MediaFormat!, $acl: CannedAccessControlList) {
-     imagePresignedUrl(imgMd5Base64: $md5, imageSuffix: $suffix, acl: $acl) {
+   query PrepareImageUpload($md5: String!, $format: MediaFormat!) {
+     imagePresignedUrlV2(imgMd5Base64: $md5, imageSuffix: $format) {
        imageId
        uploadUrl
        uploadHeaders
-     }
-   }
-
-   mutation GetVideoUploadUrl($md5: String!, $format: MediaFormat!, $acl: CannedAccessControlList) {
-     videoPresignedUrl(videoMd5Base64: $md5, videoFormat: $format, acl: $acl) {
-       videoId
-       uploadUrl
-       uploadHeaders
-     }
-   }
-
-   mutation GetFileUploadUrl($md5: String!, $format: MediaFormat!, $name: String, $suffix: String, $sizeBytes: Int, $acl: CannedAccessControlList) {
-     filePresignedUrl(
-       md5Base64: $md5
-       format: $format
-       name: $name
-       suffix: $suffix
-       sizeBytes: $sizeBytes
-       acl: $acl
-     ) {
-       fileId
-       uploadHeaders
-       uploadUrl
+       downloadUrl
+       contentType
      }
    }
    ```
 
-   - **`CannedAccessControlList`** (recommended: `PRIVATE`):
-     - AUTHENTICATE_READ, AWS_EXEC_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, DEFAULT, LOG_DELIVERY_WRITE, PRIVATE, PUBLIC_READ, PUBLIC_READ_WRITE
-   - **`MediaFormat`**:
-     - CSS, CSV, DOC, DOCX, GIF, HTML, ICO, JPEG, JPG, JSON, MOV, MP3, MP4, OTHER, PDF, PNG, PPT, PPTX, SVG, TXT, WAV, WEBP, XLS, XLSX, XML
+   `imageSuffix` and an optional `acl` must use the enum values shown in GraphiQL.
 
 ### Step 2: Upload the File and Use the Returned ID
-1. The mutation response includes:
+1. The query response includes:
    - The asset's unique ID (`imageId`, `videoId`, or `fileId`)
    - A presigned `uploadUrl`
-   - Any required `uploadHeaders`
+   - `uploadHeaders`
+   - `contentType`
 2. **Upload the file**:
-   - Perform an HTTP `PUT` request to the `uploadUrl` with the raw file data
-   - Include any `uploadHeaders` from the mutation response
+   - Perform an HTTP `PUT` request to the `uploadUrl` with the original file bytes
+   - Send every header in `uploadHeaders`. Do not omit or rewrite signed headers.
 3. **Reference the asset**:
    - Use the returned ID as the value for the corresponding `*_id` field in your Momen data mutation (e.g., `cover_image_id: returnedImageId`)
 
-> **Note:** This two-step process is **mandatory** for all media uploads in Momen.app.
+> **Note:** This upload process is **mandatory** for all media uploads in Momen.app.

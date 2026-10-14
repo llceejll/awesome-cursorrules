@@ -126,13 +126,13 @@ Binary Asset Uploads:
 
 1. All binary assets (images, videos, files) are stored in object storage, not PostgreSQL.
 2. Always reference assets by Momen ID, never by URL or path.
-3. Two-step upload process (mandatory):
-   - Step 1: Calculate MD5 hash, Base64-encode it, call presigned URL mutation (imagePresignedUrl, videoPresignedUrl, or filePresignedUrl).
-   - Step 2: HTTP PUT to uploadUrl with raw file data and uploadHeaders, then use returned ID (imageId, videoId, fileId).
-4. Presigned URL mutations require: MD5 Base64 hash, MediaFormat (suffix), optional CannedAccessControlList (recommend PRIVATE).
-5. Valid MediaFormat values: CSS, CSV, DOC, DOCX, GIF, HTML, ICO, JPEG, JPG, JSON, MOV, MP3, MP4, OTHER, PDF, PNG, PPT, PPTX, SVG, TXT, WAV, WEBP, XLS, XLSX, XML.
-6. When using media on frontend, always fetch the url subfield from FZ_Image, FZ_Video, or FZ_File types.
-7. Media columns are stored as {columnName}_id in database mutations.
+3. Upload process (mandatory):
+   - Calculate the MD5 digest (raw 16-byte digest) and encode it as standard Base64. Do not use the URL-safe variant.
+   - Call the V2 presigned query field: imagePresignedUrlV2 (imageId), videoPresignedUrlV2 (videoId), or filePresignedUrlV2 (fileId). Batch fields are presignedImageListV2 and presignedVideoListV2. The older non-V2 names are deprecated mutations.
+   - HTTP PUT the original file to uploadUrl and send every uploadHeaders entry, then use the returned asset ID.
+4. imagePresignedUrlV2 takes imgMd5Base64 and imageSuffix (MediaFormat). Optional acl must be an enum value from GraphiQL. Copy video and file arguments from GraphiQL.
+5. When using media on frontend, always fetch the url subfield from FZ_Image, FZ_Video, or FZ_File types.
+6. Media columns are stored as {columnName}_id in database mutations.
 
 Stripe Payments:
 
@@ -317,19 +317,17 @@ Binary Asset Upload Example:
 
 ```graphql
 # Step 1: Get presigned URL
-mutation GetImageUploadUrl(
-  $md5: String!
-  $suffix: MediaFormat!
-  $acl: CannedAccessControlList
-) {
-  imagePresignedUrl(imgMd5Base64: $md5, imageSuffix: $suffix, acl: $acl) {
+query PrepareImageUpload($md5: String!, $format: MediaFormat!) {
+  imagePresignedUrlV2(imgMd5Base64: $md5, imageSuffix: $format) {
     imageId
     uploadUrl
     uploadHeaders
+    downloadUrl
+    contentType
   }
 }
 
-# Step 2: Upload via HTTP PUT to uploadUrl with uploadHeaders
+# Step 2: PUT the original file to uploadUrl and send every uploadHeaders entry
 # Step 3: Use imageId in database mutation
 mutation CreatePostWithImage($imageId: Long!) {
   insert_post_one(object: { title: "My Post", cover_image_id: $imageId }) {
