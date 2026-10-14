@@ -39,7 +39,7 @@ An example AI Agent configuration whose output is streaming plain text will be u
     "output": "Unstructured Text"
 }
 ```
-1.  A mutation is sent to start the AI agent, supplying the arguments as inputArgs and the id as zAIConfigId. The response value only contains the id of the corresponding conversation. Key inputArgs by the argKey from the inputs object in the schema, not by displayName. A display name is ignored and the agent receives no value for that input. Media inputs (image, video, file, and arrays of them) take asset ids as values. The key may be the bare argKey or `{argKey}_id`. Both are recognized. There is no `_ids` form. e.g. the following configuration  
+1.  A mutation is sent to start the AI agent, supplying the arguments as inputArgs and the id as zAIConfigId. The response value only contains the id of the corresponding conversation. Key inputArgs by the argKey from the inputs object in the schema, not by displayName. A display name is ignored and the agent receives no value for that input. Media inputs (image, video, file, and arrays of them) take asset ids as values. The key may be the bare argKey, `{argKey}_id`, or `{argKey}_ids`. e.g. the following configuration  
 ```json
 { 
   "inputs": {
