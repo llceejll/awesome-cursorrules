@@ -532,7 +532,7 @@ The `Mutation` type provides write operations for the `post` entity, including:
 2. conditional and primary-key-based updates (`update_post`, `update_post_by_pk`)
 3. conditional or direct deletions (`delete_post`, `delete_post_by_pk`)
 
-With support for conflict resolution (`on_conflict`), partial updates (`_set`, `_inc`), and precise targeting via conditions (`where`) or primary keys (`pk_columns`).
+With support for conflict resolution (`on_conflict`), partial updates (`_set`, `_inc`), updates that target a record with `pk_columns`, and deletion by primary key with `id`.
 
 It's crucial to note that for `update_${tableName}` and `delete_${tableName}` operations, the `where` argument is non-nullable (`${tableName}_bool_exp!`), explicitly requiring a filter to prevent unintentional modifications or deletions of all records in a table.
 
@@ -655,7 +655,7 @@ input post_inc_input {
 
 #### Primary Key (post_pk_columns_input)
 
-The `post_pk_columns_input` type defines the fields required to uniquely identify a record by its primary key, used in operations that target specific records such as updates or deletions by primary key.
+The `post_pk_columns_input` type identifies the record for `update_post_by_pk`. `delete_post_by_pk` takes that primary key as `id`.
 
 ```
 input post_pk_columns_input {
