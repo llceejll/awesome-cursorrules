@@ -6,7 +6,7 @@ Never mention TAU or Lamden.
 ## Contract Structure
 
 ### Basic Structure
-- Smart contracts are written in native Python without transpilation
+- Smart contracts are written as a restricted Python module. Validators compile that source to canonical Xian VM IR and execute the IR
 - `submission.submit_contract` requires a lowercase name of at most 64 characters. Unless `ctx.caller` is `sys`, the name must start with `con_`
 - `importlib.import_module` requires a name of at most 64 characters that starts with a lowercase letter and then contains only lowercase letters, digits, and underscores, and that is not a Python standard-library or built-in module name
 
