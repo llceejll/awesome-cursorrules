@@ -16,8 +16,8 @@ Source repo: https://github.com/lukinov/ai-form-builder
    Validate component `type` values against the target UI library.
 2. `App.tsx` — a runnable React file that imports the persisted form and
    renders it through `<FormViewer>`.
-3. A short validation report (Screen tree root, unique keys, layout-only
-   `css`, no smuggled HTML markup, valid validation rule keys).
+3. A short validation report (Screen tree root, unique keys, `css` /
+   `style` shapes, no smuggled HTML markup, valid validation rule keys).
 4. Install command + a link to the free Online FormBuilder
    (https://formbuilder.formengine.io) so the user can tweak visually.
 
@@ -39,13 +39,9 @@ Source repo: https://github.com/lukinov/ai-form-builder
 
 ### Layout vs. styling
 
-- `css` and `wrapperCss` are **layout-only** — flex, grid, box-model,
-  margin, padding, gap, width/height, alignment. **Never** color, font,
-  background, border, shadow, radius, opacity, transform.
-- Visual styling belongs in the UI library's theme provider in
-  `App.tsx` (`<CustomProvider>` / `<ThemeProvider>` / `<MantineProvider>`).
-- The legacy `style` field is **forbidden** — use `css` / `wrapperCss`.
-- Device keys are `any`, `desktop`, `tablet`, and `mobile`. Each device value accepts `object` (camelCase CSS properties) and `string` (a plain CSS rule). Both can be present and are merged.
+- `css` and `wrapperCss` style the component and its wrapper. Device keys are `any`, `desktop`, `tablet`, and `mobile`. Each device value accepts `object` (camelCase CSS properties) and `string` (a plain CSS rule). Both can be present and are merged.
+- `style` and `wrapperStyle` set inline styles with the same device keys. They accept only `string`.
+- Set the UI library theme in `App.tsx` with `<CustomProvider>`, `<ThemeProvider>`, or `<MantineProvider>`.
 - No companion `.css` file alongside `App.tsx`. No root `className`. No
   `<style>` blocks. No `styled-components`.
 
