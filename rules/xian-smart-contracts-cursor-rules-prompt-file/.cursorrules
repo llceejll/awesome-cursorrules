@@ -196,9 +196,10 @@ else:
 - Generate random integers with `random.randint(min, max)`
 
 ### Datetime
-- Available by default without importing
-- Compare timestamps with standard comparison operators
-- Use the built-in `now` variable for current time
+- The runtime injects `datetime` without an import. Construct values with `datetime.datetime(...)` and `datetime.timedelta(...)`
+- Compare `Datetime` values with the comparison operators. Comparing a `Datetime` with another type raises `TypeError`
+- `now` is the finalized block timestamp. Every transaction in the same block sees the same value
+- `datetime.WEEKS`, `datetime.DAYS`, `datetime.HOURS`, `datetime.MINUTES`, and `datetime.SECONDS` are `Timedelta` constants
 
 ### Crypto
 - The runtime exposes `crypto.verify(vk, msg, signature)` and `crypto.key_is_valid(key)`
