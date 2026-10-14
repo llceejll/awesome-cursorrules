@@ -175,9 +175,7 @@ Each table generates a GraphQL object type (for single records) and root operati
 These types represent fundamental data values and map to GraphQL scalar types. This includes standard GraphQL scalars (like `String` and `Boolean`) and custom scalars specific to this platform. The specific mappings from the data model's column type to the corresponding GraphQL scalar type are detailed below:
 
 - `text` -> `String`
-- `integer` -> `bigint`
-- `bigint` -> `bigint`
-- `float8` -> `Decimal`
+- `integer` -> `bigint`, or the generated long type shown for that field in GraphiQL
 - `decimal` -> `Decimal`
 - `boolean` -> `Boolean`
 - `jsonb` -> `jsonb`
@@ -188,7 +186,7 @@ These types represent fundamental data values and map to GraphQL scalar types. T
 
 Column Type Classifications:
 
-1. **Numeric Column Types** (supporting avg and sum aggregation operations): `integer`, `bigint`, `float8`, `decimal`
+1. **Numeric Column Types** (supporting avg and sum aggregation operations): `integer`, `decimal`
 2. **Time Column Types**: `timestamptz`, `timetz`, `date`
 3. **Comparable Column Types** (supporting min and max aggregation operations): all numeric column types, time column types, and text types.
 
@@ -593,7 +591,7 @@ input post_set_input {
 
 #### Increment (post_inc_input)
 
-The `post_inc_input` type specifies fields that can be incrementally modified (increased or decreased) during an update operation, providing a convenient way to perform atomic counter operations. The fields are composed of Numeric Column Type fields from `Mutation Column Fields` (`integer`, `bigint`, `float8`, `decimal`).
+The `post_inc_input` type specifies fields that can be incrementally modified (increased or decreased) during an update operation, providing a convenient way to perform atomic counter operations. The fields are composed of Numeric Column Type fields from `Mutation Column Fields` (`integer`, `decimal`).
 
 ```
 input post_inc_input {
@@ -899,8 +897,7 @@ The sample below includes the title, month, and word-count clauses. Those three 
 
 The system supports nine `OperandColumnType` values: `bigint`, `decimal`, `text`, `boolean`, `jsonb`, `geo_point`, `timestamptz`, `timetz`, and `date`.
 
-- `integer` column type is treated as `bigint`.
-- `float8` column type is treated as `decimal`.
+- `integer` column type uses `bigint` or the generated long type shown in GraphiQL.
 
 A `post_bool_exp` names columns, relations, and the logical operators `_and`, `_or`, and `_not`. A column comparison puts the operator and the comparison value inside the column. The Runtime API publishes this object:
 
