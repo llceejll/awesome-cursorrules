@@ -11,7 +11,11 @@ Stack: Elixir, Phoenix, Docker, PostgreSQL, Tailwind CSS, Lefthook, Sobelow, Cre
 ## Commit Message Guidelines:
 
 - Always suggest a conventional commit message with an optional scope in lowercase. Follow this structure:
-  [optional scope]: [optional body][optional footer(s)]
+  <type>[optional scope]: <description>
+
+  [optional body]
+
+  [optional footer(s)]
 
 Where:
 

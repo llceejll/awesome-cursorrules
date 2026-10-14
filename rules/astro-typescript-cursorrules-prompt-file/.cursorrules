@@ -5,7 +5,7 @@
       
       "format": {
         "description": "The format for commit messages using the conventional commits spec.",
-        "body": "[optional scope]: \n\n[optional body]\n\n[optional footer(s)]"
+        "body": "<type>[optional scope]: <description>\n\n[optional body]\n\n[optional footer(s)]"
       },
       
       "enabled": true,
