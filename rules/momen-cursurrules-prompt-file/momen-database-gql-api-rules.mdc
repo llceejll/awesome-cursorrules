@@ -835,7 +835,7 @@ input post_bool_exp {
 The entire filtering system adheres to the standard SQL three-valued logic (`TRUE`, `FALSE`, `NULL`), where `NULL` represents an "unknown" value. This has a few key implications for filtering:
 
 - A `where` clause only includes rows where the final expression evaluates to `TRUE`. Rows that evaluate to `FALSE` or `NULL` are excluded.
-- Any direct comparison with `NULL` using operators like `=`, `!=`, `>`, etc., results in `NULL`. To properly check for nullity, you must use the `_is_null` or `_is_not_null` operators.
+- Any direct comparison with `NULL` using operators like `=`, `!=`, `>`, etc., results in `NULL`. Check nullity with `_is_null` on the column: `{ "id": { "_is_null": true } }`.
 - As a general rule, if any argument to a function is `NULL`, the function's output will also be `NULL`.
 
 ### The Three Foundational Principles of Comparison Predicates
@@ -979,42 +979,18 @@ The system supports nine `OperandColumnType` values: `bigint`, `decimal`, `text`
 - `integer` column type is treated as `bigint`.
 - `float8` column type is treated as `decimal`.
 
-```
-input post_bool_exp {
-  # 1. Binary Operators
-  # 1.1 Comparison Operators (generic)
-  _eq: post_binary_operand_input
-  _neq: post_binary_operand_input
-  _gt: post_binary_operand_input
-  _lt: post_binary_operand_input
-  _gte: post_binary_operand_input
-  _lte: post_binary_operand_input
-  # 1.2 Array Operations (generic)
-  _in: post_in_or_not_in_operand_input
-  _nin: post_in_or_not_in_operand_input
-  # 1.3 String Pattern Matching (text type)
-  _like: post_text_binary_operand_input
-  _nlike: post_text_binary_operand_input
-  _ilike: post_text_binary_operand_input
-  _nilike: post_text_binary_operand_input
-  _similar: post_text_binary_operand_input
-  _nsimilar: post_text_binary_operand_input
-  # 1.4 Json Operations (jsonb type)
-  _contains: post_jsonb_binary_operand_input
-  _contained_in: post_jsonb_binary_operand_input
-  _has_keys_any: post_has_key_all_or_has_key_any_operand_input
-  _has_key: post_has_key_operand_input
-  _has_keys_all: post_has_key_all_or_has_key_any_operand_input
-  
-  # 2. Unary Operators
-  # 2.1 Null Testing (generic)
-  _is_null: post_unary_operand_input
-  _is_not_null: post_unary_operand_input
-  # 2.2 Boolean Value Testing (boolean type)
-  _is_true: post_boolean_op
-  _is_false: post_boolean_op
+A `post_bool_exp` names columns, relations, and the logical operators `_and`, `_or`, and `_not`. A column comparison puts the operator and the comparison value inside the column. The Runtime API publishes this object:
+
+```json
+{
+  "where": {
+    "status": { "_eq": "published" },
+    "author": { "name": { "_ilike": "%lee%" } }
+  }
 }
 ```
+
+`_eq` is a top-level key only when a function transforms a field. In that case `left_operand` and `right_operand` sit directly on the operator, as in the `extract` example below. Inspect GraphiQL for generated fields on the current project.
 
 For example, to find all `post` records created in the year 2024, transform `created_at` with `extract` and compare the numeric year. The `variables` defining this `where` clause would be:
 
@@ -1036,31 +1012,22 @@ For example, to find all `post` records created in the year 2024, transform `cre
 
 #### Comparison Operators
 
-Test for equality (_eq), inequality (_neq), greater than (_gt), less than (_lt), greater than or equal (_gte), less than or equal (_lte). Applicable to comparable column types (all numeric column types and time column types).
+Test for equality (`_eq`), inequality (`_neq`), greater than (`_gt`), less than (`_lt`), greater than or equal (`_gte`), and less than or equal (`_lte`).
 
-Input: `${tableName}_binary_operand_input` (Requires `left_operand` and `right_operand` of the appropriate type).
+A comparison against a column names that column and passes the value directly:
 
+```json
+{ "status": { "_eq": "published" } }
 ```
-# Example Structure (Conceptual @oneOf applies)
-input post_binary_operand_input @oneOf {
-  text_operand(left_operand: post_text_op!, right_operand: post_text_op!)
-  bigint_operand(left_operand: post_bigint_op!, right_operand: post_bigint_op!)
-  # ... All nine OperandColumnType (timestamptz, bigint, etc.)
-}
-```
+
+When a function transforms the field, the operator is the key. `left_operand` and `right_operand` sit directly on that operator, as in the year `extract` example. The published `extract` filter does not wrap that pair in `bigint_operand`.
 
 #### Null Testing Operators
 
-`_is_null` and `_is_not_null` check if a value is NULL. As unary operators, their operand should be provided directly, not wrapped in `left_operand`.
+`_is_null` checks whether a column is NULL. It names the column first, the same way `_eq` does:
 
-Correct Usage:` {"_is_not_null": {"bigint_operand": { "column": "id" }}}`
-
-```
-input post_unary_operand_input @oneOf {
-  timestamptz_operand: post_timestamptz_op
-  bigint_operand: post_bigint_op
-  # ... All nine OperandColumnType
-}
+```json
+{ "id": { "_is_null": true } }
 ```
 
 #### Boolean Value Testing Operators
@@ -1087,11 +1054,10 @@ input post_boolean_op @oneOf {
 2. `_ilike` and `_nilike` for case-insensitive pattern matching
 3. `_similar` and `_nsimilar` for POSIX regular expression matching (case-sensitive)
 
-```
-input tag_text_binary_operand_input {
-  left_operand: tag_text_op!
-  right_operand: tag_text_op!
-}
+A pattern match names the text column and passes the pattern directly:
+
+```json
+{ "title": { "_ilike": "%Recap%" } }
 ```
 
 #### Json Operations
@@ -1122,20 +1088,15 @@ input post_has_key_all_or_has_key_any_operand_input {
 
 #### Array Operations
 
-1. `_in`: Checks if the operand value (implicit left operand) is present in the provided list (right operand, provided via array operand)
-2. `_nin`: Checks if the operand value is not present in the provided list.
+`_in` and `_nin` name the column and pass the list directly:
 
-```
-input post_in_or_not_in_operand_input @oneOf {
-  geo_point_operand(left_operand: post_geo_point_op!, right_operand: post_geo_point_array_op!)
-  decimal_operand(left_operand: post_decimal_op!, right_operand: post_decimal_array_op!)
-  # ... All nine OperandColumnType
-}
+```json
+{ "status": { "_in": ["published", "draft"] } }
 ```
 
 ## Operands (Input Value Generation)
 
-The filtering system relies heavily on **Operands**: specialized input types that define how a value (or array of values) is generated for use in predicate operators or functions. These operand types are used as arguments (e.g., `left_operand`, `right_operand`, function parameters) within the operator input types (like `${tableName}_binary_operand_input`) and function calls described elsewhere.
+Published column comparisons pass the column name and the comparison value directly. Operand inputs describe how a function argument is produced when GraphiQL shows `left_operand`, `right_operand`, or a `literal` / `column` wrapper. Confirm those generated names in GraphiQL.
 
 The system supports nine `OperandColumnType` values: `bigint`, `decimal`, `text`, `boolean`, `jsonb`, `geo_point`, `timestamptz`, `timetz`, and `date`.
 
@@ -1204,7 +1165,7 @@ input ${tableName}_${columnType}_array_conditional {
 
 Access specialized functions based on data type. Functions typically take single value operands, array operands, or enum values as arguments, allowing for complex expressions. (Every table's operands support the same function fields.)
 
-IMPORTANT: When providing a scalar value directly as an operand argument, it must be nested within the `literal` field.
+The published `extract` comparison passes a bare `right_operand`, such as `12`. Use `{ "literal": ... }` when GraphiQL shows a `literal` field on a function argument.
 
 1. Various functions use predefined enums
 
