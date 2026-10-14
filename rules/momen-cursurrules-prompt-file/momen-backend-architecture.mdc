@@ -195,28 +195,27 @@ For real-time functionality, the GraphQL API supports subscriptions. A client ca
 Once the WebSocket is established, the initial connection_init message will be acknowledged by the server with 
 ```json
 {
-  "id": null,
   "type": "connection_ack",
   "payload": null
 }
 ```
-You can then start sending subscriptions.
+You can then send a subscribe message for each operation.
 ```json
 {
-    "id": "some id, unique per websocket", 
-    "type": "start",
-    "payload": {
+  "id": "some id, unique per websocket",
+  "type": "subscribe",
+  "payload": {
     "operationName": "OperationName",
     "query": "subscription OperationName($arg0: String!) {  account (    where: {      username: {        _eq: $arg0      }    }  ) {    __typename    id    username  }}",
     "variables": { "arg0": "someName" }
-    }
+  }
 }
 ```
 You will get answers similar to this:
 ```json
 {
   "id": "2",
-  "type": "data",
+  "type": "next",
   "payload": {
     "data": {
       "account": [
