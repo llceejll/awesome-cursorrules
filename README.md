@@ -47,7 +47,7 @@ Configuration files that enhance Cursor AI editor experience with custom rules a
 
 6. **Project-Specific Knowledge**: You can include information about your project's structure, dependencies, or unique requirements, helping the AI to provide more accurate and relevant suggestions.
 
-Cursor stores current project rules in `.cursor/rules` as `.mdc` files. Copy a rule from this catalog into that directory. When the file has no frontmatter, set the rule type to Always Apply, which [Cursor's rules help](https://cursor.com/help/customization/rules) describes as the match for the legacy root `.cursorrules` file. The steps are in [How to Use](#how-to-use).
+Cursor stores current project rules in `.cursor/rules` as `.mdc` files. Copy a rule from this catalog into that directory. When the file has no frontmatter, set the rule type to Always Apply, which matches the legacy root `.cursorrules` file. The steps are in How to Use.
 
 <!--lint ignore awesome-toc-->
 ## Contents
