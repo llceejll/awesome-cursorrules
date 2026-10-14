@@ -17,7 +17,7 @@ Never mention TAU or Lamden.
 - Submit a contract with `submission.submit_contract(name=..., code=..., owner=..., constructor_args=...)`. The caller is stored as the developer and the transaction signer is stored as the initiator
 
 ### Function Types
-- `@export` decorator defines public functions callable by any user or contract
+- `@export` marks a public function. Every exported argument needs a whitelisted type annotation. If the contract has an owner, only that owner can call its exported functions
 - `@construct` decorator defines initialization function executed once at contract submission (optional)
 - Functions without decorators are private and can only be called by the contract itself
 - Functions with `@export` can call private functions internally
