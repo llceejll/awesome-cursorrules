@@ -310,7 +310,6 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 <!--lint enable awesome-list-item-->
 ## Directories
 
-- [CursorList](https://cursorlist.com)
 - [CursorDirectory](https://cursor.directory/)
 
 ## How to Use
