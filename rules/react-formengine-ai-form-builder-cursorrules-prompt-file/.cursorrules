@@ -44,8 +44,7 @@ Source repo: https://github.com/lukinov/ai-form-builder
 - Visual styling belongs in the UI library's theme provider in
   `App.tsx` (`<CustomProvider>` / `<ThemeProvider>` / `<MantineProvider>`).
 - The legacy `style` field is **forbidden** — use `css` / `wrapperCss`.
-- The shape is `{ "any": { "object": { "<layout-key>": "<value>" } } }`,
-  never a plain CSS string.
+- Device keys are `any`, `desktop`, `tablet`, and `mobile`. Each device value accepts `object` (camelCase CSS properties) and `string` (a plain CSS rule). Both can be present and are merged.
 - No companion `.css` file alongside `App.tsx`. No root `className`. No
   `<style>` blocks. No `styled-components`.
 
