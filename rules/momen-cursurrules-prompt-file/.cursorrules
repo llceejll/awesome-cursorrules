@@ -60,7 +60,7 @@ GraphQL API Interaction:
 1. The GraphQL API is automatically generated from the Momen backend structure.
 2. Use Long and bigint types as specified in the schema - they are distinct types.
 3. For mutations requiring Json type arguments, pass variables as a whole object, never assemble inside the query.
-4. Always check for 403 error codes in GraphQL responses, which indicate a permission violation.
+4. Permission failures appear in the GraphQL `errors` array. Check `message` and `path`.
 5. GraphQL scalar types include Boolean, Int, String, BigDecimal, Date, Decimal, Json, JsonObject, Long, Map_Long_StringScalar, Map_String_List_StringScalar, Map_String_MsExcelSheetDataScalar, Map_String_MsExcelSheetDataV2Scalar, Map_String_ObjectScalar, Map_String_StringScalar, Map_String_TableMappingScalar, OffsetDateTime, _int8, bigint, date, geography, jsonb, timestamptz, timetz, universal_scalar.
 6. Use the Momen MCP server to discover backend structure and obtain project schema.
 

@@ -240,27 +240,14 @@ When using a media file on the frontend, make sure to fetch its `url` subfield.
 Refer to momen-binary-asset-upload-rules
 
 ## Permission
-All GraphQL fields have permission control based on the current logged in user's role(s). If an attempted access violates permission policies, an error will be given within the GraphQL response. The key to look for here is the 403 error code.   
-e.g.
+All GraphQL fields have permission control based on the current logged in user's role(s). If an attempted access violates permission policies, the GraphQL response includes an error. Check `message` and `path`.
 ```json
 {
+  "data": null,
   "errors": [
     {
-      "errorCode": 403,
-      "extensions": {
-        "classification": "ACTION_FLOW"
-      },
-      "locations": [
-        {
-          "column": 2,
-          "line": 2
-        }
-      ],
-      "message": "Anonymous user has no permission on invocation of action flow: 63734821-319d-4f00-a5cf-69f134b42b9c",
-      "operation": "fz_invoke_action_flow_default_by_latest_version",
-      "path": [
-        "fz_invoke_action_flow_default_by_latest_version"
-      ]
+      "message": "permission denied",
+      "path": ["post"]
     }
   ]
 }
