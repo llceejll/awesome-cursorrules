@@ -137,20 +137,15 @@ Binary Asset Uploads:
 
 Stripe Payments:
 
-1. Include Stripe JavaScript/TypeScript client: @stripe/react-stripe-js and @stripe/stripe-js for React and ES modules, and https://js.stripe.com/endive/stripe.js for a script tag.
-2. Initialize Stripe with publishable key (write directly in source file - publicly exposed by design).
-3. Two payment modes: one-time and recurring (subscription).
-4. Always create order in database via actionflow before initiating payment (never on frontend).
-5. One-time payment:
-   - Call stripePayV2 mutation with orderId, amount (in currency's minor unit), and currency.
-   - Returns paymentClientSecret and stripeReadableAmount.
-   - Use clientSecret with Stripe Elements to show Checkout Form.
-6. Recurring payment (subscription):
-   - Call createStripeRecurringPayment mutation with orderId and priceId.
-   - Returns clientSecret, amount, recurringPaymentId, stripeReadableAmountAndCurrency, stripeRecurring.
-   - Use clientSecret with Stripe Elements to show Checkout Form.
-7. Stripe webhooks are handled automatically by Momen actionflows - no frontend logic needed.
-8. Frontend should poll or use GraphQL subscription to detect webhook effects (order status updates).
+1. Activate Stripe under Action → Payment → Stripe (Web). On the first activation, select the order table. Save the publishable key and secret key in that payment configuration. Do not mix test and live keys.
+2. Two payment modes: one-time and recurring (subscription). Every gateway in the project shares that order table. Momen maintains `payment_record`, `recurring_payment`, and `refund`.
+3. Create the order in the bound order table before starting payment. Keep monetary amounts under backend control.
+4. One-time payment: add Stripe → One-time payment and bind the order id, currency, and amount. Amount is a decimal in the currency’s smallest unit. Product name and product description are optional.
+5. Recurring payment: create the Price in Stripe, then add Stripe → Recurring payment → Initiate with the order id and price id. Cancel binds the recurring payment id from `recurring_payment`.
+6. The action’s On success branch is the frontend call or checkout result. It cannot contain data mutations. Fulfill from the generated webhook Actionflow only when `paymentFound` is true, `paymentStatus` is `SUCCESSFUL`, and `alreadyProcessed` is false. Compare the amount and currency with the trusted order.
+7. Refunds take the payment id from `payment_record`, not the order id, and belong to a trusted administrator role. Refund `paymentStatus` is `REFUNDED` or `FAILED`.
+8. Subscription states can include `INCOMPLETE`, `INCOMPLETE_EXPIRED`, `ACTIVE`, `PAST_DUE`, `CANCELED`, `TRIALING`, and `UNPAID`.
+9. Show the final result by querying the order table or `payment_record`. Do not treat the frontend branch as the final payment status.
 
 GraphQL Subscriptions:
 
@@ -342,27 +337,15 @@ mutation CreatePostWithImage($imageId: Long!) {
 
 Stripe Payment Example:
 
-```graphql
-mutation StripePay($orderId: Long!, $currency: String!, $amount: BigDecimal!) {
-  stripePayV2(
-    payDetails: { order_id: $orderId, currency: $currency, amount: $amount }
-  ) {
-    paymentClientSecret
-    stripeReadableAmount
-  }
+One-time payment binds these action inputs:
+
+```json
+{
+  "orderId": 167,
+  "currency": "USD",
+  "amount": 1990
 }
 ```
 
-```tsx
-// Use clientSecret with Stripe Elements
-function Checkout({ clientSecret }: { clientSecret: string }) {
-  const options = { clientSecret };
-
-  return (
-    <Elements stripe={stripePromise} options={options}>
-      <CheckoutForm />
-    </Elements>
-  );
-}
-```
+The generated webhook Actionflow exposes `orderId`, `paymentFound`, `paymentStatus` (`SUCCESSFUL` or `FAILED`), and `alreadyProcessed`. Fulfill only when `paymentFound` is true, `paymentStatus` is `SUCCESSFUL`, and `alreadyProcessed` is false.
 
