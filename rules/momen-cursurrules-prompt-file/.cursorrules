@@ -133,7 +133,7 @@ Binary Asset Uploads:
    - HTTP PUT the original file to uploadUrl and send every uploadHeaders entry, then use the returned asset ID.
 4. imagePresignedUrlV2 takes imgMd5Base64 and imageSuffix (MediaFormat). Optional acl must be an enum value from GraphiQL. Copy video and file arguments from GraphiQL.
 5. When using media on frontend, always fetch the url subfield from FZ_Image, FZ_Video, or FZ_File types.
-6. Media columns are stored as {columnName}_id in database mutations.
+6. When writing media fields, use {columnName}_id for one asset and {columnName}_ids for an asset list. For example, an image field named cover uses cover_id.
 
 Stripe Payments:
 

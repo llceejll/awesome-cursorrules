@@ -258,7 +258,7 @@ type FZ_Video {
 }
 ```
 
-All Media columns (e.g., `cover_image`) are physically stored as `${columnName}_id` columns in PostgreSQL (e.g., `cover_image_id`). These columns store Long IDs that reference the corresponding media records (`FZ_Image`, `FZ_File`, or `FZ_Video`). This acts as a special One-to-Many relationship from the media table to the owner table:
+A single media column (e.g., `cover_image`) is written as `${columnName}_id` (e.g., `cover_id` for a field named `cover`, or `cover_image_id` for `cover_image`). An asset list is written as `${columnName}_ids`. These values are Long IDs that reference `FZ_Image`, `FZ_File`, or `FZ_Video`. A single media column is a special One-to-Many relationship from the media table to the owner table:
 
 ```json
 {
