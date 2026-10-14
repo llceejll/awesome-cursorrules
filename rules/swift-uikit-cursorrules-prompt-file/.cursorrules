@@ -453,7 +453,8 @@ final class UserListViewController: UIViewController {
     
     private func bindViewModel() {
         let input = UserListViewModel.Input(
-            viewDidLoad: rx.viewDidLoad.asObservable(),
+            // Binding runs from viewDidLoad. RxCocoa has no viewDidLoad event.
+            viewDidLoad: Observable.just(()),
             refresh: refreshButton.rx.tap.asObservable(),
             selection: tableView.rx.itemSelected.asObservable()
         )
