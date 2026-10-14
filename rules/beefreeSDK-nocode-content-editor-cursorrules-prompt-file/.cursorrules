@@ -262,7 +262,7 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 ## Template Loading Guidelines
 
 ### Loading Templates
-- Call `start(beeConfig, template, endpoint, options)`. The configuration is the first argument and the template is the second. `endpoint` and `options` are optional; the current installation example passes `''` and `{ shared: false }`. Pass `{}` when there is no saved template:
+- Call `start(beeConfig, template, bucketDir, options)`. The configuration is the first argument and the template is the second. `bucketDir` and `options` are optional. The current installation example passes `''` and `{ shared: false }`. Pass `{}` when there is no saved template:
   ```typescript
   // Load template from localStorage
   const selectedTemplate = JSON.parse(localStorage.getItem('currentEmailData'));
