@@ -21,12 +21,12 @@ interface ThirdPartyApiConfig {
   outputs: { [key: string]: TypeDefinition };
 }
 ```
-N.B. The value of the operation field within ThirdPartyApiConfig determines the root GraphQL field. i.e. query -> query operation_${id}, and mutation -> mutation operation_${id}.
+N.B. An API configured and published under API generates a field named `fz_api_{api_unique_id}`. The operation type, input type, and response fields depend on that API. Copy the operation from GraphiQL. Legacy third-party APIs may still expose `operation_{operationId}` and an `fz_body` argument. Existing projects should follow the fields that remain in GraphiQL. Use the current API feature for new integrations.
 
 ## Invocation process
-Each input should be provided unless the user asks to remove it.  
-e.g. 
-Given TPA configuration as follows:
+Each input should be provided unless the user asks to remove it.
+
+A stored API config can look like this. It describes the imported HTTP API. It does not name the generated GraphQL field:
 ```json
       {
         "id": "lzb3ownk",
@@ -88,59 +88,19 @@ Given TPA configuration as follows:
         "operation": "mutation"
       }
 ```
-The corresponding GraphQL query should be
+Call the generated field and pass one input variable. This published example calls an API whose unique id is `create_order`:
 ```gql
-mutation request($summary: String, $location: String, $description: String, $start_dateTime: String, $start_timeZone: String, $end_dateTime: String, $end_timeZone: String, $attendees: [String], $Authorization: String) {
-  operation_lzb3ownk(
-    fz_body: {
-      summary: $summary
-      location: $location
-      description: $description
-      start: { dateTime: $start_dateTime, timeZone: $start_timeZone }
-      end: { dateTime: $end_dateTime, timeZone: $end_timeZone }
-      attendees: $attendees
-    }
-    Authorization: $Authorization
-  ) {
+mutation CallCreateOrderApi($input: fz_api_create_order_input!) {
+  fz_api_create_order(input: $input) {
     responseCode
-    field_200_json {
-      kind
-      etag
-      id
+    responseStatus
+    responseContentType
+    fz_api_create_order_response {
+      order_id
       status
-      htmlLink
-      created
-      updated
-      summary
-      description
-      location
-      creator {
-        email
-        self
-      }
-      organizer {
-        email
-        self
-      }
-      start {
-        dateTime
-        timeZone
-      }
-      end {
-        dateTime
-        timeZone
-      }
-      iCalUID
-      sequence
-      reminders {
-        useDefault
-      }
-      eventType
     }
   }
 }
 ```
-field_200_json is a fixed field for all third-party API derived GraphQL operations. It means the response that's valid for all 2xx response codes. 
-
-The responseCode subfield should always be checked, in case 5xx or 4xx codes are returned, which means field_200_json would be empty. 
+Check `responseCode` and `responseStatus` before reading the generated structured response field. A legacy operation may still return `field_200_json` for 2xx bodies and leave that field empty on 4xx or 5xx. Do not add `field_200_json` or `fz_body` to a new `fz_api_{api_unique_id}` operation unless GraphiQL still shows them. 
 
