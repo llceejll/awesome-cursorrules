@@ -150,7 +150,10 @@ mutation CreateOrder($actionFlowId: String!, $args: Json!) {
 ```
 AVOID assembling args inside the query. 
 
-### Exclusive List of Valid GraphQL Scalar Types
+### GraphQL scalar types
+Boolean
+Int
+String
 BigDecimal
 Date
 Decimal
