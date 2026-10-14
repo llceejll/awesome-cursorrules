@@ -108,7 +108,7 @@ final class UserListViewModel: ViewModelType {
                 self.userRepository.fetchUsers()
                     .trackActivity(activityTracker)
                     .trackError(errorTracker)
-                    .catchErrorJustReturn([])
+                    .catchAndReturn([])
             }
             .asDriver(onErrorJustReturn: [])
         

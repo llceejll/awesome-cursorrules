@@ -139,7 +139,7 @@ class HomeViewModel {
             .startWith(())
             .flatMapLatest { [unowned self] in
                 self.userRepository.getUsers()
-                    .catchErrorJustReturn([])
+                    .catchAndReturn([])
             }
             .share(replay: 1)
         
@@ -399,7 +399,7 @@ final class UserListViewModel: ViewModelType {
                 self.userRepository.fetchUsers()
                     .trackActivity(activityTracker)
                     .trackError(errorTracker)
-                    .catchErrorJustReturn([])
+                    .catchAndReturn([])
             }
             .asDriver(onErrorJustReturn: [])
         
