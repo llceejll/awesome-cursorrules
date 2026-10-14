@@ -8,6 +8,7 @@ globs: /**/*_api.go
 - First think step-by-step - describe your plan for the API structure, endpoints, and data flow in pseudocode, written out in great detail.
 - Confirm the plan, then write code!
 - Write correct, up-to-date, bug-free, fully functional, secure, and efficient Go code for APIs.
+- Register routes with ServeMux method and wildcard patterns (`GET /posts/{id}`, `/files/{path...}`, `/posts/{$}`) and read captured segments with `r.PathValue`.
 - Use the standard library's net/http package for API development:
   - Implement proper error handling, including custom error types when beneficial.
   - Use appropriate status codes and format JSON responses correctly.
