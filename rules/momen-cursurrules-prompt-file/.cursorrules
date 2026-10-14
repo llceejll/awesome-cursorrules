@@ -137,7 +137,7 @@ Binary Asset Uploads:
 
 Stripe Payments:
 
-1. Include Stripe JavaScript/TypeScript client: @stripe/react-stripe-js and @stripe/stripe-js for React, https://js.stripe.com/clover/stripe.js for ES modules.
+1. Include Stripe JavaScript/TypeScript client: @stripe/react-stripe-js and @stripe/stripe-js for React and ES modules, and https://js.stripe.com/endive/stripe.js for a script tag.
 2. Initialize Stripe with publishable key (write directly in source file - publicly exposed by design).
 3. Two payment modes: one-time and recurring (subscription).
 4. Always create order in database via actionflow before initiating payment (never on frontend).
