@@ -103,8 +103,11 @@ Use `RsCard` with the `header` prop, or `RsHeader` — never `<h1>` /
 
 ## Conditional rendering
 
-Use `renderWhen: { "jsCode": "data.X === Y" }` and pair with
-`validateWhen` if validations should also be conditional.
+Use `renderWhen` with a `value` expression. The expression reads `form.data` and does not use a `return`:
+
+`renderWhen: { "value": "form.data.X === Y" }`
+
+For a function body, set `computeType` to `"function"` and put the body in `fnSource`. When a validation rule should run only under a condition, put `validateWhen` on that rule with the same shape: `{ "value": "form.data.X === Y" }`.
 
 ## App.tsx — minimal starter
 
