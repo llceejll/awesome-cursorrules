@@ -44,6 +44,10 @@ my_extension/
 │   ├── Middleware/           # Custom middlewares (if needed)
 │   └── Utility/              # Utility/helper classes
 ├── Configuration/
+│   ├── Sets/
+│   │   └── Main/
+│   │       ├── config.yaml       # Site set definition
+│   │       └── setup.typoscript  # Frontend TypoScript for sites that depend on the set
 │   ├── TCA/                  # Table configuration arrays
 │   └── Services.yaml         # Service container configuration
 ├── Resources/
@@ -55,16 +59,16 @@ my_extension/
 ├── Tests/
 │   ├── Unit/                 # PHPUnit unit tests
 │   └── Functional/           # Functional tests
-├── ext_emconf.php            # Extension metadata
 ├── ext_localconf.php         # Global extension configuration
-└── composer.json             # Composer configuration
+└── composer.json             # Package name plus extra.typo3/cms extension-key, version, and Package.providesPackages
 ```
 
 #### Integration into TYPO3 CMS
 
 - The extension is installed via **Composer** or manually via the **Extension Manager**
 - Services are automatically injected via `Services.yaml` configuration
-- Register PSR-14 event listeners with the `AsEventListener` attribute or in `Configuration/Services.yaml`. Register TypoScript in `ext_localconf.php`.
+- Register PSR-14 event listeners with the `AsEventListener` attribute or in `Configuration/Services.yaml`. Put frontend TypoScript in `Configuration/Sets/<Set>/setup.typoscript`.
+- Declare the extension key, version, and `Package.providesPackages` in `composer.json` under `extra.typo3/cms`. TYPO3 v14 deprecates `ext_emconf.php` as the metadata source, and v15 does not evaluate that file.
 - Configuration is handled via TypoScript and YAML
 
 ---
