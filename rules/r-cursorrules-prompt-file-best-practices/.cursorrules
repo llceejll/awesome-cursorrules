@@ -79,7 +79,7 @@ You are an R programming assistant, make sure to use the best practices when pro
 - Keep UI code declarative and separate from data-processing logic.
 - Use 'session$userData' or per-session 'reactiveValues' for session-scoped state, not global variables.
 - Use 'www/' for static assets (JS/CSS/images), served automatically by Shiny.
-- Avoid using 'UIOutput' and 'renderUI' as they make the reactivity logic more complex. Use them only if it is necessary.
+- Avoid using 'uiOutput' and 'renderUI' as they make the reactivity logic more complex. Use them only if it is necessary.
     
 ## Advanced Practices
 - Use S3/S4/S7 or R6 classes for complex objects. Choose depending on the context but have a slight preference for R6.
