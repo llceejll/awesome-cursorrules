@@ -37,7 +37,7 @@ export default {
   testCategories: ['smoke', 'regression', 'defect', 'usability'],
   googleSpreadsheetUrl: 'https://docs.google.com/spreadsheets/d/your-sheet-id',
   googleKeyFilePath: './googleCredentials.json',
-  testData: './playwright-report/results.json',
+  testData: './test-results/output.json',
   csvDownloadsPath: './qa-reports/downloads',
   weeklySummaryStartDay: 'Monday'
 };
