@@ -90,8 +90,8 @@ Corresponds to:
       }
     }
     ```
-2.  The obtained conversation id is used to subscribe to the result of the previous invocation of the AI Agent. Multiple messages may be received. The messages' status may transition from IN_PROGRESS to STREAMING to eventually COMPLETED. The last message always gives you COMPLETED status and its data field will contain the consolidated output from all the previous STREAMING messages' data field. 
-For models that have reasoning content output, it works similarly to the actual output. i.e. Partial reasoning content will be emitted first in multiple messages in the reasoningContent field, and then when everything is ready, the entirety of reasoningContent will be emitted again in the COMPLETED message. 
+2.  The obtained conversation id is used to subscribe to the result of the previous invocation of the AI Agent. Multiple messages may be received. Conversation status values include CREATED, IN_PROGRESS, THINKING_CHAIN_STREAMING, STREAMING, COMPLETED, FAILED, and CANCELED. Streaming text may arrive in multiple messages. A COMPLETED message carries the consolidated output from earlier STREAMING messages in `data`. FAILED and CANCELED are terminal as well.
+For models that have reasoning content output, partial reasoning content is emitted first in the reasoningContent field, and a COMPLETED message includes the full reasoningContent. 
     Subscription request:  
     Query: 
     ```gql
@@ -172,10 +172,25 @@ For models that have reasoning content output, it works similarly to the actual 
       }
     }
     ```
+When the client cannot hold a WebSocket, poll the same conversationId with `fz_zai_conversation_result`. The query returns the current snapshot and does not replay streaming deltas. Poll until the status is COMPLETED, FAILED, or CANCELED.
+```gql
+query AgentConversationResult($conversationId: Long!) {
+  fz_zai_conversation_result(conversationId: $conversationId) {
+    conversationId
+    status
+    data
+    reasoningContent
+    images {
+      id
+      url
+    }
+  }
+}
+```
 ## Invocation process for non-streaming plain text output
 1. The mutation step is identical to the one inside the invocation process for streaming output. I.e. send a mutation `fz_zai_create_conversation(inputArgs: $inputArgs, zaiConfigId: $zaiConfigId)` to obtain the conversation id. 
 
-2. There will be no messages in the STREAMING state. i.e. A message of IN_PROGRESS status will be sent by the server, followed directly by the COMPLETED message with the final result. 
+2. There will be no messages in the STREAMING state. An IN_PROGRESS message can be followed by COMPLETED with the final result. FAILED and CANCELED are terminal as well. 
 
 ## Invocation process for AI agents that use models with image output
 Certain models support image output, like gemini-2.5-flash-image.  
@@ -224,7 +239,7 @@ AI agents with structured output cannot be streaming. They also always come with
     }
 }
 ```
-There will be no messages from the GraphQL server that are in the "STREAMING" state. There will be one "COMPLETED" message where the data field is a JSON that satisfies the JSONSchema. 
+There will be no messages from the GraphQL server that are in the "STREAMING" state. A COMPLETED message has a data field that is JSON matching the JSONSchema. FAILED and CANCELED are terminal as well. 
 e.g. 
 ```json
 {
@@ -250,7 +265,7 @@ e.g.
     "text": "make it about the sun"
   }
   ```
-The response from the corresponding fz_zai_listen_conversation_result will then continue. Similar to what happens after one initiates a conversation with an AI agent, going through the same IN_PROGRESS -> (STREAMING) -> COMPLETED status transition. 
+The response from the corresponding fz_zai_listen_conversation_result will then continue. Status values are the same set as a new conversation: CREATED, IN_PROGRESS, THINKING_CHAIN_STREAMING, STREAMING, COMPLETED, FAILED, and CANCELED. 
 
 ## Stopping conversation
 For conversations still in "IN_PROGRESS" or "STREAMING" states, they can be stopped by calling fz_zai_stop_responding, which always returns true. 
