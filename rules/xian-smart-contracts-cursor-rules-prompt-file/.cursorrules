@@ -88,25 +88,29 @@ foundation_owner = ForeignVariable(foreign_contract='foundation', foreign_name='
 - Use it when the original external signer is the authority, and use `ctx.caller` for the immediate caller
 
 ### ctx.this
-- The identity/name of the current contract
-- Never changes
-- Useful when the contract needs to refer to itself
+- The name of the contract currently executing
+- A nested call reports the callee, and the caller sees its own name again after that call returns
 
 ### ctx.owner
-- Owner of the contract, optional field set at time of submission
+- Runtime `__owner__` metadata, or `None` when unset
+- Separate from an application variable such as `owner = Variable()`
 - Only the owner can call exported functions if set
-- Pass `owner` to `submission.submit_contract` when the contract is submitted. That value stays on the contract
+- Pass `owner` to `submission.submit_contract` when the contract is submitted. The current owner can transfer it with `submission.change_owner(contract=..., new_owner=...)`
 
 ### ctx.entry
-- Returns tuple of (contract_name, function_name) of the original entry point
+- Returns tuple of (contract, function) at the transaction entry point
 - Helps identify what contract and function initiated the call chain
+
+### ctx.submission_name
+- The contract being deployed during module and constructor execution
 
 ## Built-in Variables
 
 ### Time and Blockchain Information
-- `now` - Returns the current datetime
-- `block_num` - Returns the current block number, useful for block-dependent logic
-- `block_hash` - Returns the current block hash, can be used as a source of randomness
+- `now` is the finalized block timestamp from consensus context
+- `block_num` is the executing block height
+- `block_hash` is the executing block hash
+- `chain_id` is the network chain identifier
 
 Example usage:
 ```python
