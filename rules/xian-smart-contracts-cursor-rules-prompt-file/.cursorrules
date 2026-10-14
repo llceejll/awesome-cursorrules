@@ -259,20 +259,26 @@ result = self.some_contract.some_fn(some_arg=some_value, signer="some_signer")
 
 ### Defining Events
 - Use `LogEvent` to define events at module scope
-- Pass the event name and a field map. Each field is a dictionary with `type`. Set `idx` to `True` for an indexed field. A field type may be one type or a tuple of `str`, `int`, `float`, `bool`, or `decimal`
+- Pass `event` for the event name and `params` for the field map. The compiler supplies `contract` and `name`. Each field is a dictionary with `type`. Set `idx` to `True` for an indexed field. A field type may be one type or a tuple of `str`, `int`, `float`, `bool`, or `decimal`
 
 ```python
-TransferEvent = LogEvent("Transfer", {
-    "from": {"type": str, "idx": True},
-    "to": {"type": str, "idx": True},
-    "amount": {"type": (int, float, decimal)},
-})
+TransferEvent = LogEvent(
+    event="Transfer",
+    params={
+        "from": {"type": str, "idx": True},
+        "to": {"type": str, "idx": True},
+        "amount": {"type": (int, float, decimal)},
+    },
+)
 
-ApprovalEvent = LogEvent("Approval", {
-    "owner": {"type": str, "idx": True},
-    "spender": {"type": str, "idx": True},
-    "amount": {"type": (int, float, decimal)},
-})
+ApprovalEvent = LogEvent(
+    event="Approval",
+    params={
+        "owner": {"type": str, "idx": True},
+        "spender": {"type": str, "idx": True},
+        "amount": {"type": (int, float, decimal)},
+    },
+)
 ```
 
 ### Emitting Events
