@@ -172,12 +172,12 @@ Each table generates a GraphQL object type (for single records) and root operati
 
 ### Primitive Column Types
 
-These types represent fundamental data values and map to GraphQL scalar types. This includes standard GraphQL scalars (like `String`, `Int`, `Boolean`) and custom scalars specific to this platform. The specific mappings from the data model's column type to the corresponding GraphQL scalar type are detailed below:
+These types represent fundamental data values and map to GraphQL scalar types. This includes standard GraphQL scalars (like `String` and `Boolean`) and custom scalars specific to this platform. The specific mappings from the data model's column type to the corresponding GraphQL scalar type are detailed below:
 
 - `text` -> `String`
-- `integer` -> `Int`
+- `integer` -> `bigint`
 - `bigint` -> `bigint`
-- `float8` -> `Float8`
+- `float8` -> `Decimal`
 - `decimal` -> `Decimal`
 - `boolean` -> `Boolean`
 - `jsonb` -> `jsonb`
