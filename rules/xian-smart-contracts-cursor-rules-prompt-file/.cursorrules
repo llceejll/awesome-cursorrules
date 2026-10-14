@@ -192,8 +192,9 @@ else:
 ## Modules
 
 ### Random
-- Seed RNG with `random.seed()`
-- Generate random integers with `random.randint(min, max)`
+- Call `random.seed()` before any other `random` function in the transaction. An optional argument is an extra salt and resets the sequence
+- The seed comes from public execution context (`chain_id`, `block_num`, `block_hash`, and `__input_hash`), so observers can reproduce the sequence
+- `random.randint(a, b)` returns an integer from `a` through `b` inclusive
 
 ### Datetime
 - The runtime injects `datetime` without an import. Construct values with `datetime.datetime(...)` and `datetime.timedelta(...)`
