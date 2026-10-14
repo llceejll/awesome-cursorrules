@@ -67,15 +67,15 @@ GraphQL API Interaction:
 Database Operations:
 
 1. Each database table generates GraphQL query, mutation, and subscription operations.
-2. Query root fields: {table}, {table}_by_pk, {table}_aggregate.
+2. Query root fields: `{table}`, `{table}_by_pk`, `{table}_aggregate`, and `{table}_group_by`. A location column also adds `fz_{table}_by_{column}`.
 3. Mutation root fields: insert_{table}, update_{table}, delete_{table}, insert_{table}_one, update_{table}_by_pk, delete_{table}_by_pk.
 4. System-managed columns (id, created_at, updated_at) are automatically set and not user-settable.
 5. Use where clauses for filtering with comparison operators: _eq, _neq, _gt, _gte, _lt, _lte, _in, _nin, _like, _ilike, _is_null.
 6. Use order_by for sorting with asc or desc.
 7. Use limit and offset for pagination.
 8. For relationships, use nested selection sets to fetch related data.
-9. One-to-Many relationships: Use array selection in source table (e.g., posts { author { name } }).
-10. One-to-One relationships: Use object selection (e.g., post { meta { seo_title } }).
+9. One-to-Many relationships: select the list field on the "one" side, for example `account { posts { title } }`. The field back to the parent is an object, for example `post { author { name } }`.
+10. One-to-One relationships: use object selection, for example `post { meta { seo_title } }`.
 11. Many-to-Many relationships: Navigate through junction table (e.g., post { post_tags { tag { name } } }).
 
 Actionflows:

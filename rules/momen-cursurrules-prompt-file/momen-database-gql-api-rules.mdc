@@ -324,13 +324,13 @@ This section details the notation used in the schema descriptions that follow.
 
 ## Root Operations and Inputs
 
-Root GraphQL fields for query and mutation operations are named systematically based on their corresponding table names. For example, a table named `post` generates query operations like `post`, `post_by_pk`, and `post_aggregate`, as well as mutation operations like `insert_post`, `update_post`, and `delete_post`. This consistent naming pattern applies across all tables in the user's data model, making the API intuitive and predictable.
+Root GraphQL fields for query and mutation operations are named systematically based on their corresponding table names. For example, a table named `post` generates query operations like `post`, `post_by_pk`, `post_aggregate`, and `post_group_by`, as well as mutation operations like `insert_post`, `update_post`, and `delete_post`. A location column also adds `fz_post_by_{column}`. This consistent naming pattern applies across all tables in the user's data model, making the API intuitive and predictable.
 
 This consistent naming pattern applies across all tables in the user's data model.
 
 ### Query Operations
 
-The `Query` type provides versatile read operations for the `post` entity, such as fetching lists of posts (via the `post` field), retrieving single posts by primary key (`post_by_pk`), and performing data aggregations (`post_aggregate`). All of these GraphQL operations are designed to be efficiently translated into underlying PostgreSQL `SELECT` queries.
+The `Query` type provides versatile read operations for the `post` entity, such as fetching lists of posts (via the `post` field), retrieving single posts by primary key (`post_by_pk`), performing data aggregations (`post_aggregate`), and grouping results (`post_group_by`). All of these GraphQL operations are designed to be efficiently translated into underlying PostgreSQL `SELECT` queries.
 
 ```
 type Query {
@@ -339,6 +339,8 @@ type Query {
   post_aggregate(where: post_bool_exp, order_by: [post_order_by!], distinct_on: [post_select_column!], offset: Int, limit: Int): post_aggregate!
 }
 ```
+
+The runtime reference also generates `post_group_by` for grouped results. A location column adds `fz_post_by_{column}`. Copy those arguments from GraphiQL.
 
 ### Query Inputs
 
