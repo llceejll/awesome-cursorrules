@@ -228,7 +228,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
                         handler: async (ctx, args) => {
                             const idToUsername: Record<Id<"users">, string> = {};
                             for (const userId of args.userIds) {
-                                const user = await ctx.db.get(userId);
+                                const user = await ctx.db.get("users", userId);
                                 if (user) {
                                     idToUsername[user._id] = user.username;
                                 }
@@ -257,7 +257,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
 
 ## Query guidelines
 - Do NOT use `filter` in queries. Instead, define an index in the schema and use `withIndex` instead.
-- Convex queries do NOT support `.delete()`. Instead, `.collect()` the results, iterate over them, and call `ctx.db.delete(row._id)` on each result.
+- Convex queries do NOT support `.delete()`. Instead, `.collect()` the results, iterate over them, and call `ctx.db.delete(tableName, row._id)` on each result. `ctx.db.get`, `ctx.db.patch`, `ctx.db.replace`, and `ctx.db.delete` all take the table name before the document id.
 - Use `.unique()` to get a single document from a query. This method will throw an error if there are multiple documents that match the query.
 - When using async iteration, don't use `.collect()` or `.take(n)` on the result of a query. Instead, use the `for await (const row of query)` syntax.
 ### Ordering
@@ -267,8 +267,8 @@ globs: "**/*.{ts,tsx,js,jsx}"
 
 
 ## Mutation guidelines
-- Use `ctx.db.replace` to fully replace an existing document. This method will throw an error if the document does not exist.
-- Use `ctx.db.patch` to shallow merge updates into an existing document. This method will throw an error if the document does not exist.
+- Use `ctx.db.replace(tableName, id, document)` to fully replace an existing document. This method will throw an error if the document does not exist.
+- Use `ctx.db.patch(tableName, id, partial)` to shallow merge updates into an existing document. This method will throw an error if the document does not exist.
 
 ## Action guidelines
 - Always add `"use node";` to the top of files containing actions that use Node.js built-in modules or Node.js SDKs such as `openai`. A file with `"use node";` can only export actions, so keep queries and mutations in a separate file.
@@ -323,7 +323,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
 - The `ctx.storage.getUrl()` method returns a signed URL for a given file. It returns `null` if the file doesn't exist.
 - Do NOT use the deprecated `ctx.storage.getMetadata` call for loading a file's metadata.
 
-                    Instead, query the `_storage` system table. For example, you can use `ctx.db.system.get` to load a file's metadata for an `Id<"_storage">`.
+                    Instead, query the `_storage` system table. For example, you can use `ctx.db.system.get("_storage", storageId)` to load a file's metadata for an `Id<"_storage">`.
                     ```
                     import { query } from "./_generated/server";
                     import { Id } from "./_generated/dataModel";
@@ -341,7 +341,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
                         args: { fileId: v.id("_storage") },
                         returns: v.null(),
                         handler: async (ctx, args) => {
-                            const metadata: FileMetadata | null = await ctx.db.system.get(args.fileId);
+                            const metadata: FileMetadata | null = await ctx.db.system.get("_storage", args.fileId);
                             console.log(metadata);
                             return null;
                         },
@@ -571,11 +571,11 @@ export const sendMessage = mutation({
   },
   returns: v.null(),
   handler: async (ctx, args) => {
-    const channel = await ctx.db.get(args.channelId);
+    const channel = await ctx.db.get("channels", args.channelId);
     if (!channel) {
       throw new Error("Channel not found");
     }
-    const user = await ctx.db.get(args.authorId);
+    const user = await ctx.db.get("users", args.authorId);
     if (!user) {
       throw new Error("User not found");
     }
@@ -602,7 +602,7 @@ export const loadContext = internalQuery({
     }),
   ),
   handler: async (ctx, args) => {
-    const channel = await ctx.db.get(args.channelId);
+    const channel = await ctx.db.get("channels", args.channelId);
     if (!channel) {
       throw new Error("Channel not found");
     }
@@ -615,7 +615,7 @@ export const loadContext = internalQuery({
     const result = [];
     for (const message of messages.reverse()) {
       if (message.authorId) {
-        const user = await ctx.db.get(message.authorId);
+        const user = await ctx.db.get("users", message.authorId);
         if (!user) {
           throw new Error("User not found");
         }
