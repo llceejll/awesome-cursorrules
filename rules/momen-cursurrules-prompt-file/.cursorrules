@@ -156,8 +156,8 @@ GraphQL Subscriptions:
 
 1. Use subscriptions for real-time data updates (live chat, notifications, data changes).
 2. WebSocket sends connection_init, server acknowledges with connection_ack.
-3. Subscribe using start message with id, operationName, query, and variables.
-4. Server sends data messages with matching id containing updated data.
+3. Subscribe with a message whose type is `subscribe`. Include `id` plus a payload with `operationName`, `query`, and `variables`.
+4. The server sends `next` messages with the same `id`. The result is in `payload.data`.
 5. Use the same subscription operations as queries (e.g., subscription { post { id title } }).
 
 Best Practices:
