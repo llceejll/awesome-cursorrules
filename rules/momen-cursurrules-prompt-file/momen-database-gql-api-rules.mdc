@@ -354,7 +354,10 @@ mutation InsertPost($object: post_insert_input!) {
     constraint: post_pkey,
     update_columns: [title, content]
   }) {
-    id
+    affected_rows
+    returning {
+      id
+    }
   }
 }
 ```
