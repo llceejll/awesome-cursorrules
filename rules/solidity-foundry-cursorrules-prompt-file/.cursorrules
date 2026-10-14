@@ -68,7 +68,7 @@ Solidity Best Practices
 Testing and Quality Assurance
 
 - Implement a comprehensive testing strategy including unit, integration, and end-to-end tests.
-- Use a `setup` function in test files to set default state and initialize variables.
+- Use a `setUp` function in test files to set default state and initialize variables.
 - Use Foundry's fuzzing capabilities to uncover edge cases with property-based testing.
 - Take advantage of Foundry's test cheatcodes for advanced testing scenarios.
 - Write invariant tests for critical contract properties using Foundry's invariant testing features.
