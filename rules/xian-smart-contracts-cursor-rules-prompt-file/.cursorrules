@@ -201,25 +201,22 @@ else:
 - Use the built-in `now` variable for current time
 
 ### Crypto
-- Provides cryptographic functionality using the PyNaCl library under the hood
-- Employs the Ed25519 signature scheme for digital signatures
-- Main function is `verify` for signature validation
+- The runtime exposes `crypto.verify(vk, msg, signature)` and `crypto.key_is_valid(key)`
+- `verify` checks an Ed25519 signature. It returns `True` when `vk` is a 32-byte public key in hex, `signature` is hex, and the signature matches the UTF-8 bytes of `msg`
+- A signature that decodes cleanly and does not match returns `False`. Malformed hex or an invalid public-key shape can raise, so check an untrusted key with `crypto.key_is_valid` before `verify`
+- `key_is_valid` returns `True` only for a string of exactly 64 hexadecimal characters
 
 ```python
-# Verify a signature
+assert crypto.key_is_valid(vk), "Invalid verification key"
 is_valid = crypto.verify(vk, msg, signature)
-# Returns True if the signature is valid for the given message and verification key
 ```
 
 Example usage in a contract:
 ```python
 @export
-def verify_signature(vk: str, msg: str, signature: str):
-    # Use the verify function to check if the signature is valid 
-    is_valid = crypto.verify(vk, msg, signature)
-    
-    # Return the result of the verification
-    return is_valid
+def verify_signature(vk: str, msg: str, signature: str) -> bool:
+    assert crypto.key_is_valid(vk), "Invalid verification key"
+    return crypto.verify(vk, msg, signature)
 ```
 
 ### Hashlib
@@ -443,20 +440,17 @@ def test_transfer_balances(self):
 
 ```python
 def test_signature_validation(self):
-    # GIVEN a properly signed message
     signature = wallet.sign_msg(msg)
-    
-    # WHEN using the correct parameters
-    result = self.contract.verify_signature(msg=msg, signature=signature, 
-                                          public_key=wallet.public_key)
-    
-    # THEN verification should succeed
+
+    result = self.contract.verify_signature(
+        vk=wallet.public_key, msg=msg, signature=signature
+    )
     self.assertTrue(result)
-    
-    # BUT when using modified parameters
-    with self.assertRaises(Exception):
-        self.contract.verify_signature(msg=msg+"tampered", signature=signature, 
-                                     public_key=wallet.public_key)
+
+    tampered = self.contract.verify_signature(
+        vk=wallet.public_key, msg=msg + "tampered", signature=signature
+    )
+    self.assertFalse(tampered)
 ```
 
 #### 6. Edge Cases and Boundary Conditions
