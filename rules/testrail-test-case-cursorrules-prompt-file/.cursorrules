@@ -31,7 +31,7 @@ Focus on creating standardized TestRail test cases with these key components:
 # TestRail CSV Format Example
 
 ```csv
-Title,Section,Type,Priority,Preconditions,Steps,Expected Results
+Title,Section,Type,Priority,Preconditions,Steps,Expected Result
 "Login with Valid Credentials","User Authentication","Functional","Critical","User has valid account credentials","1. Navigate to the login page.
 2. Enter valid username 'testuser'.
 3. Enter valid password 'Password123'.
@@ -88,7 +88,7 @@ describe('Login Functionality', () => {
 TestRail CSV Format:
 
 ```csv
-Title,Section,Type,Priority,Preconditions,Steps,Expected Results
+Title,Section,Type,Priority,Preconditions,Steps,Expected Result
 "Login with Valid Credentials","User Authentication","Functional","Critical","User has valid account credentials","1. Navigate to the login page.
 2. Enter valid username 'testuser'.
 3. Enter valid password 'Password123'.
