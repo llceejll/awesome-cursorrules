@@ -404,13 +404,37 @@ enum NetworkError: Error {
     case decodingError(Error)
 }
 
+enum HTTPMethod: String {
+    case get = "GET"
+    case put = "PUT"
+}
+
 enum APIEndpoint {
     case users
     case user(id: Int)
     case updateUser(User)
-    
+
+    private var url: URL {
+        switch self {
+        case .users:
+            return URL(string: "https://example.com/users")!
+        case .user(let id):
+            return URL(string: "https://example.com/users/\(id)")!
+        case .updateUser(let user):
+            return URL(string: "https://example.com/users/\(user.id)")!
+        }
+    }
+
+    private var method: HTTPMethod {
+        switch self {
+        case .users, .user:
+            return .get
+        case .updateUser:
+            return .put
+        }
+    }
+
     func asURLRequest() -> URLRequest {
-        // Implementation details
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         return request
@@ -483,7 +507,8 @@ class UserListViewModelTests: XCTestCase {
         let users = [User(id: 1, name: "John", email: "john@test.com", avatar: nil)]
         mockRepository.usersToReturn = users
         
-        let viewDidLoad = scheduler.createHotObservable([.next(10, ())])
+        // TestScheduler subscribes at virtual time 200. Earlier hot events are missed.
+        let viewDidLoad = scheduler.createHotObservable([.next(210, ())])
         let refresh = scheduler.createHotObservable([Recorded<Event<Void>>]())
         let selection = scheduler.createHotObservable([Recorded<Event<IndexPath>>]())
         
@@ -498,7 +523,7 @@ class UserListViewModelTests: XCTestCase {
         
         // Then
         XCTAssertEqual(result.events.count, 1)
-        XCTAssertEqual(result.events.first?.value.element, users)
+        XCTAssertEqual(result.events.first?.value.element, Optional(users))
     }
 }
 

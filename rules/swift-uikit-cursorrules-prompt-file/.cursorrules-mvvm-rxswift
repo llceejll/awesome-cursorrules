@@ -268,7 +268,7 @@ class HomeViewModelTests: XCTestCase {
     }
     
     func testUsersLoading() {
-        let users = [User(id: 1, name: "John", email: "john@example.com")]
+        let users = [User(id: 1, name: "John", email: "john@example.com", profileImageURL: nil)]
         mockRepository.usersToReturn = users
         
         let result = scheduler.start {
@@ -276,7 +276,7 @@ class HomeViewModelTests: XCTestCase {
         }
         
         XCTAssertEqual(result.events.count, 1)
-        XCTAssertEqual(result.events.first?.value.element, users)
+        XCTAssertEqual(result.events.first?.value.element, Optional(users))
     }
 }
 ```
