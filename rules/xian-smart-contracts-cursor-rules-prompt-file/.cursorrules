@@ -17,7 +17,7 @@ Never mention TAU or Lamden.
 - Submit a contract with `submission.submit_contract(name=..., code=..., owner=..., constructor_args=...)`. The caller is stored as the developer and the transaction signer is stored as the initiator
 
 ### Function Types
-- `@export` marks a public function. Every exported argument needs a whitelisted type annotation. If the contract has an owner, only that owner can call its exported functions
+- `@export` marks a public function. Every exported argument needs a whitelisted type annotation. The linter requires those annotations, and the runtime checks arguments only when the decorator is `@export(typecheck=True)`. That option also checks a return annotation when one is present. Annotate decimal amounts with `float`; that annotation is a `ContractingDecimal` value. Do not annotate an exported signature with Python `Decimal`. If the contract has an owner, only that owner can call its exported functions
 - `@construct` decorator defines initialization function executed once at contract submission (optional)
 - Functions without decorators are private and can only be called by the contract itself
 - Functions with `@export` can call private functions internally
@@ -231,6 +231,13 @@ payload_hash = hashlib.sha3_text("transfer:alice:bob:10")
 byte_hash = hashlib.sha3_hex("68656c6c6f")
 sha256_result = hashlib.sha256_hex("68656c6c6f")
 ```
+
+### ZK
+- The runtime exposes `zk` for Groth16/BN254 verification. Proof generation stays off-chain
+- Prefer `zk.verify_groth16(vk_id, proof_hex, public_inputs)`. It loads an active key from `zk_registry`
+- `zk.verify_groth16_bn254(vk_hex, proof_hex, public_inputs)` sends the raw key. Both return `True` or `False` for well-formed inputs, and malformed encodings raise
+- Each public input is a `0x`-prefixed, exactly 32-byte, big-endian BN254 field element
+- `zk.is_available()`, `zk.has_verifying_key(vk_id)`, and `zk.get_vk_info(vk_id)` are also exposed. `zk.is_available()` is for tests and tooling
 
 ## Testing
 
