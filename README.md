@@ -275,8 +275,8 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [TypeScript (Node.js, Next.js, React, UI, CSS)](./rules/typescript-nodejs-nextjs-react-ui-css-cursorrules-/.cursorrules) - Cursor rules for TypeScript development with Node.js, Next.js, React, UI, and CSS integration.
 - [TypeScript (Node.js, React, Vite)](./rules/typescript-nodejs-react-vite-cursorrules-prompt-fi/.cursorrules) - Cursor rules for TypeScript development with Node.js, React, and Vite integration.
 - [TypeScript (React)](./rules/typescript-react-cursorrules-prompt-file/.cursorrules) - Cursor rules for TypeScript development with React integration.
+- [TypeScript (React, HeroUI, Supabase)](./rules/typescript-react-nextui-supabase-cursorrules-promp/.cursorrules) - Cursor rules for TypeScript development with React, HeroUI, and Supabase integration.
 - [TypeScript (React, Next.js, Cloudflare)](./rules/typescript-react-nextjs-cloudflare-cursorrules-pro/.cursorrules) - Cursor rules for TypeScript development with React, Next.js, and Cloudflare integration.
-- [TypeScript (React, NextUI, Supabase)](./rules/typescript-react-nextui-supabase-cursorrules-promp/.cursorrules) - Cursor rules for TypeScript development with React, NextUI, and Supabase integration.
 - [TypeScript (shadcn/ui, Next.js)](./rules/typescript-shadcn-ui-nextjs-cursorrules-prompt-fil/.cursorrules) - Cursor rules for TypeScript development with shadcn/ui and Next.js integration.
 - [TypeScript (Vite, Tailwind)](./rules/typescript-vite-tailwind-cursorrules-prompt-file/.cursorrules) - Cursor rules for TypeScript development with Vite and Tailwind integration.
 - [TypeScript (Vue.js)](./rules/typescript-vuejs-cursorrules-prompt-file/.cursorrules) - Cursor rules for TypeScript development with Vue.js integration.
