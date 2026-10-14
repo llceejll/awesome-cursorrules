@@ -4,8 +4,8 @@ globs: "**/*.svelte"
 ---
 - Use Tailwind CSS for utility-first styling approach.
 - Leverage Shadcn components for pre-built, customizable UI elements.
-- Import Shadcn components from `#lib/components/ui` and the `cn()` utility from `#lib/utils.js`.
-- Declare `#lib` in package.json `imports`: `"#lib/*": "./src/lib/*"`.
+- Import Shadcn components from `$lib/components/ui` and the `cn()` utility from `$lib/utils`.
+- SvelteKit resolves `$lib` to `src/lib`. Those paths are the default shadcn-svelte aliases.
 - Use Svelte's built-in transition and animation features.
 - Shadcn Color Conventions:
   - Use `background` and `foreground` convention for colors.
