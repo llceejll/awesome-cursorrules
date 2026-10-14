@@ -8,7 +8,7 @@ globs: "**/*.tsx, **/*.ts, **/*.vue, **/*.svelte, src/**/*.ts, app/**/*.ts, src/
 - Prefix platform-specific variables with `ios` or `android` (e.g., `iosButtonStyle`).
 - Name custom components and styles descriptively (`primaryButtonStyle`, `userProfileView`).
 - Use `@NativeClass()` when extending native classes when needed
-- For iOS, when extending native classes, always use `static ObjCProtocols = [AnyUIKitDelegate];` to declare custom delegates if a delegate is required or used.
+- For iOS, when extending a native class that conforms to protocols, list those protocols on `public static ObjCProtocols`, for example `public static ObjCProtocols = [NSCoding]`.
 - For iOS, always retain custom delegate instances to prevent garbage collection. For example, `let delegate = MyCustomDelegate.new() as MyCustomDelegate`, and ensure it is retained in the class scope.
 - Favor `__ANDROID__` and `__APPLE__` for conditional platform code with tree-shaking.
 - Track and clean up all timers (`setTimeout`, `setInterval`) to avoid memory leaks.
