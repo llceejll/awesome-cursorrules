@@ -113,7 +113,7 @@ AI Agents:
 3. Invocation process:
    - Create conversation: fz_zai_create_conversation mutation with inputArgs and zaiConfigId (returns conversationId).
    - Subscribe to results: fz_zai_listen_conversation_result subscription with conversationId.
-4. For media inputs (image, video, file, or arrays of them), set the value to the asset id. Key inputArgs by the schema argKey, or that argKey with an `_id` or `_ids` suffix (for example, `video_id` or `video_ids`). A display name such as the_video is ignored and the agent receives no value for that input.
+4. For media inputs (image, video, file, or arrays of them), set the value to the asset id. Key inputArgs by the schema argKey, or that same argKey with an `_id` suffix. An array uses that `_id` key as well, for example `images_id: [1020000000000098, 1020000000000099]`. AI inputArgs have no `_ids` key. A display name such as the_video is ignored and the agent receives no value for that input.
 5. Output types:
    - Streaming plain text: Multiple STREAMING status messages, then COMPLETED with full result in data field.
    - Non-streaming plain text: IN_PROGRESS status, then COMPLETED with result in data field.
