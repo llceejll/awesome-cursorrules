@@ -29,7 +29,7 @@ globs: "**/*.{ts,tsx,js,jsx}"
           path: "/echo",
           method: "POST",
           handler: httpAction(async (ctx, req) => {
-          const body = await req.bytes();
+          const body = await req.arrayBuffer();
           return new Response(body, { status: 200 });
           }),
       });
