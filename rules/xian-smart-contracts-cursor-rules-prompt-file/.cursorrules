@@ -221,13 +221,13 @@ def verify_signature(vk: str, msg: str, signature: str):
 ```
 
 ### Hashlib
-- `hashlib.sha3` and `hashlib.sha256` accept a string and return a lowercase hex digest
-- A string of valid unprefixed hex is hashed as those bytes. Any other string is hashed as text
+- `hashlib.sha3_text` and `hashlib.sha256_text` hash a string as UTF-8 text and return a lowercase hex digest
+- `hashlib.sha3_hex` and `hashlib.sha256_hex` hash an even-length unprefixed hex string as those bytes and return a lowercase hex digest
 
 ```python
-payload_hash = hashlib.sha3("transfer:alice:bob:10")
-byte_hash = hashlib.sha3("68656c6c6f")
-sha256_result = hashlib.sha256("68656c6c6f")
+payload_hash = hashlib.sha3_text("transfer:alice:bob:10")
+byte_hash = hashlib.sha3_hex("68656c6c6f")
+sha256_result = hashlib.sha256_hex("68656c6c6f")
 ```
 
 ## Testing
