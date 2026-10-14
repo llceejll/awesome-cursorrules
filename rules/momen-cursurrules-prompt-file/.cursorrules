@@ -16,7 +16,7 @@ Backend: Momen.app (https://momen.app) - Full-stack no-code platform used as hea
 
 Frontend: TypeScript/JavaScript with Apollo Client
 - Apollo Client v3.13.9 for GraphQL HTTP requests
-- subscriptions-transport-ws for WebSocket connections (NOT graphql-ws)
+- graphql-ws for WebSocket connections (Momen subscriptions use the graphql-ws protocol)
 - Modern UI framework (React/Next.js/Vue/Svelte as specified)
 - Tailwind CSS for styling (check online for latest integration methods)
 
@@ -25,7 +25,7 @@ Backend Architecture:
 1. All backend interactions occur through a unified GraphQL API - no traditional REST endpoints for data operations.
 2. HTTP endpoint: https://villa.momen.app/zero/{projectExId}/api/graphql-v2
 3. WebSocket endpoint: wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription
-4. Must use Apollo Client v3.13.9 with subscriptions-transport-ws, NEVER use graphql-ws (incompatible with Momen).
+4. Must use Apollo Client v3.13.9 with graphql-ws. Momen subscriptions speak the graphql-ws protocol, and the token goes in connection_init.payload.authToken.
 5. Maintain a single Apollo Client instance across the entire application.
 6. Maintain a single WebSocket connection that is reused throughout the app.
 7. Never cache anything at the GraphQL level.
@@ -35,7 +35,7 @@ Apollo Client Setup:
 
 1. Must create Apollo Client with split link for HTTP and WebSocket.
 2. Use HttpLink for queries and mutations.
-3. Use WebSocketLink with SubscriptionClient for subscriptions.
+3. Use GraphQLWsLink with a graphql-ws client for subscriptions.
 4. Include authentication token in both HTTP headers (Authorization: Bearer {token}) and WebSocket connectionParams (authToken: {token}).
 5. Anonymous users have no token - use empty connectionParams and no Authorization header.
 6. After writing or modifying GraphQL operations, generate TypeScript types with GraphQL Code Generator by running `npm run codegen` (`graphql-codegen --config codegen.ts`).
@@ -179,19 +179,19 @@ Apollo Client Reference Implementation:
 ```typescript
 import { ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { WebSocketLink } from '@apollo/client/link/ws';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { createClient } from 'graphql-ws';
 
 const httpUrl = 'https://villa.momen.app/zero/{projectExId}/api/graphql-v2';
 const wssUrl = 'wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription';
 
 export const createApolloClient = (token?: string) => {
-  const wsClient = new SubscriptionClient(wssUrl, {
-    reconnect: true,
-    connectionParams: token ? { authToken: token } : {},
-  });
-
-  const wsLink = new WebSocketLink(wsClient);
+  const wsLink = new GraphQLWsLink(
+    createClient({
+      url: wssUrl,
+      connectionParams: token ? { authToken: token } : {},
+    }),
+  );
 
   const splitLink = split(
     ({ query }) => {

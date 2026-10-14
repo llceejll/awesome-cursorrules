@@ -165,7 +165,7 @@ alwaysApply: true  # or false for contextual rules
 **Purpose**: Core architecture understanding - always applied  
 **Teaches AI**:
 - GraphQL API endpoints (HTTP & WebSocket)
-- Apollo Client + subscriptions-transport-ws setup
+- Apollo Client + graphql-ws setup
 - Authentication token handling
 - Project structure and conventions
 

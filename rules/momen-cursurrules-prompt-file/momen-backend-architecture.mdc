@@ -17,26 +17,28 @@ Momen is a full-stack no-code development platform, but its backend architecture
   - **WebSocket URL**: wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription
 
 ## Communicating with the backend
-When using Typescript, to communicate with a Momen.app project's backend server's GraphQL API, use Apollo GraphQL v3.13.9 + subscriptions-transport-ws, NEVER use graphql-ws as Momen.app is NOT compatible with it. 
+When using Typescript, to communicate with a Momen.app project's backend server's GraphQL API, use Apollo Client v3.13.9 with graphql-ws. Momen subscriptions use the graphql-ws protocol. Send the token as connection_init.payload.authToken.
 ### Reference Implementation
 ```typescript
 import { ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { WebSocketLink } from '@apollo/client/link/ws';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { createClient } from 'graphql-ws';
 
 const httpUrl = 'https://villa.momen.app/zero/{projectExId}/api/graphql-v2';
 const wssUrl = 'wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription';
 
 export const createApolloClient = (token?: string) => {
-  const wsClient = new SubscriptionClient(wssUrl, {
-    reconnect: true,
-    connectionParams: token ? {
-      authToken: token // Anonymous users have no token, connectionParams must be empty. 
-    } : {},
-  });
-
-  const wsLink = new WebSocketLink(wsClient);
+  const wsLink = new GraphQLWsLink(
+    createClient({
+      url: wssUrl,
+      connectionParams: token
+        ? {
+            authToken: token, // Anonymous users have no token, connectionParams must be empty.
+          }
+        : {},
+    }),
+  );
 
   const splitLink = split(
     ({ query }) => {
