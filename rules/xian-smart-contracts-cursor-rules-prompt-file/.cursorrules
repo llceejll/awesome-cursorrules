@@ -234,15 +234,15 @@ sha256_result = hashlib.sha256_hex("68656c6c6f")
 
 ### Setting Up Tests
 - Use Python's unittest framework
-- Client available via `from contracting.client import ContractingClient`
-- Submit a contract function with `client.submit`, then call it through `client.get_contract`
+- Client available via `from contracting.local import ContractingClient`
+- Submit a contract function with `client.submit`, then call it through `client.get_contract_proxy`
 - Flush client before and after each test
 
 ### Setting Test Environment
-- Override block time by passing `environment={"now": Datetime(...)}`. Import `Datetime` from `contracting.stdlib.bridge.time`
+- Override block time by passing `environment={"now": Datetime(...)}`. Import `Datetime` from `xian_runtime_types.time`
 
 ```python
-from contracting.stdlib.bridge.time import Datetime
+from xian_runtime_types.time import Datetime
 
 env = {"now": Datetime(year=2021, month=1, day=1, hour=0)}
 result = self.some_contract.some_fn(some_arg=some_value, environment=env)
@@ -336,17 +336,17 @@ assert events[0]["data_indexed"]["to"] == "recipient"
 - Use Python's unittest framework for structured testing
 - Create a proper test class that inherits from `unittest.TestCase`
 - Implement `setUp` and `tearDown` methods to isolate tests
-- In setUp, flush the client, submit the contract, and load it with get_contract
+- In setUp, flush the client, submit the contract, and load it with get_contract_proxy
 
 ```python
-from contracting.client import ContractingClient
+from contracting.local import ContractingClient
 
 class TestMyContract(unittest.TestCase):
     def setUp(self):
         self.client = ContractingClient()
         self.client.flush()
         self.client.submit(my_contract, name="con_my_contract")
-        self.contract = self.client.get_contract("con_my_contract")
+        self.contract = self.client.get_contract_proxy("con_my_contract")
 
     def tearDown(self):
         self.client.flush()
