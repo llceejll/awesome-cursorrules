@@ -808,7 +808,7 @@ type post_mutation_response {
 
 Filtering is one of the most powerful features in the GraphQL schema. It allows complex queries through three fundamental building blocks:
 
-1. **Comparison Predicates**: The most basic unit. It performs a single comparison that evaluates to true, false, or null. Every predicate starts with a comparison operator (e.g., `_eq`, `_ilike`) and serves as the "atom" of the filter logic. This section will be expanded in detail later.
+1. **Comparison Predicates**: The most basic unit. It performs a single comparison that evaluates to true, false, or null. A comparison against a column names that column first, with the operator inside: `{ "status": { "_eq": "published" } }`. An operator is the top-level key only when a function transforms a field before the comparison. This section will be expanded in detail later.
 2. **Logical Operators**: The "glue" that combines multiple predicates. These operators—`_and`, `_or`, and `_not`—are used to build complex logical statements.
 
    ```
@@ -842,43 +842,46 @@ The entire filtering system adheres to the standard SQL three-valued logic (`TRU
 
 This section focuses on the three foundational principles you must follow to build a precise **Comparison Predicate**.
 
-#### Principle #1: The Operator-First Pattern
+#### Principle #1: Column Comparisons Are Field-First
 
-This is the core principle: every `Comparison Predicate` must use a comparison operator as its top-level key. Our system **strictly enforces** this pattern; syntax that places a field name at the top level is not supported.
+A comparison against a column uses the column name as the key and the operator inside it:
 
-- Correct: `{ "_eq": { ... } }`
-- Incorrect: `{ "title": { "_eq": ... } }`
+- `{ "status": { "_eq": "published" } }`
+- `{ "title": { "_ilike": "%Recap%" } }`
+- A related table nests the same way: `{ "author": { "name": { "_ilike": "%lee%" } } }`
 
-This design provides unparalleled flexibility, allowing any value (a column, a literal, or a function result) to be compared against any other value.
+Use an operator as the top-level key only when a database function must transform a field before the comparison. That object has `left_operand` and `right_operand`.
 
 #### Principle #2: Type is Determined by Final Value
 
 This principle dictates how you choose the correct operand "wrapper" (e.g., `bigint_operand`, `text_operand`). Its application depends on the type of operator you are using:
 
-- For **generic operators** (e.g., `_eq`, `_gt`) that can compare multiple data types, this principle is critical. You **must** choose the operand type based on the final data type of the values being compared. For instance, extracting the `MONTH` (a number) from a `created_at` (a timestamp) requires wrapping the entire comparison in `bigint_operand`.
+- For **generic operators** (e.g., `_eq`, `_gt`) that can compare multiple data types, this principle is critical when GraphiQL shows a typed operand wrapper. A month extracted from `created_at` is compared as a number. The Runtime API writes that check with `extract` and a numeric `right_operand`, not by naming the source timestamp type.
 - For **type-specific operators** (e.g., `_ilike`, `_contains`), the operand type is **implicit**. The system already knows that `_ilike` operates on text, so you do not need to specify it.
 
-#### Principle #3: Everything is an Operand
+#### Principle #3: Operand Wrappers Belong to Generated Operand Inputs
 
-This principle requires that any value in a comparison—whether a literal, a column reference, or a function result—must be explicitly "wrapped" in its corresponding `*_op` input type. This wrapper tells the system precisely how to interpret the value, removing any ambiguity.
+Published column comparisons pass the column name and the comparison value directly: `{ "status": { "_eq": "published" } }`. The `extract` filter passes the field name inside `extract` and a bare `right_operand`.
+
+When a generated operand input uses the `*_op` wrappers, those wrappers say how to interpret a value:
 
 - To use a literal value, wrap it as `{ "literal": "some value" }`.
 - To reference the value of a column, wrap it as `{ "column": "field_name" }`.
 - To use the result of a function, wrap it as `{ "function_name": { ... } }`.
 
-This rule is the foundation for building complex and dynamic queries.
+Use that wrapper form when the input type in GraphiQL requires it.
 
 #### Summary of the Process
 
 Therefore, the complete process for constructing a single `Comparison Predicate` always follows these three steps:
 
-1. **Choose the operator**: Select an operator (e.g., `_eq`) as the starting point for your predicate based on your comparison intent.
-2. **Determine the operand type**: If it's a generic operator, apply the "Type is Determined by Final Value" principle. If it's a specific operator, this step is skipped.
-3. **Wrap all values**: Apply the "Everything is an Operand" principle to all inputs, using the `{ "literal": ... }`, `{ "column": ... }`, or function structures.
+1. **Choose the shape**: For a column comparison, put the column name first and the operator inside it. For a function transform, put the operator first and supply `left_operand` and `right_operand`.
+2. **Determine the operand type**: If GraphiQL shows a typed operand wrapper on a generic operator, apply the "Type is Determined by Final Value" principle. If it's a specific operator, this step is skipped.
+3. **Wrap values when the input type requires it**: Apply the "Everything is an Operand" principle when the generated input uses `{ "literal": ... }`, `{ "column": ... }`, or a function object. The published `extract` filter uses the column name and a bare comparison value instead.
 
 ### Building a Filter: A Practical Walkthrough
 
-Let's apply this three-step, operator-first pattern to a real-world scenario.
+Let's apply this three-step pattern to a real-world scenario.
 
 #### The Goal
 
@@ -895,13 +898,12 @@ The request requires all four conditions to be true simultaneously, so our top-l
 
 - **Condition 1: Title contains "Recap" OR "Summary".**
 
-  - This requires a nested Logical Operator (`_or`) containing two `_ilike` predicates for case-insensitive text matching.
+  - This requires a nested Logical Operator (`_or`) containing two field-first `_ilike` predicates for case-insensitive text matching.
 - **Condition 2: Published in December.**
 
   - This showcases a key feature: comparing a value as a different type than its source.
-  - Operator: `_eq`
-  - Operand Type: `bigint_operand`. Even though the source column `created_at` is a `TIMESTAMPTZ`, the function `extract_timestamptz(..., 'MONTH')` returns a number (bigint). Therefore, the comparison requires a bigint_operand.
-  - Operands: The `left_operand` uses the `extract_timestamptz` function to get the `MONTH` number from the `created_at` timestamp. The `right_operand` is the literal `12`.
+  - Operator: `_eq`, as the top-level key, because `extract` transforms `created_at` before the comparison.
+  - Operands: `left_operand.extract` reads the `MONTH` part of the `created_at` field. `right_operand` is the number `12`.
 - **Condition 3: Published within the last 10 years.**
 
   - This requires a dynamic date comparison.
@@ -911,9 +913,7 @@ The request requires all four conditions to be true simultaneously, so our top-l
 - **Condition 4: The word count is over 1500.**
 
   - This requires a Relation Filter on `meta` to access a column in a related table.
-  - Operator: `_gt` ("greater than").
-  - Operand Type: `bigint_operand`.  The `word_count` column is a `bigint`, so we compare it against the literal 1500 using a `bigint_operand`.
-  - Operands: The `left_operand` is the `word_count` column (from the `post_meta` table), and the `right_operand` is the literal `1500`.
+  - Shape: field-first on the related `meta` record. `word_count` is compared with `_gt` and the number `1500`.
 
 #### The Final Assembled Query
 
@@ -925,35 +925,19 @@ Combining these four focused, coherent clauses gives us our final `variables` ob
     "_and": [
       {
         "_or": [
-          {
-            "_ilike": {
-              "text_operand": {
-                "left_operand": { "column": "title" },
-                "right_operand": { "literal": "%Recap%" }
-              }
-            }
-          },
-          {
-            "_ilike": {
-              "text_operand": {
-                "left_operand": { "column": "title" },
-                "right_operand": { "literal": "%Summary%" }
-              }
-            }
-          }
+          { "title": { "_ilike": "%Recap%" } },
+          { "title": { "_ilike": "%Summary%" } }
         ]
       },
       {
         "_eq": {
-          "bigint_operand": {
-            "left_operand": {
-              "extract_timestamptz": {
-                "time": { "column": "created_at" },
-                "unit": "MONTH"
-              }
-            },
-            "right_operand": { "literal": "12" }
-          }
+          "left_operand": {
+            "extract": {
+              "field": "created_at",
+              "part": "MONTH"
+            }
+          },
+          "right_operand": 12
         }
       },
       {
@@ -980,12 +964,7 @@ Combining these four focused, coherent clauses gives us our final `variables` ob
       },
       {
         "meta": {
-          "_gt": {
-            "bigint_operand": {
-              "left_operand": { "column": "word_count" },
-              "right_operand": { "literal": "1500" }
-            }
-          }
+          "word_count": { "_gt": 1500 }
         }
       }
     ]
@@ -1037,23 +1016,19 @@ input post_bool_exp {
 }
 ```
 
-For example, to find all `post` records created in the year 2024, you can use the `_eq` operator. We use `bigint_operand` because the `extract_timestamptz` function returns a bigint value (the year number), and we're comparing it with the bigint `2024`. Even though the source column `created_at` is a timestamp, the extracted year value is a bigint, so we choose `bigint_operand` based on the final comparison values. The `variables` defining this `where` clause would be:
+For example, to find all `post` records created in the year 2024, transform `created_at` with `extract` and compare the numeric year. The `variables` defining this `where` clause would be:
 
 ```
 {
   "where": {
     "_eq": {
-      "bigint_operand": {
-        "left_operand": {
-          "extract_timestamptz": {
-            "time": { "column": "created_at" },
-            "unit": "YEAR"
-          }
-        },
-        "right_operand": {
-          "literal": "2024"
+      "left_operand": {
+        "extract": {
+          "field": "created_at",
+          "part": "YEAR"
         }
-      }
+      },
+      "right_operand": 2024
     }
   }
 }
