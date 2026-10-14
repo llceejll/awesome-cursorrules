@@ -170,9 +170,13 @@ userRepository.getUsers()
     .observe(on: MainScheduler.instance)
     .catch { error in
         self.handleError(error)
-        return Observable.empty()
+        return Observable<[User]>.empty()
     }
-    .bind(to: tableView.rx.items)
+    .bind(to: tableView.rx.items) { tableView, _, user in
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell")!
+        cell.textLabel?.text = user.name
+        return cell
+    }
     .disposed(by: disposeBag)
 ```
 

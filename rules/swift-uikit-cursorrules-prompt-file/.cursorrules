@@ -170,9 +170,13 @@ userRepository.getUsers()
     .observe(on: MainScheduler.instance)
     .catch { error in
         self.handleError(error)
-        return Observable.empty()
+        return Observable<[User]>.empty()
     }
-    .bind(to: tableView.rx.items)
+    .bind(to: tableView.rx.items) { tableView, _, user in
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell")!
+        cell.textLabel?.text = user.name
+        return cell
+    }
     .disposed(by: disposeBag)
 ```
 
@@ -558,12 +562,16 @@ final class UserRepository: UserRepositoryProtocol {
 ### 2. UI Binding
 ```swift
 // Use Driver for UI binding (main thread, no errors)
-viewModel.data.asDriver()
-    .drive(tableView.rx.items)
+viewModel.data
+    .asDriver(onErrorDriveWith: .empty())
+    .drive(tableView.rx.items) { tableView, _, _ in
+        tableView.dequeueReusableCell(withIdentifier: "Cell")!
+    }
     .disposed(by: disposeBag)
 
 // Use Signal for one-time events
-viewModel.showAlert.asSignal()
+viewModel.showAlert
+    .asSignal(onErrorSignalWith: .empty())
     .emit(onNext: { message in
         // Show alert
     })
