@@ -107,12 +107,17 @@ For a function body, set `computeType` to `"function"` and put the body in `fnSo
 
 ## App.tsx — minimal starter
 
-Import only the library's stylesheet. Theme via the library's provider.
-No companion CSS. No root className. Layout-level inline styles
-(`maxWidth`, `margin`, `padding`) on the wrapping `<div>` are fine.
+Import `@react-form-builder/core/assets/styles.css` and
+`@react-form-builder/components-rsuite/assets/styles.ltr.css` with
+`rsuite/dist/rsuite.min.css`. `view` does not load those stylesheets.
+Theme via the library's provider. No companion CSS. No root className.
+Layout-level inline styles (`maxWidth`, `margin`, `padding`) on the
+wrapping `<div>` are fine.
 
 ```tsx
 import "rsuite/dist/rsuite.min.css";
+import "@react-form-builder/components-rsuite/assets/styles.ltr.css";
+import "@react-form-builder/core/assets/styles.css";
 import { FormViewer } from "@react-form-builder/core";
 import { view } from "@react-form-builder/components-rsuite";
 import formJson from "./form.json";
