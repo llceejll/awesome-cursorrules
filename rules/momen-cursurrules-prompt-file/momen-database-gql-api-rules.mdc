@@ -179,7 +179,7 @@ These types represent fundamental data values and map to GraphQL scalar types. T
 - `decimal` -> `Decimal`
 - `boolean` -> `Boolean`
 - `jsonb` -> `jsonb`
-- `geo_point` -> `geography` (A JSON point structured as `{ "type": "Point", "coordinates": [longitude, latitude] }`, e.g., `{ "type": "Point", "coordinates": [100, 30] }`)
+- `geo_point` -> `geography` (A `[longitude, latitude]` pair, for example `[100, 30]`)
 - `timestamptz` -> `timestamptz` (Represents a timestamp with time zone)
 - `timetz` -> `timetz` (Represents a time of day with time zone)
 - `date` -> `date` (Represents a calendar date)
