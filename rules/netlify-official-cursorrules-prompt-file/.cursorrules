@@ -102,7 +102,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - In a serverless function, read environment variables with `process.env.VARIABLE_NAME`. To read the context from a nested scope, import `getContext` from `@netlify/functions`. `getContext()` throws when it is called outside an active request.
   - An edge function has a global `Netlify` object.
     - `Netlify.context` is the same context object as the handler's second argument. Inside the handler it is that object. Outside the handler it is `null`.
-    - Read environment variables with `Netlify.env.get`, `Netlify.env.has`, and `Netlify.env.toObject`. `Netlify.env.set` and `Netlify.env.delete` are not available in edge functions.
+    - Read and update environment variables for this invocation with `Netlify.env.get`, `Netlify.env.has`, `Netlify.env.toObject`, `Netlify.env.set`, and `Netlify.env.delete`. `set` and `delete` apply within the invocation.
 
   ### Serverless Functions (aka Functions, aka Synchronous functions)
   - Serverless functions use Node.js and should attempt to use built-in methods where possible
@@ -283,7 +283,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - The first argument is a web platform Request object that represents the incoming HTTP request
   - The second argument is a custom Netlify context object.
   - Edge functions have a global `Netlify` object.
-    - Read environment variables with `Netlify.env.get`, `Netlify.env.has`, and `Netlify.env.toObject`. `Netlify.env.set` and `Netlify.env.delete` are not available in edge functions.
+    - Read and update environment variables for this invocation with `Netlify.env.get`, `Netlify.env.has`, `Netlify.env.toObject`, `Netlify.env.set`, and `Netlify.env.delete`. `set` and `delete` apply within the invocation.
     - `Netlify.context` is the handler context inside the handler and `null` outside it.
   - Place function files in `YOUR_BASE_DIRECTORY/netlify/edge-functions` or a subdirectory.
     - The serverless functions directory can be changed via `netlify.toml`:
