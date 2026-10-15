@@ -286,7 +286,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
     - Read and update environment variables for this invocation with `Netlify.env.get`, `Netlify.env.has`, `Netlify.env.toObject`, `Netlify.env.set`, and `Netlify.env.delete`. `set` and `delete` apply within the invocation.
     - `Netlify.context` is the handler context inside the handler and `null` outside it.
   - Place function files in `YOUR_BASE_DIRECTORY/netlify/edge-functions` or a subdirectory.
-    - The serverless functions directory can be changed via `netlify.toml`:
+    - The edge functions directory can be changed via `netlify.toml`:
       ```toml
       [build]
         edge_functions = "my-custom-directory"
