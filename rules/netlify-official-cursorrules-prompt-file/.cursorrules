@@ -95,26 +95,14 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   }
   ```
 
-  ### the `Netlify` global object
+  ### Environment variables and context outside the handler
 
-  - the `Netlify` object is available in global scope.
-  - available on all serverless and edge function types
+  Serverless functions and edge functions do not share one global object.
 
-  It has the following fields/functions:
-
-  ```
-  {
-    context: object | null, // The Netlify-specific context object - same as function's second arg. Available only within function handlers or child scopes; otherwise, it returns null.
-
-    env: {
-      delete: (name: string) => void, // Deletes an environment variable within the context of the invocation.
-      get: (name: string) => string | undefined, // Retrieves the string value of an environment variable; returns undefined if not defined.
-      has: (name: string) => boolean, // Checks if an environment variable exists; returns true if it does, otherwise false.
-      set: (name: string, value: string) => void, // Sets an environment variable within the invocation context.
-      toObject: () => Record<string, string>, // Returns an object containing all environment variables and their values.
-    },
-  };
-  ```
+  - In a serverless function, read environment variables with `process.env.VARIABLE_NAME`. To read the context from a nested scope, import `getContext` from `@netlify/functions`. `getContext()` throws when it is called outside an active request.
+  - An edge function has a global `Netlify` object.
+    - `Netlify.context` is the same context object as the handler's second argument. Inside the handler it is that object. Outside the handler it is `null`.
+    - Read environment variables with `Netlify.env.get`, `Netlify.env.has`, and `Netlify.env.toObject`. `Netlify.env.set` and `Netlify.env.delete` are not available in edge functions.
 
   ### Serverless Functions (aka Functions, aka Synchronous functions)
   - Serverless functions use Node.js and should attempt to use built-in methods where possible
@@ -126,8 +114,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - ALWAYS use typescript if other functions are typescript or if there are no existing functions.
   - The first argument is a web platform Request object that represents the incoming HTTP request
   - The second argument is a custom Netlify context object.
-  - Functions have a global `Netlify` object that is also accessible.
-    - ONLY use `Netlify.env.*` for interacting with environment variables in code.
+  - Read environment variables with `process.env.VARIABLE_NAME`.
   - Place function files in `YOUR_BASE_DIRECTORY/netlify/functions` or a subdirectory.
     - The serverless functions directory can be changed via:
       - **Netlify UI**: *Project configuration > Developer settings > Continuous deployment > Build settings*
@@ -295,8 +282,9 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
   - ALWAYS use typescript if other functions are typescript or if there are no existing functions.
   - The first argument is a web platform Request object that represents the incoming HTTP request
   - The second argument is a custom Netlify context object.
-  - Edge functions have a global `Netlify` object that is also accessible.
-    - ONLY use `Netlify.env.*` for interacting with environment variables in code.
+  - Edge functions have a global `Netlify` object.
+    - Read environment variables with `Netlify.env.get`, `Netlify.env.has`, and `Netlify.env.toObject`. `Netlify.env.set` and `Netlify.env.delete` are not available in edge functions.
+    - `Netlify.context` is the handler context inside the handler and `null` outside it.
   - Place function files in `YOUR_BASE_DIRECTORY/netlify/edge-functions` or a subdirectory.
     - The serverless functions directory can be changed via `netlify.toml`:
       ```toml
@@ -728,16 +716,21 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
     // using global store if in production, otherwise use deploy scope store
     import { getStore, getDeployStore } from "@netlify/blobs";
 
-    function getBlobStore(...storeOptions){
+    function getBlobStore(deployContext, ...storeOptions){
 
-      if (Netlify.context?.deploy.context === 'production') {
+      if (deployContext === 'production') {
         return getStore(...storeOptions);
       }
 
       return getDeployStore(...storeOptions)
     }
 
-    const store = getBlobStore("construction");
+    export default async (req, context) => {
+      // An edge function can also read Netlify.context inside this handler. Outside the handler it is null.
+      // A serverless function reads the same object with getContext() from @netlify/functions. That call throws outside an active request.
+      const store = getBlobStore(context.deploy.context, "construction");
+      return store;
+    }
   ```
 
   ---
