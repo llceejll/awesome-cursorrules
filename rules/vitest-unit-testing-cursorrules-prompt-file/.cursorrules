@@ -20,7 +20,7 @@ Write maintainable tests with descriptive names grouped in describe blocks
 **2** **Dependency Mocking**: Always mock dependencies before imports with vi.mock()
 **3** **Data Scenarios**: Test valid inputs, invalid inputs, and edge cases
 **4** **Descriptive Naming**: Use clear test names indicating expected behavior
-**5** **Test Organization**: Group related tests in describe/context blocks
+**5** **Test Organization**: Group related tests in `describe` or `suite` blocks
 **6** **Project Patterns**: Match team's testing conventions and patterns
 **7** **Edge Cases**: Include tests for undefined values, type mismatches, and unexpected inputs
 **8** **Test Quantity**: Limit to 3-5 focused tests per file for maintainability
