@@ -1,0 +1,6 @@
+---
+description: Rules for LiteLLM chat calls inside LLM chat elements.
+globs: "**/llm_chat/**/*.py"
+---
+- LLM chat calls go through LiteLLM. `LLMChatModel.generate_response` converts `MessagePayload` values to `{role, content}` dictionaries and calls `litellm.acompletion`.
+- `langchain-text-splitters` splits text in the chunker. It does not perform chat completions.

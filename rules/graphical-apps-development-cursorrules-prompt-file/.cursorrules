@@ -17,15 +17,17 @@ chat_interface:
   - chat_interface_element.py
   - chat_interface_model.py
   - css:
-    - buttons.css
-    - column.css
-    - input.css
+    - chat_input_view.css
+    - chatfeed_view.css
+    - payload_assistant_row.css
+    - payload_user_row.css
+    - send_button_view.css
 
 # Primary Libraries Used
 
 - Panel is used to create the visualization layer and run the GUI. Views tend to consist of Panel objects which can be styled with Python and CSS.
 - Param is used to create parameterized classes which help create parameters that handle type validation, default values, constraints, and most importantly, reactivity (setting event handlers to catch changes).
-- Langchain is responsible for the specific functions pertaining to incorporating LLM workflows.
+- LiteLLM handles LLM chat calls. `LLMChatModel.generate_response` converts `MessagePayload` values to `{role, content}` dictionaries and calls `litellm.acompletion`. `langchain-text-splitters` is only the text chunker.
 
 # Development Priorities
 
