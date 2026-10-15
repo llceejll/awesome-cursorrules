@@ -117,10 +117,12 @@ AI Agents:
    - Streaming plain text: Multiple STREAMING status messages, then COMPLETED with full result in data field.
    - Non-streaming plain text: IN_PROGRESS status, then COMPLETED with result in data field.
    - Structured JSON: Only COMPLETED message with JSON matching JSONSchema in data field.
-   - Image output: COMPLETED message with images array containing FZ_Image IDs.
+   - Image output: COMPLETED message whose images array contains FZ_Image objects. Each object includes id and url.
 6. For models with reasoning output: reasoningContent field shows partial reasoning during streaming, full reasoning in COMPLETED message.
 7. Continue conversations with fz_zai_send_ai_message. Pass conversationId, and optional text, imageIds, fileId, and videoId. Later turns use these fixed message arguments. Do not key a later turn by the creation inputArgs names.
 8. Stop conversations: fz_zai_stop_responding mutation (only for IN_PROGRESS or STREAMING states).
+9. Provide information requested by a tool call with fz_zai_provide_more_information. Copy that operation’s arguments from GraphiQL.
+10. Delete a conversation with fz_zai_delete_conversation. Sending a message, stopping a response, and deleting a conversation require access to that conversation.
 
 Binary Asset Uploads:
 
@@ -298,6 +300,7 @@ subscription ZaiListenConversationResult($conversationId: Long!) {
     reasoningContent
     images {
       id
+      url
       __typename
     }
     data

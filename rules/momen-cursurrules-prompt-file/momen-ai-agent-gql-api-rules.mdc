@@ -102,6 +102,7 @@ For models that have reasoning content output, partial reasoning content is emit
         reasoningContent
         images {
           id
+          url
           __typename
         }
         data
@@ -215,7 +216,7 @@ Their output will be no different from plain-text only outputs, regardless of th
   }
 }
 ```
-The ids for FZ_Image in images represent the ids in momen's file / asset system. Refer to momen-binary-asset-upload-rules
+The `images` array contains `FZ_Image` objects. Each object includes `id` and `url`. Those ids are asset ids in Momen's file system. Refer to momen-binary-asset-upload-rules
 
 
 ## Invocation process for structured output
@@ -284,3 +285,7 @@ e.g.
     "conversationId": 1480
   }
   ```
+
+## Other conversation operations
+`fz_zai_provide_more_information` provides information requested by a tool call. Copy that operation’s arguments from GraphiQL.
+`fz_zai_delete_conversation` deletes a conversation. Sending a message, stopping a response, and deleting a conversation require access to that conversation.
