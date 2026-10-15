@@ -12,7 +12,7 @@ globs: "**/*.component.ts"
 - Before providing an answer, double check your work.
 - Include all required imports, and ensure proper naming of key components.
 - Do not nest code more than 2 levels deep.
-- Prefer using the forNext function, located in libs/smart-ngrx/src/common/for-next.function.ts instead of for(let i;i < length;i++), forEach or for(x of y).
+- Prefer using the forNext function, located in libs/smart-core/src/common/for-next.function.ts instead of for(let i;i < length;i++), forEach or for(x of y).
 - Code should obey the rules defined in the .eslintrc.json, .prettierrc, .htmlhintrc, and .editorconfig files.
 - Functions and methods should not have more than 4 parameters.
 - Functions should not have more than 50 executable lines.
