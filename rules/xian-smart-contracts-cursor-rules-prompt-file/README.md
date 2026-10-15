@@ -1,7 +1,7 @@
 # Xian Smart Contracts
 
 ## Introduction
-Xian is a modern blockchain platform that enables developers to write smart contracts in native Python. Unlike other blockchain platforms that require specialized languages or transpilation, Xian supports direct Python coding, making it accessible to the millions of Python developers worldwide.
+Xian is a modern blockchain platform that enables developers to write smart contracts as a restricted Python module. Validators compile that source to canonical Xian VM IR and execute the IR. The local test harness executes through Python.
 
 ## What Xian Can Be Used For
 
@@ -14,7 +14,7 @@ Xian is a modern blockchain platform that enables developers to write smart cont
 
 ## Key Features
 
-- **Native Python Smart Contracts**: Write contracts in pure Python without transpilation
+- **Restricted Python source**: Write contracts as a restricted Python module. Validators compile that source to canonical Xian VM IR
 - **Event-Driven Architecture**: Use events to track state changes and trigger actions
 - **Rich Standard Library**: Access cryptographic functions, hashing utilities, and more
 - **Comprehensive Testing Framework**: Test contracts using familiar Python unittest patterns
@@ -24,20 +24,18 @@ Xian is a modern blockchain platform that enables developers to write smart cont
 
 To start developing on Xian:
 
-1. Set up a development environment with Python 3.11+
-2. 
-   1. Clone [xian-contracting](https://github.com/xian-network/xian-contracting)
-   2. Install Xian Contracting `cd xian-contracting && pip install -e ./`
-3. Create your first smart contract using the provided [templates](https://github.com/xian-network/xian-contracts)
-4. Test your contract using the testing framework
-5. Deploy to the Xian network
+1. Set up a development environment with Python 3.14
+2. Install the contract runtime, linter, and testing client with `uv add xian-tech-contracting`. Imports use `contracting`
+3. Create your first smart contract using the provided [templates](https://github.com/xian-technology/xian-contracts)
+4. Test your contract with `ContractingClient` from `contracting.local`
+5. Deploy reviewed source to the Xian network
 
 ## Learn More
 
 For more information about Xian and smart contract development:
 
-- [Official Xian Documentation](https://docs.xian.org)
-- [Xian GitHub Repository](https://github.com/Xian-Network)
+- [Official Xian Documentation](https://docs.xian.technology)
+- [Xian Contracting](https://github.com/xian-technology/xian-contracting)
 - [Telegram](https://t.me/xian_network)
 
 ## About This Cursor Rules File
