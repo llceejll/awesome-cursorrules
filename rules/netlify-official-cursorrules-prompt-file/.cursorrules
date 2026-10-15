@@ -411,7 +411,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
     method?: string | string[], // Optional. Specifies HTTP methods that should trigger the function (e.g., "GET", ["POST", "PUT"]).
     header?: Record<string, boolean | string>, // Optional. Header name to `true` (must be present), `false` (must be absent), or a regex string the value must match. Names are case-insensitive.
     onError?: "fail" | "bypass" | `/${string}`, // Optional. `fail` serves the generic error page. `bypass` continues the request chain. A same-site path starting with `/` rewrites there.
-    cache?: 'manual', // Optional. Enables response caching if set to 'manual'.
+    cache?: 'manual', // Optional. Opts in to response caching. Responses are cached only when the function also returns HTTP cache headers.
   } = {
     path: "", // Default value; should be set per function.
   };
@@ -433,7 +433,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
     - `pattern`: Regex-based path matching.
     - `excludedPattern`: Excludes specific regex patterns (single or array).
     - `header`: Optional conditions on request headers. A key is a header name. `true` requires the header, `false` rejects it, and a string is a regular expression the value must match.
-    - `cache`: Enables response caching (cached functions run after non-cached ones) set to 'manual' to opt in.
+    - `cache`: Opts in to response caching when set to 'manual'. Responses are cached only when the function also returns HTTP cache headers. Cached functions run after non-cached ones.
 
   - **Netlify.toml config examples**
     ```toml
