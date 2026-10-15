@@ -362,7 +362,8 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
   ```
 
-  #### Web APIs available in Edge Functions ONLY
+  #### Supported web APIs
+  - Edge Functions support the following Web APIs:
   - console.*
   - atob
   - btoa
