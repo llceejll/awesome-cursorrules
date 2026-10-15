@@ -32,7 +32,7 @@ Always produce **functional, secure, and efficient** Drupal code that aligns wit
 
 **Performance and Security**  
 - **Security**: Always use Drupal’s APIs to handle data. For example, sanitize user input with functions like `Xss::filter()` or the Twig `|escape` filter for output, use parameterized queries via Drupal’s Database API (to prevent SQL injection), and check user permissions (`AccessResult::allowedIf()` or `->hasPermission()`) before performing protected actions. Never expose sensitive info in error messages.  
-- **Performance**: Optimize using Drupal’s built-in caching. Use render caching (`#cache` metadata in render arrays) for pages and blocks, and consider caching data with Drupal’s Cache API for expensive computations. Minimize database queries by loading entities in bulk (e.g. using `EntityQuery` or `::loadMultiple()` instead of inside loops).  
+- **Performance**: Optimize using Drupal’s built-in caching. Use render caching (`#cache` metadata in render arrays) for pages and blocks, and consider caching data with Drupal’s Cache API for expensive computations. Minimize database queries by selecting IDs with `EntityQuery` and loading those entities with `::loadMultiple()`, instead of querying or loading inside loops.  
 - Use the **Batch API** for long-running processes to avoid timeouts, and offload heavy tasks to queued workers (Queue API or Cron tasks) when appropriate. This keeps the web requests fast and responsive.  
 - Adhere to Drupal’s update mechanisms: do not directly update the database schema in code – use update hooks (`hook_update_N()`) for any database schema changes to ensure they run during updates. Also, never hack core; always apply changes via modules or themes.  
 
