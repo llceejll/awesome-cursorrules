@@ -9,7 +9,7 @@ globs: app/**/*
 - Use Tailwind's built-in design tokens for spacing, colors, and typography.
 - Implement dark mode using Tailwind's `dark:` variant.
 - Use `group` and `peer` variants for interactive states.
-- Create custom utilities with `@layer utilities` for project-specific needs.
+- Create custom utilities with `@utility` so they work with variants such as `hover`, `focus`, and `lg`.
 - Reference design tokens with the CSS variables Tailwind generates, such as `var(--color-red-500)`.
 - Avoid arbitrary values (`w-[532px]`) when possible; define custom tokens in `@theme` in the CSS file that contains `@import "tailwindcss"`.
 - Use `container` class for responsive containers with max-width constraints.
