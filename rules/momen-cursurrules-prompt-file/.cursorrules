@@ -81,11 +81,11 @@ Database Operations:
 Actionflows:
 
 1. Use actionflows for multi-step backend operations, complex business logic, and long-running tasks.
-2. Actionflows have two modes: synchronous (single transaction with rollback) and asynchronous (separate transactions per node).
+2. Actionflows have two modes: synchronous (database-operation nodes commit or roll back together; API, AI, payment, and file side effects do not roll back) and asynchronous (no transaction spans all database nodes).
 3. Synchronous actionflows:
    - Invoke the deployed Actionflow with fz_invoke_action_flow_default_by_latest_version, passing actionFlowId and args.
    - Results are returned in the same HTTP response.
-   - Use for operations requiring transaction integrity.
+   - Use when database changes in the flow must commit or roll back together.
 4. Asynchronous actionflows:
    - Create a task with fz_create_action_flow_task, passing actionFlowId and args. The mutation returns the task ID.
    - Subscribe to results via fz_listen_action_flow_result, or poll fz_action_flow_result, using the task ID.
