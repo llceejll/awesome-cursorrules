@@ -5,6 +5,6 @@ globs: "**/*.jsx"
 - Use JSX for component templates.
 - Tailwind scans project source and generates only the classes it finds. Register an extra path with `@source`.
 - Utilize Solid Router for routing when applicable.
-- Use Tailwind's @layer directive for custom styles.
+- Define custom classes with Tailwind's @utility directive so they work with variants.
 - Implement utility-first CSS approach.
 - Follow both Solid.js and Tailwind naming conventions.

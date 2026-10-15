@@ -37,7 +37,7 @@ const additionalInstructions = `
 1. Use TypeScript for all .ts and .tsx files
 2. Tailwind scans project source and generates only the classes it finds. Register an extra path with @source in src/global.css
 3. Utilize Qwik City for routing when applicable
-4. Use Tailwind's @layer directive for custom styles
+4. Define custom classes with @utility so they work with variants
 5. Implement dark mode using Tailwind's dark variant
 6. Follow both Qwik and Tailwind naming conventions
 7. Use server$ for server-side code execution

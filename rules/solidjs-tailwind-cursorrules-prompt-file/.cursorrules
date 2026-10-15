@@ -34,7 +34,7 @@ const additionalInstructions = `
 1. Use JSX for component templates
 2. Tailwind scans project source and generates only the classes it finds. Register an extra path with @source
 3. Utilize Solid Router for routing when applicable
-4. Use Tailwind's @layer directive for custom styles
+4. Define custom classes with @utility so they work with variants
 5. Implement utility-first CSS approach
 6. Follow both Solid.js and Tailwind naming conventions
 `;

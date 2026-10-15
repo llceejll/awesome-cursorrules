@@ -5,7 +5,7 @@ globs: app/**/*
 - Use Tailwind's utility-first approach for consistent styling.
 - Leverage Tailwind's responsive prefixes (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`) for mobile-first responsive design.
 - Use `@apply` directive sparingly; prefer utility classes directly in HTML/JSX.
-- Create custom components with `@layer components` for repeated patterns.
+- Define repeated component classes with `@utility` so variants such as `hover` and `lg` apply to them.
 - Use Tailwind's built-in design tokens for spacing, colors, and typography.
 - Implement dark mode using Tailwind's `dark:` variant.
 - Use `group` and `peer` variants for interactive states.
