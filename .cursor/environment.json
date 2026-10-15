@@ -1,0 +1,4 @@
+{
+  "name": "awesome-cursorrules",
+  "install": "set -euo pipefail\nnpm install --global --prefix \"$HOME/.local\" --no-audit --no-fund --loglevel=error awesome-lint@2.3.0\nsudo ln -sf \"$HOME/.local/bin/awesome-lint\" /usr/local/bin/awesome-lint\nawesome-lint --version"
+}

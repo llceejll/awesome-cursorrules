@@ -91,6 +91,7 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [Next.js (React, TypeScript)](./rules/nextjs-react-typescript-cursorrules-prompt-file/.cursorrules) - Cursor rules for Next.js development with React and TypeScript integration.
 - [Next.js (SEO Development)](./rules/nextjs-seo-dev-cursorrules-prompt-file/.cursorrules) - Cursor rules for Next.js development with SEO optimization.
 - [Next.js (Supabase Todo App)](./rules/nextjs-supabase-todo-app-cursorrules-prompt-file/.cursorrules) - Cursor rules for Next.js development with Supabase integration for a Todo app.
+- [Next.js (Supabase, shadcn/ui, PWA)](./rules/nextjs-supabase-shadcn-pwa-cursorrules-prompt-file/.cursorrules) - Cursor rules for Next.js development with Supabase, shadcn/ui, and PWA integration.
 - [Next.js (TanStack Query v5)](./rules/nextjs-tanstack-query-cursorrules-prompt-file/.cursorrules) - Cursor rules for Next.js App Router with TanStack Query v5, covering the HydrationBoundary pattern, Server Actions as mutations, and optimistic updates.
 - [Next.js (Tailwind, TypeScript)](./rules/nextjs-tailwind-typescript-apps-cursorrules-prompt/.cursorrules) - Cursor rules for Next.js development with Tailwind CSS and TypeScript integration.
 - [Next.js (TypeScript App)](./rules/nextjs-typescript-app-cursorrules-prompt-file/.cursorrules) - Cursor rules for Next.js development with TypeScript integration.
@@ -121,6 +122,7 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 
 ### Backend and Full-Stack
 
+- [ASP.NET (ABP Framework)](./rules/aspnet-abp-cursorrules-prompt-file/.cursorrules) - Cursor rules for ASP.NET development with the ABP Framework.
 - [Convex best practices](./rules/convex-cursorrules-prompt-file/.cursorrules) - Cursor rules for Convex development with best practices.
 - [Deno Integration](./rules/deno-integration-techniques-cursorrules-prompt-fil/.cursorrules) - Cursor rules for Deno development with integration techniques.
 - [Drupal 11](./rules/drupal-11-cursorrules-prompt-file/.cursorrules) - Cursor rules for Drupal 11 development.
@@ -138,22 +140,26 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [Java (Springboot, JPA)](./rules/java-springboot-jpa-cursorrules-prompt-file/.cursorrules) - Cursor rules for Java development with Springboot and JPA integration.
 - [Knative (Istio, Typesense, GPU)](./rules/knative-istio-typesense-gpu-cursorrules-prompt-fil/.cursorrules) - Cursor rules for Knative development with Istio, Typesense, and GPU integration.
 - [Kotlin Ktor Development](./rules/kotlin-ktor-development-cursorrules-prompt-file/.cursorrules) - Cursor rules for Kotlin development with Ktor integration.
+- [Kotlin (Spring Boot)](./rules/kotlin-springboot-best-practices-cursorrules-prompt-file/.cursorrules) - Cursor rules for Kotlin development with Spring Boot best practices.
 - [Laravel (PHP 8.3)](./rules/laravel-php-83-cursorrules-prompt-file/.cursorrules) - Cursor rules for Laravel development with PHP 8.3 integration.
 - [Laravel (TALL Stack)](./rules/laravel-tall-stack-best-practices-cursorrules-prom/.cursorrules) - Cursor rules for Laravel development with TALL Stack best practices.
 - [Manifest](./rules/manifest-yaml-cursorrules-prompt-file/.cursorrules) - Cursor rules for manifest development with YAML integration.
+- [Medusa](./rules/medusa-cursorrules/.cursorrules) - Cursor rules for Medusa development with TypeScript and React.
 - [Momen.app (Backend-as-a-Service)](./rules/momen-cursurrules-prompt-file/.cursorrules) - Cursor rules for building custom frontends with Momen.app as headless BaaS with GraphQL API, actionflows, AI agents, and Stripe integration.
 - [Node.js (MongoDB)](./rules/nodejs-mongodb-cursorrules-prompt-file-tutorial/.cursorrules) - Cursor rules for Node.js development with MongoDB integration.
 - [Node.js (MongoDB, JWT, Express, React)](./rules/nodejs-mongodb-jwt-express-react-cursorrules-promp/.cursorrules) - Cursor rules for Node.js development with MongoDB, JWT, Express, and React integration.
-- [Rails 8 (Basic Setup)](./rules/rails-cursorrules-prompt-file/rails-basics.mdx) - Cursor rules for Rails development with basic setup.
+- [Rails 8 (Basic Setup)](./rules/rails-cursorrules-prompt-file/.cursorrules) - Cursor rules for Rails development with basic setup.
 - [Python (FastAPI)](./rules/py-fast-api/.cursorrules) - Cursor rules for Python FastAPI backend development and best practices.
 - [Python (FastAPI)](./rules/cursorrules-file-cursor-ai-python-fastapi-api/.cursorrules) - Cursor rules for Python FastAPI development with API integration.
 - [Python 3.12 (FastAPI Best Practices)](./rules/python-312-fastapi-best-practices-cursorrules-prom/.cursorrules) - Cursor rules for Python FastAPI development with best practices.
 - [Python (Django Best Practices)](./rules/python-django-best-practices-cursorrules-prompt-fi/.cursorrules) - Cursor rules for Python Django development with best practices.
 - [Python (FastAPI Best Practices)](./rules/python-fastapi-best-practices-cursorrules-prompt-f/.cursorrules) - Cursor rules for Python FastAPI development with best practices.
 - [Python (FastAPI Scalable API)](./rules/python-fastapi-scalable-api-cursorrules-prompt-fil/.cursorrules) - Cursor rules for Python FastAPI development with scalable API integration.
+- [Python (FastAPI, Pydantic)](./rules/python-fastapi-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python FastAPI development with Pydantic models and project structure.
 - [Python (Flask JSON Guide)](./rules/python-flask-json-guide-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python Flask development with JSON guide.
 - [Python LLM & ML Workflow](./rules/python-llm-ml-workflow-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python LLM & ML development with workflow integration.
-- [Salesforce (Apex)](./rules/salesforce-apex-cursorrules-prompt-file/.cursorrules.txt) - Cursor rules for Salesforce development with Apex integration.
+- [Salesforce (Apex)](./rules/salesforce-apex-cursorrules-prompt-file/.cursorrules) - Cursor rules for Salesforce development with Apex integration.
+- [Temporal (Python SDK)](./rules/temporal-python-cursorrules/.cursorrules) - Cursor rules for Temporal.io workflow orchestration in Python.
 - [TypeScript (NestJS Best Practices)](./rules/typescript-nestjs-best-practices-cursorrules-promp/.cursorrules) - Cursor rules for TypeScript development with NestJS best practices.
 - [TYPO3 CMS Extension](./rules/typo3cms-extension-cursorrules-prompt-file/.cursorrules) - Cursor rules for TYPO3 CMS development with extension integration.
 - [WordPress (PHP, Guzzle, Gutenberg)](./rules/wordpress-php-guzzle-gutenberg-cursorrules-prompt-/.cursorrules) - Cursor rules for WordPress development with PHP, Guzzle, and Gutenberg integration.
@@ -165,9 +171,12 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [Android Native (Jetpack Compose)](./rules/android-jetpack-compose-cursorrules-prompt-file/.cursorrules) - Cursor rules for Android development with Jetpack Compose integration.
 - [Cursor Rules Pack v2](./rules/cursor-rules-pack-v2-cursorrules-prompt-file/.cursorrules) - 7 sample production-tested rules (dependency discipline, error handling, state management, webhook security, and more). See the pack README for full-pack details.
 - [Flutter Expert](./rules/flutter-app-expert-cursorrules-prompt-file/.cursorrules) - Cursor rules for Flutter development with expert integration.
+- [Flutter (Riverpod)](./rules/flutter-riverpod-cursorrules-prompt-file/.cursorrules) - Cursor rules for Flutter development with Riverpod.
 - [NativeScript](./rules/nativescript-cursorrules-prompt-file/.cursorrules) - Cursor rules for NativeScript development.
 - [React Native Expo](./rules/react-native-expo-cursorrules-prompt-file/.cursorrules) - Cursor rules for React Native Expo development.
+- [React Native (Expo Router, TypeScript)](./rules/react-native-expo-router-typescript-windows-cursorrules-prompt-file/.cursorrules) - Cursor rules for React Native development with Expo Router and TypeScript.
 - [SwiftUI Guidelines](./rules/swiftui-guidelines-cursorrules-prompt-file/.cursorrules) - Cursor rules for SwiftUI development guidelines.
+- [Swift (UIKit, MVVM, RxSwift)](./rules/swift-uikit-cursorrules-prompt-file/.cursorrules) - Cursor rules for Swift UIKit development with MVVM and RxSwift.
 - [TypeScript (Expo, Jest, Detox)](./rules/typescript-expo-jest-detox-cursorrules-prompt-file/.cursorrules) - Cursor rules for TypeScript development with Expo, Jest, and Detox integration.
 - [UIKit Guidelines](./rules/uikit-guidelines-cursorrules-prompt-file/.cursorrules) - Cursor rules for UIKit development guidelines.
 
@@ -234,10 +243,11 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [Python (GitHub Setup)](./rules/python-github-setup-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python development with GitHub setup integration.
 - [Tauri (Svelte, TypeScript Guide)](./rules/tauri-svelte-typescript-guide-cursorrules-prompt-f/.cursorrules) - Cursor rules for Tauri development with Svelte and TypeScript guide integration.
 - [TypeScript Code Convention](./rules/typescript-code-convention-cursorrules-prompt-file/.cursorrules) - Cursor rules for TypeScript development with code convention integration.
-- [VSCode Extension (Electron/TypeScript)](./rules/chrome-extension-dev-js-typescript-cursorrules-pro/.cursorrules) - Cursor rules for VSCode extension development with Electron and TypeScript integration.
+- [VSCode Extension (Electron/TypeScript)](./rules/vscode-extension-dev-typescript-cursorrules-prompt-file/.cursorrules) - Cursor rules for VSCode extension development with Electron and TypeScript integration.
 
 ### Language-Specific
 
+- [Java (General Purpose)](./rules/java-general-purpose-cursorrules-prompt-file/.cursorrules) - Cursor rules for general-purpose Java development.
 - [JavaScript/TypeScript Code Quality](./rules/javascript-typescript-code-quality-cursorrules-pro/.cursorrules) - Cursor rules for JavaScript and TypeScript development with code quality integration.
 - [JavaScript (Chrome APIs)](./rules/javascript-chrome-apis-cursorrules-prompt-file/.cursorrules) - Cursor rules for JavaScript development with Chrome APIs integration.
 - [Optimize (Rell Blockchain Code)](./rules/optimize-rell-blockchain-code-cursorrules-prompt-f/.cursorrules) - Cursor rules for optimization development with Rell Blockchain code integration.
@@ -250,6 +260,7 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [Python Projects Guide](./rules/python-projects-guide-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python development with projects guide integration.
 - [PyTorch (scikit-learn)](./rules/pytorch-scikit-learn-cursorrules-prompt-file/.cursorrules) - Cursor rules for PyTorch development with scikit-learn integration.
 - [R Best Practices](./rules/r-cursorrules-prompt-file-best-practices/.cursorrules) - Cursor rules for R development with best practices integration.
+- [Scala (Kafka)](./rules/scala-kafka-cursorrules-prompt-file/.cursorrules) - Cursor rules for Scala development with Kafka.
 - [Solidity (Foundry)](./rules/solidity-foundry-cursorrules-prompt-file/.cursorrules) - Cursor rules for Solidity development with Foundry integration.
 - [Solidity (Hardhat)](./rules/solidity-hardhat-cursorrules-prompt-file/.cursorrules) - Cursor rules for Solidity development with Hardhat integration.
 - [Solidity (React Blockchain Apps)](./rules/solidity-react-blockchain-apps-cursorrules-prompt-/.cursorrules) - Cursor rules for Solidity development with React Blockchain apps integration.
@@ -284,6 +295,7 @@ By creating a `.cursorrules` file in your project's root directory, you can leve
 - [Next.js (Type LLM)](./rules/next-type-llm/.cursorrules) - Cursor rules for Next.js development with Type LLM integration.
 - [Unity (C#)](./rules/unity-cursor-ai-c-cursorrules-prompt-file/.cursorrules) - Cursor rules for Unity development with C# integration.
 - [Web App Optimization](./rules/web-app-optimization-cursorrules-prompt-file/.cursorrules) - Cursor rules for web app development with optimization integration.
+- [Xian Smart Contracts](./rules/xian-smart-contracts-cursor-rules-prompt-file/.cursorrules) - Cursor rules for writing Xian smart contracts in Python.
 - [Code Pair Interviews](./rules/code-pair-interviews/.cursorrules) - Cursor rules for code pair interviews development with integration.
 
 ### Documentation
