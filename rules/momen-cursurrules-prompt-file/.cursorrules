@@ -119,7 +119,7 @@ AI Agents:
    - Structured JSON: Only COMPLETED message with JSON matching JSONSchema in data field.
    - Image output: COMPLETED message with images array containing FZ_Image IDs.
 6. For models with reasoning output: reasoningContent field shows partial reasoning during streaming, full reasoning in COMPLETED message.
-7. Continue conversations: fz_zai_send_ai_message mutation with conversationId and text.
+7. Continue conversations with fz_zai_send_ai_message. Pass conversationId, and optional text, imageIds, fileId, and videoId. Later turns use these fixed message arguments. Do not key a later turn by the creation inputArgs names.
 8. Stop conversations: fz_zai_stop_responding mutation (only for IN_PROGRESS or STREAMING states).
 
 Binary Asset Uploads:

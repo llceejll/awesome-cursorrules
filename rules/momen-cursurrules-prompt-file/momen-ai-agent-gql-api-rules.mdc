@@ -249,13 +249,14 @@ e.g.
 ```
 
 ## Continuing conversation
-After the AI Agent returns a result (status = COMPLETED), the conversation can be continued by calling fz_zai_send_ai_message. 
+After the AI Agent returns a result (status = COMPLETED), the conversation can be continued by calling fz_zai_send_ai_message.
+Later turns use the fixed message arguments: conversationId, and optional text, imageIds, fileId, and videoId. Do not reuse the creation inputArgs keys for those media values.
 The subscription of fz_zai_listen_conversation_result on the same conversationId will continue to receive messages.  
 e.g.  
   mutation request:  
   ```gql
-  mutation continue($conversationId: Long!, $text: String) {
-    fz_zai_send_ai_message(conversationId: $conversationId, text: $text)
+  mutation continue($conversationId: Long!, $text: String, $imageIds: [Long], $fileId: Long, $videoId: Long) {
+    fz_zai_send_ai_message(conversationId: $conversationId, text: $text, imageIds: $imageIds, fileId: $fileId, videoId: $videoId)
   }
   ```
   Variables: 
