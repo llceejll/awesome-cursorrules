@@ -90,7 +90,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       id: string, // Netlify user ID of the signed-in visitor.
       email?: string, // Email on the Netlify account, when Netlify has one.
       expiresAt: Date, // When access to this project expires.
-    }, // Present when the visitor logged in with Netlify for a private project or team login protection. Undefined for public projects and basic password protection. This is not a Netlify Identity user. Available for functions deployed on or after October 5, 2026, and not available in the Netlify CLI.
+    }, // Present when the visitor logged in with Netlify for a private project or team login protection. Undefined for public projects and basic password protection. This is not a Netlify Identity user. On serverless functions, available for deploys on or after October 5, 2026. Not available in the Netlify CLI.
     waitUntil: (promise: Promise<unknown>) => void, // Extends execution until the promise settles without blocking the response. On serverless functions, available for deploys on or after March 20, 2025, and the billed duration includes that work. On edge functions, the work still counts toward the CPU time limit.
   }
   ```
