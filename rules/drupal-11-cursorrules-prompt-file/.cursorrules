@@ -27,7 +27,7 @@ Always produce **functional, secure, and efficient** Drupal code that aligns wit
 **Theming and Frontend**  
 - Use **Twig templates** for outputting HTML. Keep logic out of Twig – instead, use preprocess functions (in PHP) to prepare variables for templates. This maintains separation of concerns.  
 - Leverage **Single Directory Components (SDC)** for front-end components: group your Twig, CSS, and JavaScript for a UI component in one directory when building custom themes, to take advantage of Drupal 11’s streamlined theming workflow.  
-- Write **accessible and responsive** markup. Follow Drupal’s default theme (Olivero) practices for accessibility (proper use of ARIA roles, landmarks, alt text, etc.). Ensure mobile-first, responsive design using modern CSS (or Tailwind CSS if using a decoupled front-end).  
+- Write **accessible and responsive** markup with ARIA roles, landmarks, and alt text. Drupal 11.5’s Standard profile installs `default_admin` and sets it as the default theme. Olivero is deprecated in Drupal 11.5 and removed in Drupal 12. Ensure mobile-first, responsive design using modern CSS (or Tailwind CSS if using a decoupled front-end).  
 - Use Drupal’s asset library system to attach front-end assets. For example, define CSS/JS in a `.libraries.yml` file and include them in Twig via `attach_library` instead of hard-coding `<script>` or `<link>` tags.  
 
 **Performance and Security**  
