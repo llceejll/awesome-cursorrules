@@ -270,12 +270,11 @@ e.g.
 The response from the corresponding fz_zai_listen_conversation_result will then continue. Status values are the same set as a new conversation: CREATED, IN_PROGRESS, THINKING_CHAIN_STREAMING, STREAMING, COMPLETED, FAILED, and CANCELED. 
 
 ## Stopping conversation
-For conversations still in "IN_PROGRESS" or "STREAMING" states, they can be stopped by calling fz_zai_stop_responding, which always returns true. 
-When called on conversations with "COMPLETED" state, a 400 error will be thrown inside the `errors` field of the GraphQL response. 
+Stop the current response with `fz_zai_stop_responding`. Stopping requires access to that conversation.
 e.g.  
   mutation request:  
   ```gql
-  mutation continue($conversationId: Long!) {
+  mutation StopResponding($conversationId: Long!) {
     fz_zai_stop_responding(conversationId: $conversationId)
   }
   ```

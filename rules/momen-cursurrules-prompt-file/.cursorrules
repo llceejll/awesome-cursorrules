@@ -112,7 +112,7 @@ AI Agents:
 3. Invocation process:
    - Create conversation: fz_zai_create_conversation mutation with inputArgs and zaiConfigId (returns conversationId).
    - Subscribe to results: fz_zai_listen_conversation_result subscription with conversationId.
-4. For media inputs (image, video, file, or arrays of them), set the value to the asset id. Key inputArgs by the schema argKey, or that same argKey with an `_id` suffix. An array uses that `_id` key as well, for example `images_id: [1020000000000098, 1020000000000099]`. AI inputArgs have no `_ids` key. A display name such as the_video is ignored and the agent receives no value for that input.
+4. For media inputs (image, video, file, or arrays of them), set the value to the asset id. Key inputArgs by the schema argKey, or that same argKey with an `_id` suffix. An array uses that `_id` key as well, for example `b7wme40sd_id: [1020000000000098, 1020000000000099]`. AI inputArgs have no `_ids` key. A display name such as the_video is ignored and the agent receives no value for that input.
 5. Output types:
    - Streaming plain text: Multiple STREAMING status messages, then COMPLETED with full result in data field.
    - Non-streaming plain text: IN_PROGRESS status, then COMPLETED with result in data field.
@@ -120,7 +120,7 @@ AI Agents:
    - Image output: COMPLETED message whose images array contains FZ_Image objects. Each object includes id and url.
 6. For models with reasoning output: reasoningContent field shows partial reasoning during streaming, full reasoning in COMPLETED message.
 7. Continue conversations with fz_zai_send_ai_message. Pass conversationId, and optional text, imageIds, fileId, and videoId. Later turns use these fixed message arguments. Do not key a later turn by the creation inputArgs names.
-8. Stop conversations: fz_zai_stop_responding mutation (only for IN_PROGRESS or STREAMING states).
+8. Stop the current response with fz_zai_stop_responding. Stopping requires access to that conversation.
 9. Provide information requested by a tool call with fz_zai_provide_more_information. Copy that operation’s arguments from GraphiQL.
 10. Delete a conversation with fz_zai_delete_conversation. Sending a message, stopping a response, and deleting a conversation require access to that conversation.
 
