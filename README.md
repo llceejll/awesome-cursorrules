@@ -170,6 +170,7 @@ Cursor stores current project rules in `.cursor/rules` as `.mdc` files. Copy a r
 
 - [Android Native (Jetpack Compose)](./rules/android-jetpack-compose-cursorrules-prompt-file/.cursorrules) - Cursor rules for Android development with Jetpack Compose integration.
 - [Cursor Rules Pack v2](./rules/cursor-rules-pack-v2-cursorrules-prompt-file/.cursorrules) - 7 sample production-tested rules (dependency discipline, error handling, state management, webhook security, and more). See the pack README for full-pack details.
+- [Flutter Development Guidelines](./rules/flutter-development-guidelines-cursorrules-prompt-file/.cursorrules) - Cursor rules for Flutter development with an MVVM layout and Riverpod.
 - [Flutter Expert](./rules/flutter-app-expert-cursorrules-prompt-file/.cursorrules) - Cursor rules for Flutter development with expert integration.
 - [NativeScript](./rules/nativescript-cursorrules-prompt-file/.cursorrules) - Cursor rules for NativeScript development.
 - [React Native (Expo Router, TypeScript, Windows)](./rules/react-native-expo-router-typescript-windows-cursorrules-prompt-file/.cursorrules) - Cursor rules for React Native development with Expo Router, TypeScript, and Windows.
