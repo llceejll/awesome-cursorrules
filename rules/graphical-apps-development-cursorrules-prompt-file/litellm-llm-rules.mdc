@@ -2,5 +2,5 @@
 description: Rules for LiteLLM chat calls inside LLM chat elements.
 globs: "**/llm_chat/**/*.py"
 ---
-- LLM chat calls go through LiteLLM. `LLMChatModel.generate_response` converts `MessagePayload` values to `{role, content}` dictionaries and calls `litellm.acompletion`.
+- `LiteLLMChatModel.generate_response` converts payloads with `to_chat_completions` and calls `litellm.acompletion`. `LLMChatElement` defaults to the OpenRouter backend and can also select OpenAI, Anthropic, Cloudflare AI Gateway, and mock.
 - `langchain-text-splitters` splits text in the chunker. It does not perform chat completions.
