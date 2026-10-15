@@ -130,14 +130,11 @@ def seed():
 
 ### Importing Contracts
 - Use `importlib.import_module(contract_name)` for dynamic contract imports
-- Static contract imports can be done with `import <contract_name>`
-- Only use 'import' syntax for contracts, not for libraries or Python modules
-- Trying to import standard libraries will not work within a contract (they're automatically available)
+- A static contract import is `import <contract_name>` at module scope. An import inside a function is rejected, and `from <module> import <name>` is rejected
+- Import only a deployed contract. The Python standard library is not available inside a contract
+- `hashlib`, `datetime`, `random`, `importlib`, `crypto`, `zk`, and `decimal` are already in contract scope
 - Dynamic imports are preferred when the contract name is determined at runtime
 - Can enforce interface with `importlib.enforce_interface()`
-- NEVER import anything other than a contract.
-- ALL contracting libraries are available globally
-- NEVER IMPORT importlib. It is already available globally.
 
 ```python
 @export
@@ -163,9 +160,13 @@ def interact_with_token(token_contract: str, recipient: str, amount: float):
 - Use `assert` statements for validation and error checking
 - Include error messages: `assert condition, "Error message"`
 
-### No Try/Except
-- Exception handling with try/except is not allowed
-- Use conditional logic with if/else statements instead
+### Restricted syntax
+- The linter rejects `try/except`, `with`, `lambda`, `yield`, `yield from`, `nonlocal`, set literals, set comprehensions, semicolons, and one-line compound statements
+- Classes, async functions, nested functions, and generator expressions are rejected. Only `@export` and `@construct` are valid decorators, and a function has one decorator
+- `set()` and `frozenset()` are allowed. A brace set literal is not
+- f-strings allow basic interpolation. Conversions (`!r`, `!s`, `!a`), debug syntax (`{name=}`), and format specifications (`:04d`) are unsupported
+- Allowed builtins are `Exception`, `False`, `None`, `True`, `abs`, `all`, `any`, `ascii`, `bin`, `bool`, `bytearray`, `bytes`, `chr`, `dict`, `divmod`, `filter`, `float`, `format`, `frozenset`, `hex`, `import`, `int`, `isinstance`, `issubclass`, `len`, `list`, `map`, `max`, `min`, `oct`, `ord`, `pow`, `range`, `reversed`, `round`, `set`, `sorted`, `str`, `sum`, `tuple`, and `zip`. Everything else, including `getattr`, is forbidden
+- `range` may create at most 131,072 entries. `bytes(n)` and `bytearray(n)` may allocate at most 131,072 bytes. Integer multiplication, exponentiation, and left shifts may not create an integer larger than 1,048,576 bits
 
 ```python
 # DO NOT USE:
@@ -184,10 +185,6 @@ if value == 0:
 else:
     result = 100 / value
 ```
-
-### Prohibited Built-ins
-- `getattr` is an illegal built-in function and must not be used
-- Other Python built-ins may also be restricted for security reasons
 
 ## Modules
 
