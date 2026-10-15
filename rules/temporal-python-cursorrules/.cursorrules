@@ -28,7 +28,7 @@ You are an expert Python developer with extensive experience in Temporal.io for 
 
 ### Error Handling
 - Always wrap activities with proper try-except blocks.
-- Log workflow errors with `workflow.logger` and activity errors with `activity.logger`. Those SDK loggers suppress duplicate messages during replay.
+- Log workflow errors with `workflow.logger` and activity errors with `activity.logger`. `workflow.logger` skips logs during replay by default. `activity.logger` embeds activity details on each message.
 - Use Temporal's built-in error handling for retries and timeouts.
 
 ## Project Structure
