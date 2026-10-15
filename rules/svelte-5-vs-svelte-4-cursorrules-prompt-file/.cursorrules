@@ -65,8 +65,8 @@ In Svelte 5, event handlers are treated as standard HTML properties rather than 
 3. **Runes are not imported**:
    - `$state`, `$derived`, `$effect`, and `$props` are compiler keywords. A `$` name cannot be imported from `svelte`.
 
-4. **No More Event Modifiers**:
+4. **`onclick` does not take `on:` modifiers**:
    - Svelte 4: `on:click|preventDefault={handler}`
-   - Svelte 5: `onclick={e => { e.preventDefault(); handler(e); }}`
+   - An `onclick` handler calls `e.preventDefault()` in the function. `capture` is part of the event name, `onclickcapture`. `passive` and `nonpassive` are applied with an action.
 
 This creates clearer, more maintainable components compared to Svelte 4's previous syntax by making reactivity explicit and using standardized web platform features.
