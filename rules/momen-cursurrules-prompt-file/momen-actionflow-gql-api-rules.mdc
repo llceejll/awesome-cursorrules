@@ -11,7 +11,7 @@ Although momen.app already supports direct CRUD operations that can be initiated
 Actionflows have two modes of operation, sync or async. A synchronous actionflow is executed within a single database transaction, and therefore when an unexpected error is encountered, will rollback all database changes. Synchronous actionflows have runtime limits to avoid hogging the database connection. Asynchronous actionflows run each node inside a new database transaction, so they do not have a rollback mechanism, but are more suited for long-running tasks, like long http calls, especially those made to LLM APIs as they can take minutes. Within actionflows, all nodes of invoking AI agents built in momen.app natively can only be added inside async ones. 
 
 ## Actionflow invocation process
-In order to invoke an actionflow, obtain its id and arguments from the project schema. Call the default or latest version with `fz_invoke_action_flow_default_by_latest_version` and pass `actionFlowId` and `args`. Call a specific version with `fz_invoke_action_flow` and pass `actionFlowId`, `versionId`, and `args`. `fz_create_action_flow_task` accepts an optional `versionId` when a specific version should run.
+In order to invoke an actionflow, obtain its id and arguments from the project schema. Current integrations call the deployed Actionflow with `fz_invoke_action_flow_default_by_latest_version` or `fz_create_action_flow_task`, passing `actionFlowId` and `args`. The `versionId` argument and `fz_invoke_action_flow` remain in the schema only for existing integrations. Do not pass an Actionflow version in a new integration.
 Actionflow invocations differ based on their type. 
 
 ### Sync actionflows

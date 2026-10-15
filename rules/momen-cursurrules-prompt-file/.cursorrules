@@ -83,16 +83,15 @@ Actionflows:
 1. Use actionflows for multi-step backend operations, complex business logic, and long-running tasks.
 2. Actionflows have two modes: synchronous (single transaction with rollback) and asynchronous (separate transactions per node).
 3. Synchronous actionflows:
-   - Invoke the default or latest version with fz_invoke_action_flow_default_by_latest_version, passing actionFlowId and args.
-   - Invoke a specific version with fz_invoke_action_flow, passing actionFlowId, versionId, and args.
+   - Invoke the deployed Actionflow with fz_invoke_action_flow_default_by_latest_version, passing actionFlowId and args.
    - Results are returned in the same HTTP response.
    - Use for operations requiring transaction integrity.
 4. Asynchronous actionflows:
-   - Create a task with fz_create_action_flow_task, passing actionFlowId and args. Pass versionId when a specific version should run. The mutation returns the task ID.
+   - Create a task with fz_create_action_flow_task, passing actionFlowId and args. The mutation returns the task ID.
    - Subscribe to results via fz_listen_action_flow_result, or poll fz_action_flow_result, using the task ID.
    - Status values: CREATED, PROCESSING, COMPLETED, FAILED, STREAMING, and TIME_OUT.
    - Use for long-running operations, especially LLM API calls.
-5. Obtain the actionflow ID and arguments from the project schema. versionId selects a published version. Omit it when calling the default or latest version.
+5. Obtain the actionflow ID and arguments from the project schema. Do not pass versionId. The versionId argument and fz_invoke_action_flow remain only for existing integrations.
 6. Pass arguments as Json type in variables, never assemble inside query.
 7. Prefer actionflows over frontend logic for critical operations (inventory checks, payment processing, email sending).
 
