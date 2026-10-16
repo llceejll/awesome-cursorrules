@@ -132,7 +132,7 @@ def seed():
 - Use `importlib.import_module(contract_name)` for dynamic contract imports
 - A static contract import is `import <contract_name>` at module scope. An import inside a function is rejected, and `from <module> import <name>` is rejected
 - Import only a deployed contract. The Python standard library is not available inside a contract
-- `hashlib`, `datetime`, `random`, `importlib`, `crypto`, `zk`, and `decimal` are already in contract scope
+- `hashlib`, `datetime`, `random`, `importlib`, `crypto`, and `decimal` are already in contract scope
 - Dynamic imports are preferred when the contract name is determined at runtime
 - Can enforce interface with `importlib.enforce_interface()`
 
