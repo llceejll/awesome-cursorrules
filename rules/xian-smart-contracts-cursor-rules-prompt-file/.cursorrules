@@ -189,8 +189,8 @@ else:
 ## Modules
 
 ### Random
-- Call `random.seed()` before any other `random` function in the transaction. An optional argument is an extra salt and resets the sequence
-- The seed comes from public execution context (`chain_id`, `block_num`, `block_hash`, and `__input_hash`), so observers can reproduce the sequence
+- Call `random.seed()` before any other `random` function in the transaction. Calling it again reseeds the sequence
+- The seed concatenates `block_num`, `block_hash`, and `__input_hash`. An optional argument names an environment key, and that key's value is appended when it is set. Otherwise the runtime appends `AUXILIARY_SALT` when that key is set
 - `random.randint(a, b)` returns an integer from `a` through `b` inclusive
 
 ### Datetime
@@ -258,7 +258,7 @@ result = self.some_contract.some_fn(some_arg=some_value, signer="some_signer")
 
 ### Defining Events
 - Use `LogEvent` to define events at module scope
-- Pass `event` for the event name and `params` for the field map. The compiler supplies `contract` and `name`. A field may be a type, a tuple of types, or a dictionary with `type` and optional `idx`. `indexed(...)` returns that dictionary with `idx` set to true. Allowed types are `str`, `int`, `float`, `bool`, `set`, `frozenset`, and `decimal`. At most three fields may be indexed
+- Pass `event` for the event name and `params` for the field map. The compiler supplies `contract` and `name`. Each field is a dictionary with `type` and optional `idx`. `type` is one allowed type or a tuple of them. Allowed types are `str`, `int`, `float`, `bool`, and `decimal`. At most three fields may be indexed
 
 ```python
 TransferEvent = LogEvent(
