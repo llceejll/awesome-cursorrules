@@ -95,7 +95,7 @@ foundation_owner = ForeignVariable(foreign_contract='foundation', foreign_name='
 - Runtime `__owner__` metadata, or `None` when unset
 - Separate from an application variable such as `owner = Variable()`
 - Only the owner can call exported functions if set
-- Pass `owner` to `submission.submit_contract` when the contract is submitted. The current developer transfers that role with `submission.change_developer(contract=..., new_developer=...)`. The caller must be the current `__developer__`
+- Pass `owner` to `submission.submit_contract` when the contract is submitted. The current owner transfers `__owner__` with `submission.change_owner(contract=..., new_owner=...)`. The caller must be the current owner. `submission.change_developer(contract=..., new_developer=...)` updates `__developer__`, and the caller must be the current developer
 
 ### ctx.entry
 - Returns tuple of (contract, function) at the transaction entry point
