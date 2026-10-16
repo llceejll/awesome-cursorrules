@@ -132,7 +132,7 @@ def seed():
 - Use `importlib.import_module(contract_name)` for dynamic contract imports
 - A static contract import is `import <contract_name>` at module scope. An import inside a function is rejected, and `from <module> import <name>` is rejected
 - Import only a deployed contract. The Python standard library is not available inside a contract
-- `hashlib`, `datetime`, `random`, `importlib`, `crypto`, `zk`, and `decimal` are already in contract scope
+- `hashlib`, `datetime`, `random`, `importlib`, `crypto`, and `decimal` are already in contract scope
 - Dynamic imports are preferred when the contract name is determined at runtime
 - Can enforce interface with `importlib.enforce_interface()`
 
@@ -189,8 +189,8 @@ else:
 ## Modules
 
 ### Random
-- Call `random.seed()` before any other `random` function in the transaction. An optional argument is an extra salt and resets the sequence
-- The seed comes from public execution context (`chain_id`, `block_num`, `block_hash`, and `__input_hash`), so observers can reproduce the sequence
+- Call `random.seed()` before any other `random` function in the transaction. Calling it again reseeds the sequence
+- The seed concatenates `block_num`, `block_hash`, and `__input_hash`. An optional argument names an environment key, and that key's value is appended when it is set. Otherwise the runtime appends `AUXILIARY_SALT` when that key is set
 - `random.randint(a, b)` returns an integer from `a` through `b` inclusive
 
 ### Datetime
@@ -219,22 +219,15 @@ def verify_signature(vk: str, msg: str, signature: str) -> bool:
 ```
 
 ### Hashlib
-- `hashlib.sha3_text` and `hashlib.sha256_text` hash the UTF-8 bytes of a string and return a lowercase hex digest
-- `hashlib.sha3_hex` and `hashlib.sha256_hex` decode an unprefixed, even-length hexadecimal string and hash those bytes
-- Hex helpers reject prefixes and whitespace. A hex-looking string passed to a text helper is hashed as text
+- `hashlib.sha3` and `hashlib.sha256` each take one string and return a lowercase hex digest
+- A valid hexadecimal argument is decoded and hashed as those bytes. Any other string, including a `0x` prefix or whitespace, is hashed as UTF-8 text
+- `sha3` is SHA3-256. `sha256` is SHA-256
 
 ```python
-payload_hash = hashlib.sha3_text("transfer:alice:bob:10")
-byte_hash = hashlib.sha3_hex("68656c6c6f")
-sha256_result = hashlib.sha256_hex("68656c6c6f")
+payload_hash = hashlib.sha3("transfer:alice:bob:10")
+byte_hash = hashlib.sha3("68656c6c6f")
+sha256_result = hashlib.sha256("68656c6c6f")
 ```
-
-### ZK
-- The runtime exposes `zk` for Groth16/BN254 verification. Proof generation stays off-chain
-- Prefer `zk.verify_groth16(vk_id, proof_hex, public_inputs)`. It loads an active key from `zk_registry`
-- `zk.verify_groth16_bn254(vk_hex, proof_hex, public_inputs)` sends the raw key. Both return `True` or `False` for well-formed inputs, and malformed encodings raise
-- Each public input is a `0x`-prefixed, exactly 32-byte, big-endian BN254 field element
-- `zk.is_available()`, `zk.has_verifying_key(vk_id)`, and `zk.get_vk_info(vk_id)` are also exposed. `zk.is_available()` is for tests and tooling
 
 ## Testing
 
@@ -265,7 +258,7 @@ result = self.some_contract.some_fn(some_arg=some_value, signer="some_signer")
 
 ### Defining Events
 - Use `LogEvent` to define events at module scope
-- Pass `event` for the event name and `params` for the field map. The compiler supplies `contract` and `name`. A field may be a type, a tuple of types, or a dictionary with `type` and optional `idx`. `indexed(...)` returns that dictionary with `idx` set to true. Allowed types are `str`, `int`, `float`, `bool`, `set`, `frozenset`, and `decimal`. At most three fields may be indexed
+- Pass `event` for the event name and `params` for the field map. The compiler supplies `contract` and `name`. Each field is a dictionary with `type` and optional `idx`. `type` is one allowed type or a tuple of them. Allowed types are `str`, `int`, `float`, `bool`, and `decimal`. At most three fields may be indexed
 
 ```python
 TransferEvent = LogEvent(
