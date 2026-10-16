@@ -190,7 +190,7 @@ else:
 
 ### Random
 - Call `random.seed()` before any other `random` function in the transaction. Calling it again reseeds the sequence
-- The seed concatenates `block_num`, `block_hash`, and `__input_hash`. An optional argument names an environment key, and that key's value is appended when it is set. Otherwise the runtime appends `AUXILIARY_SALT` when that key is set
+- The seed is built from `chain_id`, `block_num`, `block_hash`, and `__input_hash`. An optional argument is a literal extra salt
 - `random.randint(a, b)` returns an integer from `a` through `b` inclusive
 
 ### Datetime
