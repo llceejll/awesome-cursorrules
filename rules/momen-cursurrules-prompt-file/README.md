@@ -198,7 +198,6 @@ query GetPostsWithAuthors($limit: Int) {
     author {  # Relationship automatically handled
       id
       name
-      email
     }
   }
 }
@@ -383,13 +382,16 @@ Use GraphQL subscriptions for live updates:
 
 ```typescript
 const POST_SUBSCRIPTION = gql`
-  subscription OnNewPost {
+  subscription OnNewPost($since: timestamptz!) {
     post(
-      where: { created_at: { _gte: "now()" } }
+      where: { created_at: { _gte: $since } }
+      order_by: { created_at: desc }
     ) {
       id
       title
-      author { name }
+      author {
+        name
+      }
     }
   }
 `;
