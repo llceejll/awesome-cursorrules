@@ -219,22 +219,15 @@ def verify_signature(vk: str, msg: str, signature: str) -> bool:
 ```
 
 ### Hashlib
-- `hashlib.sha3_text` and `hashlib.sha256_text` hash the UTF-8 bytes of a string and return a lowercase hex digest
-- `hashlib.sha3_hex` and `hashlib.sha256_hex` decode an unprefixed, even-length hexadecimal string and hash those bytes
-- Hex helpers reject prefixes and whitespace. A hex-looking string passed to a text helper is hashed as text
+- The runtime exposes `hashlib.sha3` and `hashlib.sha256`. Each takes one string and returns a lowercase hex digest
+- `sha3` is SHA3-256. `sha256` is SHA-256
+- Each function tries `bytes.fromhex` first. If that raises `ValueError`, it hashes the string's encoded bytes instead. A valid hexadecimal string is hashed as those decoded bytes. A string that is not valid hex, including one with a `0x` prefix, is hashed as text
 
 ```python
-payload_hash = hashlib.sha3_text("transfer:alice:bob:10")
-byte_hash = hashlib.sha3_hex("68656c6c6f")
-sha256_result = hashlib.sha256_hex("68656c6c6f")
+payload_hash = hashlib.sha3("transfer:alice:bob:10")
+byte_hash = hashlib.sha3("68656c6c6f")
+sha256_result = hashlib.sha256("68656c6c6f")
 ```
-
-### ZK
-- The runtime exposes `zk` for Groth16/BN254 verification. Proof generation stays off-chain
-- Prefer `zk.verify_groth16(vk_id, proof_hex, public_inputs)`. It loads an active key from `zk_registry`
-- `zk.verify_groth16_bn254(vk_hex, proof_hex, public_inputs)` sends the raw key. Both return `True` or `False` for well-formed inputs, and malformed encodings raise
-- Each public input is a `0x`-prefixed, exactly 32-byte, big-endian BN254 field element
-- `zk.is_available()`, `zk.has_verifying_key(vk_id)`, and `zk.get_vk_info(vk_id)` are also exposed. `zk.is_available()` is for tests and tooling
 
 ## Testing
 
