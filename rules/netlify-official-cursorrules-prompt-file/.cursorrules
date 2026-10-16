@@ -518,13 +518,13 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
 
     export interface BlobData<T = string> {
       data: T | null;
-      etag: string;
+      etag?: string;
       metadata: BlobMetadata;
     }
 
     export interface ListResult {
       blobs: { etag: string; key: string }[];
-      directories?: string[];
+      directories: string[];
     }
 
     interface GetKeyOptions {
@@ -578,7 +578,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       // - NEVER add the second getOpts arg unless you need an explicit type, a consistency mode for this read, or have an etag to check against.
       // - IF an etag is provided, the request sends If-None-Match. A matching etag returns `{ data: null }` and does not download the body.
       // - if the blob is missing, it will resolve the promise with a null value
-      getWithMetadata(key: string, getOpts?: GetKeyAndMetadataOptions): Promise<{ data: any, etag: string, metadata: object } | null>;
+      getWithMetadata(key: string, getOpts?: GetKeyAndMetadataOptions): Promise<{ data: any, etag?: string, metadata: object } | null>;
 
       // Retrieves metadata of a blob WITHOUT downloading the data.
       // example: await store.getMetadata('key-name');
