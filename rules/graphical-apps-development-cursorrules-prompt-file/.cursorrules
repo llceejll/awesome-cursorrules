@@ -27,7 +27,7 @@ chat_interface:
 
 - Panel is used to create the visualization layer and run the GUI. Views tend to consist of Panel objects which can be styled with Python and CSS.
 - Param is used to create parameterized classes which help create parameters that handle type validation, default values, constraints, and most importantly, reactivity (setting event handlers to catch changes).
-- The LiteLLM chat backend is `LLMChatModel`. `generate_response` converts payloads with `_messages_to_litellm` and calls `litellm.acompletion`. `LLMChatElement.create_model_selector_view` defaults `provider` to OpenAI and can also select Anthropic, Gemini, xAI, Groq, Mistral, and OpenRouter, plus Custom when models are passed. `langchain-text-splitters` is only the text chunker.
+- The LiteLLM chat backend is `LiteLLMChatModel`. `generate_response` converts payloads with `_messages_to_litellm` and calls `litellm.acompletion`. `LLMChatElement.create_model_selector_view` defaults `provider` to OpenAI and can also select Anthropic, Gemini, xAI, Groq, Mistral, and OpenRouter, plus Custom when models are passed. `langchain-text-splitters` is only the text chunker.
 
 # Development Priorities
 
