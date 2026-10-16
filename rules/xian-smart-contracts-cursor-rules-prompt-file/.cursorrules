@@ -397,14 +397,30 @@ def test_change_metadata_unauthorized(self):
 ```python
 def test_permit_double_spending(self):
     # GIVEN a permit already used once
-    self.contract.permit(owner="alice", spender="bob", value=100, deadline=deadline, 
-                        signature=signature)
-    
-    # WHEN the permit is used again
+    deadline = "2024-01-01 00:00:00"
+    signature = "ab" * 64
+    self.contract.permit(
+        token_contract="con_token",
+        owner="alice",
+        spender="bob",
+        value=100,
+        deadline=deadline,
+        nonce=0,
+        signature=signature,
+    )
+
+    # WHEN the same nonce is submitted again
     # THEN it should fail
     with self.assertRaises(Exception):
-        self.contract.permit(owner="alice", spender="bob", value=100, 
-                            deadline=deadline, signature=signature)
+        self.contract.permit(
+            token_contract="con_token",
+            owner="alice",
+            spender="bob",
+            value=100,
+            deadline=deadline,
+            nonce=0,
+            signature=signature,
+        )
 ```
 
 #### 3. Time-Based Vulnerabilities
