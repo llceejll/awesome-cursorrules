@@ -138,13 +138,13 @@ Binary Asset Uploads:
 
 Stripe Payments:
 
-1. Activate Stripe under Action → Payment → Stripe (Web). On the first activation, select the order table. Save the publishable key and secret key in that payment configuration. Do not mix test and live keys.
-2. Two payment modes: one-time and recurring (subscription). Every gateway in the project shares that order table. Momen maintains `payment_record`, `recurring_payment`, and `refund`.
+1. Open Action → Payment, create a configuration, and choose Stripe. On the first activation, select the order table. Bind the publishable key as text and the secret key as a secret, then Generate and bind the endpoint secret. Select Element and the web app client. Do not mix test and live keys, and do not change the webhook events or URL.
+2. Two payment modes: one-time and recurring (subscription). Every gateway in the project shares that order table. Momen updates `payment_record`, `recurring_payment`, and `refund`, then runs the Actionflow bound to that event.
 3. Create the order in the bound order table before starting payment. Keep monetary amounts under backend control.
-4. One-time payment: add Stripe → One-time payment and bind the order id, currency, and amount. Amount is a decimal in the currency’s smallest unit. Product name and product description are optional.
-5. Recurring payment: create the Price in Stripe, then add Stripe → Recurring payment → Initiate with the order id and price id. Cancel binds the recurring payment id from `recurring_payment`.
-6. The action’s On success branch is the frontend call or checkout result. It cannot contain data mutations. Fulfill from the generated webhook Actionflow only when `paymentFound` is true, `paymentStatus` is `SUCCESSFUL`, and `alreadyProcessed` is false. Compare the amount and currency with the trusted order.
-7. Refunds take the payment id from `payment_record`, not the order id, and belong to a trusted administrator role. Refund `paymentStatus` is `REFUNDED` or `FAILED`.
+4. One-time payment: add a Payment action with type One-Off Payment, select the Stripe configuration and Element, and bind the order id, currency, and amount. Amount is a decimal in the currency’s smallest unit. Product name and product description are optional.
+5. Recurring payment: create the Price in Stripe, then add a Payment action with type Recurring Payment and Type Initiate, and bind the order id and price id. Cancel uses Type Cancel and binds the recurring payment id from `recurring_payment`.
+6. The action’s On success branch is the frontend call or checkout result. It cannot contain data mutations. Bind an Actionflow to On payment. It runs only after the payment record becomes `SUCCESSFUL`. Add an Integer input named `payment_id`, bind it to Payment callback → Payment → id, and query `payment_record` by that id. Before granting access, compare `grand_total_value` and `currency` with the trusted order.
+7. Refunds take the payment id from `payment_record`, not the order id, and belong to a trusted administrator role. Bind an Actionflow to On refund with an Integer input named `refund_id` bound to Payment callback → Refund → id. Branch on `refund/status`: `REFUNDED` or `FAILED`. An amount larger than the remainder refunds only the remainder.
 8. Subscription states can include `INCOMPLETE`, `INCOMPLETE_EXPIRED`, `ACTIVE`, `PAST_DUE`, `CANCELED`, `TRIALING`, and `UNPAID`.
 9. Show the final result by querying the order table or `payment_record`. Do not treat the frontend branch as the final payment status.
 
@@ -345,5 +345,5 @@ One-time payment binds these action inputs:
 }
 ```
 
-The generated webhook Actionflow exposes `orderId`, `paymentFound`, `paymentStatus` (`SUCCESSFUL` or `FAILED`), and `alreadyProcessed`. Fulfill only when `paymentFound` is true, `paymentStatus` is `SUCCESSFUL`, and `alreadyProcessed` is false.
+Bind an Actionflow to On payment. Add an Integer input named `payment_id` and bind it to Payment callback → Payment → id. The flow runs only after the payment record becomes `SUCCESSFUL`. Query `payment_record` by that id and compare `grand_total_value` and `currency` with the trusted order before granting access.
 

@@ -4,15 +4,15 @@ alwaysApply: false
 ---
 
 # Overview
-Momen integrates Stripe Payment Element for one-time payments, recurring payments, and refunds. A project binds one order table during the first payment activation, and every gateway shares that table. Create an order in that table before starting a payment. Stripe then sends webhooks to generated Actionflows, which update `payment_record`, `recurring_payment`, and `refund`.
+Momen integrates Stripe Payment Element for one-time payments, recurring payments, and refunds. A project binds one order table during the first payment activation, and every gateway shares that table. Create an order in that table before starting a payment. When Stripe notifies Momen, Momen updates `payment_record`, `recurring_payment`, and `refund`, then runs the Actionflow bound to that event.
 
-Activate Stripe under Action → Payment → Stripe (Web). Save the publishable key, secret key, and optional brand name, slogan, and logo in that payment configuration. Do not mix test and live keys, and do not place the secret key in frontend source.
+Open Action → Payment, create a configuration, and choose Stripe as the payment channel. Bind the publishable key as text and the secret key as a secret, then Generate and bind the endpoint secret. Select the Element payment product and the web app client. Do not mix test and live keys, and do not place the secret key in frontend source. Do not change the events or the URL of the webhook Momen creates.
 
 ## Order creation
 The bound order table can use the project's own columns. It usually records the account, the amount, and the items. Create the order before adding the payment action. Keep monetary amounts under backend control.
 
 ## One-time payment
-Add Stripe → One-time payment from the Payment category and bind:
+Add a Payment action. Set Payment type to One-Off Payment, select the Stripe configuration, and select Element. Bind:
 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -32,10 +32,10 @@ Example bindings:
 }
 ```
 
-The action’s On success branch means the frontend call or checkout returned. It cannot contain data mutations. The generated one-off payment Actionflow exposes `orderId`, `paymentFound`, `paymentStatus` (`SUCCESSFUL` or `FAILED`), and `alreadyProcessed`. Fulfill only when `paymentFound` is true, `paymentStatus` is `SUCCESSFUL`, and `alreadyProcessed` is false. Compare the payment amount and currency with the trusted order before granting access.
+The action’s On success branch means the frontend call or checkout returned. It cannot contain data mutations. Bind an Actionflow to On payment. That flow runs only after the payment record becomes `SUCCESSFUL`. It does not run when a payment fails or is canceled. Add an Integer input named `payment_id` and bind it to Payment callback → Payment → id. Query `payment_record` where `id` equals `payment_id`. Before granting access, check that `payment_record/grand_total_value` equals the order amount and that `payment_record/currency` equals the order currency. Stripe stores `grand_total_value` in the smallest currency unit.
 
 ## Recurring payment (subscription)
-Create the recurring product and Price in Stripe first. Add Stripe → Recurring payment → Initiate and bind the order id and price id. Product name and product description are optional.
+Create the recurring product and Price in Stripe first. Add a Payment action. Set Payment type to Recurring Payment and Type to Initiate, select the Stripe configuration and Element, and bind the order id and price id. Product name and product description are optional.
 
 ```json
 {
@@ -44,10 +44,10 @@ Create the recurring product and Price in Stripe first. Add Stripe → Recurring
 }
 ```
 
-Cancel with Stripe → Recurring payment → Cancel and bind the recurring payment id from `recurring_payment`. Subscription states can include `INCOMPLETE`, `INCOMPLETE_EXPIRED`, `ACTIVE`, `PAST_DUE`, `CANCELED`, `TRIALING`, and `UNPAID`. When Stripe charges a later invoice, create a new order for that period in the reserved part of the recurring deduction Actionflow and bind that order id to the payment-record step.
+Cancel with a Payment action set to Recurring Payment and Type Cancel, and bind the recurring payment id from `recurring_payment`. Subscription states can include `INCOMPLETE`, `INCOMPLETE_EXPIRED`, `ACTIVE`, `PAST_DUE`, `CANCELED`, `TRIALING`, and `UNPAID`. When a later invoice is issued, the On recurring billing Actionflow must run synchronously. Give it an Integer input named `payment_id` bound to Payment callback → Payment → id, create the order for that period, and output that order id. Do not grant access in that flow. On payment does that after the charge succeeds.
 
 ## Refunds
-Limit Stripe refunds to a trusted administrator role under Settings → Permissions → Payment. Add Stripe → Refund and bind the payment id from `payment_record`, not the order id, plus the refund amount. Cumulative refunds cannot exceed the original payment. The generated refund Actionflow exposes `orderId`, `refundFound`, `paymentStatus` (`REFUNDED` or `FAILED`), and `alreadyProcessed`. Handle the result only when `refundFound` is true and `alreadyProcessed` is false.
+Limit Stripe refunds to a trusted administrator role under Settings → Permissions → Payment. Add a Payment action, set Payment type to Refund, and bind the payment id from `payment_record`, not the order id, plus the refund amount. If the amount is larger than the remaining refundable amount, only the remaining amount is refunded. Bind an Actionflow to On refund. Add an Integer input named `refund_id` and bind it to Payment callback → Refund → id. Query `refund` where `id` equals `refund_id`, then branch on `refund/status`: `REFUNDED` or `FAILED`.
 
 ## Webhook handling
-Treat the generated webhook Actionflow as the final payment result. Query the order table or `payment_record` to show that status. Do not fulfill an order from the frontend On success branch. `alreadyProcessed: true` means that callback state was already processed. 
+Under Payment result handling, bind an Actionflow to On payment, On refund, On subscription status change, and On recurring billing. Momen updates the system tables before it runs the bound Actionflow. A repeated gateway notification does not run that Actionflow again. If the Actionflow fails, Momen does not retry it, so guard fulfillment with the order status. Query the order table or `payment_record` to show the final status. Do not fulfill an order from the frontend On success branch.
