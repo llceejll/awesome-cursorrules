@@ -895,8 +895,6 @@ The sample below includes the title, month, and word-count clauses. Those three 
 
 ### **Predicate Operators**
 
-The system supports nine `OperandColumnType` values: `bigint`, `decimal`, `text`, `boolean`, `jsonb`, `geo_point`, `timestamptz`, `timetz`, and `date`.
-
 - A `BigInt` column uses `bigint` or the generated long type shown in GraphiQL.
 
 A `post_bool_exp` names columns, relations, and the logical operators `_and`, `_or`, and `_not`. A column comparison puts the operator and the comparison value inside the column. The Runtime API publishes this object:
