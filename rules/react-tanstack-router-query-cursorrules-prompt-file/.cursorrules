@@ -155,7 +155,8 @@ const searchSchema = z.object({
 
 export const Route = createFileRoute('/posts/')({
   validateSearch: searchSchema,
-  loader: ({ context: { queryClient }, location: { search } }) =>
+  loaderDeps: ({ search }) => search,
+  loader: ({ context: { queryClient }, deps: search }) =>
     queryClient.query({ ...postsListQueryOptions(search), staleTime: 'static' }),
   component: PostsList,
 })
