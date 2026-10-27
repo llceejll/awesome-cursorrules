@@ -17,28 +17,20 @@ Momen is a full-stack no-code development platform, but its backend architecture
   - **WebSocket URL**: wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription
 
 ## Communicating with the backend
-When using Typescript, to communicate with a Momen.app project's backend server's GraphQL API, use Apollo Client v3.13.9 with graphql-ws. Momen subscriptions use the graphql-ws protocol. Send the token as connection_init.payload.authToken.
+When using Typescript, to communicate with a Momen.app project's backend server's GraphQL API, use Apollo Client v3.13.9 with a subscriptions-transport-ws WebSocketLink. Momen subscriptions use the legacy subscriptions-transport-ws protocol. A graphql-ws client fails the handshake.
 ### Reference Implementation
 ```typescript
 import { ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
-import { createClient } from 'graphql-ws';
+import { WebSocketLink } from '@apollo/client/link/ws';
 
 const httpUrl = 'https://villa.momen.app/zero/{projectExId}/api/graphql-v2';
 const wssUrl = 'wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription';
 
 export const createApolloClient = (token?: string) => {
-  const wsLink = new GraphQLWsLink(
-    createClient({
-      url: wssUrl,
-      connectionParams: token
-        ? {
-            authToken: token, // Anonymous users have no token, connectionParams must be empty.
-          }
-        : {},
-    }),
-  );
+  const wsLink = new WebSocketLink({
+    uri: wssUrl,
+  });
 
   const splitLink = split(
     ({ query }) => {
@@ -195,18 +187,17 @@ Always ensure momen-ai-agent-gql-api-rules is read before writing code to intera
 ### Subscriptions
 
 For real-time functionality, the GraphQL API supports subscriptions. A client can subscribe to data, and the server will automatically push updates when that data changes in the database, enabling features like live chat or notifications.  
-Once the WebSocket is established, the initial connection_init message will be acknowledged by the server with 
+Once the WebSocket is established, send connection_init. The server acknowledges with
 ```json
 {
-  "type": "connection_ack",
-  "payload": null
+  "type": "connection_ack"
 }
 ```
-You can then send a subscribe message for each operation.
+You can then send a start message for each operation.
 ```json
 {
   "id": "some id, unique per websocket",
-  "type": "subscribe",
+  "type": "start",
   "payload": {
     "operationName": "OperationName",
     "query": "subscription OperationName($arg0: String!) {  account (    where: {      username: {        _eq: $arg0      }    }  ) {    __typename    id    username  }}",
@@ -218,7 +209,7 @@ You will get answers similar to this:
 ```json
 {
   "id": "2",
-  "type": "next",
+  "type": "data",
   "payload": {
     "data": {
       "account": [
@@ -232,6 +223,7 @@ You will get answers similar to this:
   }
 }
 ```
+The operation ends with a message whose type is `complete`.
 
 ## File / Binary Asset Handling
 Media and other files are not stored in the PostgreSQL database but in a dedicated Object Storage system.  

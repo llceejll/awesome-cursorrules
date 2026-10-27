@@ -16,7 +16,7 @@ Backend: Momen.app (https://momen.app) - Full-stack no-code platform used as hea
 
 Frontend: TypeScript/JavaScript with Apollo Client
 - Apollo Client v3.13.9 for GraphQL HTTP requests
-- graphql-ws for WebSocket connections (Momen subscriptions use the graphql-ws protocol)
+- subscriptions-transport-ws for WebSocket connections (Momen subscriptions use the legacy subscriptions-transport-ws protocol)
 - Modern UI framework (React/Next.js/Vue/Svelte as specified)
 - Tailwind CSS for styling (check online for latest integration methods)
 
@@ -25,7 +25,7 @@ Backend Architecture:
 1. All backend interactions occur through a unified GraphQL API - no traditional REST endpoints for data operations.
 2. HTTP endpoint: https://villa.momen.app/zero/{projectExId}/api/graphql-v2
 3. WebSocket endpoint: wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription
-4. Must use Apollo Client v3.13.9 with graphql-ws. Momen subscriptions speak the graphql-ws protocol, and the token goes in connection_init.payload.authToken.
+4. Must use Apollo Client v3.13.9 with a subscriptions-transport-ws WebSocketLink. Momen subscriptions speak the legacy subscriptions-transport-ws protocol. A graphql-ws client fails the handshake.
 5. Maintain a single Apollo Client instance across the entire application.
 6. Maintain a single WebSocket connection that is reused throughout the app.
 7. Never cache anything at the GraphQL level.
@@ -35,9 +35,9 @@ Apollo Client Setup:
 
 1. Must create Apollo Client with split link for HTTP and WebSocket.
 2. Use HttpLink for queries and mutations.
-3. Use GraphQLWsLink with a graphql-ws client for subscriptions.
-4. Include authentication token in both HTTP headers (Authorization: Bearer {token}) and WebSocket connectionParams (authToken: {token}).
-5. Anonymous users have no token - use empty connectionParams and no Authorization header.
+3. Use WebSocketLink from @apollo/client/link/ws for subscriptions. It speaks subscriptions-transport-ws.
+4. Include the authentication token in the HTTP Authorization: Bearer {token} header. Read the token from jwt.token.
+5. Anonymous users have no token and send no Authorization header.
 6. After writing or modifying GraphQL operations, generate TypeScript types with GraphQL Code Generator by running `npm run codegen` (`graphql-codegen --config codegen.ts`).
 7. Always use generated TypeScript types for type safety.
 
@@ -151,9 +151,9 @@ Stripe Payments:
 GraphQL Subscriptions:
 
 1. Use subscriptions for real-time data updates (live chat, notifications, data changes).
-2. WebSocket sends connection_init, server acknowledges with connection_ack.
-3. Subscribe with a message whose type is `subscribe`. Include `id` plus a payload with `operationName`, `query`, and `variables`.
-4. The server sends `next` messages with the same `id`. The result is in `payload.data`.
+2. After connecting, send connection_init and wait for connection_ack.
+3. Start each operation with a message whose type is `start`. Include `id` plus a payload with `operationName`, `query`, and `variables`.
+4. The server sends `data` messages with the same `id`. The result is in `payload`. The operation ends with `complete`.
 5. Use the same subscription operations as queries (e.g., subscription { post { id title } }).
 
 Best Practices:
@@ -175,19 +175,15 @@ Apollo Client Reference Implementation:
 ```typescript
 import { ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
-import { createClient } from 'graphql-ws';
+import { WebSocketLink } from '@apollo/client/link/ws';
 
 const httpUrl = 'https://villa.momen.app/zero/{projectExId}/api/graphql-v2';
 const wssUrl = 'wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription';
 
 export const createApolloClient = (token?: string) => {
-  const wsLink = new GraphQLWsLink(
-    createClient({
-      url: wssUrl,
-      connectionParams: token ? { authToken: token } : {},
-    }),
-  );
+  const wsLink = new WebSocketLink({
+    uri: wssUrl,
+  });
 
   const splitLink = split(
     ({ query }) => {
