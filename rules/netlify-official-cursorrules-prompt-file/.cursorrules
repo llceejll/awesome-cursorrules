@@ -576,7 +576,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
       // Retrieves a blob along with metadata
       // example: await store.getWithMetadata('key-name');
       // - NEVER add the second getOpts arg unless you need an explicit type, a consistency mode for this read, or have an etag to check against.
-      // - IF an etag is provided, the request sends If-None-Match. A matching etag returns `{ data: null }` and does not download the body.
+      // - IF an etag is provided, the request sends If-None-Match. A matching etag returns `{ data: null, etag, metadata }` and does not download the body.
       // - if the blob is missing, it will resolve the promise with a null value
       getWithMetadata(key: string, getOpts?: GetKeyAndMetadataOptions): Promise<{ data: any, etag?: string, metadata: object } | null>;
 
