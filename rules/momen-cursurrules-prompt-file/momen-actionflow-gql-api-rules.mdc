@@ -127,4 +127,4 @@ query GetActionFlowResult($taskId: Long!) {
   }
 }
 ``` 
-The status field uses the TaskStatus enum: CREATED, PROCESSING, COMPLETED, FAILED, STREAMING, and TIME_OUT.
+The status field uses the TaskStatus enum: CREATED, PROCESSING, COMPLETED, and FAILED.

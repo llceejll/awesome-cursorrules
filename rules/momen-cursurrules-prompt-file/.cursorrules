@@ -89,7 +89,7 @@ Actionflows:
 4. Asynchronous actionflows:
    - Create a task with fz_create_action_flow_task, passing actionFlowId and args. The mutation returns the task ID.
    - Subscribe to results via fz_listen_action_flow_result, or poll fz_action_flow_result, using the task ID.
-   - Status values: CREATED, PROCESSING, COMPLETED, FAILED, STREAMING, and TIME_OUT.
+   - Status values: CREATED, PROCESSING, COMPLETED, and FAILED.
    - Use for long-running operations, especially LLM API calls.
 5. Obtain the actionflow ID and arguments from the project schema. Do not pass versionId. The versionId argument and fz_invoke_action_flow remain only for existing integrations.
 6. Pass arguments as Json type in variables, never assemble inside query.
