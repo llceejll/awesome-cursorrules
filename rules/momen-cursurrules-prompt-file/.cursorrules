@@ -138,15 +138,14 @@ Binary Asset Uploads:
 
 Stripe Payments:
 
-1. Open Action → Payment, create a configuration, and choose Stripe. On the first activation, select the order table. Bind the publishable key as text and the secret key as a secret, then Generate and bind the endpoint secret. Select Element and the web app client. Do not mix test and live keys, and do not change the webhook events or URL.
-2. Two payment modes: one-time and recurring (subscription). Every gateway in the project shares that order table. Momen updates `payment_record`, `recurring_payment`, and `refund`, then runs the Actionflow bound to that event.
-3. Create the order in the bound order table before starting payment. Keep monetary amounts under backend control.
-4. One-time payment: add a Payment action with type One-Off Payment, select the Stripe configuration and Element, and bind the order id, currency, and amount. Amount is a decimal in the currency’s smallest unit. Product name and product description are optional.
-5. Recurring payment: create the Price in Stripe, then add a Payment action with type Recurring Payment and Type Initiate, and bind the order id and price id. Cancel uses Type Cancel and binds the recurring payment id from `recurring_payment`.
-6. The action’s On success branch is the frontend call or checkout result. It cannot contain data mutations. Bind an Actionflow to On payment. It runs only after the payment record becomes `SUCCESSFUL`. Add an Integer input named `payment_id`, bind it to Payment callback → Payment → id, and query `payment_record` by that id. Before granting access, compare `grand_total_value` and `currency` with the trusted order.
-7. Refunds take the payment id from `payment_record`, not the order id, and belong to a trusted administrator role. Bind an Actionflow to On refund with an Integer input named `refund_id` bound to Payment callback → Refund → id. Branch on `refund/status`: `REFUNDED` or `FAILED`. An amount larger than the remainder refunds only the remainder.
-8. Subscription states can include `INCOMPLETE`, `INCOMPLETE_EXPIRED`, `ACTIVE`, `PAST_DUE`, `CANCELED`, `TRIALING`, and `UNPAID`.
-9. Show the final result by querying the order table or `payment_record`. Do not treat the frontend branch as the final payment status.
+1. Go to Settings → Payment → Stripe. Enter the Publishable Key and Secret Key, plus the brand name, logo, and slogan. Do not modify the auto-generated payment-success webhook or add other events to it.
+2. Activation creates `payment_record`, `recurring_payment`, and `refund`. Create the order table before enabling payments. Once linked, that table cannot be unlinked, replaced, or deleted.
+3. One-time payment binds `orderId`, `currency`, and `amount`. `amount` is a decimal in the currency’s smallest unit.
+4. The Stripe Payment Actionflow receives `orderId`, `paymentStatus` (`SUCCESSFUL` or `FAILED`), and `alreadyProcessed`. Locate the order with `orderId`. Treat the payment as succeeded or failed only when that status is present and `alreadyProcessed` is false. Cross-check the order amount with the payment amount before granting access.
+5. Recurring payment binds `orderId` and `priceId`. Recurring actions can start a subscription or cancel an existing one.
+6. Refunds bind `paymentId` from the payment table and `refundAmount`, which must not exceed the original payment amount. The refund Actionflow receives `orderId` and `alreadyProcessed`. Process it only when `alreadyProcessed` is false. Grant refund actions to an admin-like role.
+7. Subscription `status` values are `INCOMPLETE`, `INCOMPLETE_EXPIRED`, `ACTIVE`, `PAST_DUE`, `CANCELED`, `TRIALING`, and `UNPAID`. A renewal deduction inserts a new order and passes that order id to the payment creation node's `orderId`.
+8. Show the result by subscribing to the Payment or Refund tables. Fulfill the order from the backend Actionflow.
 
 GraphQL Subscriptions:
 
@@ -348,5 +347,5 @@ One-time payment binds these action inputs:
 }
 ```
 
-Bind an Actionflow to On payment. Add an Integer input named `payment_id` and bind it to Payment callback → Payment → id. The flow runs only after the payment record becomes `SUCCESSFUL`. Query `payment_record` by that id and compare `grand_total_value` and `currency` with the trusted order before granting access.
+The Stripe Payment Actionflow receives `orderId`, `paymentStatus` (`SUCCESSFUL` or `FAILED`), and `alreadyProcessed`. Locate the order with `orderId`. Treat the payment as succeeded or failed only when that status is present and `alreadyProcessed` is false.
 
