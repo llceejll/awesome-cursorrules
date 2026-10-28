@@ -66,7 +66,7 @@ When the user changes authentication status (logging in/out), the WebSocket conn
 
 In order to obtain a JWT, the user must either register or login. Depending on the login settings of the project, it can have different authentication methods. 
 - Email with verification
-    1. When registering, you must first send a verification code. Valid values for verificationEnumType are: LOGIN, SIGN_UP, BIND, UNBIND, DEREGISTER, RESET_PASSWORD. In this case, choose SIGN_UP.
+    1. When registering, you must first send a verification code. Valid values for verificationEnumType are the verification-code scenarios: register, login, reset, bind_account, unbind_account, and delete. Registration uses register.
         ```graphql 
         mutation SendVerificationCodeToEmail(
             $email: String!

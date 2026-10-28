@@ -46,7 +46,7 @@ Authentication:
 1. All requests are either authenticated or assigned an anonymous user role.
 2. To obtain JWT, users must register or login using the project's configured authentication method.
 3. For email with verification:
-   - First send a verification code using sendVerificationCodeToEmail mutation (verificationEnumType: SIGN_UP for registration).
+   - First send a verification code using sendVerificationCodeToEmail mutation (verificationEnumType: register for registration).
    - Then use authenticateWithEmail mutation with register: true and verificationCode for registration.
    - For subsequent logins, use register: false and omit verificationCode.
 4. For username/password:
