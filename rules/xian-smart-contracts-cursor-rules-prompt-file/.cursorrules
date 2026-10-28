@@ -258,7 +258,7 @@ result = self.some_contract.some_fn(some_arg=some_value, signer="some_signer")
 
 ### Defining Events
 - Use `LogEvent` to define events at module scope
-- Pass `event` for the event name and `params` for the field map. The compiler supplies `contract` and `name`. Each field is a dictionary with `type` and optional `idx`. `type` is one allowed type or a tuple of them. Allowed types are `str`, `int`, `float`, `bool`, and `decimal`. At most three fields may be indexed
+- Pass `event` for the event name and `params` for the field map. The compiler supplies `contract` and `name`. Each field is a dictionary with `type` and optional `idx`. `type` is one allowed type or a tuple of them. Allowed types are `str`, `int`, `float`, `bool`, `decimal`, `set`, and `frozenset`. At most three fields may be indexed
 
 ```python
 TransferEvent = LogEvent(
