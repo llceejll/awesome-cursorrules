@@ -30,6 +30,9 @@ const wssUrl = 'wss://villa.momen.app/zero/{projectExId}/api/graphql-subscriptio
 export const createApolloClient = (token?: string) => {
   const wsLink = new WebSocketLink({
     uri: wssUrl,
+    options: {
+      connectionParams: token ? { authToken: token } : {},
+    },
   });
 
   const splitLink = split(
@@ -187,7 +190,16 @@ Always ensure momen-ai-agent-gql-api-rules is read before writing code to intera
 ### Subscriptions
 
 For real-time functionality, the GraphQL API supports subscriptions. A client can subscribe to data, and the server will automatically push updates when that data changes in the database, enabling features like live chat or notifications.  
-Once the WebSocket is established, send connection_init. The server acknowledges with
+Once the WebSocket is established, send connection_init. Put the JWT or admin token in `payload.authToken`:
+```json
+{
+  "type": "connection_init",
+  "payload": {
+    "authToken": "<jwt_or_admin_token>"
+  }
+}
+```
+The server acknowledges with
 ```json
 {
   "type": "connection_ack"

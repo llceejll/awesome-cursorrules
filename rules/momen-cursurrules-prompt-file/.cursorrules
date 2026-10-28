@@ -151,7 +151,7 @@ Stripe Payments:
 GraphQL Subscriptions:
 
 1. Use subscriptions for real-time data updates (live chat, notifications, data changes).
-2. After connecting, send connection_init and wait for connection_ack.
+2. After connecting, send connection_init with `payload.authToken` set to the JWT or admin token, then wait for connection_ack.
 3. Start each operation with a message whose type is `start`. Include `id` plus a payload with `operationName`, `query`, and `variables`.
 4. The server sends `data` messages with the same `id`. The result is in `payload`. The operation ends with `complete`.
 5. Use the same subscription operations as queries (e.g., subscription { post { id title } }).
@@ -183,6 +183,9 @@ const wssUrl = 'wss://villa.momen.app/zero/{projectExId}/api/graphql-subscriptio
 export const createApolloClient = (token?: string) => {
   const wsLink = new WebSocketLink({
     uri: wssUrl,
+    options: {
+      connectionParams: token ? { authToken: token } : {},
+    },
   });
 
   const splitLink = split(
