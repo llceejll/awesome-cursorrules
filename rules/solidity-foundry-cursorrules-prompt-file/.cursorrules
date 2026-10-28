@@ -112,7 +112,7 @@ Dependencies
 - Use OpenZeppelin (openzeppelin/openzeppelin-contracts) as the main source of dependencies.
 - Use Solady (vectorized/solady) when gas optimization is crucial.
 - Ensure that any libraries used are installed with forge, and remappings are set.
-- Put project remappings in `foundry.toml` under `remappings`. Generate `remappings.txt` with `forge remappings > remappings.txt` when an editor needs it; entries in that file override the toml remappings.
+- Put project remappings in `foundry.toml` under `remappings`. Generate `remappings.txt` with `forge remappings > remappings.txt` when an editor needs it. A matching prefix in `foundry.toml` is applied after `remappings.txt` and wins.
 
 Configuring Environment
 
