@@ -332,9 +332,9 @@ The `Query` type provides versatile read operations for the `post` entity, such 
 
 ```
 type Query {
-  post(where: post_bool_exp, order_by: [post_order_by!], distinct_on: [post_select_column!], offset: Int, limit: Int): [post!]!
+  post(where: post_bool_exp, order_by: post_order_by, distinct_on: [post_select_column!], offset: Int, limit: Int): [post!]!
   post_by_pk(id: bigint!): post
-  post_aggregate(where: post_bool_exp, order_by: [post_order_by!], distinct_on: [post_select_column!], offset: Int, limit: Int): post_aggregate!
+  post_aggregate(where: post_bool_exp, order_by: post_order_by, distinct_on: [post_select_column!], offset: Int, limit: Int): post_aggregate!
 }
 ```
 
@@ -357,7 +357,7 @@ Controls result set size and position using:
 
 #### Sorting (order_by)
 
-To sort query results, use the `order_by` argument. It takes a list of `post_order_by` objects, allowing you to specify multiple sorting criteria. Each criterion uses the `order_by` enum for direction:
+To sort query results, use the `order_by` argument. It takes one `post_order_by` object. Put each sort key on that object. Each column uses the `order_by` enum for direction:
 
 ```
 enum order_by {
@@ -458,10 +458,10 @@ Imagine you want to get the most recent post for each unique `title`. You could 
 query GetLatestPostPerTitle {
   post(
     distinct_on: [title],
-    order_by: [
-      { title: asc },         
-      { created_at: desc }    
-    ]
+    order_by: {
+      title: asc,
+      created_at: desc
+    }
   ) {
     title
     content
@@ -621,8 +621,8 @@ The post type represents a single record from the post table and includes the fo
    1. **One-To-Many Relationships:** A single post record is associated with multiple records in the related table (post_tag).
 
    ```
-post_tags(where: post_tag_bool_exp, order_by: [post_tag_order_by!], distinct_on: [post_tag_select_column!], offset: Int, limit: Int): [post_tag]!
-post_tags_aggregate(where: post_tag_bool_exp, order_by: [post_tag_order_by!], distinct_on: [post_tag_select_column!], offset: Int, limit: Int): post_tag_aggregate!
+post_tags(where: post_tag_bool_exp, order_by: post_tag_order_by, distinct_on: [post_tag_select_column!], offset: Int, limit: Int): [post_tag]!
+post_tags_aggregate(where: post_tag_bool_exp, order_by: post_tag_order_by, distinct_on: [post_tag_select_column!], offset: Int, limit: Int): post_tag_aggregate!
    ```
    1. **One-To-One And Many-to-One Relationships:** A post record references exactly one record in the related table (post_meta or account).
    ```
