@@ -412,9 +412,7 @@ ANY RULES IN THE ProviderContextOverrides SECTION CAN OVERRULE SPECIFIC RULES IN
     header?: Record<string, boolean | string>, // Optional. Header name to `true` (must be present), `false` (must be absent), or a regex string the value must match. Names are case-insensitive.
     onError?: "fail" | "bypass" | `/${string}`, // Optional. `fail` serves the generic error page. `bypass` continues the request chain. A same-site path starting with `/` rewrites there.
     cache?: 'manual', // Optional. Opts in to response caching. Responses are cached only when the function also returns HTTP cache headers.
-  } = {
-    path: "", // Default value; should be set per function.
-  };
+  }
   ```
 
   #### Configuring Edge Functions in netlify.toml
