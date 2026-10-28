@@ -101,7 +101,7 @@ Third-Party APIs:
 2. Each API has: id, name, operation (query or mutation), inputs, outputs.
 3. Invoke a published API through fz_api_{api_unique_id}. Copy the operation, generated input type, and response fields from GraphiQL.
 4. Check responseCode and responseStatus before reading the generated response object.
-5. Legacy APIs may still expose operation_{operationId}, fz_body, and field_200_json. Use the current API feature for new integrations.
+5. Legacy APIs may still expose operation_{operationId} and an fz_body argument. Use the current API feature for new integrations.
 6. Provide all input parameters unless explicitly instructed otherwise.
 7. Benefits: keeps API keys server-side, avoids CORS issues, centralized error handling.
 

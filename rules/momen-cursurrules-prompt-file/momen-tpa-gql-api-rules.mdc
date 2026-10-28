@@ -102,5 +102,5 @@ mutation CallCreateOrderApi($input: fz_api_create_order_input!) {
   }
 }
 ```
-Check `responseCode` and `responseStatus` before reading the generated structured response field. A legacy operation may still return `field_200_json` for 2xx bodies and leave that field empty on 4xx or 5xx. Do not add `field_200_json` or `fz_body` to a new `fz_api_{api_unique_id}` operation unless GraphiQL still shows them. 
+Check `responseCode` and `responseStatus` before reading the generated structured response field. Do not add `fz_body` to a new `fz_api_{api_unique_id}` operation unless GraphiQL still shows it. 
 
