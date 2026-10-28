@@ -16,7 +16,7 @@ Backend: Momen.app (https://momen.app) - Full-stack no-code platform used as hea
 
 Frontend: TypeScript/JavaScript with Apollo Client
 - Apollo Client v3.13.9 for GraphQL HTTP requests
-- subscriptions-transport-ws for WebSocket connections (Momen subscriptions use the legacy subscriptions-transport-ws protocol)
+- graphql-ws for WebSocket connections (Momen subscriptions use the graphql-ws protocol)
 - Modern UI framework (React/Next.js/Vue/Svelte as specified)
 - Tailwind CSS for styling (check online for latest integration methods)
 
@@ -25,7 +25,7 @@ Backend Architecture:
 1. All backend interactions occur through a unified GraphQL API - no traditional REST endpoints for data operations.
 2. HTTP endpoint: https://villa.momen.app/zero/{projectExId}/api/graphql-v2
 3. WebSocket endpoint: wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription
-4. Must use Apollo Client v3.13.9 with a subscriptions-transport-ws WebSocketLink. Momen subscriptions speak the legacy subscriptions-transport-ws protocol. A graphql-ws client fails the handshake.
+4. Must use Apollo Client v3.13.9 with GraphQLWsLink and a graphql-ws client. Momen subscriptions use the graphql-ws protocol.
 5. Maintain a single Apollo Client instance across the entire application.
 6. Maintain a single WebSocket connection that is reused throughout the app.
 7. Never cache anything at the GraphQL level.
@@ -35,7 +35,7 @@ Apollo Client Setup:
 
 1. Must create Apollo Client with split link for HTTP and WebSocket.
 2. Use HttpLink for queries and mutations.
-3. Use WebSocketLink from @apollo/client/link/ws for subscriptions. It speaks subscriptions-transport-ws.
+3. Use GraphQLWsLink from @apollo/client/link/subscriptions with createClient from graphql-ws. It speaks the graphql-ws protocol.
 4. Include the authentication token in the HTTP Authorization: Bearer {token} header. Read the token from jwt.token.
 5. Anonymous users have no token and send no Authorization header.
 6. After writing or modifying GraphQL operations, generate TypeScript types with GraphQL Code Generator by running `npm run codegen` (`graphql-codegen --config codegen.ts`).
@@ -151,8 +151,8 @@ GraphQL Subscriptions:
 
 1. Use subscriptions for real-time data updates (live chat, notifications, data changes).
 2. After connecting, send connection_init with `payload.authToken` set to the JWT or admin token, then wait for connection_ack.
-3. Start each operation with a message whose type is `start`. Include `id` plus a payload with `operationName`, `query`, and `variables`.
-4. The server sends `data` messages with the same `id`. The result is in `payload`. The operation ends with `complete`.
+3. Start each operation with a message whose type is `subscribe`. Include `id` plus a payload with `operationName`, `query`, and `variables`.
+4. The server sends `next` messages with the same `id`. The result is in `payload`. The operation ends with `complete`.
 5. Use the same subscription operations as queries (e.g., subscription { post { id title } }).
 
 Best Practices:
@@ -173,19 +173,20 @@ Apollo Client Reference Implementation:
 
 ```typescript
 import { ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { WebSocketLink } from '@apollo/client/link/ws';
+import { createClient } from 'graphql-ws';
 
 const httpUrl = 'https://villa.momen.app/zero/{projectExId}/api/graphql-v2';
 const wssUrl = 'wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription';
 
 export const createApolloClient = (token?: string) => {
-  const wsLink = new WebSocketLink({
-    uri: wssUrl,
-    options: {
+  const wsLink = new GraphQLWsLink(
+    createClient({
+      url: wssUrl,
       connectionParams: token ? { authToken: token } : {},
-    },
-  });
+    })
+  );
 
   const splitLink = split(
     ({ query }) => {

@@ -17,23 +17,24 @@ Momen is a full-stack no-code development platform, but its backend architecture
   - **WebSocket URL**: wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription
 
 ## Communicating with the backend
-When using Typescript, to communicate with a Momen.app project's backend server's GraphQL API, use Apollo Client v3.13.9 with a subscriptions-transport-ws WebSocketLink. Momen subscriptions use the legacy subscriptions-transport-ws protocol. A graphql-ws client fails the handshake.
+When using Typescript, to communicate with a Momen.app project's backend server's GraphQL API, use Apollo Client v3.13.9 with GraphQLWsLink and a graphql-ws client. Momen subscriptions use the graphql-ws protocol.
 ### Reference Implementation
 ```typescript
 import { ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { WebSocketLink } from '@apollo/client/link/ws';
+import { createClient } from 'graphql-ws';
 
 const httpUrl = 'https://villa.momen.app/zero/{projectExId}/api/graphql-v2';
 const wssUrl = 'wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription';
 
 export const createApolloClient = (token?: string) => {
-  const wsLink = new WebSocketLink({
-    uri: wssUrl,
-    options: {
+  const wsLink = new GraphQLWsLink(
+    createClient({
+      url: wssUrl,
       connectionParams: token ? { authToken: token } : {},
-    },
-  });
+    })
+  );
 
   const splitLink = split(
     ({ query }) => {
@@ -205,11 +206,11 @@ The server acknowledges with
   "type": "connection_ack"
 }
 ```
-You can then send a start message for each operation.
+You can then send a subscribe message for each operation.
 ```json
 {
   "id": "some id, unique per websocket",
-  "type": "start",
+  "type": "subscribe",
   "payload": {
     "operationName": "OperationName",
     "query": "subscription OperationName($arg0: String!) {  account (    where: {      username: {        _eq: $arg0      }    }  ) {    __typename    id    username  }}",
@@ -221,7 +222,7 @@ You will get answers similar to this:
 ```json
 {
   "id": "2",
-  "type": "data",
+  "type": "next",
   "payload": {
     "data": {
       "account": [
