@@ -99,7 +99,7 @@ class HomeViewController: UIViewController {
     
     private func bindViewModel() {
         viewModel.users
-            .bind(to: tableView.rx.items(cellIdentifier: "UserCell")) { _, user, cell in
+            .bind(to: tableView.rx.items(cellIdentifier: "UserCell", cellType: UITableViewCell.self)) { _, user, cell in
                 // Configure cell
             }
             .disposed(by: disposeBag)

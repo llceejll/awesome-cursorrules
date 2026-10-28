@@ -99,7 +99,7 @@ class HomeViewController: UIViewController {
     
     private func bindViewModel() {
         viewModel.users
-            .bind(to: tableView.rx.items(cellIdentifier: "UserCell")) { _, user, cell in
+            .bind(to: tableView.rx.items(cellIdentifier: "UserCell", cellType: UITableViewCell.self)) { _, user, cell in
                 // Configure cell
             }
             .disposed(by: disposeBag)
@@ -466,7 +466,7 @@ final class UserListViewController: UIViewController {
         let output = viewModel.transform(input: input)
         
         output.users
-            .drive(tableView.rx.items(cellIdentifier: "UserCell")) { _, user, cell in
+            .drive(tableView.rx.items(cellIdentifier: "UserCell", cellType: UITableViewCell.self)) { _, user, cell in
                 if let userCell = cell as? UserTableViewCell {
                     userCell.configure(with: user)
                 }
