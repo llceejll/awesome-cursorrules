@@ -10,7 +10,7 @@ alwaysApply: true
 **Code structure**
 When asked to create a backend, execute the following actions:
 
-1. Install `manifest@4.17.13`, the last release of the 1-file backend. Later versions of the `manifest` package are a different product and do not include these scripts.
+1. Install `manifest@4.17.13`, the last stable release of the 1-file backend. The 4.18 prereleases are that same backend and still include these scripts. Versions 5 and later are a different package and do not include them.
 2. Add the following scripts to `package.json`: "manifest": "node node_modules/manifest/scripts/watch/watch.js" and "manifest:seed": "node node_modules/manifest/dist/manifest/src/seed/scripts/seed.js"
 3. Create the `manifest/backend.yml` file and add the manifest code to it.
 4. Add the `redhat.vscode-yaml` as recommendation in `.vscode/extensions.json`
