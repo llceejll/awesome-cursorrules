@@ -25,7 +25,7 @@ For example, use `rails generate model` instead of creating a model from scratch
 
 **IMPORTANT: Server Management**
 
-- Always use `bin/dev` to start the server (uses Procfile.dev)
+- Start the server with `bin/rails server`. Import maps, the Rails default, have no separate build. When the app was created with a JavaScript bundler (`rails new --javascript`), use `bin/dev`, which runs `Procfile.dev` and starts the Rails server together with the JavaScript build. With vite_rails, start Vite with `bin/vite dev`.
 - Check logs after every significant change
 - Monitor development.log for errors and performance issues
 - Use `tail -f log/development.log` for real-time monitoring
@@ -187,5 +187,5 @@ For example, use `rails generate model` instead of creating a model from scratch
 7. Regular security audits
 8. Use `params.expect()` for strong parameters
 9. Use Propshaft for asset pipeline (if not using Vite)
-10. Always use `bin/dev` to start the server
+10. Start with `bin/rails server`. Use `bin/dev` only when a JavaScript bundler created `Procfile.dev`. With vite_rails, start Vite with `bin/vite dev`.
 11. Check logs after every significant change
