@@ -93,7 +93,7 @@ Have a preference for the following packages when relying on dependencies:
 - purrr for 'list' objects manipulation and functional programming
 - shiny for web application development
 - 'data.table' or 'dplyr' for in-memory data manipulation
-- 'data.table' or 'readr' for efficient data import (CSV/TSV). Use 'data.table::fread' or 'readr::read_csv'. 
+- 'data.table' or 'readr' for efficient data import (CSV/TSV). Use 'data.table::fread', 'readr::read_csv' for CSV, or 'readr::read_tsv' for TSV. 
 - 'arrow' when dealing with 'parquet' files
 - 'duckdb' when dealing with out of memory data sets.
 - 'ggplot2' for plotting. 
