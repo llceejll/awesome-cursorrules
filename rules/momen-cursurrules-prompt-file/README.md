@@ -432,7 +432,7 @@ Be explicit in prompts: "Using Momen backend rules, create..."
 - [Database Configuration](https://docs.momen.app/data/database/configuration/)
 - [Actionflow Guide](https://docs.momen.app/actions/actionflow/overview/)
 - [AI Agent Tutorial](https://docs.momen.app/actions/ai/overview/)
-- [Stripe Integration](https://docs.momen.app/actions/payment/)
+- [Stripe Integration](https://docs.momen.app/docs/actions/guide/payment/payment_stripe/)
 
 ### GraphQL Resources
 - [Apollo Client Docs](https://www.apollographql.com/docs/react/)
