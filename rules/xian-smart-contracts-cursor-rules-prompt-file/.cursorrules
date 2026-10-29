@@ -132,7 +132,7 @@ def seed():
 - Use `importlib.import_module(contract_name)` for dynamic contract imports
 - A static contract import is `import <contract_name>` at module scope. An import inside a function is rejected, and `from <module> import <name>` is rejected
 - Import only a deployed contract. The Python standard library is not available inside a contract
-- `hashlib`, `datetime`, `random`, `importlib`, `crypto`, and `decimal` are already in contract scope
+- `hashlib`, `datetime`, `random`, `importlib`, `crypto`, `zk`, and `decimal` are already in contract scope
 - Dynamic imports are preferred when the contract name is determined at runtime
 - Can enforce interface with `importlib.enforce_interface()`
 
@@ -165,7 +165,7 @@ def interact_with_token(token_contract: str, recipient: str, amount: float):
 - Classes, async functions, nested functions, and generator expressions are rejected. Only `@export` and `@construct` are valid decorators, and a function has one decorator
 - `set()` and `frozenset()` are allowed. A brace set literal is not
 - f-strings allow basic interpolation. Conversions (`!r`, `!s`, `!a`), debug syntax (`{name=}`), and format specifications (`:04d`) are unsupported
-- Allowed builtins are `Exception`, `False`, `None`, `True`, `abs`, `all`, `any`, `ascii`, `bin`, `bool`, `bytearray`, `bytes`, `chr`, `dict`, `divmod`, `filter`, `format`, `frozenset`, `hex`, `import`, `int`, `isinstance`, `issubclass`, `len`, `list`, `map`, `max`, `min`, `oct`, `ord`, `pow`, `range`, `reversed`, `round`, `set`, `sorted`, `str`, `sum`, `tuple`, and `zip`. Everything else, including `getattr` and `float()`, is forbidden. The name `float` is still a valid annotation
+- Allowed builtins are `Exception`, `False`, `None`, `True`, `abs`, `all`, `any`, `ascii`, `bin`, `bool`, `bytearray`, `bytes`, `chr`, `dict`, `divmod`, `filter`, `float`, `format`, `frozenset`, `hex`, `import`, `int`, `isinstance`, `issubclass`, `len`, `list`, `map`, `max`, `min`, `oct`, `ord`, `pow`, `range`, `reversed`, `round`, `set`, `sorted`, `str`, `sum`, `tuple`, and `zip`. Everything else, including `getattr`, is forbidden
 - `range` may create at most 131,072 entries. `bytes(n)` and `bytearray(n)` may allocate at most 131,072 bytes. Integer multiplication, exponentiation, and left shifts may not create an integer larger than 1,048,576 bits
 
 ```python
@@ -190,7 +190,7 @@ else:
 
 ### Random
 - Call `random.seed()` before any other `random` function in the transaction. Calling it again reseeds the sequence
-- The seed string is `block_num`, then `block_hash`, then `__input_hash`. A missing `block_num` becomes `"0"`, and a missing `block_hash` or `__input_hash` becomes `"0"`. `random.seed(aux_salt)` reads `rt.env[aux_salt]` when that value is present; otherwise it appends `rt.env["AUXILIARY_SALT"]` when that value is present
+- The seed is built from `chain_id`, `block_num`, `block_hash`, and `__input_hash`. An optional argument is a literal extra salt
 - `random.randint(a, b)` returns an integer from `a` through `b` inclusive
 
 ### Datetime
@@ -219,14 +219,14 @@ def verify_signature(vk: str, msg: str, signature: str) -> bool:
 ```
 
 ### Hashlib
-- The runtime exposes `hashlib.sha3` and `hashlib.sha256`. Each takes one string and returns a lowercase hex digest
-- `sha3` is SHA3-256. `sha256` is SHA-256
-- A string that `bytes.fromhex` accepts is hashed as those decoded bytes. Any other string is hashed as its UTF-8 bytes
+- The runtime exposes `hashlib.sha3_text`, `hashlib.sha3_hex`, `hashlib.sha256_text`, and `hashlib.sha256_hex`. Each takes one string and returns a lowercase hex digest
+- `sha3_text` and `sha3_hex` are SHA3-256. `sha256_text` and `sha256_hex` are SHA-256
+- `_text` hashes the exact UTF-8 bytes of the string. `_hex` accepts unprefixed, even-length hexadecimal with no whitespace and hashes the decoded bytes
 
 ```python
-payload_hash = hashlib.sha3("transfer:alice:bob:10")
-byte_hash = hashlib.sha3("68656c6c6f")
-sha256_result = hashlib.sha256("68656c6c6f")
+payload_hash = hashlib.sha3_text("transfer:alice:bob:10")
+byte_hash = hashlib.sha3_hex("68656c6c6f")
+sha256_result = hashlib.sha256_hex("68656c6c6f")
 ```
 
 ## Testing
