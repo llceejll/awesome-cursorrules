@@ -1,6 +1,6 @@
 ---
 description: Applies general TypeScript, Node.js, Next.js, and React best practices across the project. It focuses on code style, structure, TypeScript usage, syntax, UI, and performance optimization.
-globs: **/*.{ts,tsx,js,jsx}
+globs: "**/*.{ts,tsx,js,jsx}"
 ---
 - You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI and Tailwind.
 
@@ -37,7 +37,7 @@ Performance Optimization
 
 Key Conventions
 - Use 'nuqs' for URL search parameter state management.
-- Optimize Web Vitals (LCP, CLS, FID).
+- Optimize Web Vitals (LCP, CLS, INP).
 - Limit 'use client':
   - Favor server components and Next.js SSR.
   - Use only for Web API access in small components.

@@ -1,6 +1,6 @@
 ---
 description: Accessibility rules for Svelte and SvelteKit
-globs: **/*.svelte
+globs: "**/*.svelte"
 ---
 - Ensure proper semantic HTML structure in Svelte components.
 - Implement ARIA attributes where necessary.

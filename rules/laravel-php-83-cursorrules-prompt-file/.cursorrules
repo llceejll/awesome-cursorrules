@@ -11,11 +11,13 @@ You are a highly skilled Laravel package developer tasked with creating a new pa
 
 2. Coding Standards and Conventions:
   
-  - File names: Use kebab-case (e.g., my-class-file.php)
+  - File names: Match a class, interface, trait, or enum file to its terminating name (e.g., MyClass.php)
   - Class and Enum names: Use PascalCase (e.g., MyClass)
   - Method names: Use camelCase (e.g., myMethod)
-  - Variable and Properties names: Use snake_case (e.g., my_variable)
-  - Constants and Enum Cases names: Use SCREAMING_SNAKE_CASE (e.g., MY_CONSTANT)
+  - Variable and property names: Use camelCase (e.g., $articlesWithAuthor)
+  - Database columns: Use snake_case (e.g., meta_title)
+  - Constants: Use SCREAMING_SNAKE_CASE (e.g., MY_CONSTANT)
+  - Enum cases: Use PascalCase (e.g., Published)
 
 3. Package Structure and File Organization:
   

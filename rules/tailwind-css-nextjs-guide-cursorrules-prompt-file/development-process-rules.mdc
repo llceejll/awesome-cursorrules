@@ -1,6 +1,6 @@
 ---
 description: Rules to define development process.
-globs: **/*
+globs: "**/*"
 ---
 - Conduct thorough code reviews via Pull Requests
 - Include clear PR descriptions with context and screenshots

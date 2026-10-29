@@ -11,32 +11,30 @@ Momen is a full-stack no-code development platform, but its backend architecture
 * **Database**: A powerful, enterprise-grade relational database built on PostgreSQL.  This provides the foundation for structured data, relationships, and constraints.
 * **Actionflow**: For building custom workflows and automations.
 * **Third-party API**: Imported third-party HTTP API definitions, the server acts as a relay. 
-* **AI Agent**: AI agent builder / runtime capable of RAG, tool use (depending on model), multi-modal input/output (dpending on model), structured JSON output (depending on model). 
+* **AI Agent**: AI agent builder / runtime capable of RAG, tool use (depending on model), multi-modal input/output (depending on model), structured JSON output (depending on model). 
 * **GraphQL**: All backend interactions, including data operations and business logic execution, are exposed through a single, unified GraphQL API.  There are no traditional REST endpoints for data CRUD operations.
   - **HTTP URL**:  https://villa.momen.app/zero/{projectExId}/api/graphql-v2
   - **WebSocket URL**: wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription
 
 ## Communicating with the backend
-When using Typescript, to communicate with a Momen.app project's backend server's GraphQL API, use Apollo GraphQL v3.13.9 + subscriptions-transport-ws, NEVER use graphql-ws as Momen.app is NOT compatible with it. 
+When using Typescript, to communicate with a Momen.app project's backend server's GraphQL API, use Apollo Client v3.13.9 with GraphQLWsLink and a graphql-ws client. Momen subscriptions use the graphql-ws protocol.
 ### Reference Implementation
 ```typescript
 import { ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { WebSocketLink } from '@apollo/client/link/ws';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { createClient } from 'graphql-ws';
 
 const httpUrl = 'https://villa.momen.app/zero/{projectExId}/api/graphql-v2';
 const wssUrl = 'wss://villa.momen.app/zero/{projectExId}/api/graphql-subscription';
 
 export const createApolloClient = (token?: string) => {
-  const wsClient = new SubscriptionClient(wssUrl, {
-    reconnect: true,
-    connectionParams: token ? {
-      authToken: token // Anonymous users have no token, connectionParams must be empty. 
-    } : {},
-  });
-
-  const wsLink = new WebSocketLink(wsClient);
+  const wsLink = new GraphQLWsLink(
+    createClient({
+      url: wssUrl,
+      connectionParams: token ? { authToken: token } : {},
+    })
+  );
 
   const splitLink = split(
     ({ query }) => {
@@ -59,16 +57,16 @@ export const createApolloClient = (token?: string) => {
   });
 };
 ```
-For other languages, infer implemenation from the above example. 
+For other languages, infer implementation from the above example. 
 
 ## Authentication
 
 All requests to the GraphQL endpoint are either authenticated, or they will be assigned an anonymous user role. 
-When user changes authentication status (logging in/out), WebSocket connection should be re-established. 
+When the user changes authentication status (logging in/out), the WebSocket connection should be re-established. 
 
-In order to obtain JWT, user must either register or login. Depending on the login settings of the project, it can have different authentication methods. 
+In order to obtain a JWT, the user must either register or login. Depending on the login settings of the project, it can have different authentication methods. 
 - Email with verification
-    1. When registering, you must first send a verification code. Valid values for verificationEnumType are: LOGIN, SIGN_UP, BIND, UNBIND, DEREGISTER,RESET_PASSWORD. In this case, choose SIGN_UP.
+    1. When registering, you must first send a verification code. Valid values for verificationEnumType are the verification-code scenarios: register, login, reset, bind_account, unbind_account, and delete. Registration uses register.
         ```graphql 
         mutation SendVerificationCodeToEmail(
             $email: String!
@@ -80,7 +78,7 @@ In order to obtain JWT, user must either register or login. Depending on the log
             )
         }
         ``` 
-    2. When registering, use set register to true, and fill in the verificationCode. When logging in subsequently, set register to false and omit verificationCode. 
+    2. When registering, set register to true, and fill in the verificationCode. When logging in subsequently, set register to false and omit verificationCode. 
     ```graphql
     mutation AuthenticateWithEmail(
         $email: String!
@@ -126,29 +124,32 @@ In order to obtain JWT, user must either register or login. Depending on the log
     }
   }
 ```  
-N.B. both authentication mutations returns FZ_Account type, which is not the same as the account. FZ_Account ONLY has the following fields: email - String, id - Long, permissionRoles - [String], phoneNumber - String, profileImageUrl - String, roles - [FZ_role], username - String. Other fields in account are NOT found in FZ_Account. 
+N.B. both authentication mutations return account and jwt. Send jwt.token on later requests. account is an FZ_Account, which is not the account table. FZ_Account has these fields: email - String, id - Long, permissionRoles - [String], phoneNumber - String, profileImageUrl - String, roles - [FZ_role], username - String. Other fields on the account table are not on FZ_Account. 
 
 ## Interacting with the GraphQL API
-The GraphQL API is automatically generated by Momen.app depending on the structure of the backend. Long and bigint are sometimes used to represent corresponding fields of similar types, such as FZ_Account's id (long) and account's id (bigint), but the exact type must be chosen depending the type involved in the query. Inputs of Json type must be passed in as whole in variables. e.g. 
+The GraphQL API is automatically generated by Momen.app depending on the structure of the backend. Long and bigint are sometimes used to represent corresponding fields of similar types, such as FZ_Account's id (long) and account's id (bigint), but the exact type must be chosen depending on the type involved in the query. Inputs of Json type must be passed in as a whole in variables. e.g. 
 ```graphql
-mutation CreateOrder($args: Json!) {
-  fz_invoke_action_flow(
-    actionFlowId: "7e93e65e-7730-470c-b2fd-9ff608cb68e8"
-    versionId: 5
+mutation CreateOrder($actionFlowId: String!, $args: Json!) {
+  fz_invoke_action_flow_default_by_latest_version(
+    actionFlowId: $actionFlowId
     args: $args
   )
 }
 ```
 ```json
 {
-  "variables": {
+  "actionFlowId": "7e93e65e-7730-470c-b2fd-9ff608cb68e8",
+  "args": {
     "course_id": 2
   }
 }
 ```
 AVOID assembling args inside the query. 
 
-### Exclusive List of Valid GraphQL Scalar Types
+### GraphQL scalar types
+Boolean
+Int
+String
 BigDecimal
 Date
 Decimal
@@ -176,7 +177,7 @@ universal_scalar
 Use the momen MCP server for this. 
 
 ### Database
-Always ensure momen-database-gql-api-rules is read before writing code to interact with the databse. 
+Always ensure momen-database-gql-api-rules is read before writing code to interact with the database. 
 
 ### Third-party API
 Always ensure momen-tpa-gql-api-rules is read before writing code to interact with any Third-party APIs.
@@ -190,31 +191,38 @@ Always ensure momen-ai-agent-gql-api-rules is read before writing code to intera
 ### Subscriptions
 
 For real-time functionality, the GraphQL API supports subscriptions. A client can subscribe to data, and the server will automatically push updates when that data changes in the database, enabling features like live chat or notifications.  
-Once Websocket is established, the initial connection_init message will be acknowledged by the server with 
+Once the WebSocket is established, send connection_init. Put the JWT or admin token in `payload.authToken`:
 ```json
 {
-  "id": null,
-  "type": "connection_ack",
-  "payload": null
+  "type": "connection_init",
+  "payload": {
+    "authToken": "<jwt_or_admin_token>"
+  }
 }
 ```
-You can then start sending subscriptions.
+The server acknowledges with
 ```json
 {
-    "id": "some id, unique per websocket", 
-    "type": "start",
-    "payload": {
+  "type": "connection_ack"
+}
+```
+You can then send a subscribe message for each operation.
+```json
+{
+  "id": "some id, unique per websocket",
+  "type": "subscribe",
+  "payload": {
     "operationName": "OperationName",
     "query": "subscription OperationName($arg0: String!) {  account (    where: {      username: {        _eq: $arg0      }    }  ) {    __typename    id    username  }}",
     "variables": { "arg0": "someName" }
-    }
+  }
 }
 ```
 You will get answers similar to this:
 ```json
 {
   "id": "2",
-  "type": "data",
+  "type": "next",
   "payload": {
     "data": {
       "account": [
@@ -228,6 +236,7 @@ You will get answers similar to this:
   }
 }
 ```
+The operation ends with a message whose type is `complete`.
 
 ## File / Binary Asset Handling
 Media and other files are not stored in the PostgreSQL database but in a dedicated Object Storage system.  
@@ -236,27 +245,14 @@ When using a media file on the frontend, make sure to fetch its `url` subfield.
 Refer to momen-binary-asset-upload-rules
 
 ## Permission
-All GraphQL fields have permission control based on the current logged in user's role(s). If an attempted access violates permission policies, an error will be given within the GraphQL response. The key to look for here is the 403 error code.   
-e.g.
+All GraphQL fields have permission control based on the current logged in user's role(s). If an attempted access violates permission policies, the GraphQL response includes an error. Check `message` and `path`.
 ```json
 {
+  "data": null,
   "errors": [
     {
-      "errorCode": 403,
-      "extensions": {
-        "classification": "ACTION_FLOW"
-      },
-      "locations": [
-        {
-          "column": 2,
-          "line": 2
-        }
-      ],
-      "message": "Anonymous user has no permission on invocation of action flow: 63734821-319d-4f00-a5cf-69f134b42b9c",
-      "operation": "fz_invoke_action_flow",
-      "path": [
-        "fz_invoke_action_flow"
-      ]
+      "message": "permission denied",
+      "path": ["post"]
     }
   ]
 }

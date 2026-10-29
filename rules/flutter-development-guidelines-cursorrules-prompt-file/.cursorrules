@@ -13,10 +13,10 @@
 - /lib/utils/: helper functions and constants
 
 ### Naming conventions
-- Directories and files: use snakeCase (e.g. auth_wizard.dart).
+- Directories and files: use lowercase_with_underscores (e.g. auth_wizard.dart).
 - UpperCamelCase: use for class names/enumerations/typedefs/type parameters, etc.
-- LowerCamelCase: used for variables/functions/class members (properties, methods), etc.
-- lowercase_with_underscores (snakeCase): for files/directories/packages/libraries, etc.
+- lowerCamelCase: used for variables/functions/class members (properties, methods), etc.
+- lowercase_with_underscores: for files/directories/packages/libraries, etc.
 
 ### Import.
 - Place imports starting with dart: first (use lowercase_with_underscores for the import prefix).

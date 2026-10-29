@@ -7,7 +7,7 @@ globs: app/**/*.{ts,tsx,js,jsx}
 - Use dynamic loading for non-critical components.
 - Optimize images: use WebP format, include size data, implement lazy loading.
 - Use 'nuqs' for URL search parameter state management.
-- Optimize Web Vitals (LCP, CLS, FID).
+- Optimize Web Vitals (LCP, CLS, INP).
 - Limit 'use client':
   - Favor server components and Next.js SSR.
   - Use only for Web API access in small components.

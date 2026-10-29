@@ -1,7 +1,7 @@
 ---
 description: Rules for configuring the extension manifest and handling permissions securely.
-globs: **/manifest.json
+globs: "**/manifest.json"
 ---
-- Use the latest manifest version (v3) unless there's a specific need for v2
+- Use Manifest V3. The Chrome Web Store removed remaining Manifest V2 extensions on August 31, 2026 and no longer accepts them. Existing installs still run on Chrome 138 and earlier, but they cannot be updated or reinstalled. Manifest V2 extensions do not run on Chrome 139 and later.
 - Follow the principle of least privilege for permissions
 - Implement optional permissions where possible

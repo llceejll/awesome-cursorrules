@@ -5,9 +5,6 @@ Author: Felipe Pimentel
 ## What you can build
 Automated Deployment & CI/CD PipelineCross-Platform Mobile App FrameworkPydantic Schema Visualizer
 
-## Benefits
-
-
 ## Synopsis
 Developers skilled in web technologies will benefit by building a scalable, high-performance web application with a FastAPI backend and React/Tailwind frontend, following best practices and optimal project structure.
 

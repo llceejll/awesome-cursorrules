@@ -1,6 +1,6 @@
 ---
 description: Guidelines for developing modular, reusable Livewire components.
-globs: /app/Http/Livewire/**/*.php
+globs: /app/Livewire/**/*.php
 ---
 - Create modular, reusable Livewire components.
 - Use Livewire's lifecycle hooks effectively (e.g., mount, updated, etc.).

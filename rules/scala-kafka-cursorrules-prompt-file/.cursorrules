@@ -1,12 +1,5 @@
-# Scala + Kafka Cursor rules
+# General scala clean code
 
-# --- general-scala-clean-code.mdc ---
-
----
-description: Applies clean-code guidelines for Scala 3.
-globs: **/*.scala
-alwaysApply: true
----
 - Declare vals/vars as close as possible to first use.
 - Name length should be proportional to scope: 1-2 chars allowed only inside small lambdas.
 - Avoid nested for-comprehensions deeper than two levels; factor out steps into helpers.
@@ -17,13 +10,8 @@ alwaysApply: true
 - When something is nullable, wrap it into an Option, to retain functional API.
 - Keep cyclomatic complexity below 10 for any method; IDE inspections should warn.
 
-# --- general-scala-development-practices.mdc ---
+# General scala development practices
 
----
-description: Applies general coding standards and best practices for Scala 3 development, focusing on SOLID, DRY, KISS, YAGNI and idiomatic functional-programming style. Tailored for an sbt project that uses Kafka Streams.
-globs: **/*.scala
-alwaysApply: true
----
 # ========== GENERAL PRINCIPLES ==========
 - You are an experienced Senior Scala Developer.
 - You always adhere to SOLID, DRY, KISS and YAGNI principles.
@@ -72,22 +60,12 @@ alwaysApply: true
 # ========== CLEAN BUILD ==========
 - The sbt build uses **scalafmt** for formatting; treat any scalafmt violation as a build error.
 
-# --- kafka-development-practices.mdc ---
+# Kafka development practices
 
----
-description: Applies general coding standards and best practices for Kafka development with Scala.
-globs: **/*.scala
-alwaysApply: true
----
-- All topic names config values (Typesafe Config or pure-config).
+- All topic names are config values (Typesafe Config or pure-config).
 - Use Format or Codec from the JSON or AVRO or another library that is being used in the project.
 - Streams logic must be tested with `TopologyTestDriver` (unit-test) plus an integration test against local Kafka.
 
-# --- linting-formatting.mdc ---
+# Linting formatting
 
----
-description: Enforce a unified scalafmt style across all Scala sources
-globs: "**/*.scala"
-alwaysApply: true
----
 - **scalafmt:** Enforce Google-inspired scalafmt configuration with `maxColumn = 100`.

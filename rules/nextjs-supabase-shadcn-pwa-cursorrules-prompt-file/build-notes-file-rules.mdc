@@ -1,6 +1,6 @@
 ---
 description: Enforces rules for creating and managing build notes files within the /ProjectDocs/Build_Notes/ directory, including naming conventions, content structure, and update frequency.
-globs: **/ProjectDocs/Build_Notes/**/*
+globs: "**/ProjectDocs/Build_Notes/**/*"
 ---
 - **Location & Naming:**
    - Store all notes files in `/ProjectDocs/Build_Notes/`.

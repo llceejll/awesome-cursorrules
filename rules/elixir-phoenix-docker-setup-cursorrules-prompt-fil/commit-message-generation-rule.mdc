@@ -1,11 +1,15 @@
 ---
 description: Provides guidelines for generating conventional commit messages based on changes in the codebase.
-globs: **/*
+globs: "**/*"
 ---
 ## Commit Message Guidelines:
 
 - Always suggest a conventional commit message with an optional scope in lowercase. Follow this structure:
-  [optional scope]: [optional body][optional footer(s)]
+  <type>[optional scope]: <description>
+
+  [optional body]
+
+  [optional footer(s)]
 
 Where:
 

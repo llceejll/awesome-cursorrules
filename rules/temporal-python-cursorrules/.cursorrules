@@ -1,5 +1,5 @@
 ### **Temporal Python SDK `.cursorrules`**
-```markdown
+
 # Temporal Python SDK - .cursorrules
 
 ## Role and Expertise
@@ -28,7 +28,7 @@ You are an expert Python developer with extensive experience in Temporal.io for 
 
 ### Error Handling
 - Always wrap activities with proper try-except blocks.
-- Log errors with context using Python's `logging` module.
+- Log workflow errors with `workflow.logger` and activity errors with `activity.logger`. `workflow.logger` skips logs during replay by default. `activity.logger` embeds activity details on each message.
 - Use Temporal's built-in error handling for retries and timeouts.
 
 ## Project Structure
@@ -66,6 +66,8 @@ Organize the project with clear separation of concerns:
 
 ### Workflow Example
 ```python
+from datetime import timedelta
+
 from temporalio import workflow
 
 @workflow.defn

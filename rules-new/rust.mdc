@@ -15,7 +15,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 
 ## Anchor Framework
 - Use `#[derive(Accounts)]` for all instruction contexts
-- Validate accounts strictly using constraint macros (e.g., `#[account(mut)]`, `seeds`, `bump]`)
+- Validate accounts strictly using constraint macros (e.g., `#[account(mut)]`, `seeds`, `bump`)
 - Define all state structs with `#[account]` and `#[derive(AnchorSerialize, AnchorDeserialize)]`
 - Prefer `Init`, `Close`, `Realloc`, `Mut`, and constraint macros to avoid manual deserialization
 - Use `ctx.accounts` to access validated context accounts
@@ -23,7 +23,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 
 ## Serialization
 - Use **Borsh** or Anchor's custom serializer (not Serde) for on-chain data
-- Always include `#[account(zero_copy)]` or `#[repr(C)]` for packed structures
+- Always include `#[account(zero_copy)]` and `#[repr(C)]` for zero-copy accounts
 - Avoid floating point types — use `u64`, `u128`, or fixed-point math
 - Zero out or close unused accounts to reduce rent costs
 
@@ -33,7 +33,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 - Use `provider.simulate()` to inspect failed txs
 - Spin up a local validator (`anchor test`) and reset between tests
 - Airdrop SOL to wallets with `provider.connection.requestAirdrop(...)`
-- Validate program logs using `tx.confirmation.logMessages`
+- Validate program logs using `tx.meta.logMessages`
 
 ## Solana SDK (Manual)
 - Use `solana_program` crate when not using Anchor (bare-metal programs)
@@ -43,7 +43,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 - Never panic! Use `ProgramError::Custom(u32)` or `ErrorCode` enums
 
 ## Security Patterns
-- Always validate `msg.sender`/signer with `account_info.is_signer`
+- Always validate the signer with `account_info.is_signer`
 - Prevent replay attacks via `seeds`, `bump`, and unique PDAs
 - Use strict size checks before reallocating or deserializing
 - Avoid unsafe unchecked casting; prefer Anchor deserialization
@@ -54,8 +54,8 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 - Prefer zero-copy deserialization when accounts are large
 - Minimize compute usage; avoid loops and recursion
 - Avoid memory reallocations mid-instruction
-- Use `#[account(zero_copy)]` and `#[repr(packed)]` for tight layout
-- Profile compute units with `solana logs` and `anchor run`
+- Use `#[account(zero_copy)]` with `#[repr(C)]` for large accounts
+- Profile compute units with `solana logs`
 
 ## Dev Workflow
 - Use `anchor init` to scaffold projects
@@ -63,7 +63,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 - Use `anchor build`, `anchor deploy`, `anchor test` consistently
 - Use separate `Anchor.toml` environments for devnet/mainnet/localnet
 - Format all Rust code with `cargo fmt`, lint with `cargo clippy`
-- Keep `Cargo.lock` checked into `programs/` but not root
+- Keep the workspace `Cargo.lock` checked in at the project root
 
 ## Documentation
 - Use `///` Rust doc comments for all instructions and accounts
@@ -72,7 +72,7 @@ globs: programs/**/*.rs, src/**/*.rs, tests/**/*.ts
 - Maintain up-to-date `README.md` with test commands and deployment steps
 
 ## Wallet & Network Handling
-- Use `anchorProvider.wallet.publicKey` for signer verification in tests
+- Use `provider.wallet.publicKey` for signer verification in tests
 - Do not hardcode keypairs — use env-based loading (`process.env.ANCHOR_WALLET`)
 - Deploy with clear `cluster` targets (`localnet`, `devnet`, `mainnet`)
 - Use `anchor keys sync` to propagate program ID changes

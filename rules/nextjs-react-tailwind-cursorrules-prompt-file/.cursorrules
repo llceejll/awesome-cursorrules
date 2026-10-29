@@ -41,13 +41,13 @@
 - Key Conventions
 
   - Use 'nuqs' for URL search parameter state management.
-  - Optimize Web Vitals (LCP, CLS, FID).
+  - Optimize Web Vitals (LCP, CLS, INP).
   - Limit 'use client':
     - Favor server components and Next.js SSR.
     - Use only for Web API access in small components.
     - Avoid for data fetching or state management.
   - Follow Next.js docs for Data Fetching, Rendering, and Routing.
-  - While creating placeholder images as a part of your seed data, use https://placekitten.com/
+  - While creating placeholder images as a part of your seed data, use https://picsum.photos/. placekitten.com no longer serves images.
   - Place both the /app and /components folders under a /src directory. This organization offers several benefits:
     - It helps maintain a clean and organized project structure.
     - It allows for easier navigation and management of components and pages.

@@ -1,6 +1,6 @@
 ---
 description: Enforces specific TypeScript usage guidelines, such as preferring interfaces over types and avoiding enums.
-globs: **/*.ts
+globs: "**/*.ts"
 ---
 - Use TypeScript for all code; prefer interfaces over types.
 - Avoid enums; use maps instead.

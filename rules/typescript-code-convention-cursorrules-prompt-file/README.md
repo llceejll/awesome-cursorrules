@@ -5,9 +5,6 @@ Author: Jaron Heard
 ## What you can build
 
 
-## Benefits
-
-
 ## Synopsis
 Developers building a full-stack application with Next.js and Expo using TypeScript and modern UI libraries will benefit from improved code quality and performance optimization by adhering to these standards.
 

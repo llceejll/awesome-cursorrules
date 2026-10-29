@@ -1,5 +1,5 @@
 ---
 description: This rule prevents the AI from suggesting whitespace changes.
-globs: **/*.*
+globs: "**/*.*"
 ---
 - Don't suggest whitespace changes

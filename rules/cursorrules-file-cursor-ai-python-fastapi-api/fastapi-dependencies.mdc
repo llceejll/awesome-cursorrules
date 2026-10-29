@@ -1,6 +1,6 @@
 ---
 description: Lists essential dependencies for FastAPI projects.
-globs: **/requirements.txt
+globs: "**/requirements.txt"
 ---
 - FastAPI
 - Pydantic v2

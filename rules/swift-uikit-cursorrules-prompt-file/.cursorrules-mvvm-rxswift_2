@@ -108,7 +108,7 @@ final class UserListViewModel: ViewModelType {
                 self.userRepository.fetchUsers()
                     .trackActivity(activityTracker)
                     .trackError(errorTracker)
-                    .catchErrorJustReturn([])
+                    .catchAndReturn([])
             }
             .asDriver(onErrorJustReturn: [])
         
@@ -162,7 +162,8 @@ final class UserListViewController: UIViewController {
     
     private func bindViewModel() {
         let input = UserListViewModel.Input(
-            viewDidLoad: rx.viewDidLoad.asObservable(),
+            // Binding runs from viewDidLoad. RxCocoa has no viewDidLoad event.
+            viewDidLoad: Observable.just(()),
             refresh: refreshButton.rx.tap.asObservable(),
             selection: tableView.rx.itemSelected.asObservable()
         )
@@ -170,7 +171,7 @@ final class UserListViewController: UIViewController {
         let output = viewModel.transform(input: input)
         
         output.users
-            .drive(tableView.rx.items(cellIdentifier: "UserCell")) { _, user, cell in
+            .drive(tableView.rx.items(cellIdentifier: "UserCell", cellType: UITableViewCell.self)) { _, user, cell in
                 if let userCell = cell as? UserTableViewCell {
                     userCell.configure(with: user)
                 }
@@ -266,12 +267,16 @@ final class UserRepository: UserRepositoryProtocol {
 ### 2. UI Binding
 ```swift
 // Use Driver for UI binding (main thread, no errors)
-viewModel.data.asDriver()
-    .drive(tableView.rx.items)
+viewModel.data
+    .asDriver(onErrorDriveWith: .empty())
+    .drive(tableView.rx.items) { tableView, _, _ in
+        tableView.dequeueReusableCell(withIdentifier: "Cell")!
+    }
     .disposed(by: disposeBag)
 
 // Use Signal for one-time events
-viewModel.showAlert.asSignal()
+viewModel.showAlert
+    .asSignal(onErrorSignalWith: .empty())
     .emit(onNext: { message in
         // Show alert
     })
@@ -399,13 +404,37 @@ enum NetworkError: Error {
     case decodingError(Error)
 }
 
+enum HTTPMethod: String {
+    case get = "GET"
+    case put = "PUT"
+}
+
 enum APIEndpoint {
     case users
     case user(id: Int)
     case updateUser(User)
-    
+
+    private var url: URL {
+        switch self {
+        case .users:
+            return URL(string: "https://example.com/users")!
+        case .user(let id):
+            return URL(string: "https://example.com/users/\(id)")!
+        case .updateUser(let user):
+            return URL(string: "https://example.com/users/\(user.id)")!
+        }
+    }
+
+    private var method: HTTPMethod {
+        switch self {
+        case .users, .user:
+            return .get
+        case .updateUser:
+            return .put
+        }
+    }
+
     func asURLRequest() -> URLRequest {
-        // Implementation details
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         return request
@@ -478,7 +507,8 @@ class UserListViewModelTests: XCTestCase {
         let users = [User(id: 1, name: "John", email: "john@test.com", avatar: nil)]
         mockRepository.usersToReturn = users
         
-        let viewDidLoad = scheduler.createHotObservable([.next(10, ())])
+        // TestScheduler subscribes at virtual time 200. Earlier hot events are missed.
+        let viewDidLoad = scheduler.createHotObservable([.next(210, ())])
         let refresh = scheduler.createHotObservable([Recorded<Event<Void>>]())
         let selection = scheduler.createHotObservable([Recorded<Event<IndexPath>>]())
         
@@ -493,7 +523,7 @@ class UserListViewModelTests: XCTestCase {
         
         // Then
         XCTAssertEqual(result.events.count, 1)
-        XCTAssertEqual(result.events.first?.value.element, users)
+        XCTAssertEqual(result.events.first?.value.element, Optional(users))
     }
 }
 

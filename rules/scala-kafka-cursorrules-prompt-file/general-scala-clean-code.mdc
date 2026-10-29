@@ -1,6 +1,6 @@
 ---
 description: Applies clean-code guidelines for Scala 3.
-globs: **/*.scala
+globs: "**/*.scala"
 alwaysApply: true
 ---
 - Declare vals/vars as close as possible to first use.

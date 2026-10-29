@@ -1,4 +1,4 @@
-## Instruction to developer: save this file as .cursorrules and place it on the root project directory
+## Instruction to developer: save this file as .cursorrules and place it in the root project directory
 
 ## Core Principles
 - Follow **SOLID**, **DRY**, **KISS**, and **YAGNI** principles
@@ -9,7 +9,7 @@
 - **Framework**: Kotlin Ktor with Kotlin 2.1.20+
 - **JDK**: 21 (LTS)
 - **Build**: Gradle with Kotlin DSL
-- **Dependencies**: Ktor Server Core/Netty, kotlinx.serialization, Exposed, HikariCP, kotlin-logging, Koin, Kotest
+- **Dependencies**: Ktor Server Core/Netty, `ktor-server-content-negotiation`, `ktor-serialization-kotlinx-json`, kotlinx.serialization, Exposed, HikariCP, kotlin-logging, Koin, Kotest
 
 ## Application Structure (Feature-Based)
 - **Organize by business features, not technical layers**
@@ -69,7 +69,7 @@ interface UserRepository {
 class UserRepositoryImpl : UserRepository {
     override suspend fun findById(id: UUID): UserDTO? = withContext(Dispatchers.IO) {
         transaction {
-            Users.select { Users.id eq id }
+            Users.selectAll().where { Users.id eq id }
                 .mapNotNull { it.toUserDTO() }
                 .singleOrNull()
         }
@@ -94,6 +94,19 @@ class UserServiceImpl(
         return userRepository.findById(id) ?: throw ResourceNotFoundException("User", id.toString())
     }
     // Other implementations...
+}
+```
+
+## Serialization
+`call.respond` of a data class or map needs the Content Negotiation plugin. Install it once in the application module:
+```kotlin
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.plugins.contentnegotiation.*
+
+fun Application.configureSerialization() {
+    install(ContentNegotiation) {
+        json()
+    }
 }
 ```
 
@@ -187,8 +200,8 @@ class UserRoutesTest : FunSpec({
 
         testApplication {
             application {
-                configureRouting()
-                configureDI { single { mockService } }
+                configureSerialization()
+                configureUserRoutes(mockService)
             }
 
             client.get("/api/users/$userId").apply {
@@ -212,11 +225,7 @@ class UserRoutesTest : FunSpec({
 ## Configuration Management
 ```kotlin
 // Type-safe configuration
-interface AppConfig {
-    val database: DatabaseConfig
-    val security: SecurityConfig
-}
-
+@Serializable
 data class DatabaseConfig(
     val driver: String,
     val url: String,
@@ -224,9 +233,21 @@ data class DatabaseConfig(
     val password: String
 )
 
+@Serializable
+data class SecurityConfig(
+    val clientId: String,
+    val clientSecret: String
+)
+
+@Serializable
+data class AppConfig(
+    val database: DatabaseConfig,
+    val security: SecurityConfig
+)
+
 // Access in application
 fun Application.configureDI() {
-    val appConfig = HoconAppConfig(environment.config)
+    val appConfig = environment.config.getAs<AppConfig>()
 
     install(Koin) {
         modules(module {
@@ -259,6 +280,17 @@ fun Application.configureSecurity() {
 ```kotlin
 fun Application.configureMonitoring() {
     val startTime = System.currentTimeMillis()
+    val prometheusRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
+
+    install(MicrometerMetrics) {
+        registry = prometheusRegistry
+        meterBinders = listOf(
+            JvmMemoryMetrics(),
+            JvmGcMetrics(),
+            ProcessorMetrics(),
+            JvmThreadMetrics()
+        )
+    }
 
     routing {
         get("/health") {
@@ -268,16 +300,6 @@ fun Application.configureMonitoring() {
         get("/metrics") {
             call.respond(prometheusRegistry.scrape())
         }
-    }
-
-    install(MicrometerMetrics) {
-        registry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
-        meterBinders = listOf(
-            JvmMemoryMetrics(),
-            JvmGcMetrics(),
-            ProcessorMetrics(),
-            JvmThreadMetrics()
-        )
     }
 }
 ```

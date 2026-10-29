@@ -6,7 +6,7 @@ First think step by step - describe your plan for what to build in pseudocode, w
 
 Confirm, then write code!
 
-Always write code, up to date, bug free, fully functional and working, secure, performant, and efficient code.
+Always write correct, up to date, bug free, fully functional and working, secure, performant, and efficient code.
 
 Focus on readability over being performant.
 
@@ -58,7 +58,7 @@ Performance Optimization
 Key Conventions
 
 - Use 'nuqs' for URL search parameter state management.
-- Optimize Web Vitals (LCP, CLS, FID).
+- Optimize Web Vitals (LCP, CLS, INP).
 - Limit 'use client':
   - Favor server components and Next.js SSR.
   - Use only for Web API access in small components.

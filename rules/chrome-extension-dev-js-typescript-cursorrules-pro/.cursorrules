@@ -6,7 +6,7 @@ Code Style and Structure:
 - Use modern JavaScript features and best practices
 - Prefer functional programming patterns; minimize use of classes
 - Use descriptive variable names (e.g., isExtensionEnabled, hasPermission)
-- Structure files: manifest.json, background scripts, content scripts, popup scripts, options page
+- Structure files: manifest.json, background service worker, content scripts, popup scripts, options page
 
 Naming Conventions:
 
@@ -28,13 +28,13 @@ Extension Architecture:
 
 Manifest and Permissions:
 
-- Use the latest manifest version (v3) unless there's a specific need for v2
+- Use Manifest V3. The Chrome Web Store removed remaining Manifest V2 extensions on August 31, 2026 and no longer accepts them. Existing installs still run on Chrome 138 and earlier, but they cannot be updated or reinstalled. Manifest V2 extensions do not run on Chrome 139 and later.
 - Follow the principle of least privilege for permissions
 - Implement optional permissions where possible
 
 Security and Privacy:
 
-- Implement Content Security Policy (CSP) in manifest.json
+- Set manifest.json content_security_policy to an object with extension_pages, and sandbox when the extension uses a sandboxed page
 - Use HTTPS for all network requests
 - Sanitize user inputs and validate data from external sources
 - Implement proper error handling and logging
@@ -47,8 +47,8 @@ UI and Styling:
 
 Performance Optimization:
 
-- Minimize resource usage in background scripts
-- Use event pages instead of persistent background pages when possible
+- Minimize resource usage in the background service worker
+- Use a Manifest V3 background service worker instead of a persistent background page or an event page
 - Implement lazy loading for non-critical extension features
 - Optimize content scripts to minimize impact on web page performance
 

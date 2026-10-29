@@ -23,7 +23,7 @@ Adhere to the following guidelines in your code:
 
 Utilize early returns for code readability.
 Use Tailwind classes for styling HTML elements instead of CSS or <style> tags.
-Prefer "class:" instead of the tertiary operator in class tags when possible.
+Prefer "class:" instead of the ternary operator in class tags when possible.
 Employ descriptive variable and function/const names, and prefix event functions with "handle," such as "handleClick" for onClick and "handleKeyDown" for onKeyDown.
 Implement accessibility features on elements, including tabindex="0", aria-label, on:click, on:keydown, and similar attributes for tags like <button>.
 Use consts instead of functions, and define a type if possible.
@@ -36,51 +36,58 @@ Svelte Components
 
 Use .svelte extension for Svelte components
 Use TypeScript syntax in <script> tags:
-svelteCopy
+```svelte
 <script lang="ts">
   // TypeScript code here
 </script>
+```
 
 State Management
 
 Use Svelte stores for global state:
-typescriptCopy
+```typescript
 import { writable } from 'svelte/store';
 export const myStore = writable(initialValue);
+```
 
 Access store values in components with the $ prefix:
-svelteCopy
+```svelte
 <p>{$myStore}</p>
+```
 
 Reactivity
 
 Use reactive declarations for derived values:
-svelteCopy
+```svelte
 $: derivedValue = someValue * 2;
+```
 
 Use reactive statements for side effects:
-svelteCopy
+```svelte
 $: { 
   console.log(someValue); 
   updateSomething(someValue);
 }
+```
 
 Typing
 
 Use TypeScript for type definitions
 Create interfaces or types for component props:
-typescriptCopy
+```typescript
 interface MyComponentProps { 
   someValue: string; 
   optionalValue?: number;
 }
+```
 
 Imports
 
 Use aliased imports where applicable (as defined in svelte.config.js):
-typescriptCopy
+```typescript
 import SomeComponent from '$lib/components/SomeComponent.svelte';
 import { someUtil } from '$lib/utils';
+```
 
 Async Operations
 
@@ -93,8 +100,9 @@ Use Tailwind CSS for styling
 Utilize Tailwind's utility classes directly in the markup
 For complex components, consider using Tailwind's @apply directive in a scoped <style> block
 Use dynamic classes with template literals when necessary:
-svelteCopy
+```svelte
 <div class={`bg-blue-500 p-4 ${isActive ? 'opacity-100' : 'opacity-50'}`}></div>
+```
 
 File Structure
 

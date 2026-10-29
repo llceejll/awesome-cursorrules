@@ -1,6 +1,6 @@
 ---
 description: Defines how to name functions, variables and components.
-globs: **/*Name*.*
+globs: "**/*Name*.*"
 ---
 - Follow strict naming conventions for variables, functions, and components.
 - Use descriptive names that accurately reflect the purpose of the code.

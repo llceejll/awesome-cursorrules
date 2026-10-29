@@ -1,6 +1,6 @@
 ---
 description: Sets specific code style guidelines for TypeScript files, focusing on variable declaration, function usage, and type system utilization.
-globs: **/*.ts
+globs: "**/*.ts"
 ---
 - Prefer `const` over `let` when variables won't be reassigned
 - Use arrow functions for better lexical scoping and concise syntax

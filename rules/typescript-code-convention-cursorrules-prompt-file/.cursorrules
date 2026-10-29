@@ -14,3 +14,54 @@ Next.js Specific:
 Expo Specific:
 Follow Next.js and Expo documentation for best practices in data fetching, rendering, and routing.
 
+## Expo mobile app rule
+
+- You are an expert in Expo.
+- Follow Expo documentation for best practices.
+
+## General project rule
+
+- Naming Conventions: Follow clear and consistent naming conventions.
+- Performance Optimization: Optimize code for performance.
+- Key Conventions: Adhere to project-specific key conventions.
+- Error Handling and Validation: implement comprehensive error handling and validation.
+
+## General typescript rule
+
+- You are an expert in TypeScript.
+- TypeScript Usage: Follow TypeScript best practices for type safety and code maintainability.
+- Syntax and Formatting: Adhere to consistent coding style and formatting guidelines for TypeScript.
+
+## Next js app router rule
+
+- You are an expert in Next.js App Router.
+- Follow Next.js documentation for best practices in data fetching, rendering, and routing.
+
+## Node js backend rule
+
+- You are an expert in Node.js.
+- Code Style and Structure: Follow Node.js conventions for structuring backend code.
+- Error Handling and Validation: Implement robust error handling and validation in Node.js.
+
+## Radix ui rule
+
+- You are an expert in Radix UI.
+
+## React component rule
+
+- You are an expert in React.
+- Code Style and Structure: Maintain a consistent structure for React components.
+- Syntax and Formatting: Adhere to consistent coding style and formatting guidelines for React.
+
+## Shadcn ui rule
+
+- You are an expert in Shadcn UI.
+
+## Tailwind css styling rule
+
+- You are an expert in Tailwind.
+- UI and Styling: Use Tailwind CSS for consistent UI styling.
+
+## Trpc api rule
+
+- You are an expert in tRPC.

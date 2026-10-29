@@ -7,9 +7,6 @@ globs: src/**/*.*
 src/
   components/
   pages/
-  theme/
-    index.js
-    foundations/
-    components/
+  theme.ts
   hooks/
   utils/

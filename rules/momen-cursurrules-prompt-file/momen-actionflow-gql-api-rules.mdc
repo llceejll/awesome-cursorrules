@@ -6,25 +6,29 @@ alwaysApply: false
 # Momen.app Actionflow
 
 ## Overview
-Although momen.app already support direct CRUD operations that can be initiated from the frontend, many backend operations are multi-step, can be long-running and sometimes have to be asynchronous. Therefore momen.app also supports actionflows for these scenarios. An actionflow is a directed acyclic graph made up of actionflow nodes. These nodes represent either operations (e.g. insert into databsae, invoke another actionflow) or control flow changes (condition and loop). Actionflows also have two special nodes, input and output, where the arguments and return values of the entire actionflow are defined. 
+Although momen.app already supports direct CRUD operations that can be initiated from the frontend, many backend operations are multi-step, can be long-running and sometimes have to be asynchronous. Therefore momen.app also supports actionflows for these scenarios. An actionflow is a directed acyclic graph made up of actionflow nodes. These nodes represent either operations (e.g. insert into database, invoke another actionflow) or control flow changes (condition and loop). Actionflows also have two special nodes, input and output, where the arguments and return values of the entire actionflow are defined. 
 
-Actionflows have two modes of operation, sync or async. A synchronous actionflow is executed within a single database transaction, and therefore when an unexpected error is encountered, will rollback all database changes. Synchronous actionflows have runtime limits to avoid hogging database connection. Asynchronous actionflows run each node inside a new database transaction, so they do not have rollback mechanism, but are more suited for long running tasks, like long http calls, especially those made to LLM APIs as they can take minutes. Within actionflows, all nodes of invoking AI agents built in momen.app natively can only be added inside async ones. 
+Actionflows have two modes of operation, sync or async. A synchronous Actionflow waits for its result. Only database-operation nodes participate in the database transaction: they commit together on success and roll back together on failure. API, AI, payment, file, and other external operations stay outside that transaction and do not roll back automatically. Synchronous Actionflows are subject to the synchronous runtime cap. An asynchronous Actionflow runs in the background and does not provide one transaction across all database nodes. It is suited to longer-running work, such as long HTTP calls and LLM API calls. AI Agent nodes can only be added inside asynchronous Actionflows. 
 
 ## Actionflow invocation process
-In order to invoke an actionflow, one needs to obtain its id, a list of arguments and optionally its version. They are found inside the project schema. 
-Actionflow invocation differ based on their type. 
+In order to invoke an actionflow, obtain its id and arguments from the project schema. Current integrations call the deployed Actionflow with `fz_invoke_action_flow_default_by_latest_version` or `fz_create_action_flow_task`, passing `actionFlowId` and `args`. The `versionId` argument and `fz_invoke_action_flow` remain in the schema only for existing integrations. Do not pass an Actionflow version in a new integration.
+Actionflow invocations differ based on their type. 
 
 ### Sync actionflows
 Sync actionflows can be invoked via a regular GraphQL mutation. The results will be returned in the response of the same HTTP request. 
 Request:
 ```gql
-mutation someOperationName ($args: Json!) {
- fz_invoke_action_flow(actionFlowId: "d3ea4f95-5d34-46e1-b940-91c4028caff5", versionId: 3, args: $args)
+mutation InvokeActionFlow($actionFlowId: String!, $args: Json!) {
+  fz_invoke_action_flow_default_by_latest_version(
+    actionFlowId: $actionFlowId
+    args: $args
+  )
 }
 ```
 
 ```json
 {
+  "actionFlowId": "d3ea4f95-5d34-46e1-b940-91c4028caff5",
   "args": {
     "yaml": "post_link:\n  url: \"https://momen.app\"\n",
     "img_id": 1020000000000111
@@ -36,7 +40,7 @@ Response:
 ```json
 {
   "data": {
-    "fz_invoke_action_flow": {
+    "fz_invoke_action_flow_default_by_latest_version": {
       "img": {
         "id": 1020000000000090,
         "url": "https://fz-zion-static.functorz.com/202510252359/a64a7eb4793728a1977d3ea9e7b7e4e8/project/2000000000521152/import/1110000000000001/image/636.jpg"
@@ -51,13 +55,14 @@ Response:
 Async actionflows are triggered via a GraphQL mutation but the results are not returned in the response of the same HTTP request. Instead, a fz_create_action_flow_task is returned, containing the id of the corresponding task, which is then used for subscribing to the result in a separate GraphQL subscription. 
 Mutation request:
 ```gql
-mutation mh49tgie($args: Json!) {
- fz_create_action_flow_task(actionFlowId: "2a9068c5-8ee3-4dad-b3a4-5f3a6d365a2f", versionId: 4, args: $args)
+mutation CreateActionFlowTask($actionFlowId: String!, $args: Json!) {
+  fz_create_action_flow_task(actionFlowId: $actionFlowId, args: $args)
 }
 ```
 
 ```json
 {
+  "actionFlowId": "2a9068c5-8ee3-4dad-b3a4-5f3a6d365a2f",
   "args": {
     "int": 123,
     "img_id": 1020000000000116,
@@ -67,17 +72,19 @@ mutation mh49tgie($args: Json!) {
 }
 ```
 Mutation response:
+```json
 {
   "data": {
     "fz_create_action_flow_task": 1150000000000148
   }
 }
+```
 
 Subscription request: 
 ```gql
 subscription fz_listen_action_flow_result($taskId: Long!) {
   fz_listen_action_flow_result(taskId: $taskId) {
-    __typename"
+    __typename
     output
     status
   }
@@ -110,12 +117,14 @@ Subscription response:
   }
 }
 ```
-There might be multiple messages sent by the GraphQL subscription before the final result (inside "output") is returned, and each may contain different status values. 
-The status field has the following transition rules:
-```java
-switch (status) {
-  case CREATED -> Set.of(PROCESSING);
-  case PROCESSING -> Set.of(COMPLETED, FAILED);
-  default -> Set.of();
-};
-```
+There might be multiple messages sent by the GraphQL subscription before the final result (inside "output") is returned, and each may contain different status values.
+If the client cannot hold a WebSocket, poll the same taskId. The query returns the current snapshot and does not replay intermediate updates:
+```gql
+query GetActionFlowResult($taskId: Long!) {
+  fz_action_flow_result(taskId: $taskId) {
+    status
+    output
+  }
+}
+``` 
+The status field uses the TaskStatus enum: CREATED, PROCESSING, COMPLETED, and FAILED.

@@ -23,7 +23,7 @@ You are an expert senior software engineer specializing in modern web developmen
 ## Data Model Rules
 
 - Use the `model` utility from `@medusajs/framework/utils` to define data models.
-- Data model variables should be camelCase. Data model names as passed to `model.define` should be snake case.
+- Data model variables should be PascalCase. Data model names as passed to `model.define` should be snake case.
 - When adding an `id` field to a data model, always make it a primary key with `.primaryKey()`.
 - A data model can have one `id` only, other IDs should be `text` instead.
 - Data model fields should be snake case.

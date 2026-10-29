@@ -20,7 +20,7 @@ globs: src/**/*.*
 - A shared module for services shared between modules.
   - Utilities
   - Shared business logic
-- Use the standard Jest framework for testing.
+- Use Vitest for testing. Newly generated NestJS projects use Vitest by default, and CommonJS projects use Jest.
 - Write tests for each controller and service.
 - Write end to end tests for each api module.
-- Add a admin/test method to each controller as a smoke test.
+- Add an admin/test method to each controller as a smoke test.

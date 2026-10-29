@@ -45,15 +45,15 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Login Page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.route('/api/login', (route) => {
+    await page.route('**/api/login', async (route) => {
       const body = route.request().postDataJSON();
       if (body.username === 'validUser' && body.password === 'validPass') {
-        route.fulfill({
+        await route.fulfill({
           status: 200,
           body: JSON.stringify({ message: 'Login successful' }),
         });
       } else {
-        route.fulfill({
+        await route.fulfill({
           status: 401,
           body: JSON.stringify({ error: 'Invalid credentials' }),
         });

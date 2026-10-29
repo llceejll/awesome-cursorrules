@@ -1,6 +1,6 @@
 ---
 description: Enforces specific folder structure at root level.
-globs: *
+globs: "*"
 ---
 The recommended folder structure is:
 

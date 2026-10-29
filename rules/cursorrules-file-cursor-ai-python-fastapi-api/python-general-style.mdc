@@ -1,6 +1,6 @@
 ---
 description: Applies general Python style guidelines including functional programming preferences and naming conventions.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - Write concise, technical responses with accurate Python examples.
 - Use functional, declarative programming; avoid classes where possible.

@@ -1,6 +1,6 @@
 ---
 description: Guidelines for handling errors and edge cases in Python and FastAPI applications.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - Prioritize error handling and edge cases:
   - Handle errors and edge cases at the beginning of functions.

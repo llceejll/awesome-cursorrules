@@ -18,7 +18,7 @@ Maintain structured reporting through proper test organization and tagging
 
 **1** **Case ID Tagging**: Always include manual test case ID in brackets (e.g., [C1234])
 **2** **Test Categories**: Add test categories in brackets (e.g., [smoke], [regression])
-**3** **Structured Organization**: Use describe/context/test blocks to organize tests logically
+**3** **Structured Organization**: Use `test.describe` and `test` blocks to organize tests logically
 **4** **Clear Naming**: Use descriptive test names that indicate expected behavior
 **5** **Evidence Collection**: Capture screenshots and logs for defect documentation
 **6** **Team Tagging**: Include team name in top-level describe blocks (e.g., [Windsor])
@@ -37,7 +37,7 @@ export default {
   testCategories: ['smoke', 'regression', 'defect', 'usability'],
   googleSpreadsheetUrl: 'https://docs.google.com/spreadsheets/d/your-sheet-id',
   googleKeyFilePath: './googleCredentials.json',
-  testData: './playwright-report/results.json',
+  testData: './test-results/output.json',
   csvDownloadsPath: './qa-reports/downloads',
   weeklySummaryStartDay: 'Monday'
 };
@@ -104,4 +104,5 @@ test.describe('[Windsor] Login functionality tests', () => {
       }
     });
   });
-}); 
+});
+``` 

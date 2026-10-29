@@ -13,7 +13,7 @@ You are an expert in React, TanStack Router v1, TanStack Query v5, TypeScript, a
 - Components are pure UI: read from Query cache, trigger mutations
 
 ## Setup
-```ts
+```tsx
 // src/lib/queryClient.ts
 export const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 60_000 } },
@@ -57,7 +57,7 @@ export const postsQueryOptions = (filters?: PostFilters) =>
 ```tsx
 export const Route = createFileRoute('/posts/$postId')({
   loader: ({ context: { queryClient }, params }) =>
-    queryClient.ensureQueryData(postQueryOptions(params.postId)),
+    queryClient.query({ ...postQueryOptions(params.postId), staleTime: 'static' }),
   component: PostDetail,
 })
 
@@ -74,8 +74,9 @@ const searchSchema = z.object({ page: z.number().default(1), q: z.string().optio
 
 export const Route = createFileRoute('/posts/')({
   validateSearch: searchSchema,
-  loader: ({ context: { queryClient }, location: { search } }) =>
-    queryClient.ensureQueryData(postsQueryOptions(search)),
+  loaderDeps: ({ search }) => search,
+  loader: ({ context: { queryClient }, deps: search }) =>
+    queryClient.query({ ...postsQueryOptions(search), staleTime: 'static' }),
   component: PostsList,
 })
 
@@ -92,7 +93,7 @@ const mutation = useMutation({
   mutationFn: createPost,
   onSuccess: (newPost) => {
     queryClient.setQueryData(postKeys.detail(newPost.id), newPost)  // warm cache
-    queryClient.invalidateQueries({ queryKey: postKeys.list() })
+    queryClient.invalidateQueries({ queryKey: [...postKeys.all, 'list'] })
     navigate({ to: '/posts/$postId', params: { postId: newPost.id } })  // instant — no spinner
   },
 })
@@ -103,7 +104,7 @@ const mutation = useMutation({
 <Link
   to="/posts/$postId"
   params={{ postId: post.id }}
-  onMouseEnter={() => queryClient.prefetchQuery(postQueryOptions(post.id))}
+  onMouseEnter={() => queryClient.query(postQueryOptions(post.id)).catch(() => {})}
 >
   {post.title}
 </Link>

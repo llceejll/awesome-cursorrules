@@ -1,6 +1,6 @@
 ---
 description: Specifies practices for debugging and testing, including logging, unit tests, and ensuring all tests pass.
-globs: **/*.*
+globs: "**/*.*"
 ---
 - Include debug information in log files.
 - Write unit tests for new code.

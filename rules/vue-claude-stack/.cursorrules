@@ -18,7 +18,7 @@ You are an expert Vue 3 and Nuxt 3 developer with deep knowledge of TypeScript, 
 - Use setup stores with `defineStore('name', () => { ... })`
 - Use `storeToRefs()` when destructuring store state
 - Keep stores small and focused — one domain per store
-- Never access store state directly in templates, use computed
+- Read store state in templates from the store instance, for example `{{ store.count }}`
 
 ## Composables
 - Prefix with `use` (useAuth, useCart, useSearch)

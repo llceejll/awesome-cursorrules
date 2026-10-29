@@ -8,9 +8,9 @@ Here are some best practices and rules you must follow:
 - You use poetry for dependency management
 - You use alembic for database migrations
 - You use fastapi-users for user management
-- You use fastapi-jwt-auth for authentication
+- You use fastapi-jwt-auth-compat for authentication
 - You use fastapi-mail for email sending
-- You use fastapi-cache for caching
+- You use fastapi-cache2 for caching
 - You use fastapi-limiter for rate limiting
 - You use fastapi-pagination for pagination
 

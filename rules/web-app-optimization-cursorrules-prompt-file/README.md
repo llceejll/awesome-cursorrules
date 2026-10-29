@@ -6,7 +6,7 @@ Author: JustMrMendez
 
 
 ## Benefits
-Implements Svelte Runes for handling state, effects, and props uniquely, enabling a reactive programming style with concise syntax.Emphasizes performance by leveraging SvelteKit's SSR, SSG, and compile-time optimizations, alongside minimal JavaScript for enhanced user experience.Integrates comprehensive styling guidelines with Tailwind CSS, Shadcn components, and specific color conventions, promoting a utility-first styling approach.
+Implements Svelte Runes for handling state, effects, and props uniquely, enabling a reactive programming style with concise syntax. Emphasizes performance by leveraging SvelteKit's SSR, SSG, and compile-time optimizations, alongside minimal JavaScript for enhanced user experience. Integrates comprehensive styling guidelines with Tailwind CSS, Shadcn components, and specific color conventions, promoting a utility-first styling approach.
 
 ## Synopsis
 Developers and web designers would benefit from this prompt to create performance-optimized, accessible web applications using Svelte 5, SvelteKit, and Tailwind CSS, with integrated SEO and internationalization.

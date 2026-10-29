@@ -1,6 +1,6 @@
 ---
 description: Defines syntax and formatting rules for consistent code appearance.
-globs: **/*.{js,ts,jsx,tsx,py}
+globs: "**/*.{js,ts,jsx,tsx,py}"
 ---
 - Use consistent indentation (e.g., 2 spaces or 4 spaces).
 - Keep lines under a reasonable length (e.g., 80-120 characters).

@@ -1,6 +1,6 @@
 ---
 description: Configurations for Django settings file with the list of dependencies and conventions.
-globs: **/settings.py
+globs: "**/settings.py"
 ---
 - Django
 - Django REST Framework (for API development)

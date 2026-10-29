@@ -34,7 +34,7 @@ export function QueryProvider({ children }: { children: React.ReactNode }) {
 // app/posts/page.tsx  (Server Component)
 export default async function PostsPage() {
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(postsQueryOptions())
+  await queryClient.query(postsQueryOptions()).catch(() => {})
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <PostsList />

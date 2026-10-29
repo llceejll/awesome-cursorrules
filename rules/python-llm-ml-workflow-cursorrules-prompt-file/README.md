@@ -12,12 +12,12 @@ This prompt file is designed for senior Python AI/ML engineers specializing in L
 - `pytest`
 - Google Style Docstrings
 - `conda` / `venv`
-- `docker`, `docker-compose`
+- `docker`, `docker compose`
 - `async` and `await`
 - `fastapi`
 - `gradio`, `streamlit`
 - `langchain`, `transformers`
-- (Optional) `faiss`, `chroma`, `mlflow`, `tensorboard`, `optuna`, `hyperopt`, `pandas`, `numpy`, `dask`, `pyspark`
+- (Optional) `faiss-cpu`, `chromadb`, `mlflow`, `tensorboard`, `optuna`, `hyperopt`, `pandas`, `numpy`, `dask`, `pyspark`
 - `git`
 - `gunicorn`, `uvicorn`, `nginx`, `caddy`
 - `systemd`, `supervisor`
@@ -32,7 +32,7 @@ This prompt file is designed for senior Python AI/ML engineers specializing in L
 
 ## Usage
 
-Place this `.cursorrules` file in the root of your project to guide the AI assistant in adhering to these standards and practices.
+Copy this file into `.cursor/rules` as an `.mdc` rule. If it has no frontmatter, set the rule type to Always Apply, which [Cursor's rules help](https://cursor.com/help/customization/rules) describes as the match for the legacy root `.cursorrules` file.
 
 ## Contribution
 

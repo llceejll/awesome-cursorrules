@@ -118,7 +118,7 @@ Each build note should include:
 - Prefer React Server Components for data fetching
 - Use Supabase for real-time data
 - Implement preload patterns
-- Use Vercel KV for chat history and rate limiting
+- Use Upstash Redis for chat history and rate limiting
 
 ### Testing & Quality Assurance
 - Unit tests for utilities and hooks

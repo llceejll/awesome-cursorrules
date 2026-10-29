@@ -1,36 +1,14 @@
----
-description: Rails 8 specific rules and guidelines for the this project. These rules complement the main .cursorrules file with detailed Rails-specific practices.
-globs:
-  [
-    "*.rb",
-    "*.erb",
-    "*.rake",
-    "Gemfile",
-    "Rakefile",
-    "config/**/*.yml",
-    "config/**/*.rb",
-    "db/migrate/*.rb",
-    "app/**/*",
-  ]
-alwaysApply: true
----
-
-# Your rule content
-
-- You can @ files here
-- You can use markdown but dont have to
-
 # Rails 8 Development Guidelines
 
 ## 1. Rails 8 Core Features
 
-** Prefer the command line utilities to manually generated code **
+**Prefer the command line utilities to manually generated code**
 
-e.g use `rails generate model` instead of creating a model from scratch
+For example, use `rails generate model` instead of creating a model from scratch.
 
-** IMPORTANT: Server Management **
+**IMPORTANT: Server Management**
 
-- Always use `bin/dev` to start the server (uses Procfile.dev)
+- Start the server with `bin/rails server`. Import maps, the Rails default, have no separate build. When the app was created with a JavaScript bundler (`rails new --javascript`), use `bin/dev`, which runs `Procfile.dev` and starts the Rails server together with the JavaScript build. With vite_rails, start Vite with `bin/vite dev`.
 - Check logs after every significant change
 - Monitor development.log for errors and performance issues
 - Use `tail -f log/development.log` for real-time monitoring
@@ -56,7 +34,7 @@ e.g use `rails generate model` instead of creating a model from scratch
 3. **Controller Patterns**
    - Use `params.expect()` for safer parameter handling
    - Implement rate limiting via cache store
-   - Use the new sessions generator for authentication
+   - Use `bin/rails generate authentication` for the built-in session-based authentication system
    - Silence healthcheck requests in production
    - Keep controllers RESTful and focused
    - Use service objects for complex business logic
@@ -69,7 +47,7 @@ e.g use `rails generate model` instead of creating a model from scratch
    - Use service objects for complex business logic
    - Keep controllers skinny
    - Use concerns for shared functionality
-   - Use `params.expect()` instead of strong parameters
+   - Use `params.expect()` for strong parameters
    - Follow Rails 8 conventions
 
 2. **Performance**
@@ -115,12 +93,12 @@ e.g use `rails generate model` instead of creating a model from scratch
    - Use data attributes for JavaScript hooks
    - Use Solid Cable for real-time features
    - For standard Rails interactivity, use Hotwire (Turbo + Stimulus)
-   - For more complex JavaScript/npm dependencies, use ruby-vite
-   - Place npm/Vite-managed JavaScript entrypoints in `app/javascript/entrypoints/`
+   - For more complex JavaScript/npm dependencies, use the vite_rails gem
+   - Place npm/Vite-managed JavaScript entrypoints in `app/frontend/entrypoints/`
 
 6. **Asset Pipeline Options**
 
-   - For most projects, use Vite (via ruby-vite) for modern JavaScript and CSS asset management, especially when using npm packages.
+   - For most projects, use Vite (via the vite_rails gem) for modern JavaScript and CSS asset management, especially when using npm packages.
    - If using Vite, asset compression and optimization are handled by Vite; Thruster is not required for JS/CSS assets.
    - If not using Vite, use Propshaft for the asset pipeline (default in Rails 8).
    - Thruster is optional: it provides HTTP asset caching/compression and X-Sendfile acceleration with Puma. Consider using Thruster in production for extra HTTP-level asset performance, especially if not using Vite for all assets.
@@ -154,8 +132,9 @@ e.g use `rails generate model` instead of creating a model from scratch
 ├── models/         # Active Record models
 ├── views/          # View templates
 ├── helpers/        # View helpers
-├── javascript/     # Stimulus controllers and npm/Vite entrypoints
-│   ├── controllers/
+├── javascript/     # Stimulus controllers
+│   └── controllers/
+├── frontend/       # Vite source from vite_rails
 │   └── entrypoints/   # npm/Vite-managed JS entrypoints
 ├── services/       # Service objects
 ├── policies/       # Pundit policies
@@ -174,10 +153,10 @@ e.g use `rails generate model` instead of creating a model from scratch
 - **Background Jobs**: Solid Queue (default in Rails 8)
 - **Caching**: Solid Cache (default in Rails 8)
 - **Real-time**: Solid Cable
-- **Authentication**: Built-in Sessions Generator
+- **Authentication**: `bin/rails generate authentication`
 - **Authorization**: Pundit
 - **Deployment**: Kamal 2 (default in Rails 8)
-- **Asset Pipeline**: Vite (via ruby-vite) or Propshaft (default in Rails 8)
+- **Asset Pipeline**: Vite (via the vite_rails gem) or Propshaft (default in Rails 8)
 - **Container**: Docker (optional for production or deployment; not used for local development)
 
 ## 5. Rails-Specific Reminders
@@ -189,7 +168,7 @@ e.g use `rails generate model` instead of creating a model from scratch
 5. Keep dependencies updated
 6. Monitor application performance
 7. Regular security audits
-8. Use `params.expect()` instead of strong parameters
+8. Use `params.expect()` for strong parameters
 9. Use Propshaft for asset pipeline (if not using Vite)
-10. Always use `bin/dev` to start the server
+10. Start with `bin/rails server`. Use `bin/dev` only when a JavaScript bundler created `Procfile.dev`. With vite_rails, start Vite with `bin/vite dev`.
 11. Check logs after every significant change

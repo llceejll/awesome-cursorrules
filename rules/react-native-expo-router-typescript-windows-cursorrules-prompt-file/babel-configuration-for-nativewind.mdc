@@ -1,8 +1,7 @@
 ---
-description: Specifies the correct Babel configuration for NativeWind to ensure proper processing and avoid conflicts.
+description: Specifies the Babel presets for NativeWind 4 on Expo.
 globs: babel.config.js
 ---
-- Babel configuration for NativeWind:
-  - Include 'nativewind/babel' in the plugins array.
-  - Avoid using jsxImportSource in presets.
-  - Ensure 'react-native-reanimated/plugin' follows 'nativewind/babel'.
+- Configure `babel.config.js` presets as:
+  - `["babel-preset-expo", { jsxImportSource: "nativewind" }]`
+  - `"nativewind/babel"`

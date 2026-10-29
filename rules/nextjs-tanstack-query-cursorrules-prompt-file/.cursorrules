@@ -62,7 +62,7 @@ import { PostsList } from './_components/posts-list'
 
 export default async function PostsPage() {
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(postsQueryOptions())
+  await queryClient.query(postsQueryOptions()).catch(() => {})
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

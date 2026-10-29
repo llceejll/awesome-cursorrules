@@ -1,6 +1,6 @@
 ---
 description: Defines the required version numbers for Node.js, SvelteKit, TypeScript, Vite, and PNPM within the project. This rule ensures consistency across the project dependencies.
-globs: **/package.json
+globs: "**/package.json"
 ---
 - Node.js: 18.x or later
 - SvelteKit: 2.x (Svelte 4.x)

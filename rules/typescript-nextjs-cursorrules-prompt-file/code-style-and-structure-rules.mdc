@@ -1,6 +1,6 @@
 ---
 description: Rules for code style and structure in TypeScript, Node.js, and Next.js projects.
-globs: **/*.{ts,tsx,js,jsx}
+globs: "**/*.{ts,tsx,js,jsx}"
 ---
 - Write concise, technical TypeScript code with accurate examples.
 - Use functional and declarative programming patterns; avoid classes.

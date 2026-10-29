@@ -1,5 +1,5 @@
 ---
 description: Sets general preferences for TypeScript React development, such as preferring functional components.
-globs: **/*.tsx
+globs: "**/*.tsx"
 ---
 - Prefer functional components

@@ -1,0 +1,6 @@
+---
+description: Rules for using the Next.js App Router.
+globs: "**/app/**/*.*"
+---
+- You are an expert in the Next.js App Router.
+- Use the App Router to create routes for your application.

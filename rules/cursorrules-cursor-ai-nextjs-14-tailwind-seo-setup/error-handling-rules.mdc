@@ -1,9 +1,9 @@
 ---
 description: Rules for implementing error handling in Next.js 14 using error.tsx files.
-globs: **/app/error.tsx
+globs: "**/app/error.tsx"
 ---
 - For error handling (in error.tsx):
-  tsx
+  ```tsx
   'use client'
   export default function Error({
     error,
@@ -13,8 +13,10 @@ globs: **/app/error.tsx
     reset: () => void
   }) {
     return (
-
-
-
+      <div>
+        <p>{error.message}</p>
+        <button onClick={() => reset()}>Try again</button>
+      </div>
     );
   }
+  ```

@@ -24,7 +24,7 @@ Solidity Best Practices
 
 - Use explicit function visibility modifiers and appropriate natspec comments.
 - Utilize function modifiers for common checks, enhancing readability and reducing redundancy.
-- Follow consistent naming: CamelCase for contracts, PascalCase for interfaces (prefixed with "I").
+- Follow consistent naming: use CapWords for contracts, libraries, and interfaces, and prefix interface names with "I".
 - Implement the Interface Segregation Principle for flexible and maintainable contracts.
 - Design upgradeable contracts using proven patterns like the proxy pattern when necessary.
 - Implement comprehensive events for all significant state changes.
@@ -44,7 +44,7 @@ Solidity Best Practices
 - Implement effective state machine patterns for complex contract logic.
 - Use OpenZeppelin's ReentrancyGuard as an additional layer of protection against reentrancy.
 - Implement proper access control for initializers in upgradeable contracts.
-- Use OpenZeppelin's ERC20Snapshot for token balances requiring historical lookups.
+- OpenZeppelin Contracts 5 removed `ERC20Snapshot`. The current ERC20 extensions do not include a historical balance snapshot contract.
 - Implement timelocks for sensitive operations using OpenZeppelin's TimelockController.
 - Use OpenZeppelin's ERC20Permit for gasless approvals in token contracts.
 - Implement proper slippage protection for DEX-like functionalities.
@@ -52,7 +52,7 @@ Solidity Best Practices
 - Implement effective storage patterns to optimize gas costs (e.g., packing variables).
 - Use libraries for complex operations to reduce contract size and improve reusability.
 - Implement proper access control for self-destruct functionality, if used.
-  - Use freezable patterns instead of depricated `selfdestruct`.
+  - Use freezable patterns instead of deprecated `selfdestruct`.
 - Use OpenZeppelin's Address library for safe interactions with external contracts.
 - Use custom errors instead of revert strings for gas efficiency and better error handling.
 - Implement NatSpec comments for all public and external functions.
@@ -68,7 +68,7 @@ Solidity Best Practices
 Testing and Quality Assurance
 
 - Implement a comprehensive testing strategy including unit, integration, and end-to-end tests.
-- Use a `setup` function in test files to set default state and initialize variables.
+- Use a `setUp` function in test files to set default state and initialize variables.
 - Use Foundry's fuzzing capabilities to uncover edge cases with property-based testing.
 - Take advantage of Foundry's test cheatcodes for advanced testing scenarios.
 - Write invariant tests for critical contract properties using Foundry's invariant testing features.
@@ -112,7 +112,7 @@ Dependencies
 - Use OpenZeppelin (openzeppelin/openzeppelin-contracts) as the main source of dependencies.
 - Use Solady (vectorized/solady) when gas optimization is crucial.
 - Ensure that any libraries used are installed with forge, and remappings are set.
-- Place remappings in `foundry.toml` instead of a `remappings.txt` file.
+- Put project remappings in `foundry.toml` under `remappings`. Generate `remappings.txt` with `forge remappings > remappings.txt` when an editor needs it. When the same prefix is in both, the `remappings.txt` entry is kept.
 
 Configuring Environment
 

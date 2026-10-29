@@ -207,7 +207,7 @@ def calculate_product_discount(product_price):
   discount_amount = 0  
   if product_price > 100:  
     discount_amount = product_price * 0.1  
-  elif price > 50:  
+  elif product_price > 50:  
     discount_amount = product_price * 0.05  
   else:  
     discount_amount = 0  

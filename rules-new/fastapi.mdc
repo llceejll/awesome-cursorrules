@@ -1,6 +1,6 @@
 ---
 description: FastAPI best practices and patterns for building modern Python web APIs
-globs: **/*.py, app/**/*.py, api/**/*.py
+globs: "**/*.py, app/**/*.py, api/**/*.py"
 ---
 
 # FastAPI Best Practices

@@ -20,7 +20,7 @@ Write maintainable tests with descriptive names grouped in describe blocks
 **2** **Dependency Mocking**: Always mock dependencies before imports with jest.mock()
 **3** **Data Scenarios**: Test valid inputs, invalid inputs, and edge cases
 **4** **Descriptive Naming**: Use clear test names indicating expected behavior
-**5** **Test Organization**: Group related tests in describe/context blocks
+**5** **Test Organization**: Group related tests in `describe` blocks
 **6** **Project Patterns**: Match team's testing conventions and patterns
 **7** **Edge Cases**: Include tests for null values, undefined, and unexpected types
 **8** **Test Quantity**: Limit to 3-5 focused tests per file for maintainability
@@ -120,4 +120,5 @@ describe('getUserData', () => {
     // Act & Assert
     await expect(getUserData(1)).rejects.toThrow('Failed to fetch user: Network error');
   });
-}); 
+});
+``` 

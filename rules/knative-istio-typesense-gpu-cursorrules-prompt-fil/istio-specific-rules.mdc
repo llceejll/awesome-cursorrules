@@ -1,6 +1,6 @@
 ---
 description: Provides specific guidance related to Istio service mesh configuration, traffic management, security, and observability.
-globs: **/*.*
+globs: "**/*.*"
 ---
 2. Istio
   - Offer advice on service mesh configuration

@@ -1,6 +1,6 @@
 ---
 description: Prioritizes the method for editing code and defines verbosity levels.
-globs: *
+globs: "*"
 ---
 - Editing Code (prioritized choices):
   - Return completely edited file

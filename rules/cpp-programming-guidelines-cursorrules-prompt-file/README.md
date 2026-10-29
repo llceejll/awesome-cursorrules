@@ -28,4 +28,4 @@ This `.cursorrules` file is designed to work with the following file patterns:
 
 ## Usage
 
-Place this `.cursorrules` file in the root of your C++ project to ensure Cursor AI generates and modifies C++ code according to these guidelines. 
+Copy this file into `.cursor/rules` as an `.mdc` rule in your C++ project. If it has no frontmatter, set the rule type to Always Apply, which [Cursor's rules help](https://cursor.com/help/customization/rules) describes as the match for the legacy root `.cursorrules` file. 

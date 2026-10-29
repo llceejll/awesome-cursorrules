@@ -1,6 +1,6 @@
 # Drupal 11 Awesome CursorRules
 
-This repository provides a custom **CursorRules** file tailored for Drupal 11 projects. The rules defined in the `.cursorrules` file ensure that AI-generated code adheres to Drupal 11’s coding standards, best practices, and modern architecture, leveraging PHP 8.x, Symfony 6, and Drupal’s APIs.
+This repository provides a custom **CursorRules** file tailored for Drupal 11 projects. The rules defined in the `.cursorrules` file ensure that AI-generated code adheres to Drupal 11’s coding standards, best practices, and modern architecture, leveraging PHP 8.3 or newer, Symfony 7, and Drupal’s APIs.
 
 ## Purpose
 
@@ -17,20 +17,19 @@ The goal of this project is to enable a consistent, secure, and efficient develo
 ## Installation
 
 1. **Copy the Rule File:**  
-   Place the `.cursorrules` file in the root of your Drupal 11 project (i.e., in the same directory as your `composer.json`).
+   In the Drupal 11 project (the directory that contains `composer.json`), run `New Cursor Rule` from the command palette. Cursor saves an `.mdc` file under `.cursor/rules`. Copy this folder's `.cursorrules` contents into that file. If the copied text has no frontmatter, set the rule type to Always Apply.
 
-2. **Enable in Your Editor:**  
-   - If you’re using the Cursor AI editor, make sure that project rules are enabled (usually via a settings toggle).
-   - For VS Code users, install the [Cursor VS Code extension](https://marketplace.visualstudio.com/) and use its command palette to ensure the `.cursorrules` file is recognized.
+2. **Enable in Cursor:**  
+   Cursor loads project rules from `.cursor/rules`. Confirm the new rule is listed under Customize → Rules. [Cursor's rules help](https://cursor.com/help/customization/rules) marks a root `.cursorrules` file as legacy.
 
 3. **Commit the Changes:**  
    Once added, commit the file to your repository so that the rules are shared with your entire development team.
 
 ## References
 
-- [Awesome CursorRules on GitHub](https://github.com/awesome-cursorrules/awesome-cursorrules)
+- [Awesome CursorRules on GitHub](https://github.com/PatrickJS/awesome-cursorrules)
 - [Drupal 11 Documentation](https://www.drupal.org/docs/understanding-drupal)
-- [Drupal Coding Standards (PSR-12)](https://www.drupal.org/docs/develop/standards)
+- [Drupal Coding Standards](https://www.drupal.org/docs/develop/standards)
 
 ## Contributing
 
@@ -38,4 +37,4 @@ Contributions and improvements are welcome. If you have suggestions or enhanceme
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This catalog entry is covered by the repository license. See the [LICENSE](../../LICENSE) file for more details.

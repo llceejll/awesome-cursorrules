@@ -1,6 +1,6 @@
 ---
 description: Provides specific guidance related to Knative services, deployments, and autoscaling.
-globs: **/*.*
+globs: "**/*.*"
 ---
 1. Knative
   - Provide guidance on creating and managing Knative services

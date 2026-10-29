@@ -129,8 +129,8 @@ interface CartErrorResponse {
 test.describe('Shopping Cart Integration', () => {
   test.beforeEach(async ({ page }) => {
     // Mock the products API
-    await page.route('**/api/products', route => {
-      route.fulfill({
+    await page.route('**/api/products', async route => {
+      await route.fulfill({
         status: 200,
         body: JSON.stringify([
           { id: 1, name: 'Product A', price: 19.99, inStock: true },
@@ -197,4 +197,5 @@ test.describe('Shopping Cart Integration', () => {
     // Verify cart count is not updated
     await expect(page.locator('[data-testid="cart-count"]')).toContainText('0');
   });
-}); 
+});
+``` 

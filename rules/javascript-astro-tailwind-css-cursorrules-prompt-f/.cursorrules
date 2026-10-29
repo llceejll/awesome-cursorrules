@@ -25,7 +25,7 @@ Component Development
 - Use framework-specific components (React, Vue, Svelte) when necessary.
 - Implement proper component composition and reusability.
 - Use Astro's component props for data passing.
-- Leverage Astro's built-in components like when appropriate.
+- Leverage Astro's built-in components from astro:assets, such as Image, Picture, and Font, when appropriate.
 
 Routing and Pages
 
@@ -61,7 +61,7 @@ Data Fetching
 
 - Use Astro.props for passing data to components.
 - Implement getStaticPaths() for fetching data at build time.
-- Use Astro.glob() for working with local files efficiently.
+- Use import.meta.glob() for working with local files efficiently.
 - Implement proper error handling for data fetching operations.
 
 SEO and Meta Tags
@@ -72,7 +72,7 @@ SEO and Meta Tags
 
 Integrations and Plugins
 
-- Utilize Astro integrations for extending functionality (e.g., @astrojs/image).
+- Utilize Astro integrations for extending functionality (e.g., @astrojs/mdx).
 - Implement proper configuration for integrations in astro.config.mjs.
 - Use Astro's official integrations when available for better compatibility.
 
@@ -85,14 +85,14 @@ Build and Deployment
 
 Styling with Tailwind CSS
 
-- Integrate Tailwind CSS with Astro @astrojs/tailwind
+- Register @tailwindcss/vite in the vite.plugins array in astro.config.mjs, and import Tailwind with @import "tailwindcss" in src/styles/global.css
 
 Tailwind CSS Best Practices
 
 - Use Tailwind utility classes extensively in your Astro components.
 - Leverage Tailwind's responsive design utilities (sm:, md:, lg:, etc.).
 - Utilize Tailwind's color palette and spacing scale for consistency.
-- Implement custom theme extensions in tailwind.config.cjs when necessary.
+- Implement custom theme tokens with @theme in src/styles/global.css when necessary.
 - Never use the @apply directive
 
 Testing
@@ -117,7 +117,7 @@ Key Conventions
 
 Performance Metrics
 
-- Prioritize Core Web Vitals (LCP, FID, CLS) in development.
+- Prioritize Core Web Vitals (LCP, INP, CLS) in development.
 - Use Lighthouse and WebPageTest for performance auditing.
 - Implement performance budgets and monitoring.
 

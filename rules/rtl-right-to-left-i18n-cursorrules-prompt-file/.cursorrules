@@ -54,9 +54,9 @@ Non-directional icons (home, settings, search) should NOT be flipped.
 
 ## Automated RTL Auditing
 
-For automated RTL violation detection and fixing, use [rtlify-ai](https://github.com/idanlevi1/rtlify):
+For RTL rule setup, violation scans, and a fix prompt, use [rtlify-ai](https://github.com/idanlevi1/rtlify):
 ```bash
 npx rtlify-ai init   # Install RTL rules
 npx rtlify-ai check  # Find violations
-npx rtlify-ai fix    # Auto-fix violations
+npx rtlify-ai fix    # Print a prompt the editor uses to fix the violations
 ```

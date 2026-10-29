@@ -1,6 +1,6 @@
 ---
 description: Offers strategies for optimizing Google Apps Script performance and resource usage.
-globs: **/*.gs
+globs: "**/*.gs"
 ---
 - Minimize API calls and use batch operations when possible.
 - Implement caching strategies for frequently accessed data.

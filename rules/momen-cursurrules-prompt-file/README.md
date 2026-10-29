@@ -56,7 +56,7 @@ Before using these rules, you need to create your backend infrastructure in Mome
 ### Step 2: Clone This Repository
 
 ```bash
-git clone https://github.com/privateJiangyaokai/momen-cursor-rules.git
+git clone https://github.com/momen-tech-org/momen-cursor-rules.git
 cd momen-cursor-rules
 ```
 
@@ -165,12 +165,12 @@ alwaysApply: true  # or false for contextual rules
 **Purpose**: Core architecture understanding - always applied  
 **Teaches AI**:
 - GraphQL API endpoints (HTTP & WebSocket)
-- Apollo Client + subscriptions-transport-ws setup
+- Apollo Client + graphql-ws setup
 - Authentication token handling
 - Project structure and conventions
 
 **Key Concepts**:
-```typescript
+```text
 // HTTP endpoint
 https://villa.momen.app/zero/{projectExId}/api/graphql-v2
 
@@ -198,7 +198,6 @@ query GetPostsWithAuthors($limit: Int) {
     author {  # Relationship automatically handled
       id
       name
-      email
     }
   }
 }
@@ -342,9 +341,9 @@ Don't try to implement multi-step business logic in frontend:
 const createOrderWithInventoryCheck = async () => {
   const inventory = await checkInventory(productId);
   if (inventory > 0) {
-    const order = await createOrder(...);
+    const order = await createOrder(/* ... */);
     await reduceInventory(productId);
-    await sendEmail(...);
+    await sendEmail(/* ... */);
   }
 };
 ```
@@ -383,13 +382,16 @@ Use GraphQL subscriptions for live updates:
 
 ```typescript
 const POST_SUBSCRIPTION = gql`
-  subscription OnNewPost {
+  subscription OnNewPost($since: timestamptz!) {
     post(
-      where: { created_at: { _gte: "now()" } }
+      where: { created_at: { _gte: $since } }
+      order_by: { created_at: desc }
     ) {
       id
       title
-      author { name }
+      author {
+        name
+      }
     }
   }
 `;
@@ -430,7 +432,7 @@ Be explicit in prompts: "Using Momen backend rules, create..."
 - [Database Configuration](https://docs.momen.app/data/database/configuration/)
 - [Actionflow Guide](https://docs.momen.app/actions/actionflow/overview/)
 - [AI Agent Tutorial](https://docs.momen.app/actions/ai/overview/)
-- [Stripe Integration](https://docs.momen.app/actions/payment/)
+- [Stripe Integration](https://docs.momen.app/docs/actions/guide/payment/payment_stripe/)
 
 ### GraphQL Resources
 - [Apollo Client Docs](https://www.apollographql.com/docs/react/)
@@ -491,7 +493,7 @@ Open an issue with:
 
 This repository is provided under the MIT License. Feel free to use, modify, and distribute these rules in your projects.
 
-**Note**: While these rules are MIT licensed, Momen.app itself is a commercial service. Refer to [Momen's Terms of Service](https://momen.app/terms) for usage rights to the Momen platform.
+**Note**: While these rules are MIT licensed, Momen.app itself is a commercial service. Refer to [Momen's Terms of Service](https://momen.app/term) for usage rights to the Momen platform.
 
 ## 🙏 Acknowledgments
 

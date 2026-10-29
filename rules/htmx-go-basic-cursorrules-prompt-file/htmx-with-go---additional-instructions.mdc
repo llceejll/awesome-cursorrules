@@ -1,6 +1,6 @@
 ---
 description: Provides additional instructions for implementing HTMX with Go, including semantic HTML, CSRF protection, and error handling.
-globs: **/*.html
+globs: "**/*.html"
 ---
 - Use semantic HTML5 elements with HTMX attributes
 - Implement proper CSRF protection

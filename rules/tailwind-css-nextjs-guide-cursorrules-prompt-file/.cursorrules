@@ -45,7 +45,7 @@ Next.js Rules:
 - Use getServerSideProps for dynamic data, getStaticProps/getStaticPaths for static
 - Implement Incremental Static Regeneration (ISR) where appropriate
 - Use next/image for optimized images
-- Configure image layout, priority, sizes, and srcSet attributes
+- Set width and height, or fill, and pass sizes so Next.js generates srcset. Preload an above-the-fold image with the preload prop.
 
 TypeScript Rules:
 
@@ -65,7 +65,7 @@ TailwindCSS and DaisyUI Rules:
 - Use Tailwind's responsive variants for adaptive designs
 - Leverage DaisyUI components for rapid development
 - Customize DaisyUI components only when necessary
-- Define and use design tokens in tailwind.config.js
+- Define DaisyUI themes and design tokens in CSS with `@plugin "daisyui"` and `@plugin "daisyui/theme"` after `@import "tailwindcss"`
 
 Starknet React Rules:
 

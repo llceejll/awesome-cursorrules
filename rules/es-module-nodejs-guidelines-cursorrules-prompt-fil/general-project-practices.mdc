@@ -1,6 +1,6 @@
 ---
 description: This rule outlines general project practices, including agile methodologies, modularity, DRY principles, performance, and security considerations applicable to all files.
-globs: **/*.*
+globs: "**/*.*"
 ---
 - Follow best practices, lean towards agile methodologies
 - Prioritize modularity, DRY, performance, and security

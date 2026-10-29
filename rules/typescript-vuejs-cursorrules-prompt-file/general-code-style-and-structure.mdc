@@ -1,6 +1,6 @@
 ---
 description: Applies general code style and structure guidelines to JavaScript, TypeScript, Python files.
-globs: **/*.{js,ts,jsx,tsx,py}
+globs: "**/*.{js,ts,jsx,tsx,py}"
 ---
 - Maintain consistent code formatting and indentation.
 - Organize code into logical modules and functions.

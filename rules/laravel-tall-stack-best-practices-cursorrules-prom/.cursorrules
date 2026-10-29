@@ -11,7 +11,7 @@ Key Principles
 
 PHP and Laravel Core
 
-- Use PHP 8.1+ features when appropriate (e.g., typed properties, match expressions).
+- Use PHP 8.3+ features when appropriate (e.g., typed properties, match expressions).
 - Follow PSR-12 coding standards.
 - Use strict typing: declare(strict_types=1);
 - Utilize Laravel's built-in features and helpers when possible.
@@ -38,7 +38,7 @@ Laravel Best Practices
 - Implement API versioning for public APIs.
 - Use Laravel's localization features for multi-language support.
 - Implement proper CSRF protection and security measures.
-- Use Laravel Mix for asset compilation.
+- Use Vite for asset compilation.
 - Implement proper database indexing for improved query performance.
 - Use Laravel's built-in pagination features.
 - Implement proper error logging and monitoring.
@@ -61,9 +61,9 @@ Alpine.js Usage
 Tailwind CSS Styling
 
 - Utilize Tailwind's utility classes for responsive design.
-- Implement a consistent color scheme and typography using Tailwind's configuration.
+- Implement a consistent color scheme and typography with @theme in resources/css/app.css after @import "tailwindcss".
 - Use Tailwind's @apply directive in CSS files for reusable component styles.
-- Optimize for production by purging unused CSS classes.
+- In resources/css/app.css, import Tailwind with @import 'tailwindcss' and Flux with @import '../../vendor/livewire/flux/dist/flux.css'. Register @source '../views', @source for Laravel's pagination Blade templates under vendor/laravel/framework, and @source for the Flux and Flux Pro stub templates under vendor/livewire.
 
 Performance Optimization
 
@@ -94,7 +94,7 @@ Key Conventions
 3. Implement proper request validation using Form Requests.
 4. Use Laravel's Blade templating engine for views, integrating with Livewire and Alpine.js.
 5. Implement proper database relationships using Eloquent.
-6. Use Laravel's built-in authentication scaffolding.
+6. Use the Livewire application starter kit for authentication scaffolding.
 7. Implement proper API resource transformations.
 8. Use Laravel's event and listener system for decoupled code.
 
@@ -104,7 +104,7 @@ Dependencies
 - Livewire
 - Alpine.js
 - Tailwind CSS
-- Luvi UI component library
+- Flux UI, the component library in the Livewire starter kit
 - Composer for dependency management
 
 When providing code examples or explanations, always consider the integration of all four technologies in the TALL stack. Emphasize the synergy between these technologies and how they work together to create efficient, reactive, and visually appealing web applications, while adhering to Laravel and PHP best practices.

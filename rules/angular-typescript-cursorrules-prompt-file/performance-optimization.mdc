@@ -13,7 +13,7 @@ globs: src/**/*
 - Implement proper lazy loading for modules and components.
 - Use ChangeDetectorRef.detach() and reattach() for manual change detection control.
 - Implement proper error boundaries to prevent cascading failures.
-- Use production builds for deployment with ng build --prod.
+- Use production builds for deployment with `ng build`. The build target’s default configuration is production. Pass `--configuration production` when a project default is different.
 - Implement proper caching strategies for HTTP responses with HttpInterceptors.
 - Use service workers for caching static assets.
 - Optimize CSS by removing unused styles and using efficient selectors.

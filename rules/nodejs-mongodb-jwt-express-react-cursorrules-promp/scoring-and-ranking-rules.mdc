@@ -1,6 +1,6 @@
 ---
 description: Specifies how picks are scored, how entries advance or are eliminated, and how entries are ranked.
-globs: */scoring-ranking/**/*.*
+globs: "*/scoring-ranking/**/*.*"
 ---
 - Picks scored after games complete.
 - Win: Entry moves to the next week.

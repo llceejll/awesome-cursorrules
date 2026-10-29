@@ -14,7 +14,4 @@ globs: army_mechanics.py
 - Armies can be used to attack other nations.
 - Armies can be used to attack neutral squares.
 - Armies can be used to attack other nations' squares.
-- Armies can be used to attack neutral squares.
-- Armies can be used to attack other nations' squares.
-- Armies can be used to attack neutral squares.
 - Nations should start with the same amount of gold and land.

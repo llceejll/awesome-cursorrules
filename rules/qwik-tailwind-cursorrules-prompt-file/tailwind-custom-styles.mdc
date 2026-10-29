@@ -1,5 +1,5 @@
 ---
-description: Suggests using Tailwind's @layer directive for custom styles to maintain organization and prevent conflicts.
+description: Suggests defining custom classes with Tailwind's @utility directive so they work with variants.
 globs: src/**/*.css
 ---
-- Use Tailwind's @layer directive for custom styles
+- Define custom classes with Tailwind's @utility directive so they work with variants

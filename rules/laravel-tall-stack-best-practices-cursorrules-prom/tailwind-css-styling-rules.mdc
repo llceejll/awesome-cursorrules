@@ -3,6 +3,6 @@ description: Tailwind CSS guidelines for responsive design and consistent stylin
 globs: /resources/css/**/*.css
 ---
 - Utilize Tailwind's utility classes for responsive design.
-- Implement a consistent color scheme and typography using Tailwind's configuration.
+- Implement a consistent color scheme and typography with `@theme` in `resources/css/app.css` after `@import "tailwindcss"`.
 - Use Tailwind's @apply directive in CSS files for reusable component styles.
-- Optimize for production by purging unused CSS classes.
+- In `resources/css/app.css`, import Tailwind with `@import 'tailwindcss'` and Flux with `@import '../../vendor/livewire/flux/dist/flux.css'`. Register `@source '../views'`, `@source` for Laravel's pagination Blade templates under `vendor/laravel/framework`, and `@source` for the Flux and Flux Pro stub templates under `vendor/livewire`.

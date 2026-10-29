@@ -4,7 +4,7 @@ globs: src/**/*
 ---
 - Use Jasmine and Karma for unit testing Angular components and services.
 - Use Angular Testing Utilities for component testing with a focus on user behavior.
-- Use Protractor or Cypress for end-to-end testing of user flows.
+- Use Cypress, Playwright, Nightwatch, WebdriverIO, or Puppeteer for end-to-end testing of user flows. Those are the runners `ng e2e` offers when a project has no e2e target.
 - Implement proper test coverage targets (aim for 80%+ coverage).
 - Use mocking for external dependencies and HTTP calls in unit tests.
 - Test both success and error states for components and services.

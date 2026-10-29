@@ -1,6 +1,6 @@
 ---
 description: Enforces TypeScript best practices within Svelte component logic files, including interface usage, avoiding enums, and strict mode.
-globs: **/*.svelte.ts
+globs: "**/*.svelte.ts"
 ---
 - Use TypeScript for all code; prefer interfaces over types.
 - Avoid enums; use const objects instead.
@@ -8,7 +8,7 @@ globs: **/*.svelte.ts
 - Enable strict mode in TypeScript for better type safety.
 - State Management:
   - Use classes for complex state management (state machines):
-    typescript
+    ```typescript
     // counter.svelte.ts
     class Counter {
       count = $state(0);
@@ -24,11 +24,14 @@ globs: **/*.svelte.ts
       }
     }
     export const counter = new Counter();
+    ```
     
 - State Management Example Usage:
-  svelte
-  <br />
-  import { counter } from './counter.svelte.ts';
-  <br />
-  <button on:click={() => counter.increment()}>
+  ```svelte
+  <script>
+    import { counter } from './counter.svelte.ts';
+  </script>
+  <button onclick={() => counter.increment()}>
     Count: {counter.count}
+  </button>
+  ```

@@ -83,7 +83,7 @@ I'll provide a step-by-step guide with code examples to illustrate the implement
     "log"
     "net"
     "google.golang.org/grpc"
-    "github.com/lib/pq"
+    _ "github.com/lib/pq"
     pb "your_project/pb"
    )
    type server struct {

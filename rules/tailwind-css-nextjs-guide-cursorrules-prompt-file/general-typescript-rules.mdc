@@ -1,6 +1,6 @@
 ---
 description: Applies general TypeScript best practices to all TypeScript files in the project.
-globs: **/*.ts
+globs: "**/*.ts"
 ---
 - Enable all strict mode options in tsconfig.json
 - Explicitly type all variables, parameters, and return values

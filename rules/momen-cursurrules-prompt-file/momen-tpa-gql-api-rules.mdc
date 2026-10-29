@@ -21,12 +21,12 @@ interface ThirdPartyApiConfig {
   outputs: { [key: string]: TypeDefinition };
 }
 ```
-N.B. The value of the operation field within ThirdPartyApiConfig determines the root GraphQL field. i.e. query -> query operation_${id}, and mutation -> mutation operation_${id}.
+N.B. An API configured and published under API generates a field named `fz_api_{api_unique_id}`. The operation type, input type, and response fields depend on that API. Copy the operation from GraphiQL. Legacy third-party APIs may still expose `operation_{operationId}` and an `fz_body` argument. Existing projects should follow the fields that remain in GraphiQL. Use the current API feature for new integrations.
 
 ## Invocation process
-Each input should be provided unless the user asks to remove it.  
-e.g. 
-Given TPA configuration as follows:
+Each input should be provided unless the user asks to remove it.
+
+A stored API config can look like this. It describes the imported HTTP API. It does not name the generated GraphQL field:
 ```json
       {
         "id": "lzb3ownk",
@@ -88,18 +88,19 @@ Given TPA configuration as follows:
         "operation": "mutation"
       }
 ```
-The corresponding GraphQL query should be
+Call the generated field and pass one input variable. This published example calls an API whose unique id is `create_order`:
 ```gql
-mutation request_${nonce}($summary: String, $location: String, $description: String, $start_dateTime: String, $start_timeZone: String, $end_dateTime: String, $end_timeZone: String, $attendees:[String], $Authorization: String) {
-  operation_lzb3ownk(fz_body: {}, arg1: $_1, arg2: $_2) {
+mutation CallCreateOrderApi($input: fz_api_create_order_input!) {
+  fz_api_create_order(input: $input) {
     responseCode
-    field_200_json {
-      {subFieldSelections}
+    responseStatus
+    responseContentType
+    fz_api_create_order_response {
+      order_id
+      status
     }
- }
+  }
 }
 ```
-field_200_json is a fixed fields for all third-party API derived GraphQL operation. It means the response that's valid for all 2xx response codes. 
-
-The responseCode subfield should always be checked, in case 5xx or 4xx codes are returned, which means field_200_json would be empty. 
+Check `responseCode` and `responseStatus` before reading the generated structured response field. Do not add `fz_body` to a new `fz_api_{api_unique_id}` operation unless GraphiQL still shows it. 
 

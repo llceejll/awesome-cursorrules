@@ -6,20 +6,18 @@ Never mention TAU or Lamden.
 ## Contract Structure
 
 ### Basic Structure
-- Smart contracts are written in native Python without transpilation
-- Contract names must follow the pattern: `^con_[a-z][a-z0-9_]*$`
-- Contract names must start with 'con_' prefix (except system contracts like 'currency')
-- Contract names must be lowercase, only contain letters, numbers and underscores after prefix
-- Contract names must be max 64 characters
+- Smart contracts are written as a restricted Python module. Validators compile that source to canonical Xian VM IR and execute the IR
+- `submission.submit_contract` requires a lowercase name of at most 64 characters. Unless `ctx.caller` is `sys`, the name must start with `con_`
+- `importlib.import_module` requires a name of at most 64 characters that starts with a lowercase letter and then contains only lowercase letters, digits, and underscores, and that is not a Python standard-library or built-in module name
 
 ### Naming Conventions
-- You cannot use '_' as a prefix for variables or functions (e.g., `_private_var` is not allowed)
+- The linter rejects a variable or function name that starts or ends with `_`
 - Follow standard Python naming conventions otherwise
 - Use descriptive names for clarity
-- A contract can not be deployed by another contract
+- Submit a contract with `submission.submit_contract(name=..., code=..., owner=..., constructor_args=...)`. The caller is stored as the developer and the transaction signer is stored as the initiator
 
 ### Function Types
-- `@export` decorator defines public functions callable by any user or contract
+- `@export` marks a public function. Every exported argument needs a whitelisted type annotation. The linter requires those annotations, and the runtime checks arguments only when the decorator is `@export(typecheck=True)`. That option also checks a return annotation when one is present. Annotate decimal amounts with `float`; that annotation is a `ContractingDecimal` value. Do not annotate an exported signature with Python `Decimal`. If the contract has an owner, only that owner can call its exported functions
 - `@construct` decorator defines initialization function executed once at contract submission (optional)
 - Functions without decorators are private and can only be called by the contract itself
 - Functions with `@export` can call private functions internally
@@ -66,7 +64,7 @@ def get_value(key: str):
 ```
 
 #### Illegal Delimiters 
-":" and "." cannot be used in Variable or Hash keys.
+":" and "." cannot be used in Hash keys.
 
 ### Foreign State Access
 - `ForeignHash` provides read-only access to a Hash from another contract
@@ -87,37 +85,41 @@ foundation_owner = ForeignVariable(foreign_contract='foundation', foreign_name='
 ### ctx.signer
 - The top-level user who signed the transaction
 - Remains constant throughout transaction execution
-- Only used for security guards/blacklisting, not for account authorization
+- Use it when the original external signer is the authority, and use `ctx.caller` for the immediate caller
 
 ### ctx.this
-- The identity/name of the current contract
-- Never changes
-- Useful when the contract needs to refer to itself
+- The name of the contract currently executing
+- A nested call reports the callee, and the caller sees its own name again after that call returns
 
 ### ctx.owner
-- Owner of the contract, optional field set at time of submission
+- Runtime `__owner__` metadata, or `None` when unset
+- Separate from an application variable such as `owner = Variable()`
 - Only the owner can call exported functions if set
-- Can be changed with `ctx.owner = new_owner`
+- Pass `owner` to `submission.submit_contract` when the contract is submitted. The current owner transfers `__owner__` with `submission.change_owner(contract=..., new_owner=...)`. The caller must be the current owner. `submission.change_developer(contract=..., new_developer=...)` updates `__developer__`, and the caller must be the current developer
 
 ### ctx.entry
-- Returns tuple of (contract_name, function_name) of the original entry point
+- Returns tuple of (contract, function) at the transaction entry point
 - Helps identify what contract and function initiated the call chain
+
+### ctx.submission_name
+- The contract being deployed during module and constructor execution
 
 ## Built-in Variables
 
 ### Time and Blockchain Information
-- `now` - Returns the current datetime
-- `block_num` - Returns the current block number, useful for block-dependent logic
-- `block_hash` - Returns the current block hash, can be used as a source of randomness
+- `now` is the finalized block timestamp from consensus context
+- `block_num` is the executing block height
+- `block_hash` is the executing block hash
+- `chain_id` is the network chain identifier
 
 Example usage:
 ```python
+submission_time = Variable()
+submission_block_num = Variable()
+submission_block_hash = Variable()
+
 @construct
 def seed():
-    submission_time = Variable()
-    submission_block_num = Variable()
-    submission_block_hash = Variable()
-    
     # Store blockchain state at contract creation
     submission_time.set(now)
     submission_block_num.set(block_num)
@@ -128,14 +130,11 @@ def seed():
 
 ### Importing Contracts
 - Use `importlib.import_module(contract_name)` for dynamic contract imports
-- Static contract imports can be done with `import <contract_name>`
-- Only use 'import' syntax for contracts, not for libraries or Python modules
-- Trying to import standard libraries will not work within a contract (they're automatically available)
+- A static contract import is `import <contract_name>` at module scope. An import inside a function is rejected, and `from <module> import <name>` is rejected
+- Import only a deployed contract. The Python standard library is not available inside a contract
+- `hashlib`, `datetime`, `random`, `importlib`, `crypto`, `zk`, and `decimal` are already in contract scope
 - Dynamic imports are preferred when the contract name is determined at runtime
 - Can enforce interface with `importlib.enforce_interface()`
-- NEVER import anything other than a contract.
-- ALL contracting libraries are available globally
-- NEVER IMPORT importlib. It is already available globally.
 
 ```python
 @export
@@ -161,9 +160,13 @@ def interact_with_token(token_contract: str, recipient: str, amount: float):
 - Use `assert` statements for validation and error checking
 - Include error messages: `assert condition, "Error message"`
 
-### No Try/Except
-- Exception handling with try/except is not allowed
-- Use conditional logic with if/else statements instead
+### Restricted syntax
+- The linter rejects `try/except`, `with`, `lambda`, `yield`, `yield from`, `nonlocal`, set literals, set comprehensions, semicolons, and one-line compound statements
+- Classes, async functions, nested functions, and generator expressions are rejected. Only `@export` and `@construct` are valid decorators, and a function has one decorator
+- `set()` and `frozenset()` are allowed. A brace set literal is not
+- f-strings allow basic interpolation. Conversions (`!r`, `!s`, `!a`), debug syntax (`{name=}`), and format specifications (`:04d`) are unsupported
+- Allowed builtins are `Exception`, `False`, `None`, `True`, `abs`, `all`, `any`, `ascii`, `bin`, `bool`, `bytearray`, `bytes`, `chr`, `dict`, `divmod`, `filter`, `float`, `format`, `frozenset`, `hex`, `import`, `int`, `isinstance`, `issubclass`, `len`, `list`, `map`, `max`, `min`, `oct`, `ord`, `pow`, `range`, `reversed`, `round`, `set`, `sorted`, `str`, `sum`, `tuple`, and `zip`. Everything else, including `getattr`, is forbidden
+- `range` may create at most 131,072 entries. `bytes(n)` and `bytearray(n)` may allocate at most 131,072 bytes. Integer multiplication, exponentiation, and left shifts may not create an integer larger than 1,048,576 bits
 
 ```python
 # DO NOT USE:
@@ -183,71 +186,62 @@ else:
     result = 100 / value
 ```
 
-### Prohibited Built-ins
-- `getattr` is an illegal built-in function and must not be used
-- Other Python built-ins may also be restricted for security reasons
-
 ## Modules
 
 ### Random
-- Seed RNG with `random.seed()`
-- Generate random integers with `random.randint(min, max)`
+- Call `random.seed()` before any other `random` function in the transaction. Calling it again reseeds the sequence
+- The seed is built from `chain_id`, `block_num`, `block_hash`, and `__input_hash`. An optional argument is a literal extra salt
+- `random.randint(a, b)` returns an integer from `a` through `b` inclusive
 
 ### Datetime
-- Available by default without importing
-- Compare timestamps with standard comparison operators
-- Use the built-in `now` variable for current time
+- The runtime injects `datetime` without an import. Construct values with `datetime.datetime(...)` and `datetime.timedelta(...)`
+- Compare `Datetime` values with the comparison operators. Comparing a `Datetime` with another type raises `TypeError`
+- `now` is the finalized block timestamp. Every transaction in the same block sees the same value
+- `datetime.WEEKS`, `datetime.DAYS`, `datetime.HOURS`, `datetime.MINUTES`, and `datetime.SECONDS` are `Timedelta` constants
 
 ### Crypto
-- Provides cryptographic functionality using the PyNaCl library under the hood
-- Employs the Ed25519 signature scheme for digital signatures
-- Main function is `verify` for signature validation
+- The runtime exposes `crypto.verify(vk, msg, signature)` and `crypto.key_is_valid(key)`
+- `verify` checks an Ed25519 signature. It returns `True` when `vk` is a 32-byte public key in hex, `signature` is hex, and the signature matches the UTF-8 bytes of `msg`
+- A signature that decodes cleanly and does not match returns `False`. Malformed hex or an invalid public-key shape can raise, so check an untrusted key with `crypto.key_is_valid` before `verify`
+- `key_is_valid` returns `True` only for a string of exactly 64 hexadecimal characters
 
 ```python
-# Verify a signature
+assert crypto.key_is_valid(vk), "Invalid verification key"
 is_valid = crypto.verify(vk, msg, signature)
-# Returns True if the signature is valid for the given message and verification key
 ```
 
 Example usage in a contract:
 ```python
 @export
-def verify_signature(vk: str, msg: str, signature: str):
-    # Use the verify function to check if the signature is valid 
-    is_valid = crypto.verify(vk, msg, signature)
-    
-    # Return the result of the verification
-    return is_valid
+def verify_signature(vk: str, msg: str, signature: str) -> bool:
+    assert crypto.key_is_valid(vk), "Invalid verification key"
+    return crypto.verify(vk, msg, signature)
 ```
 
 ### Hashlib
-- Xian provides a simplified version of hashlib with a different API than Python's standard library
-- Does not require setting up an object and updating it with bytes
-- Functions directly accept and return hexadecimal strings
+- The runtime exposes `hashlib.sha3_text`, `hashlib.sha3_hex`, `hashlib.sha256_text`, and `hashlib.sha256_hex`. Each takes one string and returns a lowercase hex digest
+- `sha3_text` and `sha3_hex` are SHA3-256. `sha256_text` and `sha256_hex` are SHA-256
+- `_text` hashes the exact UTF-8 bytes of the string. `_hex` accepts unprefixed, even-length hexadecimal with no whitespace and hashes the decoded bytes
 
 ```python
-# Hash a hex string with SHA3 (256 bit)
-hash_result = hashlib.sha3("68656c6c6f20776f726c64")  # hex for "hello world"
-
-# If not a valid hex string, it will encode the string to bytes first
-text_hash = hashlib.sha3("hello world")
-
-# SHA256 works the same way (SHA2 256-bit, used in Bitcoin)
-sha256_result = hashlib.sha256("68656c6c6f20776f726c64")
+payload_hash = hashlib.sha3_text("transfer:alice:bob:10")
+byte_hash = hashlib.sha3_hex("68656c6c6f")
+sha256_result = hashlib.sha256_hex("68656c6c6f")
 ```
 
 ## Testing
 
 ### Setting Up Tests
 - Use Python's unittest framework
-- Client available via `from contracting.client import ContractingClient`
+- Client available via `from contracting.local import ContractingClient`
+- Submit a contract function with `client.submit`, then call it through `client.get_contract_proxy`
 - Flush client before and after each test
 
 ### Setting Test Environment
-- Pass environment variables like `now` (datetime) in a dictionary
+- Override block time by passing `environment={"now": Datetime(...)}`. Import `Datetime` from `xian_runtime_types.time`
 
 ```python
-from contracting.stdlib.bridge.time import Datetime
+from xian_runtime_types.time import Datetime
 
 env = {"now": Datetime(year=2021, month=1, day=1, hour=0)}
 result = self.some_contract.some_fn(some_arg=some_value, environment=env)
@@ -263,27 +257,26 @@ result = self.some_contract.some_fn(some_arg=some_value, signer="some_signer")
 ## Events
 
 ### Defining Events
-- Use `LogEvent` to define events at the top level of a contract
-- Each event has a name and a schema of parameters with their types
-- Set `idx: True` for parameters that should be indexed for querying
+- Use `LogEvent` to define events at module scope
+- Pass `event` for the event name and `params` for the field map. The compiler supplies `contract` and `name`. Each field is a dictionary with `type` and optional `idx`. `type` is one allowed type or a tuple of them. Allowed types are `str`, `int`, `float`, `bool`, `decimal`, `set`, and `frozenset`. At most three fields may be indexed
 
 ```python
 TransferEvent = LogEvent(
     event="Transfer",
     params={
-        "from": {'type': str, 'idx': True},
-        "to": {'type': str, 'idx': True},
-        "amount": {'type': (int, float, decimal)}
-    }
+        "from": {"type": str, "idx": True},
+        "to": {"type": str, "idx": True},
+        "amount": {"type": (int, float, decimal)},
+    },
 )
 
 ApprovalEvent = LogEvent(
     event="Approval",
     params={
-        "owner": {'type': str, 'idx': True},
-        "spender": {'type': str, 'idx': True},
-        "amount": {'type': (int, float, decimal)}
-    }
+        "owner": {"type": str, "idx": True},
+        "spender": {"type": str, "idx": True},
+        "amount": {"type": (int, float, decimal)},
+    },
 )
 ```
 
@@ -322,12 +315,11 @@ result = self.contract.transfer(
 )
 
 # Verify events
-events = result['events']
+events = result["events"]
 assert len(events) == 1
-assert events[0]['event'] == 'Transfer'
-assert events[0]['from'] == 'sender'
-assert events[0]['to'] == 'recipient'
-assert events[0]['amount'] == 100
+assert events[0]["event"] == "Transfer"
+assert events[0]["data_indexed"]["from"] == "sender"
+assert events[0]["data_indexed"]["to"] == "recipient"
 ```
 
 ### Common Event Types
@@ -343,30 +335,19 @@ assert events[0]['amount'] == 100
 - Use Python's unittest framework for structured testing
 - Create a proper test class that inherits from `unittest.TestCase`
 - Implement `setUp` and `tearDown` methods to isolate tests
-- Define the environment and chain ID in setUp for consistent testing
+- In setUp, flush the client, submit the contract, and load it with get_contract_proxy
 
 ```python
+from contracting.local import ContractingClient
+
 class TestMyContract(unittest.TestCase):
     def setUp(self):
-        # Bootstrap the environment
-        self.chain_id = "test-chain"
-        self.environment = {"chain_id": self.chain_id}
-        self.deployer_vk = "test-deployer"
-        
-        # Initialize the client
-        self.client = ContractingClient(environment=self.environment)
+        self.client = ContractingClient()
         self.client.flush()
-        
-        # Load and submit the contract
-        with open('path/to/my_contract.py') as f:
-            code = f.read()
-            self.client.submit(code, name="my_contract", constructor_args={"owner": self.deployer_vk})
-            
-        # Get contract instance
-        self.contract = self.client.get_contract("my_contract")
-        
+        self.client.submit(my_contract, name="con_my_contract")
+        self.contract = self.client.get_contract_proxy("con_my_contract")
+
     def tearDown(self):
-        # Clean up after each test
         self.client.flush()
 ```
 
@@ -380,16 +361,13 @@ class TestMyContract(unittest.TestCase):
 
 ```python
 def test_transfer_success(self):
-    # GIVEN a sender with balance
     sender = "alice"
-    self.contract.balances[sender] = 1000
-    
-    # WHEN a transfer is executed
+    self.client.set_var("con_my_contract", "balances", arguments=[sender], value=1000)
+
     result = self.contract.transfer(amount=100, to="bob", signer=sender)
-    
-    # THEN the balances should be updated correctly
-    self.assertEqual(self.contract.balances["bob"], 100)
-    self.assertEqual(self.contract.balances[sender], 900)
+
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=["bob"]), 100)
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=[sender]), 900)
 ```
 
 ### Testing for Security Vulnerabilities
@@ -412,14 +390,30 @@ def test_change_metadata_unauthorized(self):
 ```python
 def test_permit_double_spending(self):
     # GIVEN a permit already used once
-    self.contract.permit(owner="alice", spender="bob", value=100, deadline=deadline, 
-                        signature=signature)
-    
-    # WHEN the permit is used again
+    deadline = "2024-01-01 00:00:00"
+    signature = "ab" * 64
+    self.contract.permit(
+        token_contract="con_token",
+        owner="alice",
+        spender="bob",
+        value=100,
+        deadline=deadline,
+        nonce=0,
+        signature=signature,
+    )
+
+    # WHEN the same nonce is submitted again
     # THEN it should fail
     with self.assertRaises(Exception):
-        self.contract.permit(owner="alice", spender="bob", value=100, 
-                            deadline=deadline, signature=signature)
+        self.contract.permit(
+            token_contract="con_token",
+            owner="alice",
+            spender="bob",
+            value=100,
+            deadline=deadline,
+            nonce=0,
+            signature=signature,
+        )
 ```
 
 #### 3. Time-Based Vulnerabilities
@@ -446,16 +440,13 @@ def test_time_sensitive_function(self):
 
 ```python
 def test_transfer_balances(self):
-    # Set initial balances
-    self.contract.balances["alice"] = 1000
-    self.contract.balances["bob"] = 500
-    
-    # Perform transfer
+    self.client.set_var("con_my_contract", "balances", arguments=["alice"], value=1000)
+    self.client.set_var("con_my_contract", "balances", arguments=["bob"], value=500)
+
     self.contract.transfer(amount=300, to="bob", signer="alice")
-    
-    # Verify final balances
-    self.assertEqual(self.contract.balances["alice"], 700)
-    self.assertEqual(self.contract.balances["bob"], 800)
+
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=["alice"]), 700)
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=["bob"]), 800)
 ```
 
 #### 5. Signature Validation
@@ -464,20 +455,17 @@ def test_transfer_balances(self):
 
 ```python
 def test_signature_validation(self):
-    # GIVEN a properly signed message
     signature = wallet.sign_msg(msg)
-    
-    # WHEN using the correct parameters
-    result = self.contract.verify_signature(msg=msg, signature=signature, 
-                                          public_key=wallet.public_key)
-    
-    # THEN verification should succeed
+
+    result = self.contract.verify_signature(
+        vk=wallet.public_key, msg=msg, signature=signature
+    )
     self.assertTrue(result)
-    
-    # BUT when using modified parameters
-    with self.assertRaises(Exception):
-        self.contract.verify_signature(msg=msg+"tampered", signature=signature, 
-                                     public_key=wallet.public_key)
+
+    tampered = self.contract.verify_signature(
+        vk=wallet.public_key, msg=msg + "tampered", signature=signature
+    )
+    self.assertFalse(tampered)
 ```
 
 #### 6. Edge Cases and Boundary Conditions
@@ -506,7 +494,7 @@ def test_event_emission(self):
     sender = "alice"
     receiver = "bob"
     amount = 100
-    self.contract.balances[sender] = amount
+    self.client.set_var("con_my_contract", "balances", arguments=[sender], value=amount)
     
     # WHEN executing with return_full_output
     result = self.contract.transfer(
@@ -541,6 +529,7 @@ def test_no_reentrancy_vulnerability(self):
     # For example, check that balances are decreased before tokens are sent
     
     # Verify proper operation ordering in the contract
+    pass
 ```
 
 #### Integer Overflow/Underflow
@@ -549,15 +538,12 @@ def test_no_reentrancy_vulnerability(self):
 
 ```python
 def test_integer_boundaries(self):
-    # Set a large balance
-    self.contract.balances["user"] = 10**20
-    
-    # Test with large transfers
+    self.client.set_var("con_my_contract", "balances", arguments=["user"], value=10**20)
+
     result = self.contract.transfer(amount=10**19, to="receiver", signer="user")
-    
-    # Verify results are as expected
-    self.assertEqual(self.contract.balances["user"], 9*10**19)
-    self.assertEqual(self.contract.balances["receiver"], 10**19)
+
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=["user"]), 9 * 10**19)
+    self.assertEqual(self.client.get_var("con_my_contract", "balances", arguments=["receiver"]), 10**19)
 ```
 
 #### Front-Running Protection

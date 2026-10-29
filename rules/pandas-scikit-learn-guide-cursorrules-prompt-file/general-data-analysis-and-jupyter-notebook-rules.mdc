@@ -1,6 +1,6 @@
 ---
 description: Applies general guidelines for data analysis, visualization, and Jupyter Notebook development with Python, focusing on best practices with pandas, matplotlib, and seaborn.
-globs: **/*.ipynb
+globs: "**/*.ipynb"
 ---
 - Write concise, technical responses with accurate Python examples.
 - Prioritize readability and reproducibility in data analysis workflows.

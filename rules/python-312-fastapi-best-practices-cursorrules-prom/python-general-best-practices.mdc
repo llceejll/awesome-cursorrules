@@ -1,6 +1,6 @@
 ---
 description: Applies general Python coding best practices across all Python files in the project, focusing on code clarity, style, and maintainability.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - Follow PEP 8 style guide for formatting.
 - Use docstrings to document functions and classes.

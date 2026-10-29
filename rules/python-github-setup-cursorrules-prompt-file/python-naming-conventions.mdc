@@ -1,6 +1,6 @@
 ---
 description: Applies Python naming conventions for variables, functions, classes, interfaces, and files.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - Use snake_case for variables.
 - Use snake_case for functions.

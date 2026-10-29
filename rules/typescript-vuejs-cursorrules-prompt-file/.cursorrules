@@ -15,3 +15,57 @@ Performance Optimization:
 Key Conventions:
 Follow Vue.js docs for where makes sense
 
+## Error handling and validation
+
+- Implement robust error handling using try-catch blocks.
+- Validate user input to prevent unexpected errors or security vulnerabilities.
+- Log errors and exceptions to facilitate debugging.
+- Provide informative error messages to users.
+
+## General code style and structure
+
+- Maintain consistent code formatting and indentation.
+- Organize code into logical modules and functions.
+- Keep functions short and focused on a single task.
+- Use comments to explain complex logic or algorithms.
+
+## Naming conventions
+
+- Use descriptive and meaningful names.
+- Follow camelCase for variables and functions (e.g., `myVariable`, `myFunction`).
+- Use PascalCase for class names (e.g., `MyClass`).
+- Avoid abbreviations unless they are widely understood.
+
+## Performance optimization
+
+- Optimize images and other assets for faster loading times.
+- Use lazy loading to improve initial page load performance.
+- Minimize the number of HTTP requests.
+- Avoid unnecessary DOM manipulations.
+
+## Syntax and formatting
+
+- Use consistent indentation (e.g., 2 spaces or 4 spaces).
+- Keep lines under a reasonable length (e.g., 80-120 characters).
+- Use consistent bracing style (e.g., K&R or Allman).
+- Avoid unnecessary semicolons where possible.
+
+## Typescript usage
+
+- Use explicit types for variables and function parameters.
+- Leverage interfaces and type aliases for code reusability and clarity.
+- Enable strict mode in `tsconfig.json` to catch potential errors.
+- Prefer `const` over `let` when possible to enforce immutability.
+
+## Ui and styling
+
+- Maintain a consistent design language across the application.
+- Use CSS preprocessors (e.g., Sass, Less) for improved styling capabilities.
+- Follow BEM (Block Element Modifier) naming conventions for CSS classes.
+
+## Vue js conventions
+
+- Follow Vue.js documentation for best practices.
+- Organize component options in a consistent order (e.g., data, computed, methods, watch, lifecycle hooks).
+- Use `v-bind` and `v-on` directives for data binding and event handling.
+- Prefer using single file components (.vue files).

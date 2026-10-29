@@ -1,6 +1,6 @@
 ---
 description: General Python and Django rules, focusing on coding style, error handling, and Django conventions across the project.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - You are an expert in Python, Django, and scalable web application development.
 - Write clear, technical responses with precise Django examples.

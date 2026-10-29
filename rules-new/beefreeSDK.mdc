@@ -1,6 +1,6 @@
 ---
 description: Guidelines and best practices for building applications with [Beefree SDK](https://docs.beefree.io/beefree-sdk), including installation, authentication, configuration, customization, and template management
-globs: **/*.{ts,tsx,js,jsx,html,css}
+globs: "**/*.{ts,tsx,js,jsx,html,css}"
 ---
 
 # Beefree SDK Guidelines
@@ -17,11 +17,11 @@ Guidelines and best practices for building applications with [Beefree SDK](https
   ```
 
 ### Dependencies
-- Beefree SDK requires the following core dependencies:
+- The authentication proxy in this guide uses these packages alongside the Beefree SDK:
   ```json
   {
     "dependencies": {
-      "@beefree.io/sdk": "^9.0.2-fix-optional-url-config.0",
+      "@beefree.io/sdk": "^11.7.1",
       "axios": "^1.10.0",
       "express": "^5.1.0",
       "cors": "^2.8.5",
@@ -125,7 +125,7 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 
 ### React Container
 - For React applications, the following code snippet shows an example using refs to manage the container:
-  ```typescript
+  ```tsx
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -262,18 +262,18 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 ## Template Loading Guidelines
 
 ### Loading Templates
-- Use the `start()` method with template data to load existing templates:
+- Call `start(beeConfig, template)`. The configuration is the first argument and the template is the second. Pass `{}` when there is no saved template:
   ```typescript
   // Load template from localStorage
   const selectedTemplate = JSON.parse(localStorage.getItem('currentEmailData'));
   
   if (selectedTemplate) {
-    beefreeSDKInstance.start(selectedTemplate);
+    beefreeSDKInstance.start(beeConfig, selectedTemplate);
     console.log('Loaded template from localStorage');
   } else {
     // Start with empty template
-              beefreeSDKInstance.start();
-          console.log('Started with empty template');
+    beefreeSDKInstance.start(beeConfig, {});
+    console.log('Started with empty template');
   }
   ```
 
@@ -292,10 +292,12 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 ### Autosave Functionality
 - Implement autosave to prevent data loss:
   ```typescript
-  onAutoSave: function (jsonFile) {
-    console.log("Auto-saving template...");
-    localStorage.setItem("email.autosave", jsonFile);
-  }
+  const beeConfig = {
+    onAutoSave: function (jsonFile) {
+      console.log("Auto-saving template...");
+      localStorage.setItem("email.autosave", jsonFile);
+    }
+  };
   ```
 
 ## HTML Import Guidelines
@@ -323,7 +325,7 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 - Load imported templates into the Beefree SDK:
   ```typescript
   const importedTemplate = await importHtmlTemplate(htmlContent);
-  beefreeSDK.start(importedTemplate);
+  beefreeSDK.start(beeConfig, importedTemplate);
   ```
 
 ## Error Handling Guidelines
@@ -331,24 +333,24 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 ### onError Callback
 - ALWAYS implement the `onError` callback to handle SDK errors:
   ```typescript
-  onError: function (errorMessage) {
-    console.error("Beefree SDK error:", errorMessage);
-    // Display user-friendly error message
-    document.getElementById('beefree-sdk-container').innerHTML = 
-      '<div class="error">Error loading Beefree SDK: ' + errorMessage.message + '</div>';
-  }
+  const beeConfig = {
+    onError: function (errorMessage) {
+      console.error("Beefree SDK error:", errorMessage);
+      // Display user-friendly error message
+      document.getElementById('beefree-sdk-container').innerHTML = 
+        '<div class="error">Error loading Beefree SDK: ' + errorMessage.message + '</div>';
+    }
+  };
   ```
 
 ### Authentication Error Handling
 - Handle authentication failures gracefully:
   ```typescript
   function getBeeToken(callback) {
-    fetch('/api/beefree/auth', {
+    fetch('http://localhost:3001/proxy/bee-auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        client_id: 'your_client_id',
-        client_secret: 'your_client_secret',
         uid: beeConfig.uid
       })
     })
@@ -362,7 +364,7 @@ Guidelines and best practices for building applications with [Beefree SDK](https
     .catch(error => {
       console.error('Error getting Beefree token:', error);
       document.getElementById('beefree-sdk-container').innerHTML = 
-        '<div class="error">Failed to authenticate with Beefree. Please check your credentials and try again.</div>';
+        '<div class="error">Failed to authenticate with Beefree. Check the authentication proxy and try again.</div>';
     });
   }
   ```
@@ -374,12 +376,15 @@ Guidelines and best practices for building applications with [Beefree SDK](https
 - Reference: [Track Message Changes Documentation](https://docs.beefree.io/beefree-sdk/getting-started/tracking-message-changes)
 
 ### Change Detection
-- Use the `onChange` callback to track template changes:
+- Set `trackChanges` to `true` and use the `onChange` callback to track template changes:
   ```typescript
-  onChange: function (jsonFile, response) {
-  console.log('json', jsonFile);
-  console.log('response', response);
+  const beeConfig = {
+    trackChanges: true,
+    onChange: function (jsonFile, response) {
+      console.log('json', jsonFile);
+      console.log('response', response);
     },
+  };
   ```
 
 ## Customization Guidelines
@@ -417,7 +422,7 @@ Customize the Beefree SDK appearance with:
   };
   ```
 ### Other Customizations
-Reference the official [Beefree SDK technical documentation](https://docs.beefree.io/beefree-sdk) for a comprehnsive reference of possible customizations.  
+Reference the official [Beefree SDK technical documentation](https://docs.beefree.io/beefree-sdk) for a comprehensive reference of possible customizations.  
 
 ## Best Practices
 
@@ -445,7 +450,7 @@ Reference the official [Beefree SDK technical documentation](https://docs.beefre
 
 ### Complete React Component
 Reference the full project at [beefree-react-demo](https://github.com/BeefreeSDK/beefree-react-demo).
-```typescript
+```tsx
 import { useEffect, useRef } from 'react';
 import BeefreeSDK from '@beefree.io/sdk';
 
@@ -515,12 +520,12 @@ Reference the complete project at Beefree SDK [multiple-versions-concept](https:
   </head>
   <body>
     <div id="beefree-sdk-container"></div>
-    <script src="https://app-rsrc.getbee.io/plugin/BeefreeSDK.js"></script>
+    <script src="https://app-rsrc.getbee.io/plugin/v2/BeePlugin.js"></script>
     <script type="text/javascript">
       const beeConfig = {
-            container: 'beefree-sdk-container',
-    uid: 'demo-user-' + Date.now(),
-    language: 'en-US',
+        container: 'beefree-sdk-container',
+        uid: 'demo-user-' + Date.now(),
+        language: 'en-US',
         onSave: function (jsonFile, htmlFile) {
           console.log("Template saved:", jsonFile);
         },
@@ -530,12 +535,10 @@ Reference the complete project at Beefree SDK [multiple-versions-concept](https:
       };
 
       function getBeeToken(callback) {
-        fetch('/api/beefree/auth', {
+        fetch('http://localhost:3001/proxy/bee-auth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            client_id: 'your_client_id',
-            client_secret: 'your_client_secret',
             uid: beeConfig.uid
           })
         })
@@ -547,9 +550,9 @@ Reference the complete project at Beefree SDK [multiple-versions-concept](https:
       }
 
       function initializeBeefree(authResponse) {
-        BeefreeSDK.create(authResponse, beeConfig, function (beefreeSDKInstance) {
+        BeePlugin.create(authResponse, beeConfig, function (beePluginInstance) {
           console.log('Beefree SDK initialized successfully');
-          beefreeSDKInstance.start();
+          beePluginInstance.start({});
         });
       }
 

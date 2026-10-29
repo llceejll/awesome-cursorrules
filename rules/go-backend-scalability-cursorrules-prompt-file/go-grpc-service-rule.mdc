@@ -1,6 +1,6 @@
 ---
 description: Specific guidelines for implementing gRPC services in Go.
-globs: */grpc/**/*.go
+globs: "*/grpc/**/*.go"
 ---
 When working with gRPC services in Go:
 - Define your Protocol Buffer messages and service.

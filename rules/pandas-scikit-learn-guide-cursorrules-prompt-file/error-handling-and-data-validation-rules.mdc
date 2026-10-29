@@ -1,6 +1,6 @@
 ---
 description: Governs error handling and data validation practices, including data quality checks, missing data handling, and data type validation.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - Implement data quality checks at the beginning of analysis.
 - Handle missing data appropriately (imputation, removal, or flagging).

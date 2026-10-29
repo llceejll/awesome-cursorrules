@@ -62,20 +62,33 @@ UI and Styling
 
 - Use Tailwind CSS for utility-first styling approach.
 - Leverage Shadcn components for pre-built, customizable UI elements.
-- Import Shadcn components from `$lib/components/ui`.
-- Organize Tailwind classes using the `cn()` utility from `$lib/utils`.
+- Import shared modules through the `#lib` subpath. SvelteKit 3 declares that subpath in `package.json` imports, and the import includes the file extension:
+  ```json
+  {
+    "imports": {
+      "#lib": "./src/lib/index.js",
+      "#lib/*": "./src/lib/*"
+    }
+  }
+  ```
+  ```svelte
+  import { Button } from '#lib/components/ui/button/index.js';
+  import { cn } from '#lib/utils.js';
+  ```
 - Use Svelte's built-in transition and animation features.
 
 Shadcn Color Conventions
 
 - Use `background` and `foreground` convention for colors.
-- Define CSS variables without color space function:
+- Define color tokens as complete colors. shadcn-svelte uses `oklch`:
   ```css
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
   ```
 - Usage example:
   ```svelte
+  <div class="bg-primary text-primary-foreground"></div>
+  ```
 
 SvelteKit Project Structure
 
@@ -85,9 +98,8 @@ SvelteKit Project Structure
     - lib/
     - routes/
     - app.html
-    - static/
-    - svelte.config.js
-    - vite.config.js
+  - static/
+  - vite.config.js
   ```
 
 Component Development
@@ -96,7 +108,7 @@ Component Development
 - Use .svelte.ts files for component logic and state machines.
 - Implement proper component composition and reusability.
 - Use Svelte's props for data passing.
-- Leverage Svelte's reactive declarations for local state management.
+- Leverage `$state` for local state management.
 
 State Management
 
@@ -120,11 +132,12 @@ State Management
   ```
 - Use in components:
   ```svelte
-  <br />
-  import { counter } from './counter.svelte.ts';
-  <br />
-  <button on:click={() => counter.increment()}>
+  <script>
+    import { counter } from './counter.svelte.ts';
+  </script>
+  <button onclick={() => counter.increment()}>
     Count: {counter.count}
+  </button>
   ```
 
 Routing and Pages
@@ -146,7 +159,7 @@ Performance Optimization
 - Use `{#key}` blocks to force re-rendering of components when needed.
 - Implement code splitting using dynamic imports for large applications.
 - Profile and monitor performance using browser developer tools.
-- Use `$effect.tracking()` to optimize effect dependencies.
+- Use `$effect.tracking()` to tell whether the current code is running inside a tracking context.
 - Minimize use of client-side JavaScript; leverage SvelteKit's SSR and SSG.
 - Implement proper lazy loading for images and other assets.
 
@@ -160,26 +173,25 @@ Data Fetching and API Routes
 
 SEO and Meta Tags
 
-- Use Svelte:head component for adding meta information.
+- Use `<svelte:head>` for adding meta information.
 - Implement canonical URLs for proper SEO.
 - Create reusable SEO components for consistent meta tag management.
 
 Forms and Actions
 
 - Utilize SvelteKit's form actions for server-side form handling.
-- Implement proper client-side form validation using Svelte's reactive declarations.
+- Implement proper client-side form validation with `$derived`.
 - Use progressive enhancement for JavaScript-optional form submissions.
 
 Internationalization (i18n) with Paraglide.js
 
 - Use Paraglide.js for internationalization: https://inlang.com/m/gerre34r/library-inlang-paraglideJs
 - Install Paraglide.js: `npm install @inlang/paraglide-js`
-- Set up language files in the `languages` directory.
-- Use the `t` function to translate strings:
+- Store messages in `messages/{locale}.json` and compile them into the `paraglide` output directory.
+- Import the generated message functions. `@inlang/paraglide-js` does not export a `t` function:
   ```svelte
-  <br />
-  import { t } from '@inlang/paraglide-js';
-  <br />
+  import { m } from './paraglide/messages.js';
+  ```
   - Support multiple languages and RTL layouts.
   - Ensure text scaling and font adjustments for accessibility.
 
@@ -194,7 +206,7 @@ Key Conventions
 
 1. Embrace Svelte's simplicity and avoid over-engineering solutions.
 2. Use SvelteKit for full-stack applications with SSR and API routes.
-3. Prioritize Web Vitals (LCP, FID, CLS) for performance optimization.
+3. Prioritize Web Vitals (LCP, INP, CLS) for performance optimization.
 4. Use environment variables for configuration management.
 5. Follow Svelte's best practices for component composition and state management.
 6. Ensure cross-browser compatibility by testing on multiple platforms.
@@ -202,10 +214,10 @@ Key Conventions
 
 Documentation
 
-- Svelte 5 Runes: https://svelte-5-preview.vercel.app/docs/runes
+- Svelte 5 Runes: https://svelte.dev/docs/svelte/what-are-runes
 - Svelte Documentation: https://svelte.dev/docs
 - SvelteKit Documentation: https://kit.svelte.dev/docs
-- Paraglide.js Documentation: https://inlang.com/m/gerre34r/library-inlang-paraglideJs/usage
+- Paraglide.js Documentation: https://inlang.com/m/gerre34r/library-inlang-paraglideJs
 
 Refer to Svelte, SvelteKit, and Paraglide.js documentation for detailed information on components, internationalization, and best practices.
 

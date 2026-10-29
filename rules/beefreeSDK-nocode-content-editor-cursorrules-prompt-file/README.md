@@ -62,9 +62,10 @@ BEE_CLIENT_SECRET=your_client_secret_here
 </head>
 <body>
     <div id="beefree-sdk-container"></div>
-    
-    <script src="https://app-rsrc.getbee.io/plugin/BeefreeSDK.js"></script>
-    <script>
+
+    <script type="module">
+        import BeefreeSDK from 'https://cdn.jsdelivr.net/npm/@beefree.io/sdk/+esm';
+
         const beeConfig = {
             container: 'beefree-sdk-container',
             language: 'en-US',
@@ -76,19 +77,14 @@ BEE_CLIENT_SECRET=your_client_secret_here
             }
         };
 
-        // Initialize with authentication
-        async function initializeBeefree() {
-            const token = await fetch('http://localhost:3001/proxy/bee-auth', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ uid: 'demo-user' })
-            }).then(res => res.json());
+        const token = await fetch('http://localhost:3001/proxy/bee-auth', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ uid: 'demo-user' })
+        }).then((response) => response.json());
 
-            const bee = new BeefreeSDK(token);
-            bee.start(beeConfig, {});
-        }
-
-        initializeBeefree();
+        const bee = new BeefreeSDK(token);
+        await bee.start(beeConfig, {}, '', { shared: false });
     </script>
 </body>
 </html>
@@ -96,7 +92,7 @@ BEE_CLIENT_SECRET=your_client_secret_here
 
 #### React Implementation
 
-```typescript
+```tsx
 import { useEffect, useRef } from 'react';
 import BeefreeSDK from '@beefree.io/sdk';
 
@@ -238,10 +234,10 @@ node proxy-server.js
 const selectedTemplate = JSON.parse(localStorage.getItem('currentEmailData'));
 
 if (selectedTemplate) {
-  beefreeSDKInstance.start(selectedTemplate);
+  beefreeSDKInstance.start(beeConfig, selectedTemplate);
   console.log('Loaded template from localStorage');
 } else {
-  beefreeSDKInstance.start();
+  beefreeSDKInstance.start(beeConfig, {});
   console.log('Started with empty template');
 }
 ```
@@ -266,6 +262,7 @@ const data = await response.json();
 ```typescript
 const beeConfig = {
   container: 'beefree-sdk-container',
+  trackChanges: true,
   onChange: function (jsonFile, response) {
     console.log('Template changed:', jsonFile);
     console.log('Response:', response);

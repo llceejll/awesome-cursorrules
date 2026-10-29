@@ -1,5 +1,5 @@
 ---
 description: Rules for testing and debugging Chrome extensions to ensure quality and stability.
-globs: **/*.js
+globs: "**/*.js"
 ---
 - Testing and Debugging

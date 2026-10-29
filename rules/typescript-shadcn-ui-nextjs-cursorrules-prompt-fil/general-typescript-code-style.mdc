@@ -1,6 +1,6 @@
 ---
 description: Applies general TypeScript code style and structure guidelines to all TypeScript files in the project.
-globs: **/*.ts
+globs: "**/*.ts"
 ---
 - Write concise, technical TypeScript code with accurate examples
 - Use functional and declarative programming patterns; avoid classes

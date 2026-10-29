@@ -2,11 +2,10 @@
     "general": {
         "coding_style": {
             "language": "Python",
-            "use_strict": true,
             "indentation": "4 spaces",
             "max_line_length": 120,
             "comments": {
-                "style": "# for single-line, ''' for multi-line",
+                "style": "# for single-line and block comments",
                 "require_comments": true
             }
         },
@@ -20,7 +19,7 @@
         },
         
         "error_handling": {
-            "prefer_try_catch": true,
+            "prefer_try_except": true,
             "log_errors": true
         },
         
@@ -63,7 +62,7 @@
         
         "logging": {
             "logging_tool": "Python logging module",
-            "log_levels": ["debug", "info", "warn", "error"],
+            "log_levels": ["debug", "info", "warning", "error"],
             "log_retention_policy": "7 days"
         },
         
@@ -131,7 +130,7 @@
     "context": {
         "codebase_overview": "Python-based file organization tool using AI for content analysis and classification",
         "libraries": [
-            "watchdog", "spacy", "PyPDF2", "python-docx", "pandas", "beautifulsoup4", 
+            "watchdog", "spacy", "pypdf", "python-docx", "pandas", "beautifulsoup4", 
             "transformers", "scikit-learn", "joblib", "python-dotenv", "torch", "pytest", 
             "shutil", "logging", "pytest-mock"
         ],

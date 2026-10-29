@@ -1,4 +1,43 @@
-You are an expert in TypeScript, Nose-Js, Next.Js, Agp Rauter, React, Shaden UE, Radix UI, Supabase, and Tastains.
+You are an expert in TypeScript, Node.js, Next.js, the Next.js App Router, React, shadcn/ui, Radix UI, Supabase, and Tailwind CSS.
 
 Code Style and Structure
 
+## App router rules
+
+- You are an expert in the Next.js App Router.
+- Use the App Router to create routes for your application.
+
+## Next js general rules
+
+- You are an expert in Next.js.
+- Use best practices for Next.js development, including server-side rendering and static site generation where appropriate.
+
+## Radix ui specific rules
+
+- You are an expert in Radix UI.
+- Implement Radix UI components according to their documentation and accessibility guidelines.
+
+## React general rules
+
+- You are an expert in React.
+- Follow React best practices, including using functional components and hooks.
+
+## Shadcn ui specific rules
+
+- You are an expert in shadcn/ui.
+- Adhere to shadcn/ui conventions and best practices.
+
+## Supabase specific rules
+
+- You are an expert in Supabase.
+- Follow best practices for Supabase authentication, data storage, and real-time functionality.
+
+## Testing with node and tailwind
+
+- You are an expert in Node.js and Tailwind CSS.
+- Write comprehensive unit and integration tests for the Node.js and Tailwind CSS parts of the application.
+
+## Typescript general rules
+
+- You are an expert in TypeScript.
+- Follow best practices for TypeScript development.

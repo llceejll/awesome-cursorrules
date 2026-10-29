@@ -99,7 +99,7 @@ class HomeViewController: UIViewController {
     
     private func bindViewModel() {
         viewModel.users
-            .bind(to: tableView.rx.items(cellIdentifier: "UserCell")) { _, user, cell in
+            .bind(to: tableView.rx.items(cellIdentifier: "UserCell", cellType: UITableViewCell.self)) { _, user, cell in
                 // Configure cell
             }
             .disposed(by: disposeBag)
@@ -139,7 +139,7 @@ class HomeViewModel {
             .startWith(())
             .flatMapLatest { [unowned self] in
                 self.userRepository.getUsers()
-                    .catchErrorJustReturn([])
+                    .catchAndReturn([])
             }
             .share(replay: 1)
         
@@ -170,9 +170,13 @@ userRepository.getUsers()
     .observe(on: MainScheduler.instance)
     .catch { error in
         self.handleError(error)
-        return Observable.empty()
+        return Observable<[User]>.empty()
     }
-    .bind(to: tableView.rx.items)
+    .bind(to: tableView.rx.items) { tableView, _, user in
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell")!
+        cell.textLabel?.text = user.name
+        return cell
+    }
     .disposed(by: disposeBag)
 ```
 
@@ -264,7 +268,7 @@ class HomeViewModelTests: XCTestCase {
     }
     
     func testUsersLoading() {
-        let users = [User(id: 1, name: "John", email: "john@example.com")]
+        let users = [User(id: 1, name: "John", email: "john@example.com", profileImageURL: nil)]
         mockRepository.usersToReturn = users
         
         let result = scheduler.start {
@@ -272,7 +276,7 @@ class HomeViewModelTests: XCTestCase {
         }
         
         XCTAssertEqual(result.events.count, 1)
-        XCTAssertEqual(result.events.first?.value.element, users)
+        XCTAssertEqual(result.events.first?.value.element, Optional(users))
     }
 }
 ```

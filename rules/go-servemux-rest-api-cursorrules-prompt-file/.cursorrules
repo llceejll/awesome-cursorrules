@@ -10,7 +10,8 @@ Confirm the plan, then write code!
 
 Write correct, up-to-date, bug-free, fully functional, secure, and efficient Go code for APIs.
 
-Use the standard library's net/http package for API development:
+Use the standard library's net/http package for API development.
+Register routes with ServeMux method and wildcard patterns (`GET /posts/{id}`, `/files/{path...}`, `/posts/{$}`) and read captured segments with `r.PathValue`.
 Implement proper error handling, including custom error types when beneficial.
 Use appropriate status codes and format JSON responses correctly.
 Implement input validation for API endpoints.

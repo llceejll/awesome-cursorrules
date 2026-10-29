@@ -1,6 +1,6 @@
 # Helium MCP in Cursor
 
-When the user’s project or question involves **news**, **media bias**, **markets**, **options**, or **financial memes**, prefer **Helium MCP tools** (if enabled) over guessing headlines, prices, or Greeks. Helium is a hosted MCP service from [Helium Trades](https://heliumtrades.com); upstream docs and source live at [github.com/connerlambden/helium-mcp](https://github.com/connerlambden/helium-mcp).
+When the user’s project or question involves **news**, **media bias**, **markets**, **options**, or **financial memes**, prefer **Helium MCP tools** (if enabled) over guessing headlines, prices, or Greeks. Helium is a hosted MCP service from [Helium Trades](https://heliumtrades.com). Setup and tool docs are on the [Helium MCP page](https://heliumtrades.com/mcp-page/).
 
 ## Enable the server in Cursor
 
@@ -16,7 +16,7 @@ Add a streamable HTTP MCP entry pointing at the hosted endpoint (no API key requ
 }
 ```
 
-Alternative: stdio bridge via `npx @mcp-get-community/server-helium` if your workflow requires a local process (see that package’s README for `HELIUM_MCP_URL` overrides).
+Alternative: stdio bridge via `npx helium-mcp` if your workflow requires a local process. The package connects to `https://heliumtrades.com/mcp`.
 
 ## Ground rules for the agent
 

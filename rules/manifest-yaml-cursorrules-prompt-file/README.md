@@ -47,6 +47,6 @@ This prompt file guides the generation of backends with Manifest. It embeds your
 
 ## References
 
-- Manifest Docs: https://manifest.build/docs
+- Manifest backend: https://github.com/mnfst/manifest-baas
 
-- JSON Schema: https://schema.manifest.build/schema.json
+- JSON Schema: https://raw.githubusercontent.com/mnfst/manifest-baas/master/packages/core/json-schema/src/schema/schema.json

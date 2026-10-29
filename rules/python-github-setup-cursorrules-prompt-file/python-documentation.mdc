@@ -1,6 +1,6 @@
 ---
 description: Sets documentation requirements for Python code, including requiring docstrings and following the Google Python Style Guide.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - Require documentation for all code.
 - Use docstrings for documentation.

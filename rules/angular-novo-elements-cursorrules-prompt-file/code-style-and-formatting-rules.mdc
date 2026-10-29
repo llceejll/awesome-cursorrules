@@ -1,6 +1,6 @@
 ---
 description: Enforces coding standards, consistent naming conventions, and discourages the use of deprecated features.
-globs: **/*.*
+globs: "**/*.*"
 ---
 - Follow the project's coding standards.
 - Use consistent naming conventions.

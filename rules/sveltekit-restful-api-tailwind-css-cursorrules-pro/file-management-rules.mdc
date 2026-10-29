@@ -1,6 +1,6 @@
 ---
-description: Specifies file management guidelines, including including full file paths as comments, updating project structure in AI.MD, and maintaining package.json. This rule ensures organized and well-documented project files.
-globs: **/*
+description: Specifies file management guidelines, including full file paths as comments, updating project structure in AI.MD, and maintaining package.json. This rule ensures organized and well-documented project files.
+globs: "**/*"
 ---
 - |-
   4. File Management:

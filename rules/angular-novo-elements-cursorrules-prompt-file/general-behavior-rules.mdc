@@ -1,6 +1,6 @@
 ---
 description: Defines basic interaction and response guidelines for the AI, including verification and human-like communication.
-globs: **/*.*
+globs: "**/*.*"
 ---
 - Do not apologize.
 - Do not thank me.

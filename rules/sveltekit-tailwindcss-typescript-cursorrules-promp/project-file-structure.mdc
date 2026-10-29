@@ -1,6 +1,6 @@
 ---
 description: Describes the project file structure, including component grouping, pages, layouts, utility functions, and types. This encourages a well-organized and maintainable project structure.
-globs: **/src/**/*
+globs: "**/src/**/*"
 ---
 - File Structure
   - Group related components in subdirectories under src/lib/components/

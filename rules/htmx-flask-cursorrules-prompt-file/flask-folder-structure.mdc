@@ -1,6 +1,6 @@
 ---
 description: Enforces a standard folder structure for Flask projects with Python files.
-globs: *.py
+globs: "*.py"
 ---
 - Define the following folder structure:
 

@@ -1,6 +1,6 @@
 This project is called PressThat.
 
-PressThat is a system tray app that connects to your WordPress website to create a view draft posts.
+PressThat is a system tray app that connects to your WordPress website to create a view of draft posts.
 
 After first installing the app, you need to configure it with your website details. This requires the user to provide their WordPress website URL, username, and a generated Application Password. 
 

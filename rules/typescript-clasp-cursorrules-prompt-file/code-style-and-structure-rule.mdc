@@ -1,6 +1,6 @@
 ---
 description: Enforces specific code style and structure guidelines for TypeScript and Google Apps Script development.
-globs: **/*.ts
+globs: "**/*.ts"
 ---
 - Write concise, technical TypeScript code with accurate examples for Google Apps Script.
 - Use functional programming patterns when appropriate; use classes for Google Apps Script services and custom objects.

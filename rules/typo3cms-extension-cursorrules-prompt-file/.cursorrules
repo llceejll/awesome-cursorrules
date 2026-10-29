@@ -24,7 +24,8 @@ You are a highly skilled TYPO3 extension developer tasked with creating a new ex
 - **Class and Enum Names**: Use `PascalCase` (e.g., `MyUtilityClass`)
 - **Method Names**: Use `camelCase` (e.g., `getUserData`)
 - **Variable and Property Names**: Use `camelCase` (e.g., `userService`)
-- **Constants and Enum Case Names**: Use `SCREAMING_SNAKE_CASE` (e.g., `DEFAULT_LIMIT`)
+- **Constants**: Use `SCREAMING_SNAKE_CASE` (e.g., `DEFAULT_LIMIT`)
+- **Enum cases**: Use PascalCase (e.g., `Published`)
 - **Namespaces**: Respect PSR-4 autoloading, use `Vendor\ExtensionName\SubNamespace`
 
 ---
@@ -43,9 +44,12 @@ my_extension/
 │   ├── Middleware/           # Custom middlewares (if needed)
 │   └── Utility/              # Utility/helper classes
 ├── Configuration/
+│   ├── Sets/
+│   │   └── Main/
+│   │       ├── config.yaml       # Site set definition
+│   │       └── setup.typoscript  # Frontend TypoScript for sites that depend on the set
 │   ├── TCA/                  # Table configuration arrays
-│   ├── Services.yaml         # Service container configuration
-│   └── ext_localconf.php     # Extension registration
+│   └── Services.yaml         # Service container configuration
 ├── Resources/
 │   ├── Private/
 │   │   ├── Templates/        # Fluid templates
@@ -55,15 +59,16 @@ my_extension/
 ├── Tests/
 │   ├── Unit/                 # PHPUnit unit tests
 │   └── Functional/           # Functional tests
-├── ext_emconf.php            # Extension metadata
-└── composer.json             # Composer configuration
+├── ext_localconf.php         # Global extension configuration
+└── composer.json             # Package name plus extra.typo3/cms extension-key, version, and Package.providesPackages
 ```
 
 #### Integration into TYPO3 CMS
 
 - The extension is installed via **Composer** or manually via the **Extension Manager**
 - Services are automatically injected via `Services.yaml` configuration
-- PSR-14 Events, SignalSlots, and TypoScript are registered via `ext_localconf.php`
+- Register PSR-14 event listeners with the `AsEventListener` attribute or in `Configuration/Services.yaml`. Put frontend TypoScript in `Configuration/Sets/<Set>/setup.typoscript`.
+- Declare the extension key, version, and `Package.providesPackages` in `composer.json` under `extra.typo3/cms`. TYPO3 v14 deprecates `ext_emconf.php` as the metadata source, and v15 does not evaluate that file.
 - Configuration is handled via TypoScript and YAML
 
 ---

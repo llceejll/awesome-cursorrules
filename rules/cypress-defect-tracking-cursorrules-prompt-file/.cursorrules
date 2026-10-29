@@ -73,9 +73,9 @@ When a user provides the following inputs:
 Generate this implementation:
 
 ```js
-// Import the qa-shadow-report package
-const { ReportTracker } = require('qa-shadow-report');
-// For TypeScript: import { ReportTracker } from 'qa-shadow-report';
+// qa-shadow-report is a CLI. Specs do not import it.
+// After the run, merge the mochawesome JSON and run: qa-shadow-report cypress
+// The CLI reads these title tags and shadowReportConfig.js.
 
 describe('[CartTeam][regression] Shopping Cart Tests', () => {
   beforeEach(() => {

@@ -1,6 +1,6 @@
 ---
 description: Defines rules for creating informative and visually appealing plots using matplotlib and seaborn, emphasizing proper labels, titles, legends, and color schemes.
-globs: **/*.py
+globs: "**/*.py"
 ---
 - Use matplotlib for low-level plotting control and customization.
 - Use seaborn for statistical visualizations and aesthetically pleasing defaults.

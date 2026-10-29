@@ -1,6 +1,6 @@
 ---
 description: Enforces consistent code style and structure across the project, including concise code, functional programming, and descriptive variable names.
-globs: **/*.{ts,vue}
+globs: "**/*.{ts,vue}"
 ---
 - Write concise, maintainable, and technically accurate TypeScript code with relevant examples.
 - Use functional and declarative programming patterns; avoid classes.

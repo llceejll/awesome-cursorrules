@@ -1,7 +1,7 @@
 ---
-description: Rules specific to the theme directory for managing and customizing the Chakra UI theme.
-globs: src/theme/**/*.*
+description: Define the Chakra UI theme with createSystem and defaultConfig.
+globs: src/theme.ts
 ---
-- Create theme/index.js to export theme
-- Place theme foundations in theme/foundations/
-- Place component-specific theme overrides in theme/components/
+- Define the custom theme in theme.ts with createSystem and defaultConfig, and export the system.
+- Put design tokens under theme.tokens. Token values use a value key.
+- Style components with recipes and slot recipes. Chakra UI v3 removed styleConfig and multiStyleConfig.

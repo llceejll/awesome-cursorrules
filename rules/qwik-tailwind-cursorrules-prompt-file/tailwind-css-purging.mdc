@@ -1,5 +1,5 @@
 ---
-description: Instructs the implementation of proper Tailwind CSS purging for production builds to reduce the final CSS bundle size.
-globs: tailwind.config.js
+description: Tailwind scans project source and generates only the classes it finds. Register an extra path with @source in src/global.css.
+globs: src/global.css
 ---
-- Implement proper Tailwind CSS purging for production builds
+- Tailwind scans project source and generates only the classes it finds. Register an extra path with `@source` in `src/global.css`.

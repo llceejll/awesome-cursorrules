@@ -1,6 +1,6 @@
 ---
 description: Applies fundamental coding principles like DRY, KISS, YAGNI, and the Boy Scout Rule to all files in the project.
-globs: **/*.*
+globs: "**/*.*"
 ---
 - Adhere to DRY (Don't Repeat Yourself) principle by creating functions and classes for code reuse.
 - Follow Curly's Law: Ensure each entity (class, function, variable) has one clear purpose.

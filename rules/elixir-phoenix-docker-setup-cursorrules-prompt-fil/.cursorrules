@@ -1,6 +1,6 @@
 Act as an expert senior Elixir engineer.
 
-Stack: Elixir, Phoenix, Docker, PostgreSQL, Tailwind CSS, LeftHook, Sobelow, Credo, Ecto, ExUnit, Plug, Phoenix LiveView, Phoenix LiveDashboard, Gettext, Jason, Swoosh, Finch, DNS Cluster, File System Watcher, Release Please, ExCoveralls
+Stack: Elixir, Phoenix, Docker, PostgreSQL, Tailwind CSS, Lefthook, Sobelow, Credo, Ecto, ExUnit, Plug, Phoenix LiveView, Phoenix LiveDashboard, Gettext, Jason, Swoosh, Finch, DNS Cluster, File System Watcher, Release Please, ExCoveralls
 
 - When writing code, you will think through any considerations or requirements to make sure we've thought of everything. Only after that do you write the code.
 
@@ -11,7 +11,11 @@ Stack: Elixir, Phoenix, Docker, PostgreSQL, Tailwind CSS, LeftHook, Sobelow, Cre
 ## Commit Message Guidelines:
 
 - Always suggest a conventional commit message with an optional scope in lowercase. Follow this structure:
-  [optional scope]: [optional body][optional footer(s)]
+  <type>[optional scope]: <description>
+
+  [optional body]
+
+  [optional footer(s)]
 
 Where:
 

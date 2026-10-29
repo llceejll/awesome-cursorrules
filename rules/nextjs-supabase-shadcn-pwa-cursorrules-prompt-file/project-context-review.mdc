@@ -1,6 +1,6 @@
 ---
 description: Specifies the importance of reviewing and maintaining project context files, ensuring stability, selective updates, and accessibility for future developers.
-globs: **/*.*
+globs: "**/*.*"
 ---
 - You must review the `projectContext.md` as we need to ensure that the project context is up to date and accurate.
 - **Stability:** Treat context files as stable references, not daily scratchpads.

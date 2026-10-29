@@ -1,6 +1,6 @@
 ---
 description: Enforces general code quality and style guidelines across the entire project, including TypeScript best practices, functional programming principles, and code review processes.
-globs: **/*.*
+globs: "**/*.*"
 ---
 - Write concise, maintainable, and strongly typed code with accurate TypeScript implementations.
 - Embrace functional, declarative programming. Avoid OOP and classes.
@@ -12,4 +12,4 @@ globs: **/*.*
 - Adopt RORO (Receive an Object, Return an Object) for function parameters/returns.
 - Always attain to use DRY (Don't Repeat Yourself) principles.
 - Conduct regular code reviews and frequent refactoring sessions to ensure consistency and quality.
-- Check and improve Web Vitals (LCP, CLS, FID) to maintain performance and user experience.
+- Check and improve Web Vitals (LCP, CLS, INP) to maintain performance and user experience.

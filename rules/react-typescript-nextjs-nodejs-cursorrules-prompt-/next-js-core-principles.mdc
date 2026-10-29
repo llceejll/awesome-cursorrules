@@ -3,7 +3,7 @@ description: Outlines key conventions for Next.js development, focusing on utili
 globs: app/**/*.*
 ---
 - Rely on Next.js App Router for state changes.
-- Prioritize Web Vitals (LCP, CLS, FID).
+- Prioritize Web Vitals (LCP, CLS, INP).
 - Minimize 'use client' usage:
   - Prefer server components and Next.js SSR features.
   - Use 'use client' only for Web API access in small components.

@@ -1,6 +1,6 @@
 This project contains automation scripts and workflows for the @findhow packages, based on the original Deno automation repository. The goal is to provide consistent and efficient automation for the @findhow ecosystem.
 
-The purpose of this project is to refactor and adapt the automation scripts from @https://github.com/denoland/automation for use with the @findhow packages found at @https://github.com/zhorton34/findhow.
+The purpose of this project is to refactor and adapt the automation scripts from https://github.com/denoland/automation for use with the @findhow packages found at https://jsr.io/@findhow.
 
 When working on this project, Cursor AI should:
 
@@ -12,3 +12,28 @@ When creating or modifying automation scripts:
 
 Remember to thoroughly test all modifications to ensure they work correctly with the @findhow ecosystem before merging changes into the main branch.
 
+## Automation script rule
+
+When creating or modifying automation scripts:
+- Ensure scripts are modular and reusable.
+- Implement robust error handling and logging.
+- Document the purpose and usage of each script clearly.
+- Prioritize efficiency and performance in script design.
+
+## Documentation rule
+
+When updating documentation:
+- Follow the existing style and conventions.
+- Ensure all updates are accurate and reflect the current state of the code.
+- Provide clear and concise explanations for all concepts.
+
+## General development rule
+
+When making changes:
+- Remember to thoroughly test all modifications to ensure they work correctly with the @findhow ecosystem before merging changes into the main branch.
+
+## Project overview rule
+
+- This project contains automation scripts and workflows for the @findhow packages, based on the original Deno automation repository.
+- The goal is to provide consistent and efficient automation for the @findhow ecosystem.
+- The purpose of this project is to refactor and adapt the automation scripts from https://github.com/denoland/automation for use with the @findhow packages found at https://jsr.io/@findhow.

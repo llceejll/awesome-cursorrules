@@ -1,6 +1,6 @@
 ---
 description: Python best practices and patterns for modern software development with Flask and SQLite
-globs: **/*.py, src/**/*.py, tests/**/*.py
+globs: "**/*.py, src/**/*.py, tests/**/*.py"
 ---
 
 # Python Best Practices
@@ -26,7 +26,7 @@ globs: **/*.py, src/**/*.py, tests/**/*.py
 ## Type Hints
 - Use type hints for all function parameters and returns
 - Import types from `typing` module
-- Use `Optional[Type]` instead of `Type | None`
+- Write a value that may be `None` as `Type | None`
 - Use `TypeVar` for generic types
 - Define custom types in `types.py`
 - Use `Protocol` for duck typing
@@ -49,7 +49,7 @@ globs: **/*.py, src/**/*.py, tests/**/*.py
 
 ## Authentication
 - Use Flask-Login for session management
-- Implement Google OAuth using Flask-OAuth
+- Implement Google OAuth using Authlib
 - Hash passwords with bcrypt
 - Use proper session security
 - Implement CSRF protection

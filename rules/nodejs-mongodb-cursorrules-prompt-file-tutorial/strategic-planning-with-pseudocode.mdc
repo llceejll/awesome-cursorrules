@@ -1,5 +1,5 @@
 ---
-description: Rules that enforce to use pseudocode before implementation
+description: Rules that enforce using pseudocode before implementation
 globs: /*.*
 ---
 - Begin each feature with detailed pseudocode.

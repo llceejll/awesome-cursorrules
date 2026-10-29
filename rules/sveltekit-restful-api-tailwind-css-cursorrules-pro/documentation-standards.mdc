@@ -1,6 +1,6 @@
 ---
 description: Defines documentation standards, including writing clear comments, using JSDoc, and keeping README.md, AI.MD, and CHANGELOG.md updated. This rule ensures comprehensive and up-to-date documentation.
-globs: **/*
+globs: "**/*"
 ---
 - |-
   7. Documentation:
