@@ -19,7 +19,7 @@ Configuration files that enhance Cursor AI editor experience with custom rules a
 	  <a href="https://coderabbit.ai/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
 		  <img alt="CodeRabbit.ai Sponsorship Logo" src="./cr_logo.png" width=350>
 	  </a>
-	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP - Supercharge Cursor with your team’s knowledge</a></h3> 
+	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP - Supercharge Cursor with your team’s knowledge</a></h3>
 	  <a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
 		  <img alt="Unblocked Sponsorship Logo" src="./Unblocked-logo-sq-words-over-gradient-1024w.png" width=250>
 	  </a>
@@ -158,7 +158,6 @@ Cursor stores current project rules in `.cursor/rules` as `.mdc` files. Copy a r
 - [Python LLM & ML Workflow](./rules/python-llm-ml-workflow-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python LLM & ML development with workflow integration.
 - [Rails 8 (Basic Setup)](./rules/rails-cursorrules-prompt-file/.cursorrules) - Cursor rules for Rails development with basic setup.
 - [Salesforce (Apex)](./rules/salesforce-apex-cursorrules-prompt-file/.cursorrules) - Cursor rules for Salesforce development with Apex integration.
-- [Scala (Kafka)](./rules/scala-kafka-cursorrules-prompt-file/.cursorrules) - Cursor rules for Scala development with Kafka.
 - [Temporal (Python SDK)](./rules/temporal-python-cursorrules/.cursorrules) - Cursor rules for Temporal workflow development with the Python SDK.
 - [TypeScript (NestJS Best Practices)](./rules/typescript-nestjs-best-practices-cursorrules-promp/.cursorrules) - Cursor rules for TypeScript development with NestJS best practices.
 - [TYPO3 CMS Extension](./rules/typo3cms-extension-cursorrules-prompt-file/.cursorrules) - Cursor rules for TYPO3 CMS development with extension integration.
@@ -262,6 +261,7 @@ Cursor stores current project rules in `.cursor/rules` as `.mdc` files. Copy a r
 - [Python/TypeScript Guide](./rules/python--typescript-guide-cursorrules-prompt-file/.cursorrules) - Cursor rules for Python development with TypeScript guide integration.
 - [PyTorch (scikit-learn)](./rules/pytorch-scikit-learn-cursorrules-prompt-file/.cursorrules) - Cursor rules for PyTorch development with scikit-learn integration.
 - [R Best Practices](./rules/r-cursorrules-prompt-file-best-practices/.cursorrules) - Cursor rules for R development with best practices integration.
+- [Scala (Kafka)](./rules/scala-kafka-cursorrules-prompt-file/.cursorrules) - Cursor rules for Scala development with Kafka.
 - [Solidity (Foundry)](./rules/solidity-foundry-cursorrules-prompt-file/.cursorrules) - Cursor rules for Solidity development with Foundry integration.
 - [Solidity (Hardhat)](./rules/solidity-hardhat-cursorrules-prompt-file/.cursorrules) - Cursor rules for Solidity development with Hardhat integration.
 - [Solidity (React Blockchain Apps)](./rules/solidity-react-blockchain-apps-cursorrules-prompt-/.cursorrules) - Cursor rules for Solidity development with React Blockchain apps integration.
@@ -355,7 +355,7 @@ Please ensure your contribution is original or properly credited if based on exi
 	  <a href="https://coderabbit.ai/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
 		  <img alt="CodeRabbit.ai Sponsorship Logo" src="./cr_logo.png" width=350>
 	  </a>
-	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP - Supercharge Cursor with your team’s knowledge</a></h3> 
+	<h3><a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">Unblocked MCP - Supercharge Cursor with your team’s knowledge</a></h3>
 	  <a href="https://getunblocked.com/unblocked-mcp/?utm_source=oss&utm_medium=sponsorship&utm_campaign=awesome-cursorrules">
 		  <img alt="Unblocked Sponsorship Logo" src="./Unblocked-logo-sq-words-over-gradient-1024w.png" width=250>
 	  </a>
